@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[1]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 import sys, pickle, subprocess, os
 prefix=sys.argv[1]; n=int(sys.argv[2]); os.makedirs("results/es", exist_ok=True)
 for i in range(n):

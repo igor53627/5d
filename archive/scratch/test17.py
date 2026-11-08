@@ -1,6 +1,6 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 import json, time, numpy as np, glider_eco as GE
-sp = json.load(open('specs/b15m.json'))[0]['runs'][0]
+sp = json.load(open(_path._root / 'archive/specs/b15m.json'))[0]['runs'][0]
 c = sp['c']; e = dict(sp['ecos'][0])
 for nm, ex in [("evo", {}), ("blind", dict(blind=1.0)), ("nobrain", dict(kb=0.0, kr=0.0)), ("nopoison", dict(P0=0.0))]:
     t = time.time()

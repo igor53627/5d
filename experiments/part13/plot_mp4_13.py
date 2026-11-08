@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Часть 13: видео особей (проекция центров на оси x1,x2), цвет = p0, размер ∝ масса. python plot_mp4_12.py out.mp4 L file:tag:title ..."""
 import sys, pickle, os, numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt, matplotlib.animation as an
 out = sys.argv[1]; items = [a.split(":", 2) for a in sys.argv[2:]]; import re; LS = [int(re.match(r"\w+?_\dD(\d+)", t).group(1)) for _, t, _ in items]

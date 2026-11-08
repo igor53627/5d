@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Часть 8: таблица частоты репликации, фигура (сетка исходов, дочерние v(m), каскад), mp4 события и каскада."""
 import sys, os, glob, pickle, json, numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 import matplotlib.animation as an

@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[1]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Сводка поиска (стадии s1–s5): таблица по механизмам + рисунок."""
 import json, glob, collections, numpy as np
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt

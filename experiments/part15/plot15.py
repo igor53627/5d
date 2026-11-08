@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 import pickle, re, sys, numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 R = pickle.load(open("results/eco15/main.pkl", "rb")); R5 = pickle.load(open("results/eco15/d5.pkl", "rb")) if len(sys.argv) > 1 else {}
 G = {}

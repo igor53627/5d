@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[1]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 import pickle, sys, glob, numpy as np, json, subprocess, os
 def fetch(prefix, n):
     os.makedirs("results/glider", exist_ok=True)

@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[1]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 import json, numpy as np, copy, itertools
 rng = np.random.default_rng(3)
 S1 = {c["seed"]: c for call in json.load(open("specs/glider_s1.json")) for c in call[0]["cands"]}

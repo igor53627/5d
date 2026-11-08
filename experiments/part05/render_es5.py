@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Фигура проверки лучшей особи 5D-CMA-ES и анимация (сопутствующий срез) по ver5-pkl."""
 import sys, os, pickle, numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 R0 = pickle.load(open(sys.argv[1], "rb"))["out"][0]; tag = sys.argv[2]

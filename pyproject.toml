@@ -5,8 +5,7 @@ description = "Feigenbaum-Lenia: Evolving cellular automata with conditional Lya
 requires-python = ">=3.9"
 dependencies = [
     "numpy",
-    "jax",
-    "jaxlib",
+    "jax>=0.4.25",
     "matplotlib",
     "scipy",
 ]
@@ -15,9 +14,12 @@ dependencies = [
 dev = ["pytest"]
 modal = ["modal"]
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["src*"]
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
 
-[tool.setuptools.package-dir]
-"" = "."
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

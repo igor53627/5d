@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Part 17: poison food in 4D. Loads results/eco17/b17*.pkl (fl_poison logs) → table, main17.pkl, figures."""
 import pickle, glob, re, sys, numpy as np, fl_poison as Z, analyze_eco as AE
 K0, NW, iD, KEAT, F0 = Z.K0, Z.NW, Z.K0 + Z.NW, 0.01, 0.08

@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Часть 9: эксперименты экологии — свип параметров пищи, длинные прогоны популяции, контроли."""
 import time, numpy as np
 import glider_coll as GC

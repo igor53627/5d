@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[1]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Ограниченный эволюционный поиск (элитарная ES) спонтанных глайдеров в Flow-Lenia(+χ∇φ), asym = 0.
 Особь: изолированное пятно в центре чистой решётки. Фитнес = (смещение главного объекта / R) × прямолинейность × corr²,
 обнуляется, если объект распался/расползся (не один доминирующий компонент) или занял > 5% решётки."""
@@ -22,7 +22,7 @@ def encode(c, n_rings):
 
 def evaluate(cands, N=4, L=32, steps=1500, every=50, thr=0.1, seed=0, flip=False, traj=False, slice_every=0):
     import jax, jax.numpy as jnp, fl_glider as FG
-    from glider_search import ball_vol
+    from helpers import ball_vol
     R = cands[0]["R"]; B = len(cands)
     KA = jnp.stack([jnp.asarray(FG.ring_kernel_np(L, N, c["R"], tuple(c["peaks"]))) for c in cands])
     Ko = jnp.asarray(FG.ring_kernel_np(L, N, 3.0))

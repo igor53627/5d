@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Длинный CMA-ES в 5D: жёсткий самодвижущийся солитон Flow-Lenia+χ∇φ при asym=0.
 Метрики считаются на GPU (без scipy): масса, круговой центр и локализация по осям, корреляция формы в сопутствующей
 системе (центрированный, усреднённый 2×-пулингом снимок) с лагами 50 и 250 шагов.

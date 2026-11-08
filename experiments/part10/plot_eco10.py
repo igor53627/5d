@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Часть 10: популяция при ёмкости, наследуемость, межособевой отбор (Прайс) — отбор / нейтр. / без переноса, 3 зерна."""
 import glob, pickle, json, sys, numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 from scipy import stats

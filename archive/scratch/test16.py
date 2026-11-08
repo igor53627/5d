@@ -1,6 +1,6 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 import json, numpy as np, jax, jax.numpy as jnp, fl_eco3 as E3, fl_brain as B, fl_glider as FG, glider_coll as GC
-c = json.load(open('specs/eco13m.json'))[0]['runs'][0]['c']
+c = json.load(open(_path._root / 'archive/specs/eco13m.json'))[0]['runs'][0]['c']
 eco = dict(keat=0.01, dec=0.0003, rF=0.0001, F0=0.08, pmu=0.0, hom=0.05, mutn=0.002, krep=10, ks=2, pk=0.0, kb=1.0, kr=10.0)
 N, L = 4, 24; st, v = GC.soliton(c, N, L, 1, pre=200); U1 = E3.U1_of(st["A"], L, N, coarse=True); cc = dict(c, **eco, U1=U1)
 s = B.make_state({k: st[k] for k in ("A","x","y","z","c")}, cc, K=B.KB, seed=5)

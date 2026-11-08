@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[1]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Сверка JAX-порта с numpy-версией на маленькой решётке (4D, L=8) из одинакового начального состояния."""
 import json, sys, time, types
 import numpy as np, jax, jax.numpy as jnp

@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Part 15: micro-brain metrics. python analyze15.py prefix files...  → results/eco15/<prefix>.pkl, prints table."""
 import pickle, sys, re, numpy as np, analyze_eco as AE, analyze12 as A12, fl_brain as B
 K0, NW = B.K0, B.NW; iD = K0 + NW          # 26: D0 intake/mass, 27 v·ĝ, 28 |v|, 29 vb·ĝ

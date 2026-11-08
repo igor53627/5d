@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[1]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Батч-поиск движущихся структур: прогон кандидатов (vmap) + детекторы + треки."""
 import time, json, numpy as np
 

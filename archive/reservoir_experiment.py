@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[1]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """
 Reservoir computing на Feigenbaum-Lenia vs ESN.
 Задачи: Mackey-Glass (tau=17) прогноз на h шагов, Lorenz-x прогноз, линейная ёмкость памяти Джегера (MC).

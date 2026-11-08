@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Часть 9: фигуры экологии. python plot_eco.py OUT.png L file.pkl[:idx,idx] ... [--mp4 file.pkl:idx out.mp4]"""
 import sys, os, pickle, numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 import analyze_eco as AE

@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[1]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Анизотропия направлений движения: гистограммы max|u_k| и угла до ближайшего направления решётки ({-1,0,1}^N) vs изотропный эталон."""
 import os, sys, pickle, itertools, numpy as np, json, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 from scipy.stats import ks_2samp

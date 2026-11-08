@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[1]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 import json, numpy as np, sys
 rng = np.random.default_rng(int(sys.argv[2]) if len(sys.argv) > 2 else 0)
 PEAKS = [[1.0], [1.0, 0.5], [0.5, 1.0], [1.0, 1.0], [1/3, 2/3, 1.0]]

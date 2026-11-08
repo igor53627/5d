@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[1]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Рисунок для режима без входа (ALife) с гомеостазом по условному λc."""
 import pickle, sys, os, numpy as np
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt

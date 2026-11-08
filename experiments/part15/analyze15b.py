@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Part 15b: what the evolved micro-brains encode. Uses saved Part 15 logs only."""
 import pickle, glob, re, numpy as np, fl_brain as B, analyze12 as A12, analyze_eco as AE
 K0, NW, iD = B.K0, B.NW, B.K0 + B.NW

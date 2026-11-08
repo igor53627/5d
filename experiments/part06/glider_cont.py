@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Численная континуация по asym: вырастить подвижную «палочку» в супе, вырезать одну на чистую решётку,
 затем медленно уводить asym → 0 (с релаксацией на каждом шаге) в нескольких ветках сразу (vmap):
 вариации μ/σ/β/χ, зеркальная копия (flip), резкий сброс (quench), реверс asym.
@@ -14,7 +14,7 @@ def _fresh_osc(key, L, N):
 def grow_and_pick(cand, N=4, L_soup=32, soup_steps=2000, track_steps=600, every=25, thr=0.1, nseed=4, seed=0):
     """Суп → трек → выбрать лучший подвижный локализованный объект. Возвращает dict полей, центрированных в L_soup//2, и маску."""
     import jax, jax.numpy as jnp, fl_glider as FG
-    from glider_search import ball_vol
+    from helpers import ball_vol
     from scipy import ndimage
     R = cand["R"]; mode = cand.get("mode", "lenia"); use_chi = cand.get("chi", 0) != 0
     cands = [dict(cand, seed=cand.get("seed", 0) + 7919 * s) for s in range(nseed)]
@@ -95,7 +95,7 @@ def continuation(cand, branches, n_stage_steps, N=4, L=40, soup_steps=2000, soup
     """Континуация на ПОПУЛЯЦИИ (суп после soup_steps при asym=soup_asym) + опционально изолированная «палочка» (iso=True).
     branches: dict(name, asyms[len(n_stage_steps)], axis=0, flip=False, iso=False, over={param: value})."""
     import jax, jax.numpy as jnp, fl_glider as FG
-    from glider_search import ball_vol
+    from helpers import ball_vol
     t0 = time.time()
     R = cand["R"]; mode = cand.get("mode", "lenia"); a0 = cand.get("asym", 0.0) if soup_asym is None else soup_asym
     use_chi = cand.get("chi", 0) != 0 or any(b.get("over", {}).get("chi", 0) != 0 for b in branches)

@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Часть 10: видео проекций (среднее по осям x3..xN) для нескольких прогонов рядом. python plot_mp4_10.py out.mp4 proj_every f1.pkl:title f2.pkl:title ..."""
 import sys, os, pickle, numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt, matplotlib.animation as an
 out, pe = sys.argv[1], int(sys.argv[2]); items = [a.split(":", 1) for a in sys.argv[3:]]

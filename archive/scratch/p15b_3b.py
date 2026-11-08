@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 import pickle, numpy as np, analyze15b as Z, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 T = pickle.load(open("results/eco15/types15b.pkl", "rb")); R = Z.load()
 Vt, mu0, grid = T["Vt"], T["mu0"], T["grid"]

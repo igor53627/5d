@@ -1,4 +1,4 @@
-import sys; _R = __import__("pathlib").Path(__file__).resolve().parents[2]; [sys.path.insert(0, str(p)) for p in [_R, _R / "src"] + list((_R / "experiments").glob("part*"))]
+import _path  # noqa: F401
 """Part 18b: map Part-17 evolved brains (4→3→3) onto the Part-18 architecture (7→3→4) as warm-start founders."""
 import pickle, glob, numpy as np, fl_poison as P17, fl_season as Z
 def best17(tag):
