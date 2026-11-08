@@ -27,10 +27,56 @@ def _objects(Ap, Qp, M1, pool, N):
         out.append((float(ms[j]) * pool ** N / M1, (cen[j] * pool).tolist(), qs[j].tolist()))
     return out
 
+def masks_ok(A2, A, min_sep, min_gap=None):
+    """Reject a founder mask that overlaps existing mass.
+
+    min_sep is the historical flag: None disables the overlap test, any other value rejects mask overlap
+    (the numeric distance is not used). min_gap, if set, also rejects pairs whose 0.02 contours are
+    at Chebyshev distance <= min_gap. Leaving both unset keeps the historical placement.
+    """
+    if min_sep is None and min_gap is None:
+        return True
+    new = A2 > 0.02
+    old = A > 0.02
+    if min_sep is not None and (new & old).any():
+        return False
+    gap = 0 if min_gap is None else int(min_gap)
+    if gap > 0 and old.any():
+        from scipy import ndimage
+        dil = ndimage.binary_dilation(old, structure=np.ones((3,) * A.ndim, dtype=bool), iterations=gap)
+        if (new & dil).any():
+            return False
+    return True
+
+def init_multi(st, rng, n_init, L, N, K, p0, p_spread, min_sep, min_gap=None, p_inits=None):
+    """Place n_init copies. p_inits replaces the Gaussian draw but the draw is still consumed, so positions match a p_spread run."""
+    if p_inits is not None and len(p_inits) != n_init:
+        raise ValueError(f"p_inits has {len(p_inits)} rows, n_init is {n_init}")
+    A = np.zeros_like(st["A"]); Q = np.zeros((K,) + st["A"].shape, np.float32); base = {k: x.copy() for k, x in st.items()}
+    perms = list(GC.signed_perms(N)); pinit = []
+    for i in range(n_init):
+        p, sg = perms[rng.integers(len(perms))]; S = GC.transform(st, p, sg)
+        for _try in range(200):     # перф: при подборе сдвига крутим только A, остальные поля — один раз
+            sh = tuple(int(x) for x in rng.integers(0, L, N)); A2 = np.roll(S["A"], sh, axis=tuple(range(N)))
+            if masks_ok(A2, A, min_sep, min_gap): break
+        S = {k: (A2 if k == "A" else np.roll(x, sh, axis=tuple(range(N)))) for k, x in S.items()}
+        m = (S["A"] > 0.02) & (A < 0.02)
+        noise = rng.standard_normal(K)
+        pi = np.asarray(p_inits[i], float) if p_inits is not None else np.asarray(p0) + p_spread * noise
+        pinit.append(np.asarray(pi, float).tolist())
+        for k in base:
+            if k != "A": base[k] = np.where(m, S[k], base[k])
+        A = A + np.where(m, S["A"], 0); Q += np.asarray(pi, np.float32).reshape((K,) + (1,) * N) * np.where(m, S["A"], 0)[None]
+    base["A"] = A.astype(np.float32)
+    return base, Q.astype(np.float32), pinit
+
 def run_eco(c, ecos, N=4, L=48, seed=3, steps=10000, every=100, K=2, p0=(0.0, 0.0), pre=600, proj_every=500, transport=None,
-            init="single", n_init=1, p_spread=0.0, save_cb=None, batch=6, tag="", model="eco", min_sep=None, async_log=True, opts=None, legacy_log=False):
+            init="single", n_init=1, p_spread=0.0, save_cb=None, batch=6, tag="", model="eco", min_sep=None, async_log=True, opts=None, legacy_log=False,
+            p_inits=None, min_gap=None):
     """ecos: список словарей эко-параметров (keat, dec, rF, F0, mut, ...); каждый — отдельный член батча.
-    transport: список bool той же длины (по умолчанию True). init='single' — один солитон; 'multi' — n_init копий с p ~ N(p0, p_spread)."""
+    transport: список bool той же длины (по умолчанию True). init='single' — один солитон; 'multi' — n_init копий с p ~ N(p0, p_spread).
+    p_inits: готовые геномы (n_init, K) вместо этого гаусса; шум всё равно снимается с rng, позиции те же.
+    min_gap: клетки Чебышёва между контурами 0.02. min_sep по-прежнему только флаг «без наложений»."""
     import jax, jax.numpy as jnp, fl_glider as FG
     E = __import__({"eco2": "fl_eco2", "eco3": "fl_eco3", "brain": "fl_brain", "poison": "fl_poison", "season": "fl_season"}.get(model, "fl_eco")); opts = opts or {}; e2 = model in ("eco2", "eco3", "brain", "poison", "season"); e3 = model in ("eco3", "brain", "poison", "season")
     t0 = time.time(); out = dict(runs=[], partial=True, tag=tag)
@@ -49,19 +95,8 @@ def run_eco(c, ecos, N=4, L=48, seed=3, steps=10000, every=100, K=2, p0=(0.0, 0.
         ecos = [dict(e, U1=U1) for e in ecos]
     rng = np.random.default_rng(seed)
     if init == "multi":
-        A = np.zeros_like(st["A"]); Q = np.zeros((K,) + st["A"].shape, np.float32); base = {k: x.copy() for k, x in st.items()}
-        perms = list(GC.signed_perms(N)); pinit = []
-        for i in range(n_init):
-            p, sg = perms[rng.integers(len(perms))]; S = GC.transform(st, p, sg)
-            for _try in range(200):     # перф: при подборе сдвига крутим только A, остальные поля — один раз
-                sh = tuple(int(x) for x in rng.integers(0, L, N)); A2 = np.roll(S["A"], sh, axis=tuple(range(N)))
-                if min_sep is None or not ((A2 > 0.02) & (A > 0.02)).any(): break
-            S = {k: (A2 if k == "A" else np.roll(x, sh, axis=tuple(range(N)))) for k, x in S.items()}
-            m = (S["A"] > 0.02) & (A < 0.02); pi = np.asarray(p0) + p_spread * rng.standard_normal(K); pinit.append(pi.tolist())
-            for k in base:
-                if k != "A": base[k] = np.where(m, S[k], base[k])
-            A = A + np.where(m, S["A"], 0); Q += pi.reshape((K,) + (1,) * N) * np.where(m, S["A"], 0)[None]
-        base["A"] = A.astype(np.float32); out["p_init"] = pinit
+        base, Q, pinit = init_multi(st, rng, n_init, L, N, K, p0, p_spread, min_sep, min_gap, p_inits)
+        out["p_init"] = pinit
     transport = transport or [True] * len(ecos)
     for i0 in range(0, len(ecos), batch):
         EC = ecos[i0:i0 + batch]; TR = transport[i0:i0 + batch]
