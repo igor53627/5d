@@ -2,7 +2,7 @@
 
 Evolving artificial life in 4D/5D Flow-Lenia.
 
-Hyperlife is a continuous cellular automaton (Flow-Lenia) in four and five spatial dimensions. The transport step conserves mass; feeding adds mass and decay removes it. Each cell is a chaotic Rössler oscillator, so its local dynamics sit on the period-doubling cascade — the Feigenbaum route — which is why earlier notes call the project Feigenbaum-Lenia. Localized gliders and organisms self-organize, and open-ended evolution acts on heritable parameters and small neural micro-brains that travel with the mass. The experiments probe foraging, poison avoidance, and seasons, and they measure change with the Price equation, heritability, and founder lineages.
+Hyperlife is a continuous cellular automaton (Flow-Lenia) in four and five spatial dimensions. The transport step conserves mass; feeding adds mass and decay removes it. Each cell is a chaotic Rössler oscillator, so its local dynamics sit on the period-doubling cascade (the Feigenbaum route). Localized gliders and organisms self-organize, and open-ended evolution acts on heritable parameters and small neural micro-brains that travel with the mass. The experiments probe foraging, poison avoidance, and seasons, and they measure change with the Price equation, heritability, and founder lineages.
 
 Python modules keep their historical names (`feigenbaum_lenia.py` and the `fl_*` engines). The installable distribution name is `hyperlife`.
 
@@ -56,8 +56,8 @@ JAX_PLATFORMS=cuda python -m feigenbaum_lenia --out gpu_run
 ```
 src/                 Core library: models, kernels, dynamics
 experiments/         Per-part experiment scripts and results
-  part05/            ES-based glider search
-  part06/            Continuation analysis
+  part05/            Asymmetry continuation and swimmers
+  part06/            Long 5D CMA-ES
   ...
   part18/            Seasonal environments
 figures/             PNG figures by part
@@ -70,8 +70,8 @@ archive/             Early searches, benchmarks, reservoir experiments
 
 | Part | Topic | Notes | Key Figure |
 |------|-------|-------|------------|
-| 5 | ES-based glider search | [part5_notes.md](experiments/part05/results/part5_notes.md) | [glider_es5_fitness.png](figures/glider_es5_fitness.png) |
-| 6 | Continuation analysis | [part6_notes.md](experiments/part06/results/part6_notes.md) | [glider_cont_bifurcation.png](figures/glider_cont_bifurcation.png) |
+| 5 | Asymmetry continuation and swimmers | [part5_notes.md](experiments/part05/results/part5_notes.md) | [glider_cont_bifurcation.png](figures/glider_cont_bifurcation.png) |
+| 6 | Long 5D CMA-ES | [part6_notes.md](experiments/part06/results/part6_notes.md) | [glider_es5_fitness.png](figures/glider_es5_fitness.png) |
 | 7 | Collision experiments | [part7_notes.md](experiments/part07/results/part7_notes.md) | [glider_part7_coll4D.png](figures/glider_part7_coll4D.png) |
 | 8 | Replication | [part8_notes.md](experiments/part08/results/part8_notes.md) | [glider_part8_replication.png](figures/glider_part8_replication.png) |
 | 9 | Growth and selection | [part9_notes.md](experiments/part09/results/part9_notes.md) | [glider_part9_growth.png](figures/glider_part9_growth.png) |
@@ -88,7 +88,16 @@ archive/             Early searches, benchmarks, reservoir experiments
 
 ## Data
 
-Heavy arrays (simulation logs, snapshots, optimizer checkpoints) live in a **Modal Volume**. They will be published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (coming soon). See [DATA.md](DATA.md) for the manifest, logging cadence, and access.
+Simulation logs are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (public, CC-BY-4.0, 372 files under `part03`–`part18`, 1.54 GB). Part 18 also holds the 18b runs. Per-part sizes, the log cadence, and where `bench_b300_0.pkl` and `bench_h100_0.pkl` sit are in [DATA.md](DATA.md).
+
+```bash
+huggingface-cli download igor53627/5d --repo-type dataset
+```
+
+```python
+from huggingface_hub import snapshot_download
+snapshot_download("igor53627/5d", repo_type="dataset", allow_patterns="part07/*")
+```
 
 ## License
 
