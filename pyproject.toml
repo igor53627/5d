@@ -1,0 +1,23 @@
+[project]
+name = "feigenbaum-lenia"
+version = "0.1.0"
+description = "Feigenbaum-Lenia: Evolving cellular automata with conditional Lyapunov exponents"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy",
+    "jax",
+    "jaxlib",
+    "matplotlib",
+    "scipy",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+modal = ["modal"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.setuptools.package-dir]
+"" = "."
