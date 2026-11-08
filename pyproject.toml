@@ -1,7 +1,7 @@
 [project]
-name = "feigenbaum-lenia"
+name = "hyperlife"
 version = "0.1.0"
-description = "Feigenbaum-Lenia: Evolving cellular automata with conditional Lyapunov exponents"
+description = "Hyperlife: evolving artificial life in 4D/5D Flow-Lenia"
 requires-python = ">=3.9"
 dependencies = [
     "numpy",
