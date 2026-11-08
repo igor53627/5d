@@ -17,7 +17,7 @@ Heavy arrays are planned for migration to **Hugging Face Datasets** for easier a
 | Simulation logs | `.pkl` | Pickled dictionaries with time series, object tracking, metrics |
 | Snapshots | `.npy`, `.npz` | NumPy arrays: lattice states, genome fields |
 | Optimizer checkpoints | `.pkl` | CMA-ES state (mean, covariance, step-size) + fitness history; **not** restartable lattice state |
-| Ecology logs | `.pkl` | Object tracking and 2D projections (partial=True); **not** full N-D lattice snapshots |
+| Ecology logs | `.pkl` | Object tracking and 2D projections. `partial=True` on in-progress checkpoints; `run_eco` sets `partial=False` when a run finishes, and Modal saves that result. **Not** full N-D lattice snapshots. |
 | Figures | `.png` | Rendered plots (in `figures/`) |
 | Videos | `.mp4` | Rendered animations (in `videos/`) |
 
@@ -29,14 +29,15 @@ Heavy arrays are planned for migration to **Hugging Face Datasets** for easier a
 | 6 | Continuation sweeps | Bifurcation diagrams and parameter scans | ~100 MB |
 | 7 | Collision outcomes | Pairwise collision result matrices | ~200 MB |
 | 8–9 | Replication/growth logs | Lineage tracking and division events | ~500 MB |
-| 10–14 | `glider_eco.run_eco` | Ecology time series: object lists (mass, center, phenotype), 2D max-projections, and food totals per snapshot. Partial logs, not full N-D fields. | ~2 GB |
+| 10–14 | `glider_eco.run_eco` | Ecology time series: object lists (mass, center, phenotype), 2D projections (mean over the omitted axes), and the spatial mean of the food field `F` per snapshot. `partial=True` while running, `partial=False` when complete. Not full N-D fields. | ~2 GB |
 | 15–16 | Brain evolution logs | Micro-brain weight evolution and intake correlations | ~1 GB |
 | 17–18 | Poison/seasonal logs | Seasonal adaptation metrics and memory tests | ~1 GB |
 
 ## File Naming Convention
 
-- `results/eco{part}/b{part}m_*.pkl` — main experiment batches
+- `results/eco{part}/b{part}m_*.pkl` — main experiment batches (example pattern, not exhaustive)
 - `results/eco{part}/main{part}.pkl` — aggregated summary tables
+- Part 10 batch logs are `eco10m_*.pkl`. Part 12 batch logs are `eco12m_*.pkl`; `plot_eco12.py` writes the aggregate `main_metrics.pkl` next to them.
 - `specs/*.json` — experiment configuration files
 
 ## Access

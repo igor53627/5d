@@ -12,4 +12,6 @@ for f in sys.argv[2:]:
         print(f"{t:12s} T{m['T']} n{list(n[idx])} M{[round(x) for x in m['M'][idx]]} p0{list(np.round(m['p0'][idx],2))} sd{list(np.round(m['sd'][idx],2))} div{m['div']} h{m['h']:.2f} "
               f"S_pl{m['S_plateau']:+.3f}(c{m['corr_plateau']:+.2f}) sd_pl{m['sd_pl']:.2f} k{m['k_mode']} lin{m['lin_n'][-1]}/{m['lin_eff'][-1]:.1f} "
               f"Sw{[round(x[1],3) for x in m['Sw']]} {('LA %.2f' % m['local_adapt']) if 'local_adapt' in m else ''} {m.get('season_track','')}")
-pickle.dump(R, open(f'{_archive}/results/eco12/sum_{sys.argv[2].split("/")[-1].split("_")[0]}.pkl', 'wb'))
+_eco12 = _root / "experiments" / "part12" / "results" / "eco12"
+_eco12.mkdir(parents=True, exist_ok=True)
+pickle.dump(R, open(_eco12 / f'sum_{sys.argv[2].split("/")[-1].split("_")[0]}.pkl', 'wb'))

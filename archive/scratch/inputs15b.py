@@ -14,4 +14,6 @@ for d in (None, 8, 12, 16, 20, 24):
     s1 = Ub[m] / U1 - 1; s2 = Uf[m] / U1
     q = lambda x: [float(np.average(x, weights=w)), *[float(np.percentile(x, p)) for p in (5, 50, 95)]]
     out[str(d)] = dict(s1=q(s1), s2=q(s2)); print(d, "s1 mean/p5/p50/p95", np.round(q(s1), 3), "s2", np.round(q(s2), 3))
-pickle.dump(out, open(f"{_archive}/results/eco15/inputs15b.pkl", "wb"))
+_eco15 = _root / "experiments" / "part15" / "results" / "eco15"
+_eco15.mkdir(parents=True, exist_ok=True)
+pickle.dump(out, open(_eco15 / "inputs15b.pkl", "wb"))

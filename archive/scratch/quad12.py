@@ -10,8 +10,10 @@ def quad_log(log):
         m = np.array([o[0] for o in O]); p = np.array([o[2][0] for o in O]); pb = np.average(p, weights=m)
         out.append((t, [(o[0], o[1], [(o[2][0] - pb) ** 2] + list(o[2][1:])) for o in O]))
     return out
+_eco12 = _root / "experiments" / "part12" / "results" / "eco12"
+_eco12.mkdir(parents=True, exist_ok=True)
 Q = {}
-for f in sorted(glob.glob(f'{_archive}/results/eco12/eco12m_*.pkl')):
+for f in sorted(glob.glob(str(_eco12 / "eco12m_*.pkl"))):
     o = pickle.load(open(f, 'rb'))['out'][0]
     for t, r in o.items():
         if t == 'summary' or '_96_' not in t: continue
@@ -22,4 +24,4 @@ for c, v in Q.items():
     v = np.array(v); print(c, 'C_quad growth %.4f±%.4f' % (v[:, 0].mean(), v[:, 0].std(ddof=1)), 'plateau %.4f±%.4f p_vs0=%.3f' % (v[:, 1].mean(), v[:, 1].std(ddof=1), stats.ttest_1samp(v[:, 1], 0).pvalue), np.round(v[:, 1], 4))
 a = np.array(Q['res2k'])[:, 1]; b = np.array(Q['neu'])[:, 1]; s = np.array(Q['sel'])[:, 1]
 print('res2k vs neu p=%.3f, res2k vs sel p=%.3f' % (stats.ttest_ind(a, b, equal_var=False).pvalue, stats.ttest_ind(a, s, equal_var=False).pvalue))
-pickle.dump(Q, open(f'{_archive}/results/eco12/quad.pkl', 'wb'))
+pickle.dump(Q, open(_eco12 / "quad.pkl", "wb"))

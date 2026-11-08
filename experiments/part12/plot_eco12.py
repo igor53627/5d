@@ -3,15 +3,17 @@ import _path  # noqa: F401
 import glob, pickle, json, numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 from scipy import stats
 import analyze12 as A
+_eco12 = _path._root / "experiments" / "part12" / "results" / "eco12"
+_eco12.mkdir(parents=True, exist_ok=True)
 R = {}
-for f in sorted(glob.glob("results/eco12/eco12m_*.pkl")):
+for f in sorted(glob.glob(str(_eco12 / "eco12m_*.pkl"))):
     o = pickle.load(open(f, "rb"))["out"][0]
     for t, r in o.items():
         if t == "summary" or not r.get("runs"): continue
         cond, geo, sd = t.rsplit("_", 2); L = {"96": 96, "128": 128, "5D40": 40}[geo]
         rr = r["runs"][0]; m = A.metrics(rr, L, eco=rr["eco"]); m.update(seed=int(sd[1:]), partial=r.get("partial"), geo=geo)
         R.setdefault((cond, geo), []).append(m)
-pickle.dump(R, open("results/eco12/main_metrics.pkl", "wb"))
+pickle.dump(R, open(_eco12 / "main_metrics.pkl", "wb"))
 COL = {"sel": "tab:red", "neu": "tab:gray", "res2k": "tab:green", "seasonK1": "tab:purple"}
 LAB = {"sel": "направленный отбор (e^{p0})", "neu": "нейтрально", "res2k": "2 ресурса, компромисс (γ=2)", "seasonK1": "сезонный оптимум"}
 C4 = [c for c in ("sel", "neu", "res2k", "seasonK1") if (c, "96") in R]
