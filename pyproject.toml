@@ -1,0 +1,41 @@
+[project]
+name = "feigenbaum-lenia"
+version = "0.1.0"
+description = "Feigenbaum-Lenia: Evolving cellular automata with conditional Lyapunov exponents"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy",
+    "jax>=0.4.25",
+    "matplotlib",
+    "scipy",
+    "imageio",
+    "imageio-ffmpeg",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+modal = ["modal"]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+py-modules = [
+    "alife_jax",
+    "analyze_eco",
+    "feigenbaum_lenia",
+    "fl_brain",
+    "fl_eco",
+    "fl_eco2",
+    "fl_eco3",
+    "fl_glider",
+    "fl_jax",
+    "fl_poison",
+    "fl_season",
+    "glider_coll",
+    "helpers",
+    "modal_app",
+    "render",
+]
