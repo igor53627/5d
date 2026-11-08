@@ -1,0 +1,30 @@
+Note that running a local entrypoint in detached mode only keeps the last triggered Modal function alive after the parent process has been killed or disconnected.
+✓ Initialized. View run at 
+https://modal.com/apps/igor53627/main/ap-SzkHuTwPAsTMhUs92aaNok
+✓ Created objects.
+├── ✓ Uploaded /workspace/attractor_ca/modal_app.py
+├── ✓ Uploaded /workspace/attractor_ca/glider_coll.py
+├── ✓ Uploaded /workspace/attractor_ca/glider_es5.py
+├── ✓ Uploaded /workspace/attractor_ca/glider_es.py
+├── ✓ Uploaded /workspace/attractor_ca/glider_cont.py
+├── ✓ Uploaded /workspace/attractor_ca/fl_glider.py
+├── ✓ Uploaded /workspace/attractor_ca/glider_search.py
+├── ✓ Uploaded /workspace/attractor_ca/bench.py
+├── ✓ Uploaded /workspace/attractor_ca/alife_jax.py
+├── ✓ Uploaded /workspace/attractor_ca/feigenbaum_lenia.py
+├── ✓ Uploaded /workspace/attractor_ca/reservoir_gpu.py
+├── ✓ Uploaded /workspace/attractor_ca/fl_jax.py
+├── ✓ Uploaded /workspace/attractor_ca/reservoir_experiment.py
+├── ✓ Created Function gpu_job_auto.
+├── ✓ Created Function gpu_job_lean.
+├── ✓ Created Function gpu_job.
+├── ✓ Created Function gpu_job_cheap.
+├── ✓ Created Function gpu_job_big.
+└── ✓ Created Function gpu_job_h100.
+spawned 3
+NVIDIA H100 80GB HBM3, 81559 MiB 161s {'S1|flow_iso_mc': (0.0787, 0.943)}
+NVIDIA H100 80GB HBM3, 81559 MiB 182s {'S1|flow_iso_muscl_sub2': (0.0766, 
+0.941)}
+NVIDIA H100 80GB HBM3, 81559 MiB 168s {'S1|flow_iso_mc_sub2': (0.0781, 0.943)}
+✓ App completed. View run at 
+https://modal.com/apps/igor53627/main/ap-SzkHuTwPAsTMhUs92aaNok

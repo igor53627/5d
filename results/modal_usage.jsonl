@@ -1,0 +1,17 @@
+{"tag": "smoke", "gpu_req": "L4", "gpu": "NVIDIA L4, 23034 MiB", "wall_fn": 2.212860584259033, "wall_client": 90.09988474845886, "time": "2026-11-06 11:34:34"}
+{"tag": "bench_L4", "gpu_req": "L4", "gpu": "NVIDIA L4, 23034 MiB", "wall_fn": 94.3349015712738, "wall_client": 98.9239821434021, "time": "2026-11-06 11:36:22"}
+{"tag": "res_tune_L8.json", "gpu_req": "L4", "gpu": "NVIDIA L4, 23034 MiB", "wall_fn": 239.34487128257751, "wall_client": 248.0163459777832, "time": "2026-11-06 11:46:53"}
+{"tag": "bench_B200", "gpu_req": "B200", "gpu": "NVIDIA B200, 183359 MiB", "wall_fn": 73.56631469726562, "wall_client": 779.9221465587616, "time": "2026-11-06 11:47:43"}
+{"tag": "res_tune_L8.json", "gpu_req": "L4", "gpu": "NVIDIA L4, 23034 MiB", "wall_fn": 228.9955837726593, "wall_client": 477.0306804180145, "time": "2026-11-06 11:50:42"}
+{"tag": "res_tune_L8.json", "gpu_req": "L4", "gpu": "NVIDIA L4, 23034 MiB", "wall_fn": 240.08213639259338, "wall_client": 719.1591446399689, "time": "2026-11-06 11:54:44"}
+{"tag": "tune2_L8", "gpu_req": "auto", "gpu": "NVIDIA A10, 23028 MiB", "wall_fn": 374.1167571544647, "wall_client": 569.161524772644, "time": "2026-11-06 12:32:14"}
+{"tag": "tune2_L8", "gpu_req": "auto", "gpu": "NVIDIA L40S, 49140 MiB", "wall_fn": 248.92826581001282, "wall_client": 571.7776048183441, "time": "2026-11-06 12:32:17"}
+{"tag": "final_L8", "gpu_req": "auto", "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB", "wall_fn": 67.956866979599, "wall_client": 74.66404008865356, "time": "2026-11-06 12:33:52"}
+{"tag": "final_L8", "gpu_req": "auto", "gpu": "NVIDIA H200, 143771 MiB", "wall_fn": 70.96922707557678, "wall_client": 80.43408203125, "time": "2026-11-06 12:33:58"}
+{"tag": "final_L8", "gpu_req": "auto", "gpu": "NVIDIA H200, 143771 MiB", "wall_fn": 48.8750479221344, "wall_client": 80.86071848869324, "time": "2026-11-06 12:33:59"}
+{"tag": "final_L12", "gpu_req": "auto", "gpu": "NVIDIA H200, 143771 MiB", "wall_fn": 90.03449749946594, "wall_client": 96.84860730171204, "time": "2026-11-06 12:34:18"}
+{"tag": "final_L12", "gpu_req": "auto", "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB", "wall_fn": 83.11750507354736, "wall_client": 97.66865038871765, "time": "2026-11-06 12:34:18"}
+{"tag": "final_L12", "gpu_req": "auto", "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB", "wall_fn": 56.65528678894043, "wall_client": 98.47329425811768, "time": "2026-11-06 12:34:19"}
+{"tag": "final_L16", "gpu_req": "auto", "gpu": "NVIDIA L40S, 46068 MiB", "wall_fn": 256.9819669723511, "wall_client": 420.95784640312195, "time": "2026-11-06 12:39:44"}
+{"tag": "final_L16", "gpu_req": "auto", "gpu": "NVIDIA L40S, 46068 MiB", "wall_fn": 258.71236968040466, "wall_client": 421.7205810546875, "time": "2026-11-06 12:39:45"}
+{"tag": "final_L16", "gpu_req": "auto", "gpu": "NVIDIA L40S, 46068 MiB", "wall_fn": 144.03794693946838, "wall_client": 422.20647382736206, "time": "2026-11-06 12:39:45"}

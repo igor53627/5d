@@ -1,0 +1,27 @@
+sel sd_pl         3D-5D spearman rho=-0.64 p=0.00073
+sel dp0_5k        3D-5D spearman rho=-0.07 p=0.76
+sel dp0           3D-5D spearman rho=-0.24 p=0.25
+sel h             3D-5D spearman rho=-0.08 p=0.71
+sel div_rate_k    3D-5D spearman rho=+0.88 p=9.6e-09
+sel merge_rate_k  3D-5D spearman rho=+0.92 p=1.7e-10
+sel t_plateau     3D-5D spearman rho=+0.72 p=8e-05
+sel lin_eff       3D-5D spearman rho=-0.63 p=0.001
+sel sd_slope_pl   3D-5D spearman rho=+0.51 p=0.011
+sel S_growth      3D-5D spearman rho=-0.61 p=0.0015
+sel S_pl          3D-5D spearman rho=+0.36 p=0.083
+neu sd_pl         3D-5D spearman rho=-0.31 p=0.14
+neu dp0_5k        3D-5D spearman rho=-0.07 p=0.73
+neu dp0           3D-5D spearman rho=+0.38 p=0.07
+neu h             3D-5D spearman rho=-0.76 p=1.7e-05
+neu div_rate_k    3D-5D spearman rho=+0.91 p=4.3e-10
+neu merge_rate_k  3D-5D spearman rho=+0.93 p=5.8e-11
+neu t_plateau     3D-5D spearman rho=+0.93 p=7.7e-11
+neu lin_eff       3D-5D spearman rho=-0.81 p=1.5e-06
+neu sd_slope_pl   3D-5D spearman rho=+0.15 p=0.49
+neu S_growth      3D-5D spearman rho=+0.14 p=0.51
+neu S_pl          3D-5D spearman rho=-0.07 p=0.76
+3D96 sd_sel/sd_neu=0.59 dp0_5k/gen(≈div per ind in 5k)=0.184 extinct 0
+4D56 sd_sel/sd_neu=0.57 dp0_5k/gen(≈div per ind in 5k)=0.078 extinct 0
+5D40 sd_sel/sd_neu=0.51 dp0_5k/gen(≈div per ind in 5k)=0.066 extinct 0
+2D512 sd_sel/sd_neu=0.88 dp0_5k/gen(≈div per ind in 5k)=2.214 extinct 0
+2D512n48 sd_sel/sd_neu=0.76 dp0_5k/gen(≈div per ind in 5k)=1.234 extinct 0

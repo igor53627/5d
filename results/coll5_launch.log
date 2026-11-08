@@ -1,0 +1,34 @@
+Note that running a local entrypoint in detached mode only keeps the last triggered Modal function alive after the parent process has been killed or disconnected.
+✓ Initialized. View run at 
+https://modal.com/apps/igor53627/main/ap-YeNUBhewJgFk9KXp2Cjoqc
+✓ Created objects.
+├── ✓ Uploaded /workspace/attractor_ca/modal_app.py
+├── ✓ Uploaded /workspace/attractor_ca/glider_coll.py
+├── ✓ Uploaded /workspace/attractor_ca/glider_es5.py
+├── ✓ Uploaded /workspace/attractor_ca/glider_es.py
+├── ✓ Uploaded /workspace/attractor_ca/glider_cont.py
+├── ✓ Uploaded /workspace/attractor_ca/glider_search.py
+├── ✓ Uploaded /workspace/attractor_ca/fl_glider.py
+├── ✓ Uploaded /workspace/attractor_ca/alife_jax.py
+├── ✓ Uploaded /workspace/attractor_ca/bench.py
+├── ✓ Uploaded /workspace/attractor_ca/reservoir_gpu.py
+├── ✓ Uploaded /workspace/attractor_ca/feigenbaum_lenia.py
+├── ✓ Uploaded /workspace/attractor_ca/reservoir_experiment.py
+├── ✓ Uploaded /workspace/attractor_ca/fl_jax.py
+├── ✓ Created Function gpu_job.
+├── ✓ Created Function gpu_job_auto.
+├── ✓ Created Function gpu_job_lean.
+├── ✓ Created Function gpu_job_cheap.
+├── ✓ Created Function gpu_job_big.
+└── ✓ Created Function gpu_job_h100.
+spawned 3
+NVIDIA H200, 143771 MiB 1420s [(180, 0, 0, 'захват→переизлучение', 2), (150, 8, 
+0, 'захват→переизлучение', 2), (90, 0, 0, 'слияние', 1), (60, 8, 0, 'слияние', 
+1)]
+NVIDIA H100 80GB HBM3, 81559 MiB 1412s [(180, 8, 0, 'захват→переизлучение', 2), 
+(120, 0, 0, 'слияние', 1), (90, 8, 0, 'слияние', 1), (180, 0, 50, 'слияние', 1)]
+NVIDIA H200, 143771 MiB 1425s [(150, 0, 0, 'слияние', 1), (120, 8, 0, 
+'захват→переизлучение', 2), (60, 0, 0, 'слияние', 1), (180, 0, 100, 
+'захват→переизлучение', 2)]
+✓ App completed. View run at 
+https://modal.com/apps/igor53627/main/ap-YeNUBhewJgFk9KXp2Cjoqc

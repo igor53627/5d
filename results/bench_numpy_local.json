@@ -1,0 +1,57 @@
+[
+ {
+  "N": 4,
+  "L": 24,
+  "B": 1,
+  "rule": "own",
+  "cells": 331776,
+  "steps": 60,
+  "steps_per_s": 21.04973203351486,
+  "cell_steps_per_s": 6983795.895151426,
+  "device": "numpy-cpu"
+ },
+ {
+  "N": 4,
+  "L": 48,
+  "B": 1,
+  "rule": "own",
+  "cells": 5308416,
+  "steps": 3,
+  "steps_per_s": 0.9062361989409429,
+  "cell_steps_per_s": 4810678.738237284,
+  "device": "numpy-cpu"
+ },
+ {
+  "N": 4,
+  "L": 64,
+  "B": 1,
+  "rule": "own",
+  "cells": 16777216,
+  "steps": 2,
+  "steps_per_s": 0.18828963742686067,
+  "cell_steps_per_s": 3158975.9176721256,
+  "device": "numpy-cpu"
+ },
+ {
+  "N": 5,
+  "L": 16,
+  "B": 1,
+  "rule": "own",
+  "cells": 1048576,
+  "steps": 19,
+  "steps_per_s": 4.9388713483363675,
+  "cell_steps_per_s": 5178781.962953155,
+  "device": "numpy-cpu"
+ },
+ {
+  "N": 5,
+  "L": 24,
+  "B": 1,
+  "rule": "own",
+  "cells": 7962624,
+  "steps": 2,
+  "steps_per_s": 0.49784871706716904,
+  "cell_steps_per_s": 3964182.14288825,
+  "device": "numpy-cpu"
+ }
+]

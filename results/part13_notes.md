@@ -1,0 +1,46 @@
+# Part 13 notes (dimension comparison 2D/3D/4D/5D) — prep while Part 12 finishes
+- 09:40 UTC: CPU check of R2g5 base soliton in low D (GC.soliton, pre 600/1500): 2D 64²: localized object, mass 65 (conserved), peak 1.5 → 2.0, speed 0.06 → 0.01 (slows/peaks up); 3D 48³: mass 512, peak 1.25 → 1.71, speed 0.05 → 0.025. Localized blobs exist but are slower and sharpen with time — not clearly gliders. Need GPU eco pilot in 2D/3D before main design.
+- Matching plan: same fl_eco3 all5 and eco params (F0, keat, rF, dec, krep, ks, hom, mutn); pick L per dimension from pilot plateau density so that n_plateau ≈ 60–100 (5D 40⁵ gives ~40–60, 4D 64⁴ ~80–100).
+- 09:43 UTC: analyze12.metrics13: merges (≥2 prev objects map to same next object; matching-based upper bound), per-capita merge/div rates, t_plateau (first t with n ≥ 0.9·mean of last 20%). Test neu_96_s81: merges 2489 vs divisions 2297 → matching noise large; treat merges as upper bound.
+- 10:05 UTC: Part 12 delivered (results/part12_report_ru.md). Part 13 billing baseline = $135.61.
+- 10:06 UTC: launched pilot eco13p (8 × H100): 2D L128/256, 3D L64/96 × {sel, neu}, 30k steps, 12 founders, seed 101, fl_eco3 all5, same eco params as Part 12 sel/neu.
+- Pilot eco13p results (30k steps, seed 101; n trajectory at 6 points, sd, divisions):
+  - 2D L128: sel 10→18→1, neu → 0 (extinct). 2D L256: sel n 23→14, neu 24→10, M declining (17→7); few divisions (16/48). 2D not self-sustaining at plateau so far (slow decline).
+  - 3D L64: n ~10–11 (too few). 3D L96: sel n 58→49 (p0 .10→.80, sd .59→.16, S_pl +.009), neu n ~39–40 stable (sd .61 const). 3D works -> 3D96 matches 5D 40^5 (n_neu≈43).
+  - Wall 23–66 s per run (cheap).
+- 10:11 UTC: launched pilot2 eco13q: 2D L384/512 50k, 4D L56 30k × {sel,neu}
+- Pilot2 eco13q (seed 101):
+  - 2D L384/512, 50k: n caps at ~24 = 2×12 founders for all L (256/384/512). Only 11–21 divisions in 50k steps. So 2D is limited by division, not by food: with the same rules 2D solitons almost never divide (3D96: 500–800 div/30k, 4D56: 900–1600, 5D more).
+  - 4D L56 30k: neu n=45 stable (sd .55 const); sel n 66→52, p0 .05→.68, sd .55→.19. Wall ~200–230 s.
+- Matching decision (n_neu ≈ 40–45, same F0/food per cell, same rules, 12 founders): 5D L40 (43), 4D L56 (45), 3D L96 (40).
+  - 2D cannot reach that n by reproduction. Run 2D L512 with 12 founders (same protocol) AND with 48 founders (matched n, mostly survival selection).
+- Main spec specs/eco13m.json: 80 runs in 32 containers, 30k steps, seeds 201–208, sel/neu. Estimate ≈ $50 (5D dominates, ~2000 s/run).
+- 10:18 UTC: launched main eco13m (32 × H100)
+- 10:19 UTC: analyze13.py + plot13.py written, tested on pilots (note: merge_rate≈div_rate at plateau → merges likely the main loss channel; Price S_growth noisy, dp0_5k used as robust response)
+- 10:25 UTC (14:2x Dubai): resumed after interruption; Part 12 already complete (128^4 collected earlier). Added IDEAS.md + part12_report_ru.md to zip. eco13m: 24 tasks still running.
+- 11:00 UTC (15:00 Dubai): all 80 eco13m runs done (30k steps each), 0 apps. analyze13 → results/part13_table.md, results/eco13/main13.pkl, an13.txt, trend.txt (Spearman over 3D–5D, 8 seeds each).
+  Figures: glider_part13_timeseries.png, glider_part13_metrics.png. Video: glider_part13_dims.mp4 (sel s201; 2D n48/3D/4D/5D).
+- Key numbers, sel vs neu, mean ± SE over 8 seeds:
+  - Δ⟨p0⟩ after 5k steps:
+    - sel: 3D .39±.04, 4D .39±.04, 5D .36±.06 (no trend with D, ρ = −.07);
+    - 2D: .08 (12 founders) and .11 (48 founders);
+    - neu ≈ 0 everywhere.
+  - sd on the plateau:
+    - sel: 3D .28, 4D .27, 5D .22 (ρ = −.64, p = 7e-4);
+    - neu: .48 / .47 / .43;
+    - sel/neu ratio: .59 / .57 / .51;
+    - 2D: .47/.53 and .37/.48.
+  - Divisions per individual per 1000 steps:
+    - 3D .42–.48, 4D .8–1.0, 5D .9–1.1 (ρ = +.9);
+    - 2D .006–.036, i.e. practically no reproduction.
+  - Merges ≈ divisions on the plateau in 3D–5D (merging is the main loss channel; this is an upper-bound estimate).
+  - h: 3D–5D .43–.56 (neu h falls with D, ρ = −.76); 2D .6–.8 (few events, noisy).
+  - t_plateau: sel 4.4k / 6.0k / 6.6k, neu 6.4k / 7.5k / 8.8k (rises with D; selection speeds it up).
+  - Effective founder lineages at the end: 3D 3.6–5.3, 4D 2.3, 5D 1.5–1.7 (falls with D).
+  - Price S on the plateau: sel 3D −.034 (p = .017 vs neu), 4D −.025 (n.s.), 5D +.009 (n.s.).
+    - 2D: S_pl > 0 and significant (12 founders .014, 48 founders .031). 2D is not at steady state; n slowly declines and selection acts through survival.
+- Caveats:
+  - sel n_pl > neu in 4D/5D (60 vs 47, 50 vs 42), because pk raises the feeding rate.
+  - 2D with 48 founders: n peaks at about 97 from early divisions, then declines, so t_plateau is meaningless there.
+  - Response per generation (Δp0_5k / divisions per individual in 5k): 3D .18, 4D .08, 5D .07 → in higher D more divisions are needed per unit of response.
+- billing: total today $188.06 → Part 13 ≈ $52.4 (pilots + main)

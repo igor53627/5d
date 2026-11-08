@@ -1,0 +1,38 @@
+Note that running a local entrypoint in detached mode only keeps the last triggered Modal function alive after the parent process has been killed or disconnected.
+✓ Initialized. View run at 
+https://modal.com/apps/igor53627/main/ap-q5xpRSWEasRTG0HiTHQtno
+✓ Created objects.
+├── ✓ Uploaded /workspace/attractor_ca/modal_app.py
+├── ✓ Uploaded /workspace/attractor_ca/glider_coll.py
+├── ✓ Uploaded /workspace/attractor_ca/glider_es5.py
+├── ✓ Uploaded /workspace/attractor_ca/glider_es.py
+├── ✓ Uploaded /workspace/attractor_ca/fl_glider.py
+├── ✓ Uploaded /workspace/attractor_ca/glider_search.py
+├── ✓ Uploaded /workspace/attractor_ca/glider_cont.py
+├── ✓ Uploaded /workspace/attractor_ca/bench.py
+├── ✓ Uploaded /workspace/attractor_ca/alife_jax.py
+├── ✓ Uploaded /workspace/attractor_ca/reservoir_gpu.py
+├── ✓ Uploaded /workspace/attractor_ca/reservoir_experiment.py
+├── ✓ Uploaded /workspace/attractor_ca/fl_jax.py
+├── ✓ Uploaded /workspace/attractor_ca/feigenbaum_lenia.py
+├── ✓ Created Function gpu_job.
+├── ✓ Created Function gpu_job_auto.
+├── ✓ Created Function gpu_job_lean.
+├── ✓ Created Function gpu_job_cheap.
+├── ✓ Created Function gpu_job_big.
+└── ✓ Created Function gpu_job_h100.
+spawned 3
+NVIDIA H100 80GB HBM3, 81559 MiB 251s [(180, 0, 0, 'слияние', 1), (150, 0, 0, 
+'слияние', 1), (120, 0, 0, 'слияние', 1), (90, 0, 0, 'слияние', 1), (60, 0, 0, 
+'слияние', 1), (30, 0, 0, 'слияние', 1), (180, 0, 50, 'отклонение (рассеяние)', 
+2), (90, 0, 50, 'отклонение (рассеяние)', 2)]
+NVIDIA H100 80GB HBM3, 81559 MiB 260s [(180, 6, 0, 'слияние', 1), (150, 6, 0, 
+'слияние', 1), (120, 6, 0, 'слияние', 1), (90, 6, 0, 'слияние', 1), (60, 6, 0, 
+'слияние', 1), (30, 6, 0, 'слияние', 1), (180, 0, 100, 'слияние', 1), (90, 0, 
+100, 'слияние', 1)]
+NVIDIA H100 80GB HBM3, 81559 MiB 287s [(180, 12, 0, 'слияние', 1), (150, 12, 0, 
+'слияние', 1), (120, 12, 0, 'слияние', 1), (90, 12, 0, 'слияние', 1), (60, 12, 
+0, 'слияние', 1), (30, 12, 0, 'слияние', 1), (180, 0, 200, 'отклонение 
+(рассеяние)', 2), (90, 0, 200, 'слияние', 1)]
+✓ App completed. View run at 
+https://modal.com/apps/igor53627/main/ap-q5xpRSWEasRTG0HiTHQtno

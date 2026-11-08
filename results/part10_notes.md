@@ -1,0 +1,34 @@
+# Part 10 notes
+- B300 WORKS on Igor's account: gpu="B300" -> "NVIDIA B300 SXM6 AC, 275040 MiB" (gpu_job_b300 / spawn_b300 in modal_app.py)
+- bench (eco 4D 64^4, batch 2, 2000 steps incl. compile+prep): see results/bench_*.pkl
+- bench 2000 steps dominated by overhead (B300 56s vs H100 60s) -> not informative
+- fl_eco2.py: (a) repulsion -krep·∇(A*ring8-16) + size penalty dec·exp(ks·max(Ub/U1-1,0)); (b) hom: p <- (1-hom)p + hom·blur_mass_weighted(p) (R=6), body-scale normalized mutation mutn. glider_eco.run_eco(model="eco2", min_sep) embeds 64^N soliton into big L
+- 06:16 UTC launched eco10t tuning (4D 64^4, 30k, multi 6, seed 21): krep {0,3,10} x ks {0,2} + F0 .08 (krep 10/3, ks 2); hom .05 mutn .002 pk 1
+- tuning eco10t (stopped at 12.1k steps, partial ok): repulsion is key: krep 0 -> n 2-5 (merges, max obj 11 M1); krep 3 -> n 55 (max obj 5); krep 10 -> n 64-68, max obj 2.5-2.7, almost no merges (0-3); F0 .08 krep 10 ks 2 -> n ~115 plateau (carrying capacity), M overshoot 154 -> 130. Price selection S>0 (corr p,w .35-.76), p0 .18->.82. ks (size penalty) minor effect.
+- part10 cost at 06:18 UTC: 2.44
+- 06:19 UTC launched eco10m (H100 x9): 96^4, 25k steps, 12 founders p~N(0,.5), F0 .08 krep 10 ks 2 hom .05 mutn .002; seeds 31-33 x {sel pk=1, neutral pk=0 pmu=0, no-transport}; eco10b (B300): 128^4 sel, 24 founders, seed 41
+- B300 log shows cuBLAS<13.2 TMEM warning (possible silent corruption for concurrent cuBLAS kernels; we use FFT/elementwise, single stream)
+- 06:29 UTC: eco10m at ~4000/25000 steps (~450 s per 4000 incl prep) ETA ~07:05 UTC; eco10b (B300 128^4) no checkpoint yet; plot_eco10.py ready
+- 06:45 UTC: part10 cost so far 22.46 (62.37-39.91); eco10m app burning ~$40/h (9 H100); plan: 5D 40^5 eco2 sel 6 founders 16k steps (specs/eco10d5.json) after eco10m finishes; stop B300 128^4 at ~16k steps to stay under $60
+- 06:55 UTC: wrote perf_eco.py (component timings, steps/s excl compile, nvidia-smi sampler, cost_analysis, log/host timings) + fl_eco2 fast=True (shared rFFT of A and An; CPU test bitwise identical) + kind 'perf'; spec specs/perf10.json (96^4 B1,B2 + 128^4 B1). Will run on H100 and B300 after main runs.
+- 06:52 UTC: launched perf10h (H100) and perf10b (B300) with specs/perf10.json; eco10m notr x3 finished (25k)
+- 07:06 UTC: eco10m all 9 finished (25k steps, ~2100 s each). Final n: sel 479/568/586, neu 348/343/345, notr 343/341/342. eco10b B300 128^4 at 12k steps, n=1271.
+- perf10b (B300) done: 96^4 22.3 steps/s (44 ms/step), GPU util ~100%, 35.6 GB; B2 22.9 sim-steps/s (no gain); 128^4 7.96 steps/s, 138 GB (!). one conv (rfft+mul+irfft) 3.36 ms @96^4 → 11 convs/step ≈ 37 ms ≈ 84% of step; MUSCL 1.65 ms ×3; RNG 0.87×2. fast (shared rFFT) = identical bitwise and same speed (XLA CSE already did it). logging: _objects CPU 1.5 s (127 obj, 96^4) / 3.9 s (463 obj, 128^4) per log every 200 steps; full-field proj transfer 0.15/0.46 s.
+- perf10h (H100) FAILED: OOM at 128^4 (needs 138 GB > 80 GB) → whole job lost; relaunched 96^4 only (specs/perf10h96.json)
+- ~07:07 UTC: implemented async logging (dispatch next chunk before CPU object finding) + projection mean on GPU in glider_eco.run_eco(async_log=True); CPU test L32: logs/tot/proj bitwise identical vs sync
+- ~07:09 UTC: analysis eco10m (analyze_eco.nearest vectorized: 900 s → 2 s). Results (3 seeds each): Δ⟨p0⟩ sel +0.54/+0.60/+0.59 vs neu −0.01/−0.05/+0.01 (Welch p=2e-5). Price S in growth phase (0–5k, lag 1000 steps): sel +0.051/+0.057/+0.056 (corr p,w .12–.53) vs neu ≈0 (p=2.6e-5); at capacity (10–25k) S ≈ 0 (sel −0.015 mean, p=.36) — selection fades as sd p0 drops .43→.15 and food is depleted. Heritability parent→child p0: transport 0.42–0.55 vs no-transport 0.01–0.03 (p=8e-7; without transport p collapses to 0 at once). Capacity: neu/notr n plateau 341–348 from ~21k (M overshoot 440 → 390); sel boom-bust: n peak 482–598 → 468–548, M peak 610–790 → 420–450, F 0.08 → 0.02; sel has more, smaller individuals (0.72–0.86 vs 1.11 M1), n sel vs neu p=0.02. Divisions: sel 6–11k, neu ~2k per run.
+- 07:10 UTC: perf10h (H100, 96^4): 13.9 steps/s (72 ms/step), GPU util 100%, mem-bw util 90% (bandwidth-bound), 35.4 GB; B2 14.3 sim-steps/s; conv 4.43 ms, MUSCL 2.30 ms. B300/H100 = 22.3/13.9 = 1.60x at 96^4. 128^4 does not fit in 80 GB (needs 138 GB).
+- 07:11 UTC: cost part10 = 35.41 (75.32−39.91; billing may lag); eco10m app 23.38, B300 app 6.80 (≈$7.7/h incl CPU/mem). B300 128^4 at 16k/25k, n=1650, ~7.2 steps/s → ETA ~07:32 UTC.
+- 07:12 UTC: launched eco10d5 (5D 40^5, eco2 sel, 6 founders, 16k steps, H100, with new async logging)
+- 07:13 UTC: glider_part10_population.png, results/part10_table.md (windowed S), glider_part10_96.mp4 (sel/neu/notr seed 32 side by side, 1.7 MB) done
+- 07:16 UTC: placement speedup in run_eco multi-init (roll only A while searching shift; identical result in CPU test). Setup overhead seen: B300 128^4 first 4000 steps checkpoint at 1458 s vs ~555 s of stepping → ~13 min prep (mostly np.roll of all fields ×tries ×24 founders)
+- 07:14 UTC: wrote results/perf_notes.md
+- 07:37 UTC: eco10b (B300 128^4) finished 25k steps, wall 4375 s, n_end 1655; 5D at 12k (n 61)
+- 07:39 UTC: eco10b (B300 128^4, 24 founders, sel): n 24→1663 peak (~17.5k) →1634 end; M overshoot 2115 → 1383; F 0.08→0.023; ⟨p0⟩ −0.04→+0.54, sd .45→.17; 24k divisions; heritability 0.44 (48.8k pairs); S growth 0–5k +0.057 (corr .55), 5–10k +0.020, capacity ≈ −0.003. Mean object 0.82 M1, max 1.62 (no giant blobs).
+- 07:39 UTC: eco10d5 (5D 40^5, partial 12k/16k): n 6→61, M peak 128 → 105, F→0.018, ⟨p0⟩ .26→.78, h 0.40 (1011 pairs), 487 divisions; S small (+0.013, corr .02). First self-reproducing population in 5D in this project.
+- 07:38 UTC: glider_part10_128_B300.mp4 done
+- 07:39 UTC: README Part 10 draft at /tmp/readme10.md (5D placeholder)
+- 07:39 UTC: eco10d5 finished 16k (wall 1657 s); no Modal apps running
+- 07:39 UTC: 5D final: n 6→61 plateau, M 128→88, h .44, p0 .26→.80, S +.013 weak, no neutral 5D control; glider_part10_5D.mp4; README Part 10 appended
+- 07:40 UTC: cost Part 10 = $40.28 per billing (may lag ~$1–2 → ≈$41–42); eco10m 23.38, B300 128^4 9.64, 5D 2.03; 0 Modal apps running
+- 07:40 UTC: zip rebuilt

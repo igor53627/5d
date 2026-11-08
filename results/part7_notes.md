@@ -1,0 +1,16 @@
+# Part 7 notes (checkpoint)
+- iso1 done (results/iso/iso1_*.pkl, analyze_iso.py -> results/iso_table.json, glider_iso_hist.png)
+- 5D S1: flow KS=0.84 angle 9.3° (iso 19.3°) ; flow_iso_muscl KS=0.25 angle 15.0°, v .0639->.0771, r50 .93->.94
+- 4D S1: flow KS=0.39; flow_spec_muscl KS=0.11 p=0.81 (isotropic), flow_iso_muscl KS=0.17 p=0.28
+- chosen: flow_iso_muscl. iso2 launched (mc limiter, sub2) ~19:15 UTC; coll4 (4D L64 sep26, 24 configs) launched
+- collision smoke: soliton radius ~8.5 cells (4D), L32 too small -> L64/sep26; t_cls = t_hit+(diam+0.3L)/(v_rel) to avoid torus re-collision
+- cost: 52.46 at 19:10 UTC (base 49.212)
+- iso2: 5D S1 flow_iso_mc KS=0.17 p=0.10 but axis-leaning (max|u| .767>.737); muscl_sub2 KS .21; mc_sub2 .21 -> keep flow_iso_muscl
+- glider_iso_hist.png (before/after, 8 panels); results/iso_table.txt
+- coll4 (L64, old classify) reclassified by classify2: 10 capture->re-emission, 11 merge, 2 bounce+mass exchange, 1 capture+exchange. glider_coll4_L64.png, mp4 glider_coll4_L64_collision_0.mp4
+- launched coll4b (4D L80 sep28 full, 6 calls) and coll5 (5D L44 sep22, 3 calls) ~19:22 UTC; ver7 (S1 flow_iso_muscl verify) ~19:17 UTC
+- ver7 done: S1iso 5D32 net 259/3400 steps (v .076), straight .994-.998, r50 .93-.94; 4D64 v~.055. glider_part7_S1iso_verify.png, glider_part7_S1iso_5D.mp4
+- coll4b done (4D L80): results/coll4D_L80_table.md, glider_part7_coll4D.png, mp4 glider_coll4D_L80_collision_0.mp4. Two survivors common -> param search NOT needed
+- coll5 running (app ap-YeNUBhewJgFk9KXp2Cjoqc), ~1 config/8min, expected done ~19:57 UTC. cost at 19:33 UTC: 60.59 (part7 = 11.38)
+- README draft in scratch/readme7_head.md (5D section pending)
+- coll5 done: results/coll5D_L44_table.md, glider_part7_coll5D.png/.mp4; no apps running

@@ -1,0 +1,29 @@
+# Part 12 notes (selection & diversity at carrying capacity)
+- 08:36 UTC: billing baseline today = $86.3 (Part 12 cost = later total − this).
+- fl_eco3: new params (all off by default; CPU test: eco3 with F2/t state and defaults == eco2 bitwise): kn (niche strength), popt(x,t) = na·sin(2π x0/nl) + sa·sin(2π t/nt), eating rate keat·exp(pk·p0 − kn·(p0−popt)²); res2=1: two resources F, F2 (each F0), rates keat·((1±p0)/2)^g2 (g2>1 → generalists worse → disruptive, frequency-dependent via depletion). All conditions use all5 (coarse+fnoise+m5).
+- glider_eco.run_eco_list + kind "ecolist" (several runs per container).
+- launched pilot eco12p: 64^4, 20k steps, 12 founders, seeds 71,72 × {sel, neu, niche(kn2 na.8 nl32), season(kn2 sa.8 nt4000), res2 g2=2, res2 g2=3}; 6 × H100.
+- 08:37 UTC: analyze12.py (Price S in 2000-step windows + plateau, sd p0, GMM-BIC modes of p0, founder lineages surviving + effective number, local adaptation corr(p0, popt(x)), season tracking); tested on eco10m_0 (5 s)
+- 08:47 UTC: pilot eco12p done (64^4, 20k, 2 seeds; results/eco12/pilot_summary.txt). sel: n≈100 plateau, ⟨p0⟩ .36–.51, Price S stays >0 on plateau in s71 (windows +.03…+.05), s72 → ~0; sd .17–.22. neu: n≈78, sd stays .44–.49, S≈0. niche/season (kn=2): populations barely grow (n 14–19) — penalty too harsh; season: ⟨p0⟩ tracks popt(t) with lag ~1000 steps (corr .85–.89). res2 g2=2: not at plateau at 20k (n 66–72 rising), sd .54–.61 (GMM 2–3 modes); g2=3: one specialist wins (p0 → −.85, sd ↓ .26–.33).
+- next: pilot2 (64^4, 30k): niche kn=1 keat .02; season kn=1 keat .02; res2 g2=2 keat .02; 2 seeds each, 6 × H100.
+- 08:45 UTC: steering: Team plan, up to ~40 parallel containers allowed; budget still ≤$50. Plan main wave all in parallel after pilot2.
+- 08:53 UTC: pilot2 done (64^4, 30k; results/eco12/pilot2_summary.txt). (Local launcher was killed by the interruption at 08:50 but all 6 runs had already finished and saved.)
+  - res2k (2 resources, g2=2, keat .02): plateau n≈140 from ~12k; **sd p0 between individuals grows on the plateau .52 → .60–.64** (GMM 3 modes), ⟨p0⟩ drifts back toward 0 (both specialist types coexist); S fluctuates in sign (frequency dependence), h .39–.49. Best candidate for diversity at capacity.
+  - nicheK1: n≈93 plateau; NO local adaptation (corr(p0,popt(x)) ≈ 0) — individuals move across the 32-cell niche wavelength faster than selection acts; sd declines .31→.27; S on plateau of either sign.
+  - seasonK1: n≈98; ⟨p0⟩ tracks popt(t) with lag ≈1000 steps (corr .57–.70); sd .27–.29.
+- Plan main wave (all fl_eco3 all5, H100, one run/container, all in parallel): 96^4 25k, 12 founders: sel×5, neu×5, res2k×5, season×2, niche×2 (seeds 81–85); 128^4 20k 24 founders: sel, neu; 5D 40^5 16k 6 founders: sel, neu.
+- 08:52 UTC: Part 12 cost so far ≈ $6.2 (pilots). Dropped niche from main (no local adaptation in pilot). Launched eco12m: 21 × H100 (setsid launcher), tags in specs/eco12m.json; est. ≈ $40.
+- 08:52 UTC: wrote plot_eco12.py (population fig, p0 histograms, table + Welch/one-sample stats) and plot_mp4_12.py (individuals coloured by p0)
+- 09:16 UTC: 19/21 main runs done (all 96^4 + 5D). 128^4 sel/neu at 4k/20k (setup ~10 min), ETA ~09:50 UTC. Cost so far $43.2 (129.49−86.3) — higher than planned; hard stop of 128^4 if Part 12 cost reaches $49.
+- 09:23 UTC: main 96^4 analysis (results/part12_table.md, glider_part12_population.png, results/eco12/quad.txt). 5 seeds each:
+  - sel: n_pl 548–624; ⟨p0⟩ .53–.91; sd_pl .22 (declining on plateau −.06, p=.015); **S on plateau slightly negative −.028 (p=.013 vs 0; vs neu p=.006)**; quadratic C on plateau +.016 (p=.004); h .41; lineages eff 3.8–6.1. ⟨p0⟩ still creeps up on plateau despite S<0 → transmission term, not selection.
+  - neu: n_pl 319–337; sd_pl .48 constant (Δ 0.000); S ≈ 0 (p=.55); h .53; lineages eff 8.5–10.7.
+  - res2k: n_pl 699–733 (2 resources → higher capacity); **sd_pl .60 (vs sel .22, p=.002; vs neu .48, p=.13), increases on plateau +.023 (p=.034)**; ⟨p0⟩ returns toward 0 (both specialist types coexist); GMM 2–3 modes; S plateau −.013 (p=.21), quadratic C: growth +.016 (disruptive), plateau −.007 (p=.14); h .46; lineages eff 6.5–8.6.
+  - seasonK1 (2 seeds): sd .24/.41, S≈0; season tracking measured in pilot.
+  - 5D 40^5 (16k): sel n 57, ⟨p0⟩ +.79, sd .21, h .46; neu n 43, ⟨p0⟩ .26 → .26 (no change; .26 is the start value), sd .43 constant → clear selection response in 5D vs neutral control (sel ⟨p0⟩ .26 → .79, sd .43 → .18; 1 seed each).
+- 09:20 UTC: glider_part12_96.mp4 (individuals coloured by p0; sel / res2k / neu, seed 81). Cost $44.35 at 09:20.
+- 09:21 UTC: README Part 12 draft scratch/readme12.md (controls placeholder)
+- 09:28 UTC: 128^4 at 8k/20k (≈7 steps/s); cost $45.6. Full 20k would end ≈$50.1 → decision: stop 128^4 after 16k checkpoint (≈09:47 UTC) to stay ≤$50.
+- 09:35 UTC: steering: Igor — do NOT stop 128^4, let finish (overrun up to ~$60 ok).
+- 10:01 UTC: all 21 main runs finished; 0 apps. Part 12 cost ≈ $49.3 (135.61−86.30; may lag).
+- 10:06 UTC: controls: 128^4 (20k, 24 founders): sel n→1870 plateau, ⟨p0⟩ .09→.70, sd .45→.18, S growth +.09→+.02, h .41; neu n 1107 still growing (no plateau at 20k), ⟨p0⟩ .08 const, sd .45 const, h .61. 5D: sel ⟨p0⟩ .26→.79 vs neu .26→.26.

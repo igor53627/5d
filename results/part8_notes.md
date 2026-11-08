@@ -1,0 +1,25 @@
+# Part 8 notes (replication search)
+- glider_rep.py: evaluate_rep (4D L48: single + 6 collisions in one batch, horizon t_hit+1400), run_rep_cma (ckpt /vol/rep_ckpt_{name}.pkl), run_rep_eval
+- modal kinds rep / repeval added
+- baseline cost: 63.97 (Nov 6 UTC day, at 19:55 UTC); new UTC day Nov 7 starts at 0
+- baseline (L48 4D): S1 fit .15 (0 replications, 1 config n=3 [0.86,.69,.40]), S2 .075, S3 dead in 4D (v .007). 47 s/candidate on H100
+- rep1 launched 02:35 UTC: 3 CMA runs (S1a, S1b, S2), lam 8, max_wall 5400s, ckpt /vol/rep_ckpt_{S1a,S1b,S2}.pkl; results to rep1_{0,1,2}.pkl
+- 02:47 UTC: rep1 gen2, best .167, no replication yet (~5.5 min/gen). glider_rep.py has run_rep_verify (daughters test) + run_cascade; modal kinds repver/cascade
+- 02:55 UTC wake: pulled vol checkpoints (partial True, still 3 Modal tasks); no WakeParent
+- 03:02 UTC: rep1 gen5 no replication (plateau at 2 survivors, S1b found 6/6 clean 2-survivor). Launched rep2 (S1c, fv=2 smooth fitness on 3rd-object mass, tau-heavy configs), ckpt rep_ckpt_S1c
+- 03:14 UTC resume: rep1 gen7-8 (best .25, 0 replications; fission 1->0.99+0.5+0.48 seen), rep2 gen2 (.211). Apps ap-oVQU..., ap-duDY... running
+- 03:29 UTC: stopped rep1 (ap-oVQU) at gen 10-11: plateau, 0 replications by fv=1 criteria; rep2 continues
+- 03:31 UTC launched repver1 (verify R2g4, R10g3, R11g5 at 4D L64, 19 configs, daughter tests); specs/rep_cands1.json
+- 03:41 UTC repver1 results: daughters 0.4-0.9 M1 all survive alone & move (v .067-.093, smaller=faster) -> fission into viable smaller solitons. Strict >=0.6 M1 x3: 0 events (mass conservation: need >=1.8 of ~1.95). >=3 objects each >=0.35 M1: R2g4 4/19 configs, R10g3 3/12, R11g5 ~3/19. c in daughters ~2.8-2.96 (slaved to A, global params -> nothing heritable)
+- rep2 gen7: best .46 at gen5
+- 03:43 launched cascade1 (R2g4, R10g3; 4D L96, 6 solitons, 10000 steps) and repver5 (R2g4 5D L40, 3 configs)
+- 03:45 launched repver2 (R2g5 = rep2 best)
+- 03:57 UTC: stopped rep2 at gen 10 (best .485 g8). cost today 21.50 at 03:56.
+- repver2 R2g5 (best): 8/19 configs -> 3 objects all >=0.49 M1; all 24 daughters survive alone & move (v .057-.075; single v .050, r250 .78 pooled). R10g3: 3/19 clean triples.
+- cascade1: R2g4 6->9 (t=3000) ->5 (merges; final masses 1.85,1.46,1.46,.58,.48); R10g3 6->5 (no growth)
+- launched cascade2 (R2g5) + repver5b (R2g5 5D L40); repver5 (R2g4 5D) running ap-NRDr
+- 04:05 UTC: plot_rep2.py -> results/part8_tables.md, glider_part8_replication.png, glider_part8_replication.mp4, cascade mp4 (from cascade1, redo with cascade2)
+- 04:06 UTC: cascade2 (R2g5) done: 6->4->6->5, no growth (final 1.64,1.27,.99,.97,.97). repver5 & repver5b OOM (5D L40 batch 4: 31GB alloc in _pool). Relaunched repver5c: R2g5 5D L40, 1 config per call (3 calls)
+- 04:10 README Part 8 draft in scratch/readme8.md (5D section pending)
+- 04:14 UTC repver5c (5D L40 R2g5): 180t50 -> 2 [1.02,.91]; 120t0 merge; 90t0 merge; single v .068 r .75-.79. Launched repver5d (150t50,150t150,180b6t100)
+- 04:25 UTC repver5d: 5D 0/3 replication (2 objs w/ mass exchange x2, 2 objs). README Part 8 appended. No apps running.

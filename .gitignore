@@ -1,0 +1,17 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*.egg-info/
+.eggs/
+
+# Large data files
+*.npy
+*.npz
+*.pkl
+
+# Virtual environment
+.venv/
+venv/
+env/

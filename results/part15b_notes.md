@@ -1,0 +1,46 @@
+# Part 15b — what the evolved micro-brains encode (from saved Part 15 data only)
+- 16:56 UTC: start. Data: results/eco15/b15m_*.pkl (4D, 24 runs), b15d5_*.pkl (5D), b15p_*.pkl (pilot). Billing baseline $285.51 (no GPU planned).
+- Realistic input ranges (CPU, 4D soliton in 48^4, coarse kernels; scratch/inputs15b.py → results/eco15/inputs15b.pkl). Mass-weighted inside the body:
+  - s1 = Ub/U1−1: mean −.40 (p5–p95 −.61…−.21) when alone; up to +.34 with a neighbour 8 cells away.
+  - s2 = Ufar/U1: .05 (own body) up to .18 with a close neighbour.
+  - s0 = F̃−1: plateau global mean F/F0 = .39 → s0 ≈ −.6, range [−1, 0].
+  - Typical point s* = (−.6, −.4, .06). NB: Part 15 evaluated g_F/g_R at s=0, which is not typical (full food, s1 = 0).
+- sklearn is not installable (pip broken in the venv); PCA via numpy SVD, GMM via own EM (diagonal covariance, BIC).
+- (1) Response curves done (glider_part15b_curves.png, results/eco15/curves15b.txt). Each input is varied over its realistic range, the others are held at s*. Population mean, then mean over seeds.
+  - Values at s*, mean ± sd over seeds:
+    - g_F: 4D evo .48±.25, frozen .55±.23, rep .59±.14, nobrain −.09±.27, founders −.02±.29; 5D evo .77, 5D nobrain .14.
+    - g_R: 4D evo +.24±.31, frozen +.17, rep +.05, nobrain +.05; 5D evo −.32, 5D nobrain −.01.
+    - g_E (not used by the model): drifts, 5D evo −.25.
+  - The curves are almost FLAT: evolved brains are essentially constant biases ("always go up the food gradient"), not computations. Over the realistic input ranges:
+    - g_F changes by ≤ .05–.1 (in 4D slightly stronger when food is low: .48 at s0 = −1 → .44 at s0 = 0);
+    - g_R in 4D falls with own density (+.27 → +.11): less extra repulsion in dense bodies, more at food (+.20 → +.29).
+  - 5D evo: constant g_F ≈ .77 and attraction g_R ≈ −.32 at all inputs.
+- (2) Weights (glider_part15b_weights.png, results/eco15/weights15b.txt).
+  - Input dependence (sd of the output over a realistic 5×5×5 input grid) FALLS under evolution: g_F 4D evo .13, frozen .11, rep .15 vs nobrain .18 and founders .18; 5D evo .025 vs .16.
+    - Selection simplifies brains toward a constant output.
+  - Sensitivity at s* is always dominated by the output biases b2[F], b2[R] (≈1–1.8), then the W2 row (≈.5–.8). This is structural, also true in nobrain.
+  - Ablation of any single weight changes g_F by ≤ .16 in 4D, i.e. g_F is spread redundantly over b2 and W2·h.
+    - In 5D evo it is concentrated: b2[F] ablation −.43, b1[h0] −.26.
+  - No weight shifts consistently across seeds (best p ≈ .03–.07 out of 24 tests, n.s. after correction).
+    - Function is constrained (g_F > 0 in all 18 runs) while individual weights are not. This fits a degenerate solution manifold (hidden-unit sign and permutation symmetries, many ways to get a positive output).
+  - Within-population sd shrinks uniformly over all weights (start .46 → .20 evo, .15 frozen, .31 rep; nobrain .455). This is founder sorting, not weight-specific constraint.
+- (3) Types (glider_part15b_types.png, glider_part15b_behaviour.png, results/eco15/types15b.pkl). Features: response of 3 outputs on a 27-point realistic input grid (symmetry-invariant), PCA plus diagonal GMM.
+  - PC1–3 explain 36/29/24% (88% together) and are mixtures of the three output LEVELS. The inputs hardly matter.
+  - BIC keeps decreasing up to K=8: a continuum, NOT discrete brain types. GMM "types" are just a partition of that continuum.
+  - Individual behaviour at s* (2D histograms):
+    - founders are saturated at ±1 corners (ws=2);
+    - evolved 4D individuals concentrate at g_F ≈ +.75…+1 while g_R is spread over −1…+1, i.e. g_F is selected and g_R is neutral (the population mean g_R ≈ +.2 hides this);
+    - 5D evo is a single point (g_F .77, g_R −.32).
+  - Lineages: share of a founder's descendants of the same type is .60 in evo, .72 frozen, .49 rep, .52 nobrain, 1.00 in 5D evo (one lineage).
+  - Heritability: parent–child PC1 h evo .36, frozen .30, rep .30, nobrain .47 (drift is not homogenized away). Parent and child have the same type .58 vs .38 by chance (evo), .66 vs .48 (frozen).
+- (4) 5D fused vs 4D (glider_part15b_fused.png, results/eco15/fused15b.pkl).
+  - In 5D, g_R turns negative early (−.13 at 2k, −.32 at 4k), BEFORE fusion (n is still 12–15). It then freezes at −.30 because the fused body is one genotype (lineage purity 1, input dependence .025, weight sd .02).
+  - g_R looks like a hitchhiker of g_F. The founders' among-individual corr(g_F, g_R) predicts where g_R goes as g_F is pushed up:
+    - 5D −.23 → g_R −.30;
+    - 4D seeds: corr(early corr, final g_R) over 6 seeds r ≈ .9 (s315: −.60 → −.27; s313: +.60 → +.78).
+  - Price split in 5D evo, 0–5k:
+    - g_F: S −.21, Δ +.13 → transmission +.34;
+    - g_R: S +.21 (between-individual selection FAVOURS repulsion), Δ −.07 → transmission −.28.
+    - So within-body dynamics drag g_R down along with g_F, against between-individual selection.
+  - 4D seed s315 reached a similar g_R (−.27) WITHOUT fusion. Weaker repulsion leads to fusion only in 5D, presumably because of geometry (more neighbours, a crowded 40^5 box). One 5D seed → hypothesis.
+  - 5D nobrain had the same founders (same mean-founder brain g_F .38, g_R −.40) and stayed at g_R ≈ 0, g_F .15 → the attraction needs the active brain.

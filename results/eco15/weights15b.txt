@@ -1,0 +1,26 @@
+evo_4D56       input-dependence (sd over realistic grid) gF 0.128 gR 0.108  (founders 0.182 0.208)
+   top sensitivity gF: b2[F] 1.18 (ablate -0.12), W2[F,h2] 0.59 (ablate -0.07), W2[F,h1] 0.54 (ablate -0.10), W2[F,h0] 0.52 (ablate -0.16)
+   top sensitivity gR: b2[R] 1.46 (ablate -0.14), W2[R,h2] 0.71 (ablate -0.07), W2[R,h1] 0.65 (ablate +0.02), W2[R,h0] 0.56 (ablate -0.00)
+   most consistent shifts across seeds: W1[h1,s2] Δ-0.11 (p=0.066), W1[h0,s0] Δ-0.13 (p=0.076), W1[h1,s1] Δ-0.11 (p=0.097), W1[h1,s0] Δ+0.10 (p=0.136), W2[F,h0] Δ+0.09 (p=0.167)
+   within-pop sd: start 0.464 → plateau 0.203; b2[F] sd 0.178, W1 mean sd 0.192, W2 mean sd 0.215
+frozen_4D56    input-dependence (sd over realistic grid) gF 0.109 gR 0.082  (founders 0.182 0.208)
+   top sensitivity gF: b2[F] 1.20 (ablate -0.14), W2[F,h0] 0.56 (ablate -0.18), W2[F,h1] 0.55 (ablate -0.12), W2[F,h2] 0.53 (ablate -0.08)
+   top sensitivity gR: b2[R] 1.60 (ablate -0.08), W2[R,h1] 0.78 (ablate +0.03), W2[R,h2] 0.73 (ablate -0.09), W2[R,h0] 0.63 (ablate -0.01)
+   most consistent shifts across seeds: W1[h0,s0] Δ-0.13 (p=0.045), W1[h1,s2] Δ-0.09 (p=0.051), W1[h1,s1] Δ-0.11 (p=0.080), b2[F] Δ+0.12 (p=0.090), W1[h1,s0] Δ+0.11 (p=0.101)
+   within-pop sd: start 0.464 → plateau 0.154; b2[F] sd 0.121, W1 mean sd 0.135, W2 mean sd 0.169
+nobrain_4D56   input-dependence (sd over realistic grid) gF 0.178 gR 0.190  (founders 0.182 0.208)
+   top sensitivity gF: b2[F] 0.91 (ablate +0.02), W2[F,h2] 0.56 (ablate +0.03), W2[F,h0] 0.56 (ablate +0.02), W2[F,h1] 0.51 (ablate +0.01)
+   top sensitivity gR: b2[R] 0.90 (ablate -0.11), W2[R,h2] 0.57 (ablate +0.05), W2[R,h0] 0.54 (ablate -0.03), W2[R,h1] 0.52 (ablate +0.03)
+   most consistent shifts across seeds: b1[h0] Δ+0.03 (p=0.005), W2[E,h0] Δ-0.03 (p=0.018), W1[h2,s0] Δ+0.03 (p=0.189), W2[F,h2] Δ+0.01 (p=0.208), W2[F,h0] Δ+0.01 (p=0.210)
+   within-pop sd: start 0.464 → plateau 0.455; b2[F] sd 0.412, W1 mean sd 0.451, W2 mean sd 0.466
+evo_rep_4D56   input-dependence (sd over realistic grid) gF 0.149 gR 0.162  (founders 0.182 0.208)
+   top sensitivity gF: b2[F] 0.98 (ablate -0.12), W2[F,h0] 0.58 (ablate -0.13), W2[F,h1] 0.55 (ablate -0.16), W2[F,h2] 0.54 (ablate -0.13)
+   top sensitivity gR: b2[R] 1.23 (ablate +0.00), W2[R,h1] 0.70 (ablate +0.01), W2[R,h0] 0.69 (ablate -0.07), W2[R,h2] 0.65 (ablate +0.02)
+   most consistent shifts across seeds: W1[h1,s0] Δ+0.15 (p=0.029), W1[h1,s2] Δ-0.15 (p=0.052), W1[h0,s0] Δ-0.14 (p=0.056), W2[E,h2] Δ+0.10 (p=0.106), b2[R] Δ-0.09 (p=0.123)
+   within-pop sd: start 0.464 → plateau 0.311; b2[F] sd 0.261, W1 mean sd 0.306, W2 mean sd 0.322
+evo_5D40       input-dependence (sd over realistic grid) gF 0.025 gR 0.029  (founders 0.153 0.138)
+   top sensitivity gF: b2[F] 0.81 (ablate -0.43), b1[h0] 0.65 (ablate -0.26), W2[F,h1] 0.53 (ablate +0.04), W1[h0,s0] 0.39 (ablate -0.01)
+   top sensitivity gR: b2[R] 1.79 (ablate +0.06), W2[R,h1] 1.17 (ablate +0.22), W2[R,h0] 0.78 (ablate -0.00), b1[h2] 0.58 (ablate +0.11)
+nobrain_5D40   input-dependence (sd over realistic grid) gF 0.158 gR 0.133  (founders 0.153 0.138)
+   top sensitivity gF: b2[F] 0.77 (ablate -0.16), b1[h2] 0.50 (ablate -0.03), W2[F,h0] 0.48 (ablate -0.04), W2[F,h1] 0.43 (ablate +0.01)
+   top sensitivity gR: b2[R] 0.79 (ablate +0.15), W2[R,h0] 0.58 (ablate +0.15), W2[R,h1] 0.52 (ablate -0.09), W2[R,h2] 0.43 (ablate -0.09)

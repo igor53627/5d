@@ -1,0 +1,58 @@
+# Part 15 — micro-brain (budget $80)
+- 13:46 UTC: start; baseline billing $214.19
+- Design (fl_brain.py, model "brain" in glider_eco):
+  - Q has 26 channels: p0, p1 and 24 weights of the net 3→3(tanh)→3. The weights are advected by MUSCL, homogenized over the body (hom) and mutated at body scale (mutw).
+  - Inputs: F̃−1 (food blurred over the body, /F0), Ub/U1−1, Ufar/U1. Outputs:
+    - g_F: chemotaxis, v += dtA·10·kb·g_F·∇F̃;
+    - g_R: controlled repulsion, −kr·g_R·∇Ufar;
+    - g_E: eating gain, exp(ke·g_E) with mortality cost ce (off, ke=0).
+  - The net is rotation-equivariant (scalar gains × gradients).
+  - Diagnostics D (logged as extra per-object means): D0 = intake/mass, D1 = v·ĝ, D2 = |v|, D3 = v_brain·ĝ (ĝ = unit ∇F̃). Chemotaxis index CI = D1/D2.
+  - glider_eco: logging concatenates Q and D. modal_app image includes fl_brain.py.
+- CPU test (4D 24^4):
+  - with kb=kr=0 the step is bitwise equal to fl_eco3 (A and Q maxdiff 0);
+  - with brain on (kb=1, kr=10) the flow changes (|ΔA| up to 1.38); brain velocity along ∇F̃ is −.074 against total |v| .12.
+- 13:51 UTC: pilot b15p launched (6 × H100, 4D 56^4, 20k, seed 301):
+  - conditions: evo (kb1 kr10 mutw .004), frozen (mutw 0), nobrain (kb=kr=0, weights drift = neutral), evo_kb3, evo_rep (krep 20), evo_res2 (res2 g2=2 keat .02);
+  - all runs: pk=0, pmu=0, p_spread .5.
+- 14:00 UTC: pilot runs at ~20 steps/s on H100 (4D 56^4, K=26), 4.4× slower than eco3 K=2. Projection: 25k-step 4D run ≈ 21 min ≈ $1.6; a 5D 40^5 25k run ≈ 2 h ≈ $9.5. analyze15.py written (behaviour traits gF/gR from weights at s=0, CI = v·ĝ/|v|, intake/mass, weight drift/sd, h of weights/gF/CI, Price S of gF/CI).
+- 14:14 UTC: pilot b15p finished (6 runs, 20k steps). Part 15 spend so far ≈ $8.5. Results (results/eco15/pilot.txt):
+  - Behaviour evolves: chemotaxis gain g_F(s=0) goes .04–.06 → .32–.63 in every run with a brain, including frozen (.54). In nobrain (drift only) it stays .02.
+  - Chemotaxis index on the plateau: brain .23–.34 against nobrain .235. It starts at .25 / .35 because the initial food is uniform.
+  - Brain populations are larger (n_pl 59–81 vs 48) and divide more (1.1 vs .65 /ind/1k); intake per mass is about the same (.00025 vs .00027).
+  - Heritability: weights h .26–.31 (nobrain .50); g_F h .34–.38; CI h .09–.23.
+  - Price S of g_F during growth is NEGATIVE (−.08 … −.2) although mean g_F rises. The rise probably comes from transmission (homogenization during merges) or from nonlinearity of g_F(w̄). To be checked.
+  - Weight diversity on the plateau: wsd evo .17, rep .35 (krep 20 keeps more diversity), kb3 .09, nobrain .46 (drift).
+- Decision:
+  - main 4D, 6 seeds (311–316) × {evo, frozen, nobrain, evo_rep}, 24k steps, H100 (24 containers);
+  - in parallel 5D 40^5 evo + nobrain, seed 401, 20k steps (signal present).
+- 14:15 UTC: launched b15m (24×H100) and b15d5 (2×H100)
+- Price check (pilot): during growth Δḡ_F per 1000 steps ≈ +.04–.06 while S ≈ −.08…−.2. The transmission term (Δz̄ − S ≈ +.1…+.25) dominates: g_F rises INSIDE bodies (cell-level / within-individual selection: body parts with higher g_F carry mass toward food and grow there), not through differential reproduction of individuals. nobrain: Δz ≈ 0, S ≈ 0.
+- 14:25 UTC: b15d5 on H100 failed with OOM (K=26 at 40^5). Relaunched the same spec on B300 (b15d5b.log).
+- 14:30 UTC: billing 253.28 → Part 15 ≈ $39 so far (24×H100 ≈ $112/h). Projection: 4D main ends ~14:40 (≈$41 total main), 5D B300 2 runs ≈ $16 → Part 15 ≈ $66–70.
+- 14:36 UTC: resumed; 4D main done (app gone), 5D B300 app running (2 tasks). Part 15 ≈ $47.6.
+- 14:40 UTC: 4D main analysed (6 seeds × 4 conditions, 24k steps) → results/part15_table.md, results/eco15/main.pkl. Brain vs nobrain (Welch p):
+  - n_pl 59.5 vs 47.7 (p = .001).
+  - CI .29 vs .25 (p = .046).
+  - g_F .47 vs −.09 (p = .002).
+  - speed .147 vs .128 (p = 2e-4).
+  - div 1.08 vs .71 and merges 1.10 vs .76 per ind per 1000 steps (both up, p ≤ 1e-4).
+  - intake/mass the same (p = .29).
+  - Weight diversity wsd .20 vs .45 (drift).
+  - h of weights .33 vs .49; h of g_F .42; h of CI .09 vs −.02 (p = 2e-4).
+- evo ≈ frozen in every metric (p > .1): within 24k steps mutation adds nothing; everything comes from sorting and mixing of the founders' standing variation.
+- Price on g_F: S_growth −.18 while Δḡ_F +.056/1000 steps (p = .003 vs nobrain). The transmission term ≈ +.24 dominates, i.e. within-body (cell-level) selection, not between individuals.
+- evo_rep (krep 20): more weight diversity (wsd .31 vs .20, p = .045), higher speed. Merges are NOT reduced (1.07 vs 1.10).
+- 14:40 UTC: glider_part15_timeseries.png (4D) and glider_part15_4D.mp4 (evo vs nobrain s311, colour = g_F) made.
+- 14:53 UTC: 5D evo at 4k steps (3.6 st/s on B300 incl. 3 min compile). ETA both ~16:05–16:15 UTC. Projected Part 15 ≈ $70 (now $51.8). Guard: stop at $77 (partials every 4k steps).
+- 14:53 UTC: README Part 15 draft in scratch/readme15.md (4D results; 5D pending).
+- 14:57 UTC: recompressed mp4 (part13_dims, part9_growth, part10_5D, part15_4D; crf 33) to make room in the zip
+- 15:11 UTC: 5D evo: by 4k steps a large object forms, and by 8k the WHOLE mass (101 M1) is ONE connected object (n 11→1). Brain-driven aggregation (percolating blob?). 5D nobrain is normal: n 12→16, max object 2.9 M1. Letting both finish (projection ≈ $70).
+- 5D evo traits: g_F .20→.80 and g_R 0→−.37 by 5k steps, i.e. repulsion weakened by 37%. This causes fusion. 5D nobrain: g_F ~.15, g_R ~0. In 4D g_R on the plateau is +.23±.14 (n.s.), no fusion.
+- 15:26 UTC: resumed; 5D app still running; Part 15 ≈ $60.7
+- 15:39 UTC: Part 15 ≈ $64.0; 5D running
+- 15:47 UTC: 5D evo at 16k steps: 15 objects (the giant object broke up again). nobrain at 12k: 43 objects. ETA evo ~16:05, nobrain ~16:25 UTC; projection ≈ $74.
+- 15:59 UTC: Part 15 ≈ $69.3
+- 16:07 UTC: 5D evo finished; nobrain still running. Part 15 ≈ $71.2
+- 5D evo full run: fusion → fission. Giant object 110 M1 (n=1) at 8–10k, then breaks up (n 4→9→15→25 at 19k). Total mass falls 110→69 M1. g_F .80 and g_R −.33…−.38 stay unchanged. CI .35–.38.
+- 16:12 UTC: 5D both done (20k), 0 apps. 5D evo vs nobrain: n_pl 12.9 vs 44.5; CI .35 vs .21; g_F .80 vs .16; g_R −.35 vs .02; weight sd .02 vs .43 (monoculture after fusion); h_w .30 vs .50; intake/mass .000265 vs .000304; div 1.17 vs .91; merges 1.24 vs .96; S(g_F) growth −.065 with Δḡ +.033/1k (transmission dominates again). Part 15 ≈ $71.3.

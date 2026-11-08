@@ -1,0 +1,21 @@
+evo_4D56       food F̃−1              g_F: +0.48→+0.44 g_R: +0.20→+0.29 g_E: +0.02→-0.00
+frozen_4D56    food F̃−1              g_F: +0.55→+0.49 g_R: +0.13→+0.22 g_E: -0.03→-0.05
+evo_rep_4D56   food F̃−1              g_F: +0.58→+0.53 g_R: -0.01→+0.13 g_E: -0.09→-0.07
+nobrain_4D56   food F̃−1              g_F: -0.10→-0.07 g_R: +0.00→+0.12 g_E: -0.04→-0.04
+start_4D56     food F̃−1              g_F: -0.04→-0.02 g_R: -0.02→+0.15 g_E: +0.00→-0.02
+evo_5D40       food F̃−1              g_F: +0.77→+0.77 g_R: -0.31→-0.33 g_E: -0.28→-0.21
+nobrain_5D40   food F̃−1              g_F: +0.16→+0.10 g_R: -0.01→+0.02 g_E: -0.13→-0.14
+evo_4D56       own density Ub/U1−1    g_F: +0.45→+0.49 g_R: +0.27→+0.11 g_E: -0.00→+0.05
+frozen_4D56    own density Ub/U1−1    g_F: +0.52→+0.55 g_R: +0.20→+0.07 g_E: -0.07→+0.05
+evo_rep_4D56   own density Ub/U1−1    g_F: +0.52→+0.60 g_R: +0.07→-0.05 g_E: -0.08→-0.03
+nobrain_4D56   own density Ub/U1−1    g_F: -0.08→-0.08 g_R: +0.07→+0.03 g_E: -0.03→-0.03
+start_4D56     own density Ub/U1−1    g_F: -0.02→-0.07 g_R: +0.07→-0.02 g_E: +0.01→-0.03
+evo_5D40       own density Ub/U1−1    g_F: +0.74→+0.83 g_R: -0.30→-0.38 g_E: -0.26→-0.23
+nobrain_5D40   own density Ub/U1−1    g_F: +0.11→+0.18 g_R: +0.00→-0.13 g_E: -0.08→-0.27
+evo_4D56       neighbours Ufar/U1     g_F: +0.49→+0.45 g_R: +0.24→+0.24 g_E: +0.02→+0.01
+frozen_4D56    neighbours Ufar/U1     g_F: +0.56→+0.52 g_R: +0.17→+0.17 g_E: -0.04→-0.04
+evo_rep_4D56   neighbours Ufar/U1     g_F: +0.59→+0.57 g_R: +0.05→+0.03 g_E: -0.06→-0.08
+nobrain_4D56   neighbours Ufar/U1     g_F: -0.09→-0.09 g_R: +0.05→+0.05 g_E: -0.04→-0.03
+start_4D56     neighbours Ufar/U1     g_F: -0.02→-0.02 g_R: +0.05→+0.04 g_E: +0.01→+0.01
+evo_5D40       neighbours Ufar/U1     g_F: +0.77→+0.77 g_R: -0.31→-0.36 g_E: -0.24→-0.28
+nobrain_5D40   neighbours Ufar/U1     g_F: +0.14→+0.16 g_R: -0.02→+0.01 g_E: -0.15→-0.11

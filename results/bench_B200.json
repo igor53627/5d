@@ -1,0 +1,127 @@
+{
+ "kind": "bench",
+ "gpu": "NVIDIA B200, 183359 MiB",
+ "wall": 73.56631469726562,
+ "out": [
+  {
+   "N": 4,
+   "L": 24,
+   "B": 1,
+   "rule": "own",
+   "cells": 331776,
+   "steps": 5000,
+   "steps_per_s": 3469.855150251873,
+   "cell_steps_per_s": 1151214662.3299654,
+   "finite": true,
+   "device": "cuda:0"
+  },
+  {
+   "N": 4,
+   "L": 48,
+   "B": 1,
+   "rule": "own",
+   "cells": 5308416,
+   "steps": 1772,
+   "steps_per_s": 922.2121218738895,
+   "cell_steps_per_s": 4895485583.149304,
+   "finite": true,
+   "device": "cuda:0"
+  },
+  {
+   "N": 4,
+   "L": 64,
+   "B": 1,
+   "rule": "own",
+   "cells": 16777216,
+   "steps": 1267,
+   "steps_per_s": 387.36495854375625,
+   "cell_steps_per_s": 6498905580.319644,
+   "finite": true,
+   "device": "cuda:0"
+  },
+  {
+   "N": 5,
+   "L": 16,
+   "B": 1,
+   "rule": "own",
+   "cells": 1048576,
+   "steps": 5000,
+   "steps_per_s": 2793.9983882049323,
+   "cell_steps_per_s": 2929719653.910375,
+   "finite": true,
+   "device": "cuda:0"
+  },
+  {
+   "N": 5,
+   "L": 24,
+   "B": 1,
+   "rule": "own",
+   "cells": 7962624,
+   "steps": 2288,
+   "steps_per_s": 690.5954999094708,
+   "cell_steps_per_s": 5498952301.87115,
+   "finite": true,
+   "device": "cuda:0"
+  },
+  {
+   "N": 4,
+   "L": 24,
+   "B": 1,
+   "rule": "cond",
+   "cells": 331776,
+   "steps": 5000,
+   "steps_per_s": 2518.1396175394866,
+   "cell_steps_per_s": 835458289.7487806,
+   "finite": true,
+   "device": "cuda:0"
+  },
+  {
+   "N": 4,
+   "L": 64,
+   "B": 1,
+   "rule": "cond",
+   "cells": 16777216,
+   "steps": 871,
+   "steps_per_s": 246.51893439252845,
+   "cell_steps_per_s": 4135901410.3932786,
+   "finite": true,
+   "device": "cuda:0"
+  },
+  {
+   "N": 4,
+   "L": 8,
+   "B": 512,
+   "rule": "cond",
+   "cells": 2097152,
+   "steps": 4735,
+   "steps_per_s": 1417.5651363433683,
+   "cell_steps_per_s": 2972849560.8127675,
+   "finite": true,
+   "device": "cuda:0"
+  },
+  {
+   "N": 4,
+   "L": 16,
+   "B": 64,
+   "rule": "cond",
+   "cells": 4194304,
+   "steps": 2788,
+   "steps_per_s": 817.8165726453448,
+   "cell_steps_per_s": 3430171321.91266,
+   "finite": true,
+   "device": "cuda:0"
+  },
+  {
+   "N": 4,
+   "L": 24,
+   "B": 32,
+   "rule": "own",
+   "cells": 10616832,
+   "steps": 1997,
+   "steps_per_s": 619.8667962344241,
+   "cell_steps_per_s": 6581021637.999113,
+   "finite": true,
+   "device": "cuda:0"
+  }
+ ]
+}

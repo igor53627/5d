@@ -1,0 +1,658 @@
+[
+  {
+    "object_id": "ap-3lTkd1gdvZE6LIwgcJmr2V",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "L40S",
+    "cost": "2.18941646"
+  },
+  {
+    "object_id": "ap-3lTkd1gdvZE6LIwgcJmr2V",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.21557331"
+  },
+  {
+    "object_id": "ap-3lTkd1gdvZE6LIwgcJmr2V",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.21242954"
+  },
+  {
+    "object_id": "ap-4720gT4rKHxi68KQw3huIP",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.01009077"
+  },
+  {
+    "object_id": "ap-4720gT4rKHxi68KQw3huIP",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "L4",
+    "cost": "0.02133355"
+  },
+  {
+    "object_id": "ap-4720gT4rKHxi68KQw3huIP",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.00682673"
+  },
+  {
+    "object_id": "ap-9MCivMQ71Qb9kWob9nZnH9",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "H100",
+    "cost": "0.30722092"
+  },
+  {
+    "object_id": "ap-9MCivMQ71Qb9kWob9nZnH9",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.03982205"
+  },
+  {
+    "object_id": "ap-9MCivMQ71Qb9kWob9nZnH9",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.02945122"
+  },
+  {
+    "object_id": "ap-H0sNkm24HgCcSucwIwSg0c",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "H100",
+    "cost": "0.24797498"
+  },
+  {
+    "object_id": "ap-H0sNkm24HgCcSucwIwSg0c",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.03214258"
+  },
+  {
+    "object_id": "ap-H0sNkm24HgCcSucwIwSg0c",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.02377379"
+  },
+  {
+    "object_id": "ap-IM6pgFpBKANJbccg3mJfFQ",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "A10G",
+    "cost": "0.84822242"
+  },
+  {
+    "object_id": "ap-IM6pgFpBKANJbccg3mJfFQ",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.14805337"
+  },
+  {
+    "object_id": "ap-IM6pgFpBKANJbccg3mJfFQ",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.14589426"
+  },
+  {
+    "object_id": "ap-IywgB6vxD15jvQCOYcOqrP",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "A10G",
+    "cost": "0.53166673"
+  },
+  {
+    "object_id": "ap-IywgB6vxD15jvQCOYcOqrP",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.09280001"
+  },
+  {
+    "object_id": "ap-IywgB6vxD15jvQCOYcOqrP",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.09144668"
+  },
+  {
+    "object_id": "ap-OaQiPzECpVWbUsRjzCo5Bx",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.05865202"
+  },
+  {
+    "object_id": "ap-OaQiPzECpVWbUsRjzCo5Bx",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "L4",
+    "cost": "0.12400004"
+  },
+  {
+    "object_id": "ap-OaQiPzECpVWbUsRjzCo5Bx",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.03968001"
+  },
+  {
+    "object_id": "ap-Q13x1zl4F0JxJ7skhVoIEb",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.00798845"
+  },
+  {
+    "object_id": "ap-Q13x1zl4F0JxJ7skhVoIEb",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.00540445"
+  },
+  {
+    "object_id": "ap-Q13x1zl4F0JxJ7skhVoIEb",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "B200",
+    "cost": "0.13194450"
+  },
+  {
+    "object_id": "ap-T0Ak4Mc4S0LeWRr3px5y2Z",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "A10G",
+    "cost": "0.49438889"
+  },
+  {
+    "object_id": "ap-T0Ak4Mc4S0LeWRr3px5y2Z",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.08629333"
+  },
+  {
+    "object_id": "ap-T0Ak4Mc4S0LeWRr3px5y2Z",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.08503489"
+  },
+  {
+    "object_id": "ap-TW74wRJYYAcDxzKxUHHgZB",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "A10G",
+    "cost": "1.61088909"
+  },
+  {
+    "object_id": "ap-TW74wRJYYAcDxzKxUHHgZB",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "L40S",
+    "cost": "0.71608610"
+  },
+  {
+    "object_id": "ap-TW74wRJYYAcDxzKxUHHgZB",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.35168031"
+  },
+  {
+    "object_id": "ap-TW74wRJYYAcDxzKxUHHgZB",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.34655164"
+  },
+  {
+    "object_id": "ap-bMjGgytmqQ8XosVJpoA8sG",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Network Egress",
+    "cost": "0.00000839"
+  },
+  {
+    "object_id": "ap-bMjGgytmqQ8XosVJpoA8sG",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "A10G",
+    "cost": "0.24982248"
+  },
+  {
+    "object_id": "ap-bMjGgytmqQ8XosVJpoA8sG",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "L40S",
+    "cost": "0.24591664"
+  },
+  {
+    "object_id": "ap-bMjGgytmqQ8XosVJpoA8sG",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.18084989"
+  },
+  {
+    "object_id": "ap-bMjGgytmqQ8XosVJpoA8sG",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.13365951"
+  },
+  {
+    "object_id": "ap-dvXbTVKal0zExiHccnCrpK",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "A10G",
+    "cost": "0.30555555"
+  },
+  {
+    "object_id": "ap-dvXbTVKal0zExiHccnCrpK",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.05333333"
+  },
+  {
+    "object_id": "ap-dvXbTVKal0zExiHccnCrpK",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.05255555"
+  },
+  {
+    "object_id": "ap-lK67CpvHl973DIDWE3pBcN",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "L40S",
+    "cost": "0.41816688"
+  },
+  {
+    "object_id": "ap-lK67CpvHl973DIDWE3pBcN",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.10979561"
+  },
+  {
+    "object_id": "ap-lK67CpvHl973DIDWE3pBcN",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.08114582"
+  },
+  {
+    "object_id": "ap-oFacwozg9gs8XmvcfB783x",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "A10G",
+    "cost": "0.39049986"
+  },
+  {
+    "object_id": "ap-oFacwozg9gs8XmvcfB783x",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.06815998"
+  },
+  {
+    "object_id": "ap-oFacwozg9gs8XmvcfB783x",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.06716598"
+  },
+  {
+    "object_id": "ap-osbUi4jEUEVQiSJu2BX6wD",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.00441470"
+  },
+  {
+    "object_id": "ap-osbUi4jEUEVQiSJu2BX6wD",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "L4",
+    "cost": "0.00933341"
+  },
+  {
+    "object_id": "ap-osbUi4jEUEVQiSJu2BX6wD",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.00298669"
+  },
+  {
+    "object_id": "ap-puzp4MP9F9MCqDYYT0CuIO",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Network Egress",
+    "cost": "0.00543270"
+  },
+  {
+    "object_id": "ap-puzp4MP9F9MCqDYYT0CuIO",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "A10G",
+    "cost": "0.17600000"
+  },
+  {
+    "object_id": "ap-puzp4MP9F9MCqDYYT0CuIO",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.08192000"
+  },
+  {
+    "object_id": "ap-puzp4MP9F9MCqDYYT0CuIO",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.06054400"
+  },
+  {
+    "object_id": "ap-q0WR47brbPuwORG6VDlDkq",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "H100",
+    "cost": "6.32548558"
+  },
+  {
+    "object_id": "ap-q0WR47brbPuwORG6VDlDkq",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.40995552"
+  },
+  {
+    "object_id": "ap-q0WR47brbPuwORG6VDlDkq",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.30298275"
+  },
+  {
+    "object_id": "ap-rG3HuFxP873oIFeGmIkPvZ",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.24953623"
+  },
+  {
+    "object_id": "ap-rG3HuFxP873oIFeGmIkPvZ",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "A10G",
+    "cost": "0.52556250"
+  },
+  {
+    "object_id": "ap-rG3HuFxP873oIFeGmIkPvZ",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "L4",
+    "cost": "0.14533347"
+  },
+  {
+    "object_id": "ap-rG3HuFxP873oIFeGmIkPvZ",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.33763887"
+  },
+  {
+    "object_id": "ap-uJURsvk1S86IwNCKManFq0",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.00222278"
+  },
+  {
+    "object_id": "ap-uJURsvk1S86IwNCKManFq0",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Network Egress",
+    "cost": "0.00028330"
+  },
+  {
+    "object_id": "ap-uJURsvk1S86IwNCKManFq0",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "L4",
+    "cost": "0.00044445"
+  },
+  {
+    "object_id": "ap-uJURsvk1S86IwNCKManFq0",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.00018889"
+  },
+  {
+    "object_id": "ap-uXK3JkTLQnWf8affv339Jy",
+    "description": "exact-local-mixing-exp9",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Network Egress",
+    "cost": "0.00000149"
+  },
+  {
+    "object_id": "ap-uXK3JkTLQnWf8affv339Jy",
+    "description": "exact-local-mixing-exp9",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "B300",
+    "cost": "0.20511239"
+  },
+  {
+    "object_id": "ap-uXK3JkTLQnWf8affv339Jy",
+    "description": "exact-local-mixing-exp9",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.00013246"
+  },
+  {
+    "object_id": "ap-uXK3JkTLQnWf8affv339Jy",
+    "description": "exact-local-mixing-exp9",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.02320237"
+  },
+  {
+    "object_id": "ap-ugW3Tcl745RPg6FAZNBkjN",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.02333464"
+  },
+  {
+    "object_id": "ap-ugW3Tcl745RPg6FAZNBkjN",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Network Egress",
+    "cost": "0.00542378"
+  },
+  {
+    "object_id": "ap-ugW3Tcl745RPg6FAZNBkjN",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.01578665"
+  },
+  {
+    "object_id": "ap-ugW3Tcl745RPg6FAZNBkjN",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "B200",
+    "cost": "0.38541622"
+  },
+  {
+    "object_id": "ap-vwk1isWmPqxsQpcRNUZzI5",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.30214019"
+  },
+  {
+    "object_id": "ap-vwk1isWmPqxsQpcRNUZzI5",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "A10G",
+    "cost": "0.77320328"
+  },
+  {
+    "object_id": "ap-vwk1isWmPqxsQpcRNUZzI5",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "L4",
+    "cost": "0.07644453"
+  },
+  {
+    "object_id": "ap-vwk1isWmPqxsQpcRNUZzI5",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.40881548"
+  },
+  {
+    "object_id": "ap-wbqAipxPd25QdtTzvxFCEM",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "A10G",
+    "cost": "0.79482134"
+  },
+  {
+    "object_id": "ap-wbqAipxPd25QdtTzvxFCEM",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.36995320"
+  },
+  {
+    "object_id": "ap-wbqAipxPd25QdtTzvxFCEM",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.27341854"
+  },
+  {
+    "object_id": "ap-y8WdOde9ucDJRnwoG4LNkG",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "CPU",
+    "cost": "0.07525952"
+  },
+  {
+    "object_id": "ap-y8WdOde9ucDJRnwoG4LNkG",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Network Egress",
+    "cost": "0.00004134"
+  },
+  {
+    "object_id": "ap-y8WdOde9ucDJRnwoG4LNkG",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "L4",
+    "cost": "0.15911104"
+  },
+  {
+    "object_id": "ap-y8WdOde9ucDJRnwoG4LNkG",
+    "description": "feigenbaum-lenia",
+    "environment": "main",
+    "interval_start": "2026-11-06T00:00:00",
+    "resource": "Memory",
+    "cost": "0.05091553"
+  }
+]

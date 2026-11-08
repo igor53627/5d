@@ -1,0 +1,69 @@
+== prof96_base.trace.json.gz: span 71.9 ms/step, GPU busy 71.7 ms/step (100%), 195 kernels/step
+   FFT (cuFFT kernels)                             34.12 ms  47.6%    113/step
+   XLA fusions (elementwise, stencils, MUSCL)      26.08 ms  36.4%     44/step
+   transpose (FFT layout)                          10.87 ms  15.2%     30/step
+   reductions (std, sum)                            0.44 ms   0.6%      4/step
+   memcpy/memset                                    0.18 ms   0.3%      2/step
+   other                                            0.00 ms   0.0%      2/step
+   top kernels:
+       9.97 ms  13.9%  x  40  void regular_fft<96u, EPT<8u, 12u>, 16u, 7u, (padding_t)6, (twiddle_t)  [fft.123.0]
+       5.63 ms   7.9%  x  20  void regular_fft<96u, EPT<4u, 6u>, 8u, 10u, (padding_t)6, (twiddle_t)0  [fft.122.0]
+       5.53 ms   7.7%  x  11  void regular_fft_c2r<96u, EPT<4u, 6u>, 8u, 10u, (padding_t)6, (twiddle  [fft.123.0]
+       5.34 ms   7.5%  x  10  loop_transpose_fusion_9  [loop_transpose_fusion.2]
+       4.48 ms   6.3%  x   9  void regular_fft_r2c<96u, EPT<4u, 6u>, 8u, 10u, (padding_t)6, (twiddle  [fft.128.0]
+       4.25 ms   5.9%  x   1  loop_multiply_fusion_7  [command_buffer_55]
+       3.33 ms   4.7%  x  11  void scal_kernel_val<float, float>(cublasScalParamsVal<float, float>)  [fft.123.0]
+       3.03 ms   4.2%  x  10  wrapped_transpose_8  [wrapped_transpose.21]
+       2.79 ms   3.9%  x   1  loop_minimum_multiply_fusion  [command_buffer_55]
+       2.67 ms   3.7%  x  11  void scal_kernel_val<float2, float2>(cublasScalParamsVal<float2, float  [fft.122.0]
+       2.50 ms   3.5%  x  11  MemcpyD2D  [fft.123.0]
+       2.15 ms   3.0%  x   1  input_concatenate_fusion_13  [command_buffer_55]
+       2.13 ms   3.0%  x   9  wrapped_transpose_6  [wrapped_transpose.13]
+       1.87 ms   2.6%  x   1  loop_multiply_fusion_1  [loop_multiply_fusion.1]
+   sample FFT kernel_details: regs:30 static_shared:0 dynamic_shared:3072 grid:110592,1,1 block:24,8,1 occ_pct:93.75
+== prof96_all5.trace.json.gz: span 42.9 ms/step, GPU busy 42.8 ms/step (100%), 168 kernels/step
+   XLA fusions (elementwise, stencils, MUSCL)      24.69 ms  57.6%     73/step
+   FFT (cuFFT kernels)                             13.79 ms  32.2%     69/step
+   transpose (FFT layout)                           3.89 ms   9.1%     19/step
+   reductions (std, sum)                            0.29 ms   0.7%      3/step
+   memcpy/memset                                    0.18 ms   0.4%      2/step
+   other                                            0.00 ms   0.0%      2/step
+   top kernels:
+       4.26 ms   9.9%  x   1  loop_multiply_fusion_8  [command_buffer_175]
+       3.99 ms   9.3%  x  16  void regular_fft<96u, EPT<8u, 12u>, 16u, 7u, (padding_t)6, (twiddle_t)  [fft.155.0]
+       2.79 ms   6.5%  x   1  loop_minimum_multiply_fusion  [command_buffer_175]
+       2.25 ms   5.3%  x   8  void regular_fft<96u, EPT<4u, 6u>, 8u, 10u, (padding_t)6, (twiddle_t)0  [fft.154.0]
+       2.15 ms   5.0%  x   1  input_concatenate_fusion_21  [command_buffer_175]
+       2.01 ms   4.7%  x   4  void regular_fft_c2r<96u, EPT<4u, 6u>, 8u, 10u, (padding_t)6, (twiddle  [fft.155.0]
+       1.99 ms   4.6%  x   4  void regular_fft_r2c<96u, EPT<4u, 6u>, 8u, 10u, (padding_t)6, (twiddle  [fft.152.0]
+       1.60 ms   3.7%  x   3  loop_transpose_fusion_2  [loop_transpose_fusion.4]
+       1.26 ms   2.9%  x   7  void scal_kernel_val<float, float>(cublasScalParamsVal<float, float>)  [fft.191.0]
+       1.00 ms   2.3%  x   7  void scal_kernel_val<float2, float2>(cublasScalParamsVal<float2, float  [fft.190.0]
+       0.99 ms   2.3%  x   1  loop_add_clamp_compare_fusion  [command_buffer_103]
+       0.95 ms   2.2%  x   7  MemcpyD2D  [fft.191.0]
+       0.95 ms   2.2%  x   4  wrapped_transpose_6  [wrapped_transpose.21]
+       0.91 ms   2.1%  x   3  wrapped_transpose_8  [wrapped_transpose.20]
+   sample FFT kernel_details: regs:31 static_shared:0 dynamic_shared:3072 grid:6912,1,1 block:8,16,1 occ_pct:100
+== prof40_5_base.trace.json.gz: span 89.8 ms/step, GPU busy 89.6 ms/step (100%), 203 kernels/step
+   XLA fusions (elementwise, stencils, MUSCL)      38.30 ms  42.7%     52/step
+   FFT (cuFFT kernels)                             37.51 ms  41.9%    113/step
+   transpose (FFT layout)                          13.05 ms  14.6%     30/step
+   reductions (std, sum)                            0.52 ms   0.6%      4/step
+   memcpy/memset                                    0.22 ms   0.2%      2/step
+   other                                            0.00 ms   0.0%      2/step
+   top kernels:
+      12.16 ms  13.6%  x  40  void regular_fft<40u, EPT<5u, 8u>, 32u, 6u, (padding_t)6, (twiddle_t)0  [fft.123.0]
+       8.05 ms   9.0%  x  20  void composite_vector_2d_fft<40u, 40u, EPT<5u, 8u>, EPT<5u, 8u>, 1u, 4  [fft.122.0]
+       7.07 ms   7.9%  x  10  loop_transpose_fusion_9  [loop_transpose_fusion.2]
+       5.77 ms   6.4%  x   1  loop_multiply_fusion_7  [command_buffer_57]
+       5.75 ms   6.4%  x   1  loop_minimum_multiply_fusion  [command_buffer_57]
+       4.02 ms   4.5%  x  11  void scal_kernel_val<float, float>(cublasScalParamsVal<float, float>)  [fft.123.0]
+       3.97 ms   4.4%  x   1  input_concatenate_fusion_17  [command_buffer_57]
+       3.82 ms   4.3%  x  11  void regular_fft_c2r<40u, EPT<5u, 8u>, 8u, 32u, (padding_t)14, (twiddl  [fft.123.0]
+       3.29 ms   3.7%  x  11  void scal_kernel_val<float2, float2>(cublasScalParamsVal<float2, float  [fft.122.0]
+       3.10 ms   3.5%  x  11  MemcpyD2D  [fft.123.0]
+       3.08 ms   3.4%  x   9  void regular_fft_r2c<40u, EPT<5u, 8u>, 8u, 32u, (padding_t)14, (twiddl  [fft.128.0]
+       2.88 ms   3.2%  x  10  wrapped_transpose_8  [wrapped_transpose.18]
+       2.65 ms   3.0%  x   9  wrapped_transpose_6  [wrapped_transpose.13]
+       2.33 ms   2.6%  x   1  loop_multiply_fusion_1  [loop_multiply_fusion.1]
+   sample FFT kernel_details: regs:31 static_shared:0 dynamic_shared:2560 grid:320000,1,1 block:8,8,1 occ_pct:100

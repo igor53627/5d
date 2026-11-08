@@ -1,0 +1,20 @@
+# Part 9 notes (local heritable params + food)
+- fl_eco.py: step with Q=A·p (K=2: p0 -> Δμ=pmu·p0 (0.02), p1 -> σ·(1+psig·p1) (0.15)), Q advected by same MUSCL flux; food F: eat=keat·A·F, A+=eat-dec·A, F+=rF(F0-F)-eat; correlated mutation noise mut; transport=False control
+- glider_eco.py: run_eco (single or multi init, logs objects (mass/M1, cen, mean p) every 100 steps, proj every 500)
+- modal kind "eco"
+- baseline billing today (Nov 7 UTC) before part 9: 24.687 (at 04:36 UTC)
+- 04:36 UTC launched eco1: sweep 18 (keat {5e-4,1.5e-3,5e-3} x dec {3e-4,1e-3} x rF {3e-4,1e-3,3e-3}, mut .003), R2g5, 4D L48, 10000 steps, 3 calls
+- eco1 done (~7 min): fast growth (keat>=1.5e-3) -> one giant blob filling box (no division). keat 5e-4/dec 3e-4: single soliton grows to 3.4 M1 and buds (1->4 objects by 9000 steps, M 6.6) = self-reproduction! dec 1e-3 with keat 5e-4 -> dies. mut .003 too small (p var ~.005)
+- 04:50 UTC launched eco2: 30000 steps L48, keat {4,5,7}e-4 x rF {1e-5,1e-4}, mut .03 + controls (no transport; no food keat=0)
+- eco2 done: F0=1 food too abundant -> mass grows ~exponentially (up to 100-400 M1), early divisions (2-10) but everything merges into one giant blob by ~15000 steps; no-food control: 1 soliton forever (M=1); no-transport control behaves like transport (p has small effect)
+- 05:00 UTC launched eco3: scarce food F0 {.03,.06} x keat {.01,.02} x rF {3e-5,1e-4}, dec 3e-4 (food-limited: carrying cap ~ rF·F0·V/dec), 30000 steps L48
+- eco3 done: scarce food works: F0 .06, keat .01-.02: mass bounded 3-7 M1, repeated divisions (5-11) + merges, n 1-4 in L48. F0 .03 k .01 -> starves/dies; F0 .03 k .02 -> ~2 M1, 6 div
+- 05:13 UTC launched eco4 (4 calls): single L64 40k; multi(4 solitons, p spread .5) base + neutral p; controls: no transport (multi) + no food (multi); 5D L32 20k (keat .01, .02). base = keat .01 dec 3e-4 rF 1e-4 F0 .06 mut .03
+- eco3 fig glider_part9_sweep_L48.png, mp4 glider_part9_growth_L48.mp4
+- 05:25 UTC eco4 stopped (partial, saved). FOUND BUG: p=Q/(A+1e-4) diluted p toward 0 at edges -> p diversity collapsed in all runs (even no-food). eco4 results only valid for growth/division (single L64: 16 div, M 3.5-8, n up to 7; 5D L32 keat .01: grows to 8.8 M1, 3 div by 16k).
+- fixed fl_eco: p=Q/max(A,1e-6); new effect: p0 -> keat·e^{pk·p0} (pk=1), p1 -> Δμ=.02·p1. cost today 32.05 at 05:25 (part9 so far 7.4)
+- 05:27 launched eco5 (L64, 40k, multi 6 solitons p spread .5, seed 5): [selection pk=1, neutral pk=0 pmu=0], no-transport, no-food, single-start (mut .1)
+- 05:38 UTC eco5 (fixed p): selection pk=1: <p0> 0 -> .19-.24 (sd->0, lineage fixation), neutral pk=0: <p0> -> .09-.10; heritability corr(parent,child) p0: sel .76 (35 pairs), neutral .49, NO-TRANSPORT -.16 (p lost to 0 immediately), single-start (mut .1) .78 with <p0> 0 -> .3; no-food: M const 6, 3 div(collision splits), p frozen. eco5_0 partial at 32100 (still running at 05:38)
+- 05:39 launched eco6: replicates seeds 11-13: single-start [sel, neutral] and multi-start [sel, neutral], L64 20k; + 5D L32 single-start sel 20k (7 calls)
+- 05:50 UTC eco5_0 + eco6 done (7 calls). paired Δ<p0> sel-neutral positive 7/7 (single s11 .24 s12 .09 s13 .37; multi s5 .16 s11 .05 s12 .21 s13 .07). caveat: also rises w/o divisions -> cell-level selection within object. 5D single: 2 div only
+- 05:55 figures: glider_part9_selection.png, glider_part9_growth.png (+mp4 571KB), results/part9_table.md, part9_runs.json

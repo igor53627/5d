@@ -1,0 +1,176 @@
+[
+{
+"cfg": {
+"theta": 180,
+"b": 0,
+"theta_real": 180.0
+},
+"outcome": "захват→переизлучение",
+"bound_steps": 350,
+"masses": [
+0.9875619397911388,
+0.9506425632552615
+],
+"speeds_out": [
+0.07546052356621603,
+0.07644519064583308
+],
+"angle_out": 130.57753682895083
+},
+{
+"cfg": {
+"theta": 180,
+"b": 8,
+"theta_real": 180.0
+},
+"outcome": "захват→переизлучение",
+"bound_steps": 350,
+"masses": [
+0.9727596470366353,
+0.9680627435065103
+],
+"speeds_out": [
+0.0757232519626984,
+0.07569320046966872
+],
+"angle_out": 140.97639797496973
+},
+{
+"cfg": {
+"theta": 150,
+"b": 0,
+"theta_real": 150.0832977294922
+},
+"outcome": "слияние",
+"bound_steps": 2000,
+"masses": null,
+"speeds_out": null,
+"angle_out": null
+},
+{
+"cfg": {
+"theta": 150,
+"b": 8,
+"theta_real": 150.0832977294922
+},
+"outcome": "захват→переизлучение",
+"bound_steps": 300,
+"masses": [
+1.030332112570152,
+0.9103647791842499
+],
+"speeds_out": [
+0.0749332397028851,
+0.07717188466980152
+],
+"angle_out": 102.64120467752736
+},
+{
+"cfg": {
+"theta": 120,
+"b": 0,
+"theta_real": 120.00005340576172
+},
+"outcome": "слияние",
+"bound_steps": 2600,
+"masses": null,
+"speeds_out": null,
+"angle_out": null
+},
+{
+"cfg": {
+"theta": 120,
+"b": 8,
+"theta_real": 120.00005340576172
+},
+"outcome": "захват→переизлучение",
+"bound_steps": 500,
+"masses": [
+1.1918462416882405,
+0.7517640513597841
+],
+"speeds_out": [
+0.07129415636904225,
+0.07957704654896171
+],
+"angle_out": 49.340455424316254
+},
+{
+"cfg": {
+"theta": 90,
+"b": 0,
+"theta_real": 90.02234649658203
+},
+"outcome": "слияние",
+"bound_steps": 2650,
+"masses": null,
+"speeds_out": null,
+"angle_out": null
+},
+{
+"cfg": {
+"theta": 90,
+"b": 8,
+"theta_real": 90.02234649658203
+},
+"outcome": "слияние",
+"bound_steps": 2650,
+"masses": null,
+"speeds_out": null,
+"angle_out": null
+},
+{
+"cfg": {
+"theta": 60,
+"b": 0,
+"theta_real": 59.999942779541016
+},
+"outcome": "слияние",
+"bound_steps": 2700,
+"masses": null,
+"speeds_out": null,
+"angle_out": null
+},
+{
+"cfg": {
+"theta": 60,
+"b": 8,
+"theta_real": 59.999942779541016
+},
+"outcome": "слияние",
+"bound_steps": 2700,
+"masses": null,
+"speeds_out": null,
+"angle_out": null
+},
+{
+"cfg": {
+"theta": 180,
+"tau": 50,
+"theta_real": 180.0
+},
+"outcome": "слияние",
+"bound_steps": 2600,
+"masses": null,
+"speeds_out": null,
+"angle_out": null
+},
+{
+"cfg": {
+"theta": 180,
+"tau": 100,
+"theta_real": 180.0
+},
+"outcome": "захват→переизлучение",
+"bound_steps": 400,
+"masses": [
+1.062489659749065,
+0.8678934277033292
+],
+"speeds_out": [
+0.07395109735748522,
+0.07798100129274847
+],
+"angle_out": 112.73435065006043
+}
+]

@@ -1,0 +1,122 @@
+[
+ {
+  "N": 4,
+  "L": 24,
+  "B": 1,
+  "rule": "own",
+  "cells": 331776,
+  "steps": 663,
+  "steps_per_s": 243.25815080233045,
+  "cell_steps_per_s": 80707216.24059398,
+  "finite": true,
+  "device": "cpu:0"
+ },
+ {
+  "N": 4,
+  "L": 48,
+  "B": 1,
+  "rule": "own",
+  "cells": 5308416,
+  "steps": 33,
+  "steps_per_s": 11.239055114734363,
+  "cell_steps_per_s": 59661579.99593773,
+  "finite": true,
+  "device": "cpu:0"
+ },
+ {
+  "N": 4,
+  "L": 64,
+  "B": 1,
+  "rule": "own",
+  "cells": 16777216,
+  "steps": 10,
+  "steps_per_s": 2.4172857174472733,
+  "cell_steps_per_s": 40555324.61532787,
+  "finite": true,
+  "device": "cpu:0"
+ },
+ {
+  "N": 5,
+  "L": 16,
+  "B": 1,
+  "rule": "own",
+  "cells": 1048576,
+  "steps": 172,
+  "steps_per_s": 53.697521006870915,
+  "cell_steps_per_s": 56305931.787300676,
+  "finite": true,
+  "device": "cpu:0"
+ },
+ {
+  "N": 5,
+  "L": 24,
+  "B": 1,
+  "rule": "own",
+  "cells": 7962624,
+  "steps": 22,
+  "steps_per_s": 6.946317562247195,
+  "cell_steps_per_s": 55310914.93277101,
+  "finite": true,
+  "device": "cpu:0"
+ },
+ {
+  "N": 4,
+  "L": 24,
+  "B": 1,
+  "rule": "cond",
+  "cells": 331776,
+  "steps": 509,
+  "steps_per_s": 161.07708738261104,
+  "cell_steps_per_s": 53441511.74345316,
+  "finite": true,
+  "device": "cpu:0"
+ },
+ {
+  "N": 4,
+  "L": 64,
+  "B": 1,
+  "rule": "cond",
+  "cells": 16777216,
+  "steps": 10,
+  "steps_per_s": 1.4368344138899274,
+  "cell_steps_per_s": 24106081.318064712,
+  "finite": true,
+  "device": "cpu:0"
+ },
+ {
+  "N": 4,
+  "L": 8,
+  "B": 512,
+  "rule": "cond",
+  "cells": 2097152,
+  "steps": 57,
+  "steps_per_s": 18.871347591156596,
+  "cell_steps_per_s": 39576084.34348924,
+  "finite": true,
+  "device": "cpu:0"
+ },
+ {
+  "N": 4,
+  "L": 16,
+  "B": 64,
+  "rule": "cond",
+  "cells": 4194304,
+  "steps": 42,
+  "steps_per_s": 13.113019878242092,
+  "cell_steps_per_s": 54999991.72739032,
+  "finite": true,
+  "device": "cpu:0"
+ },
+ {
+  "N": 4,
+  "L": 24,
+  "B": 32,
+  "rule": "own",
+  "cells": 10616832,
+  "steps": 19,
+  "steps_per_s": 5.777521584749945,
+  "cell_steps_per_s": 61338976.04166393,
+  "finite": true,
+  "device": "cpu:0"
+ }
+]
