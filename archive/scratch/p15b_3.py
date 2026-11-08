@@ -1,5 +1,6 @@
-import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
-_archive = str(_root / "archive")
+import _path  # noqa: F401
+_root = _path._root
+_archive = str(_root / "archive") if _root is not None else ""
 import pickle, numpy as np, analyze15b as Z, analyze12 as A12, analyze_eco as AE, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 rng = np.random.default_rng(0)
 grid = np.array([[a, b, c] for a in (-1, -.6, 0) for b in (-.6, -.4, .3) for c in (0, .06, .2)])

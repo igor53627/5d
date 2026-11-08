@@ -1,5 +1,6 @@
-import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
-_archive = str(_root / "archive")
+import _path  # noqa: F401
+_root = _path._root
+_archive = str(_root / "archive") if _root is not None else ""
 """Part 15b: realistic ranges of brain inputs s1=Ub/U1-1, s2=Ufar/U1 (4D), from a single CPU soliton embedded in 48^4, and with a neighbour at distance d."""
 import json, numpy as np, jax, jax.numpy as jnp, fl_eco3 as E3, glider_coll as GC, pickle
 c = json.load(open(_root / 'archive/specs/eco13m.json'))[0]['runs'][0]['c']; N = 4

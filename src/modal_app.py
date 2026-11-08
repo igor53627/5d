@@ -39,6 +39,7 @@ image = (modal.Image.debian_slim(python_version="3.12")
          .add_local_file(_src("fl_season.py"), "/root/fl_season.py")
          .add_local_file(_src("helpers.py"), "/root/helpers.py")
          .add_local_file(_src("analyze_eco.py"), "/root/analyze_eco.py")
+         .add_local_file(os.path.join(ROOT, "_path.py"), "/root/_path.py")
          # Archive (moved from root)
          .add_local_file(_archive("reservoir_experiment.py"), "/root/reservoir_experiment.py")
          .add_local_file(_archive("reservoir_gpu.py"), "/root/reservoir_gpu.py")
@@ -104,9 +105,11 @@ def gpu_job_auto(kind, payload, save_as=None):
 def JOB(gpu):
     return gpu_job_auto if gpu == "auto" else gpu_job.with_options(gpu=gpu)
 
+RESULTS = os.path.join(ROOT, "archive", "results")
+
 def _log(fn_gpu, res, t_client, tag):
-    os.makedirs(os.path.join(HERE, "results"), exist_ok=True)
-    with open(os.path.join(HERE, "results", "modal_usage.jsonl"), "a") as f:
+    os.makedirs(RESULTS, exist_ok=True)
+    with open(os.path.join(RESULTS, "modal_usage.jsonl"), "a") as f:
         f.write(json.dumps(dict(tag=tag, gpu_req=fn_gpu, gpu=res.get("gpu"), wall_fn=res["wall"], wall_client=t_client,
                                 time=time.strftime("%Y-%m-%d %H:%M:%S"))) + "\n")
 
@@ -123,7 +126,7 @@ def smoke(gpu: str = "L4"):
 @app.local_entrypoint()
 def bench(gpu: str = "L4", max_cells: int = 0):
     res = call(gpu, "bench", dict(max_cells=max_cells or None), f"bench_{gpu}")
-    json.dump(res, open(os.path.join(HERE, "results", f"bench_{gpu}.json"), "w"), indent=1)
+    json.dump(res, open(os.path.join(RESULTS, f"bench_{gpu}.json"), "w"), indent=1)
     print(res["gpu"], res["wall"])
 
 @app.local_entrypoint()
@@ -146,7 +149,7 @@ def alife(gpu: str = "L4", size: int = 48, steps: int = 8000):
     payload = [dict(L=L, steps=steps, lam_target=-0.005), dict(L=L, steps=steps, lam_target=-0.02),
                dict(L=L, steps=steps, lam_target=-0.005, kappa=0.7)]
     res = call(gpu, "alife", payload, f"alife_{gpu}")
-    pickle.dump(res, open(os.path.join(HERE, "results", f"alife_L{L}.pkl"), "wb"))
+    pickle.dump(res, open(os.path.join(RESULTS, f"alife_L{L}.pkl"), "wb"))
     print(res["gpu"], res["wall"], [r["sec"] for r in res["out"]])
 
 @app.local_entrypoint()

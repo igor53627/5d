@@ -1,5 +1,6 @@
-import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
-_archive = str(_root / "archive")
+import _path  # noqa: F401
+_root = _path._root
+_archive = str(_root / "archive") if _root is not None else ""
 import json, numpy as np, sys, copy
 rng = np.random.default_rng(2)
 S1 = {c["seed"]: c for call in json.load(open(f"{_archive}/specs/glider_s1.json")) for c in call[0]["cands"]}

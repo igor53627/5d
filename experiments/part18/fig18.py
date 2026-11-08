@@ -1,4 +1,4 @@
-import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+import _path  # noqa: F401
 """Part 18 figures/table/mp4 from results/eco18/main18.pkl and b18m logs."""
 import pickle, re, glob, os, subprocess, numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 from scipy.stats import ttest_ind

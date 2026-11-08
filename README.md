@@ -10,19 +10,20 @@ Each cell in an N-dimensional lattice (default 4D, 24⁴ = 331,776 cells) is a s
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
-pip install -e .           # or: pip install numpy jax jaxlib matplotlib scipy
+pip install -e .
+# GPU build of JAX (optional): pip install -U "jax[cuda12]"
 ```
 
 ## Running
 
 ```bash
-# Quick CPU demo (4D 16³ lattice, ~2 min, produces mp4)
-python -m feigenbaum_lenia --N 4 --L 16 --steps 500 --out demo_run
+# Quick CPU demo (3D, L=8; writes animation.mp4)
+python -m feigenbaum_lenia --N 3 --L 8 --steps 80 --every 10 --out demo_run
 
-# Full simulation (4D 24⁴ lattice, ~6 min on CPU)
+# Full simulation (4D, L=24, about 6 minutes on CPU)
 python -m feigenbaum_lenia --out full_run
 
-# With GPU acceleration (install: pip install -U "jax[cuda12]")
+# GPU, after `pip install -U "jax[cuda12]"`
 JAX_PLATFORMS=cuda python -m feigenbaum_lenia --out gpu_run
 ```
 

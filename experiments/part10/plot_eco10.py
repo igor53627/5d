@@ -1,4 +1,4 @@
-import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+import _path  # noqa: F401
 """Часть 10: популяция при ёмкости, наследуемость, межособевой отбор (Прайс) — отбор / нейтр. / без переноса, 3 зерна."""
 import glob, pickle, json, sys, numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 from scipy import stats

@@ -1,4 +1,4 @@
-import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+import _path  # noqa: F401
 """Part 13: dimension comparison. python analyze13.py results/eco13/eco13m_*.pkl"""
 import pickle, sys, re, json, numpy as np, analyze12 as A
 from scipy import stats

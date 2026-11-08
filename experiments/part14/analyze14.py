@@ -1,4 +1,4 @@
-import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+import _path  # noqa: F401
 """Part 14: 6D vs Part 13 (3D–5D). python analyze14.py results/eco14_0.pkl results/eco14_1.pkl"""
 import pickle, sys, re, numpy as np, analyze13 as A, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 R13 = pickle.load(open("results/eco13/main13.pkl", "rb")); R6 = {}

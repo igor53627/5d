@@ -1,4 +1,4 @@
-import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+import _path  # noqa: F401
 """Part 17: poison food in 4D. Loads results/eco17/b17*.pkl (fl_poison logs) → table, main17.pkl, figures."""
 import pickle, glob, re, sys, numpy as np, fl_poison as Z, analyze_eco as AE
 K0, NW, iD, KEAT, F0 = Z.K0, Z.NW, Z.K0 + Z.NW, 0.01, 0.08

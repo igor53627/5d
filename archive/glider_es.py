@@ -1,5 +1,6 @@
-import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
-_archive = str(_root / "archive")
+import _path  # noqa: F401
+_root = _path._root
+_archive = str(_root / "archive") if _root is not None else ""
 """Ограниченный эволюционный поиск (элитарная ES) спонтанных глайдеров в Flow-Lenia(+χ∇φ), asym = 0.
 Особь: изолированное пятно в центре чистой решётки. Фитнес = (смещение главного объекта / R) × прямолинейность × corr²,
 обнуляется, если объект распался/расползся (не один доминирующий компонент) или занял > 5% решётки."""

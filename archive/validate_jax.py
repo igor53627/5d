@@ -1,5 +1,6 @@
-import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
-_archive = str(_root / "archive")
+import _path  # noqa: F401
+_root = _path._root
+_archive = str(_root / "archive") if _root is not None else ""
 """Сверка JAX-порта с numpy-версией на маленькой решётке (4D, L=8) из одинакового начального состояния."""
 import json, sys, time, types
 import numpy as np, jax, jax.numpy as jnp

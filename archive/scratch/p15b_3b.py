@@ -1,5 +1,6 @@
-import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
-_archive = str(_root / "archive")
+import _path  # noqa: F401
+_root = _path._root
+_archive = str(_root / "archive") if _root is not None else ""
 import pickle, numpy as np, analyze15b as Z, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 T = pickle.load(open(f"{_archive}/results/eco15/types15b.pkl", "rb")); R = Z.load()
 Vt, mu0, grid = T["Vt"], T["mu0"], T["grid"]

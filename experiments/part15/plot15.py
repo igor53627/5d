@@ -1,4 +1,4 @@
-import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+import _path  # noqa: F401
 import pickle, re, sys, numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 R = pickle.load(open("results/eco15/main.pkl", "rb")); R5 = pickle.load(open("results/eco15/d5.pkl", "rb")) if len(sys.argv) > 1 else {}
 G = {}

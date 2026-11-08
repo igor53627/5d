@@ -1,4 +1,4 @@
-import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+import _path  # noqa: F401
 """Part 15b: what the evolved micro-brains encode. Uses saved Part 15 logs only."""
 import pickle, glob, re, numpy as np, fl_brain as B, analyze12 as A12, analyze_eco as AE
 K0, NW, iD = B.K0, B.NW, B.K0 + B.NW
