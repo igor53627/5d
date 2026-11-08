@@ -1,4 +1,5 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 """Фигуры, таблица и анимация для больших прогонов глайдеров."""
 import pickle, glob, sys, os, json, subprocess, numpy as np
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
@@ -97,7 +98,7 @@ def animation(o, out_mp4, every, fps=15):
 
 if __name__ == "__main__":
     prefix = sys.argv[1]; rows = []
-    for f in sorted(glob.glob(f"results/glider/{prefix}_*.pkl")):
+    for f in sorted(glob.glob(f"{_archive}/results/glider/{prefix}_*.pkl")):
         r = pickle.load(open(f, "rb"))
         for job in r["out"]:
             for o in job["out"]:
@@ -109,4 +110,4 @@ if __name__ == "__main__":
                 if len(sys.argv) > 2 and tag in sys.argv[2].split(","):
                     animation(o, os.path.join(HERE, f"glider_{tag}.mp4"), job["every"])
                 print(json.dumps(row))
-    json.dump(rows, open(f"results/glider/{prefix}_table.json", "w"), indent=1)
+    json.dump(rows, open(f"{_archive}/results/glider/{prefix}_table.json", "w"), indent=1)

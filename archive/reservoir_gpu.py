@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 """
 Reservoir-бенчмарк Feigenbaum-Lenia на JAX (GPU/CPU): гомеостаз по условному показателю Ляпунова.
 

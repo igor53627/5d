@@ -1,4 +1,4 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
 """Part 18b: map Part-17 evolved brains (4→3→3) onto the Part-18 architecture (7→3→4) as warm-start founders."""
 import pickle, glob, numpy as np, fl_poison as P17, fl_season as Z
 def best17(tag):

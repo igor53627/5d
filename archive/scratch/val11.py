@@ -1,9 +1,10 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 import pickle, numpy as np, analyze_eco as AE
 from scipy import stats
 L = 64; R = {}
 for i in range(3):
-    o = pickle.load(open(f'results/p11/val11_{i}.pkl', 'rb'))['out'][0]
+    o = pickle.load(open(f'{_archive}/results/p11/val11_{i}.pkl', 'rb'))['out'][0]
     for vn, oo in o.items():
         r = oo['runs'][0]; s = AE.summarize(r, L); ps = AE.pstats(r['log'], 0); log = r['log']
         Se = AE.selection_diff([x for x in log if x[0] <= 7000], L, lag=5)
@@ -31,4 +32,4 @@ for vn in R:
     dp = [np.abs(R[vn][i]['p0_t'] - R['base'][i]['p0_t']).max() for i in range(3)]
     sp = [np.abs(R['base'][i]['p0_t'] - R['base'][j]['p0_t']).max() for i in range(3) for j in range(i + 1, 3)]
     print(vn, 'max|Δn|/n_max', np.round(dn, 2), 'max|Δp0(t)|', np.round(dp, 3), '(between-seed base max|Δp0|', np.round(sp, 2), ')')
-pickle.dump(R, open('results/p11/val11_summary.pkl', 'wb'))
+pickle.dump(R, open(f'{_archive}/results/p11/val11_summary.pkl', 'wb'))

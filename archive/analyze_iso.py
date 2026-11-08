@@ -1,4 +1,5 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 """Анизотропия направлений движения: гистограммы max|u_k| и угла до ближайшего направления решётки ({-1,0,1}^N) vs изотропный эталон."""
 import os, sys, pickle, itertools, numpy as np, json, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 from scipy.stats import ks_2samp
@@ -24,7 +25,7 @@ for f in files:
                          corr_speed_maxu=float(np.corrcoef(sp, a)[0, 1]) if len(sp) > 2 else np.nan, ok_frac=float(np.mean([x["ok"] for x in v])))
 for k, r in rows.items():
     print(f"{k:28s} n={r['n']:2d} v={r['speed']:.4f}±{r['speed_cv']*100:.1f}% r50={r['r50']:.3f} r250={r['r250']:.3f} | max|u| {r['maxu_mean']:.3f} (изотр {r['maxu_iso']:.3f}) KS={r['ks_maxu']:.2f} p={r['ks_p']:.1e} | угол до реш. {r['ang_mean']:.1f}° (изотр {r['ang_iso']:.1f}°) | осей>0.25: {r['nz_mean']:.2f} ({r['nz_iso']:.2f}) | corr(v,max|u|)={r['corr_speed_maxu']:.2f} ok={r['ok_frac']:.2f}")
-json.dump(rows, open("results/iso_table.json", "w"), indent=1)
+json.dump(rows, open(f"{_archive}/results/iso_table.json", "w"), indent=1)
 if len(sys.argv) > 1:
     keys = [k for k in os.environ.get("ISO_KEYS", "").split(";") if k in data] or list(data); fig, ax = plt.subplots(2, len(keys), figsize=(3.2 * len(keys), 6.5), squeeze=False)
     for j, k in enumerate(keys):

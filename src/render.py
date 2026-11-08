@@ -1,4 +1,3 @@
-import _path  # noqa: F401
 """Визуализация результатов Feigenbaum-Lenia: анимация, диагностика, финальный кадр."""
 import json, os, sys
 import numpy as np

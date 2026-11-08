@@ -1,4 +1,4 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
 """Part 15: micro-brain metrics. python analyze15.py prefix files...  → results/eco15/<prefix>.pkl, prints table."""
 import pickle, sys, re, numpy as np, analyze_eco as AE, analyze12 as A12, fl_brain as B
 K0, NW = B.K0, B.NW; iD = K0 + NW          # 26: D0 intake/mass, 27 v·ĝ, 28 |v|, 29 vb·ĝ

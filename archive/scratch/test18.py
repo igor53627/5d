@@ -1,6 +1,7 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 import json, time, numpy as np, glider_eco as GE, fl_season as Z
-sp = json.load(open(_path._root / 'archive/specs/b15m.json'))[0]['runs'][0]
+sp = json.load(open(_root / 'archive/specs/b15m.json'))[0]['runs'][0]
 c = sp['c']; e = dict(sp['ecos'][0])
 for nm, ex in [("mem", dict(Ts=200.0)), ("nomem", dict(mem=0.0, Ts=200.0))]:
     t = time.time()

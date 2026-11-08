@@ -1,14 +1,15 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 import pickle, sys, glob, numpy as np, json, subprocess, os
 def fetch(prefix, n):
-    os.makedirs("results/glider", exist_ok=True)
+    os.makedirs(f"{_archive}/results/glider", exist_ok=True)
     for i in range(n):
-        f = f"results/glider/{prefix}_{i}.pkl"
+        f = f"{_archive}/results/glider/{prefix}_{i}.pkl"
         if not os.path.exists(f):
             subprocess.run(["/workspace/.venv-aca/bin/modal", "volume", "get", "--force", "fl-results", f"{prefix}_{i}.pkl", f], capture_output=True)
 def load(prefix):
     rows = []
-    for f in sorted(glob.glob(f"results/glider/{prefix}_*.pkl")):
+    for f in sorted(glob.glob(f"{_archive}/results/glider/{prefix}_*.pkl")):
         r = pickle.load(open(f, "rb"))
         for job in r["out"]:
             for o in job["out"]:
@@ -36,4 +37,4 @@ def summarize(rows, top=25):
     return out
 if __name__ == "__main__":
     fetch(sys.argv[1], int(sys.argv[2])); rows = load(sys.argv[1]); s = summarize(rows, int(sys.argv[3]) if len(sys.argv) > 3 else 25)
-    json.dump(s, open(f"results/glider/{sys.argv[1]}_summary.json", "w"))
+    json.dump(s, open(f"{_archive}/results/glider/{sys.argv[1]}_summary.json", "w"))

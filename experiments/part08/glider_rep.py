@@ -1,4 +1,4 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
 """Часть 8: CMA-ES на «репликацию» — столкновения двух солитонов, дающие ≥3 выживших жёстких движущихся солитона.
 Режим flow_iso_muscl. Особь оценивается в 4D (L=48 по умолчанию): одиночный солитон (скорость, жёсткость) + набор столкновений в одном vmap-батче."""
 import os, time, pickle, numpy as np

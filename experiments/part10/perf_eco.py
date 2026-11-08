@@ -1,4 +1,4 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
 """Часть 10: профилирование шага eco2 (тайминги по компонентам, steps/s без компиляции, загрузка GPU, cost_analysis)."""
 import time, subprocess, threading, numpy as np
 

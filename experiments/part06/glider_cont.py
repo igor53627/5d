@@ -1,4 +1,4 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
 """Численная континуация по asym: вырастить подвижную «палочку» в супе, вырезать одну на чистую решётку,
 затем медленно уводить asym → 0 (с релаксацией на каждом шаге) в нескольких ветках сразу (vmap):
 вариации μ/σ/β/χ, зеркальная копия (flip), резкий сброс (quench), реверс asym.

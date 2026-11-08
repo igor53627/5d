@@ -1,4 +1,5 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 """Эффективная размерность признаков резервуара (participation ratio спектра PCA) на входе Mackey-Glass."""
 import json, numpy as np
 from reservoir_experiment import BatchFL, FL_DEFAULT, make_input
@@ -23,4 +24,4 @@ win = rng.uniform(-1, 1, N); b = rng.uniform(-.2, .2, N); h = np.zeros(N); H = n
 for k in range(900): h = np.tanh(W @ h + 0.1 * win * u[k] + b); H[k] = h
 out["ESN rho=1.1"] = pr(H[300:])
 for k, v in out.items(): print(f"{k:22s} PR={v[0]:6.1f}  #PC(99%)={v[1]:.0f}")
-json.dump(out, open("results/feature_rank.json", "w"), indent=1)
+json.dump(out, open(f"{_archive}/results/feature_rank.json", "w"), indent=1)

@@ -1,4 +1,5 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 """Сверка JAX-порта с numpy-версией на маленькой решётке (4D, L=8) из одинакового начального состояния."""
 import json, sys, time, types
 import numpy as np, jax, jax.numpy as jnp
@@ -27,7 +28,7 @@ def main(L=8, N=4, steps=(1, 10, 50, 200, 1000, 4000), warmup=2.0):
             r[f"maxdiff_{k}"] = float(np.abs(A - B).max()); r[f"mean_{k}_jax"] = float(A.mean()); r[f"mean_{k}_np"] = float(B.mean())
         r["frac_chaos_jax"] = float((np.asarray(st["lam"][0]) > 0.01).mean()); r["frac_chaos_np"] = float((sim.lam > 0.01).mean())
         out.append(r); print(json.dumps(r), flush=True)
-    json.dump(out, open("results/validate_jax.json", "w"), indent=1)
+    json.dump(out, open(f"{_archive}/results/validate_jax.json", "w"), indent=1)
 
 if __name__ == "__main__":
     main()

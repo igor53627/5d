@@ -1,6 +1,7 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 import json, numpy as np, time, jax, jax.numpy as jnp, fl_eco3 as E3, fl_brain as B, fl_glider as FG, glider_coll as GC
-c = json.load(open(_path._root / 'archive/specs/eco13m.json'))[0]['runs'][0]['c']
+c = json.load(open(_root / 'archive/specs/eco13m.json'))[0]['runs'][0]['c']
 eco = dict(keat=0.01, dec=0.0003, rF=0.0001, F0=0.08, pmu=0.0, hom=0.05, mutn=0.002, krep=10, ks=2, pk=0.0)
 N, L = 4, 24
 st, v = GC.soliton(c, N, L, 1, pre=300)

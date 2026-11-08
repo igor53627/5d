@@ -1,4 +1,4 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
 """Часть 9: отбор — ⟨p0⟩(t) при отборе (pk=1) и нейтрально (pk=0), парные Δ, наследуемость родитель→потомок."""
 import pickle, glob, json, numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 import analyze_eco as AE

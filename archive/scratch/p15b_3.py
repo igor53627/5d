@@ -1,4 +1,5 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 import pickle, numpy as np, analyze15b as Z, analyze12 as A12, analyze_eco as AE, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 rng = np.random.default_rng(0)
 grid = np.array([[a, b, c] for a in (-1, -.6, 0) for b in (-.6, -.4, .3) for c in (0, .06, .2)])
@@ -46,7 +47,7 @@ for t, r in R.items():
 for g in conds:
     v = [LH[t] for t in LH if Z.cond(t) == g]
     print(f"{g:14s} lineage purity {np.nanmean([x['purity'] for x in v]):.2f}  h(PC1) {np.nanmean([x['h_pc1'] for x in v]):.2f}  parent-child same type {np.nanmean([x['type_agree'] for x in v]):.2f} (chance {np.nanmean([x['agree_chance'] for x in v]):.2f})")
-pickle.dump(dict(ev=ev, Vt=Vt[:5], mu0=mu0, fits={K: dict(bic=f["bic"], pi=f["pi"]) for K, f in fits.items()}, Kb=Kb, gmm=fb, comp=comp, cent=cent, LH=LH, grid=grid), open("results/eco15/types15b.pkl", "wb"))
+pickle.dump(dict(ev=ev, Vt=Vt[:5], mu0=mu0, fits={K: dict(bic=f["bic"], pi=f["pi"]) for K, f in fits.items()}, Kb=Kb, gmm=fb, comp=comp, cent=cent, LH=LH, grid=grid), open(f"{_archive}/results/eco15/types15b.pkl", "wb"))
 # figure: PCA scatter by condition + type centroids + type frequency over time for one 4D evo run and 5D evo
 fig, ax = plt.subplots(1, 3, figsize=(17, 5))
 cc = {"evo_4D56": "C3", "frozen_4D56": "C1", "evo_rep_4D56": "C4", "nobrain_4D56": "C0", "evo_5D40": "k", "nobrain_5D40": "c"}

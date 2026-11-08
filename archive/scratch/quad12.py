@@ -1,4 +1,5 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 import pickle, glob, numpy as np, analyze_eco as AE
 from scipy import stats
 def quad_log(log):
@@ -9,7 +10,7 @@ def quad_log(log):
         out.append((t, [(o[0], o[1], [(o[2][0] - pb) ** 2] + list(o[2][1:])) for o in O]))
     return out
 Q = {}
-for f in sorted(glob.glob('results/eco12/eco12m_*.pkl')):
+for f in sorted(glob.glob(f'{_archive}/results/eco12/eco12m_*.pkl')):
     o = pickle.load(open(f, 'rb'))['out'][0]
     for t, r in o.items():
         if t == 'summary' or '_96_' not in t: continue
@@ -20,4 +21,4 @@ for c, v in Q.items():
     v = np.array(v); print(c, 'C_quad growth %.4f±%.4f' % (v[:, 0].mean(), v[:, 0].std(ddof=1)), 'plateau %.4f±%.4f p_vs0=%.3f' % (v[:, 1].mean(), v[:, 1].std(ddof=1), stats.ttest_1samp(v[:, 1], 0).pvalue), np.round(v[:, 1], 4))
 a = np.array(Q['res2k'])[:, 1]; b = np.array(Q['neu'])[:, 1]; s = np.array(Q['sel'])[:, 1]
 print('res2k vs neu p=%.3f, res2k vs sel p=%.3f' % (stats.ttest_ind(a, b, equal_var=False).pvalue, stats.ttest_ind(a, s, equal_var=False).pvalue))
-pickle.dump(Q, open('results/eco12/quad.pkl', 'wb'))
+pickle.dump(Q, open(f'{_archive}/results/eco12/quad.pkl', 'wb'))

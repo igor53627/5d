@@ -8,6 +8,8 @@ dependencies = [
     "jax>=0.4.25",
     "matplotlib",
     "scipy",
+    "imageio",
+    "imageio-ffmpeg",
 ]
 
 [project.optional-dependencies]
@@ -20,6 +22,20 @@ content-type = "text/markdown"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
-
-[tool.setuptools.packages.find]
-where = ["src"]
+py-modules = [
+    "alife_jax",
+    "analyze_eco",
+    "feigenbaum_lenia",
+    "fl_brain",
+    "fl_eco",
+    "fl_eco2",
+    "fl_eco3",
+    "fl_glider",
+    "fl_jax",
+    "fl_poison",
+    "fl_season",
+    "glider_coll",
+    "helpers",
+    "modal_app",
+    "render",
+]

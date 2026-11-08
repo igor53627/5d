@@ -1,4 +1,4 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
 """Part 16: fusion catastrophe test. python analyze16.py"""
 import pickle, glob, re, numpy as np, analyze15b as Z, analyze_eco as AE, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 R = {}

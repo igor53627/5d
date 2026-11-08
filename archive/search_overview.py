@@ -1,14 +1,15 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 """Сводка поиска (стадии s1–s5): таблица по механизмам + рисунок."""
 import json, glob, collections, numpy as np
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 rows = []
 for st in ("s1", "s2", "s3", "s4", "s5"):
-    for d in json.load(open(f"results/glider/glider_{st}_summary.json")):
+    for d in json.load(open(f"{_archive}/results/glider/glider_{st}_summary.json")):
         d["stage"] = st; rows.append(d)
 spec = {}
 for st in ("s1", "s2", "s3", "s4", "s5_5d"):
-    for call in json.load(open(f"specs/glider_{st}.json")):
+    for call in json.load(open(f"{_archive}/specs/glider_{st}.json")):
         for c in call[0]["cands"]: spec[c["seed"]] = c
 def mech(d):
     c = spec[d["i"]]; N = "5D" if d["stage"] == "s5" else "4D"

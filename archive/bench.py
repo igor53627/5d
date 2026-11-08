@@ -1,4 +1,5 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 """Бенчмарк шагов/с: JAX (CPU/GPU) и numpy. Модель = основная Feigenbaum-Lenia (правило own, без входа)."""
 import time, json, sys
 import numpy as np
@@ -57,4 +58,4 @@ def bench_numpy(cases=((4, 24), (4, 48), (4, 64), (5, 16), (5, 24)), nsteps=None
 if __name__ == "__main__":
     which = sys.argv[1]
     res = bench_numpy() if which == "numpy" else bench_jax(max_cells=int(sys.argv[2]) if len(sys.argv) > 2 else None)
-    json.dump(res, open(f"results/bench_{which}_local.json", "w"), indent=1)
+    json.dump(res, open(f"{_archive}/results/bench_{which}_local.json", "w"), indent=1)

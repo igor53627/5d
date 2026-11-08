@@ -1,4 +1,4 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
 """Скачать cont*-pkl с Volume и напечатать/сохранить таблицу стадий по веткам."""
 import sys, os, pickle, json, subprocess, numpy as np
 prefix = sys.argv[1]; n = int(sys.argv[2]); fetch = len(sys.argv) < 4 or sys.argv[3] != "nofetch"

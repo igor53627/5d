@@ -1,4 +1,5 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 import pickle, numpy as np, analyze15b as Z, analyze_eco as AE, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 R = Z.load()
 def series(t):
@@ -26,7 +27,7 @@ for t in ["evo_5D40_s401", "nobrain_5D40_s401"] + [f"evo_4D56_s{s}" for s in ran
     gavg = Z.brain_batch(np.average(Wf, 0, weights=mf)[None], Z.SSTAR)[0, 0]
     print(f"{t:18s} early(≤4k) corr(gF,gR) among individuals {np.nanmean([x[7] for x in S if x[0] <= 4000]):+.2f}; gR at 2k/4k/end {gR[np.searchsorted(tt,2000)]:+.2f}/{gR[np.searchsorted(tt,4000)]:+.2f}/{gR[-1]:+.2f}; "
           f"Price(0-5k) gF S={pr['gF'][0]:+.3f} dz={pr['gF'][1]:+.3f}, gR S={pr['gR'][0]:+.3f} dz={pr['gR'][1]:+.3f}; brain(mean founder w) gF {gavg[0]:+.2f} gR {gavg[1]:+.2f}; end gF {gF[-1]:+.2f} gR {gR[-1]:+.2f}")
-pickle.dump({t: [x[:8] for x in S] for t, S in res.items()}, open("results/eco15/fused15b.pkl", "wb"))
+pickle.dump({t: [x[:8] for x in S] for t, S in res.items()}, open(f"{_archive}/results/eco15/fused15b.pkl", "wb"))
 fig, ax = plt.subplots(1, 3, figsize=(16, 4.5))
 for t, S in res.items():
     tt = [x[0] for x in S]; c = "k" if "5D" in t and "evo" in t else ("c" if "5D" in t else "C3"); lw = 2 if "5D" in t else .8; lb = t if ("5D" in t or t.endswith("311")) else None

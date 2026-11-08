@@ -16,11 +16,14 @@ pip install -e .           # or: pip install numpy jax jaxlib matplotlib scipy
 ## Running
 
 ```bash
-# Quick demo (CPU, ~6 min for 4D 24⁴ lattice)
-python src/feigenbaum_lenia.py --out demo_run
+# Quick CPU demo (4D 16³ lattice, ~2 min, produces mp4)
+python -m feigenbaum_lenia --N 4 --L 16 --steps 500 --out demo_run
 
-# With JAX GPU acceleration
-JAX_PLATFORMS=cuda python src/fl_jax.py
+# Full simulation (4D 24⁴ lattice, ~6 min on CPU)
+python -m feigenbaum_lenia --out full_run
+
+# With GPU acceleration (install: pip install -U "jax[cuda12]")
+JAX_PLATFORMS=cuda python -m feigenbaum_lenia --out gpu_run
 ```
 
 ## Project Structure

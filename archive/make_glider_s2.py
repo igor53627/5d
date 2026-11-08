@@ -1,7 +1,8 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 import json, numpy as np, sys, copy
 rng = np.random.default_rng(2)
-S1 = {c["seed"]: c for call in json.load(open("specs/glider_s1.json")) for c in call[0]["cands"]}
+S1 = {c["seed"]: c for call in json.load(open(f"{_archive}/specs/glider_s1.json")) for c in call[0]["cands"]}
 def pert(base, i, **over):
     c = copy.deepcopy(base); c["seed"] = 10000 + i
     c["mu"] = float(base["mu"] * rng.uniform(0.9, 1.1)); c["sigma"] = float(base["sigma"] * rng.uniform(0.8, 1.25))
@@ -28,4 +29,4 @@ for j in range(3): calls.append([dict(cands=fl[16 * j:16 * j + 16], N=4, L=32, s
 # C: навязанный дрейф (#37) — эталон «движущейся» структуры с заданным направлением
 dr = [pert(S1[37], i + k, asym=float(rng.choice([0.05, 0.1, 0.15])), beta=float(rng.choice([0, -0.3, -0.6]))) for k in range(16)]; i += 16
 calls.append([dict(cands=dr, N=4, L=32, steps=3000, every=25)])
-json.dump(calls, open("specs/glider_s2.json", "w")); print(len(calls), i)
+json.dump(calls, open(f"{_archive}/specs/glider_s2.json", "w")); print(len(calls), i)

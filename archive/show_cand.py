@@ -1,9 +1,10 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 import pickle, glob, sys, numpy as np
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 prefix, ids, out = sys.argv[1], [int(x) for x in sys.argv[2].split(",")], sys.argv[3]
 rows = {}
-for f in sorted(glob.glob(f"results/glider/{prefix}_*.pkl")):
+for f in sorted(glob.glob(f"{_archive}/results/glider/{prefix}_*.pkl")):
     for job in pickle.load(open(f, "rb"))["out"]:
         for o in job["out"]: rows[o["cand"]["seed"]] = o
 fig, axs = plt.subplots(len(ids), 6, figsize=(14, 2.4 * len(ids)), squeeze=False)

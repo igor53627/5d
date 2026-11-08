@@ -1,10 +1,11 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 import sys, pickle, subprocess, os, numpy as np
 sys.path.insert(0,'.'); import fl_glider as FG
-prefix=sys.argv[1]; ids=[int(x) for x in sys.argv[2].split(',')]; os.makedirs("results/ver", exist_ok=True)
+prefix=sys.argv[1]; ids=[int(x) for x in sys.argv[2].split(',')]; os.makedirs(f"{_archive}/results/ver", exist_ok=True)
 names="ABCDE"
 for i in ids:
-    f=f"results/ver/{prefix}_{i}.pkl"
+    f=f"{_archive}/results/ver/{prefix}_{i}.pkl"
     subprocess.run(["/workspace/.venv-aca/bin/modal","volume","get","--force","fl-results",f"{prefix}_{i}.pkl",f],capture_output=True)
     if not os.path.exists(f): print(i,'missing'); continue
     R=pickle.load(open(f,"rb"))["out"][0]

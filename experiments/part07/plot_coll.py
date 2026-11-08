@@ -1,4 +1,4 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
 """Таблица и фигура исходов столкновений; mp4 одного столкновения. python plot_coll.py TAG out.png file1.pkl ... [--mp4 idx]"""
 import sys, os, pickle, json, numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 tag, png = sys.argv[1], sys.argv[2]; args = sys.argv[3:]; mp4 = None

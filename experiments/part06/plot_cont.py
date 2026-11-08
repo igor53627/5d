@@ -1,4 +1,4 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
 """Бифуркационная диаграмма континуации по asym: скорость / доля движущихся / корреляция формы vs asym."""
 import sys, json, pickle, numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 prefix = sys.argv[1]; n = int(sys.argv[2])

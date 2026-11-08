@@ -1,4 +1,5 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 import json, numpy as np, sys
 rng = np.random.default_rng(int(sys.argv[2]) if len(sys.argv) > 2 else 0)
 PEAKS = [[1.0], [1.0, 0.5], [0.5, 1.0], [1.0, 1.0], [1/3, 2/3, 1.0]]

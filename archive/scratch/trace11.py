@@ -1,4 +1,5 @@
-import _path  # noqa: F401
+import sys; from pathlib import Path; _root = next(p for p in [Path(__file__).resolve().parent] + list(Path(__file__).resolve().parents) if (p / "pyproject.toml").exists()); sys.path.insert(0, str(_root / "src"))
+_archive = str(_root / "archive")
 import gzip, json, collections, sys, re
 def cat(e):
     n = e["name"].lower(); op = str(e.get("args", {}).get("hlo_op", "")).lower()
