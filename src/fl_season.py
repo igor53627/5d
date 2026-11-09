@@ -8,7 +8,7 @@ float32 и float64 расходились на один шаг.
   R — «награда»: размытый по телу чистый прирост от еды за прошлый шаг на единицу массы, /(keat·F0);
   h — наследуемая переменная памяти (канал Q, переносится MUSCL и гомогенизируется по телу, как веса; не мутирует)).
   H=3 (tanh), выходы o = [g_A, g_B, g_R, o_h]:  v += dtA·10·(kb·(g_A∇Ã + g_B∇B̃) − kr·g_R∇Ufar);  h ← h + α(o_h − h) каждый шаг (если mem=1).
-mem=0 — без памяти (вход h=0, h не обновляется; вход R остаётся — чистая абляция памяти). cue=1 — сезон дан напрямую.
+mem=0 — без памяти (вход h=0, h не обновляется; вход R остаётся — чистая абляция памяти). cue=1 — сезон дан напрямую. cue_lead>0 — мозг видит σ(t+cue_lead); еда/яд по-прежнему от σ(t) (default 0 = legacy).
 D: D0 = съедено A, D1 = съедено B, D2 = R, D3 = A·g_A, D4 = A·g_B (реализованные усиления)."""
 import numpy as np, jax, jax.numpy as jnp
 from functools import partial
@@ -22,9 +22,9 @@ ND = 5
 # Sensory columns of W1. R, h and the oracle cue are the channels Part 18 added; A, B, Ub, Ufar come from Part 17.
 IN_A, IN_B, IN_R, IN_H, IN_CUE, IN_UB, IN_UFAR = range(NIN)
 OUT_GA, OUT_GB, OUT_GR, OUT_H = range(NOUT)
-BKEYS = ["kb", "kr", "mutw", "mut_bias", "ws", "mem", "cue", "alpha", "rG", "cp", "lam", "om", "Ts", "smooth", "season_rule"]
+BKEYS = ["kb", "kr", "mutw", "mut_bias", "ws", "mem", "cue", "cue_lead", "alpha", "rG", "cp", "lam", "om", "Ts", "smooth", "season_rule"]
 # mut_bias < 0 → use mutw for g_A/g_B (legacy; bit-identical amp). >=0 overrides only those two biases.
-BDEF = dict(kb=0.0, kr=0.0, mutw=None, mut_bias=-1.0, ws=2.0, mem=1.0, cue=0.0, alpha=0.01, rG=0.001, cp=2.0, lam=28.0, om=2 * np.pi / 6000, Ts=6000.0, smooth=0.0, season_rule=0.0)
+BDEF = dict(kb=0.0, kr=0.0, mutw=None, mut_bias=-1.0, ws=2.0, mem=1.0, cue=0.0, cue_lead=0.0, alpha=0.01, rG=0.001, cp=2.0, lam=28.0, om=2 * np.pi / 6000, Ts=6000.0, smooth=0.0, season_rule=0.0)
 
 def w1_flat(h, col):
     """Index of W1[h, col] inside the flat NW weight vector (before the K0 offset)."""
@@ -137,11 +137,14 @@ def step(st, P, KA, Ko, KX, transport=True, coarse=False, fnoise=False, do_mut=T
     Ufar = wconv(A, KX["far"])
     t = st.get("t", jnp.float32(0.0))
     sg = jnp.where(P["season_rule"] > 0, season_half(t, P["Ts"]), season(t, P["Ts"]))
+    # cue_lead: brain sees a future season; food/poison keep using sg (legacy when cue_lead=0).
+    t_cue = t + P["cue_lead"]
+    sg_cue = jnp.where(P["season_rule"] > 0, season_half(t_cue, P["Ts"]), season(t_cue, P["Ts"]))
     # --- мозг ---
     At = wconv(F, KX["blur"]) / P["F0"]; Bt = wconv(FB, KX["blur"]) / P["F0"]
     hm = p[iM] * P["mem"]
     Ub0 = wconv(A, KX["big"])
-    s_in = jnp.stack([At, Bt, Rw, hm, P["cue"] * sg * jnp.ones_like(A), Ub0 / P["U1"] - 1.0, Ufar / P["U1"]])
+    s_in = jnp.stack([At, Bt, Rw, hm, P["cue"] * sg_cue * jnp.ones_like(A), Ub0 / P["U1"] - 1.0, Ufar / P["U1"]])
     o = brain(p[K0:iM], s_in, P["ws"])
     gA = [FG._grad(At, k) for k in range(N)]; gB = [FG._grad(Bt, k) for k in range(N)]; gU = [FG._grad(Ufar, k) for k in range(N)]
     vb = [(P["kb"] * (o[0] * gA[k] + o[1] * gB[k]) - P["kr"] * o[2] * gU[k]) * P["dtA"] * 10.0 for k in range(N)]

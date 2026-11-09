@@ -1,0 +1,36 @@
+{
+ "numpy": "2.5.4",
+ "Ts": 8000.0,
+ "every": 200,
+ "steps": 8000,
+ "seeds": [
+  841,
+  842
+ ],
+ "mut_bias": 0.05,
+ "dec_base": 0.0001,
+ "dec_low": 2.5e-05,
+ "cue_lead": 400.0,
+ "sign_changes": 2,
+ "taxis_repulsion": {
+  "v_rep": 0.10868857402238065,
+  "v_food": 0.11052904187783798,
+  "ratio": 0.9833485586757235,
+  "cap": 0.225,
+  "krep": 90.0,
+  "coarse": true
+ },
+ "arms": [
+  "bias_cue",
+  "bias_cue_lowdec",
+  "bias_cue_lead",
+  "planted"
+ ],
+ "notes": [
+  "18e pilot: raise within-body \u0394g at season switches for bias_cue.",
+  "Variants on bias_cue (mut_bias=0.05): lowdec (dec=2.5e-05), lead (cue_lead=400.0).",
+  "planted = positive within-body control. No bias_nocue (compare to 18d).",
+  "cue_lead default 0 keeps food/poison and brain season identical (18d path).",
+  "Budget target ~$3\u20135 for 8\u00d78000 H100 ecolist runs."
+ ]
+}

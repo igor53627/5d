@@ -250,8 +250,8 @@ def test_part18_specs_omit_the_new_placement_keys():
     spec_dir = ROOT / "archive" / "specs"
     seen = 0
     for path in sorted(spec_dir.glob("b18*.json")):
-        # 18c/18d add min_gap + p_inits; only 18/18b must omit them.
-        if path.name.startswith(("b18c", "b18d")):
+        # 18c onward add min_gap + p_inits; only 18/18b must omit them.
+        if path.name.startswith(("b18c", "b18d", "b18e")):
             continue
         for item in json.loads(path.read_text()):
             runs = item["runs"] if isinstance(item, dict) and "runs" in item else [item]
@@ -396,8 +396,8 @@ def test_committed_specs_match_the_phenotype_contract():
     assert one(full, "lo_s731")["ecos"][0]["krep"] == R.KREP_18C
     # Parts 18/18b stay on the historical repulsion; the 18c raise is opt-in via specs only.
     for path in sorted((ROOT / "archive" / "specs").glob("b18*.json")):
-        # 18c/18d use krep=90; historical 18/18b keep 10.
-        if path.name.startswith(("b18c", "b18d")):
+        # 18c onward use krep=90; historical 18/18b keep 10.
+        if path.name.startswith(("b18c", "b18d", "b18e")):
             continue
         for item in json.loads(path.read_text()):
             runs = item["runs"] if isinstance(item, dict) and "runs" in item else [item]
