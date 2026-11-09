@@ -22,8 +22,9 @@ ND = 5
 # Sensory columns of W1. R, h and the oracle cue are the channels Part 18 added; A, B, Ub, Ufar come from Part 17.
 IN_A, IN_B, IN_R, IN_H, IN_CUE, IN_UB, IN_UFAR = range(NIN)
 OUT_GA, OUT_GB, OUT_GR, OUT_H = range(NOUT)
-BKEYS = ["kb", "kr", "mutw", "ws", "mem", "cue", "alpha", "rG", "cp", "lam", "om", "Ts", "smooth", "season_rule"]
-BDEF = dict(kb=0.0, kr=0.0, mutw=None, ws=2.0, mem=1.0, cue=0.0, alpha=0.01, rG=0.001, cp=2.0, lam=28.0, om=2 * np.pi / 6000, Ts=6000.0, smooth=0.0, season_rule=0.0)
+BKEYS = ["kb", "kr", "mutw", "mut_bias", "ws", "mem", "cue", "alpha", "rG", "cp", "lam", "om", "Ts", "smooth", "season_rule"]
+# mut_bias < 0 → use mutw for g_A/g_B (legacy; bit-identical amp). >=0 overrides only those two biases.
+BDEF = dict(kb=0.0, kr=0.0, mutw=None, mut_bias=-1.0, ws=2.0, mem=1.0, cue=0.0, alpha=0.01, rG=0.001, cp=2.0, lam=28.0, om=2 * np.pi / 6000, Ts=6000.0, smooth=0.0, season_rule=0.0)
 
 def w1_flat(h, col):
     """Index of W1[h, col] inside the flat NW weight vector (before the K0 offset)."""
@@ -180,7 +181,15 @@ def step(st, P, KA, Ko, KX, transport=True, coarse=False, fnoise=False, do_mut=T
         nz = jnp.stack([_noise(jax.random.fold_in(sk, k), nshape, KX["blur"], fnoise) for k in range(K)])
         nz = nz / (jnp.std(nz, axis=tuple(range(1, N + 1)), keepdims=True) + 1e-12)
         if coarse: nz = jnp.stack([up2(nz[k]) for k in range(K)])
-        amp = jnp.concatenate([jnp.full((K0,), P["mutn"]), jnp.full((NW,), P["mutw"]), jnp.zeros((1,))]).reshape((K,) + (1,) * N)
+        w_amp = jnp.full((NW,), P["mutw"])
+        mb = P["mut_bias"]
+        # When mut_bias < 0 the where keeps mutw, so the selected values match the legacy full(NW, mutw).
+        w_amp = jnp.where(
+            (jnp.arange(NW) == b2_flat(OUT_GA)) | (jnp.arange(NW) == b2_flat(OUT_GB)),
+            jnp.where(mb >= 0.0, mb, P["mutw"]),
+            w_amp,
+        )
+        amp = jnp.concatenate([jnp.full((K0,), P["mutn"]), w_amp, jnp.zeros((1,))]).reshape((K,) + (1,) * N)
         pn = jnp.clip(pn + amp * np.sqrt(m) * nz * (An2[None] > 0.05), -1.0, 1.0)
     pn = jnp.where(An2[None] > 1e-6, pn, 0.0)
     ct = P["c_lo"] + (P["c_hi"] - P["c_lo"]) * jnp.clip(An2, 0.0, 1.0)
