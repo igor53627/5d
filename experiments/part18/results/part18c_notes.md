@@ -1,6 +1,6 @@
-# Part 18c — seasonal assay, setup only
+# Part 18c — seasonal assay
 
-No population has been run. Nothing here is evidence that a brain learned to switch seasons. The GPU commands below are for a later, separate launch. This change does not start Modal and does not touch the Hugging Face dataset.
+A GPU pilot (krep=10) has been run; it fused early. Specs now use krep=90 for a re-pilot (not launched in the fusion-fix change). Nothing here is evidence that a brain learned to switch seasons. This change does not start Modal and does not touch the Hugging Face dataset.
 
 Parts 18 and 18b are unchanged as experiments. Their specs, notes, and `analyze18.py` stay. Re-analyzing those logs still calls `season()` (the historical sine). Re-running them still uses `season_rule=0`.
 
@@ -16,7 +16,7 @@ Checked on the four Part 18b founder genomes in `archive/specs/b18bm.json` (mapp
 
 4. **Oracle cue wiring is intact.** With cue weights set by hand, the live step's memory state follows the season sign (+0.96 then −0.96). The null cue result in 18b is not a disconnected input. It is a zero weight on an input that the locked readout ignores.
 
-5. **`krep=10` does not compete with food taxis.** On two blobs, coarse kernels, the Part 18b `dtA`, median `|krep ∇U_far|` is 0.012 cells/step and `|∇Ã|` is 0.111. Ratio 0.109, while the speed cap is 0.225. The far kernel is also a ring, so once bodies are inside it the repulsion does not push them apart. Raising `krep` into the tens was not adopted as a fusion fix. `min_gap=4` only spaces the 0.02 contours at placement. It does not stop bodies that later share one food lobe from meeting. Whether that meeting erases a planted cue weight by homogenization (`hom=0.05`) is an outcome to read off `n(t)`, max mass fraction, and the between-body std of the new weights. It is not assumed.
+5. **`krep=10` does not compete with food taxis.** On two blobs, coarse kernels, the Part 18b `dtA`, median `|krep ∇U_far|` is 0.012 cells/step and `|∇Ã|` is 0.111. Ratio 0.109, while the speed cap is 0.225. The far kernel is also a ring, so once bodies are inside it the repulsion does not push them apart. Raising `krep` into the tens was first deferred; after the pilot fused by t=200, 18c specs use `krep=90` (see Fusion fix). `min_gap=4` only spaces the 0.02 contours at placement. It does not stop bodies that later share one food lobe from meeting. Whether that meeting erases a planted cue weight by homogenization (`hom=0.05`) is an outcome to read off `n(t)`, max mass fraction, and the between-body std of the new weights. It is not assumed.
 
 6. **Season endpoints.** `season()` is still `sin(2πt/Ts) >= 0`, so a re-analysis of Parts 18 and 18b does not move. In float32, `sin(kπ) ≈ −1e-7`, so the live step at a half-period is one step early relative to float64. `season_rule=1` (18c only) uses `(t/Ts mod 1) <= 1/2`, which matches in both dtypes, and includes the endpoint in season A. Logged `D` is the last step of the chunk, and that step read the clock `t−1`. `snapshot_season` labels the row with that step. On the 200-step grid of the full run there are 4 such sign changes (frames 4200, 8200, 12200, 16200).
 
@@ -91,12 +91,55 @@ Part 18b was 16×H100, about 24 minutes each, 24000 steps, `L=48`, and the notes
 
 Wall time if the jobs stay parallel is about 12 minutes (pilot) and 20 minutes (full). A queue turns that into waiting, not into a higher GPU-hour count. The historical band for one of these experiments is about $40, with a hard cap of $50. The sum above is inside the cap. It is an extrapolation from the 18b note, not a new invoice, and a price change or a retry would move it. Do not launch if the sum of pilot, full, and retries would pass $50.
 
+## Pilot results (b18cp, seed 731, krep=10, ~$5, ~13 min wall)
+
+Five H100 runs, 12000 steps, two season switches. All survived. Walls 747–786 s (~1.06 GPU-h).
+
+| arm | n_end | mass_end | fusion_t | max_frac_end | mean_g at A→B / B→A | Δmean (within / fusion / uncertain / repl) | poison A→B / B→A |
+|---|---:|---:|---:|---:|---|---|---|
+| lo | 7 | 49.0 | 200 | 0.27 | +1.73→+1.73 / +1.74→+1.73 | ~0 | 0.19→0.81 / 0.87→0.14 |
+| inputs | 4 | 48.7 | 200 | 0.27 | +1.70→+1.71 / +1.73→+1.70 | ~0 | 0.19→0.82 / 0.87→0.14 |
+| cue | 4 | 48.2 | 200 | 0.27 | +1.69→+1.76 / +1.74→+1.68 | small | 0.18→0.82 / 0.87→0.13 |
+| planted | 2 | 56.5 | 200 | **0.85** | +1.57→+0.87 / +0.72→+1.57 | **−0.709 / +0.858** (mostly replacement) | 0.18→0.75 / 0.77→0.14 |
+| nobrain | 17 | 23.3 | None | 0.08 | stays ~+1.7 | ~0 | ~0.5 |
+
+mean_g never flips sign. Planted is the only arm with a large season-aligned Δmean; `flip=0` on matched bodies. Logs: Modal volume `fl-results/b18cp_*.pkl`; local `results/eco18c/` (+ `pilot18c_summary.json`).
+
+Go/no-go at krep=10: populations survive and logs parse, but early fusion (all brain arms by t=200) collapses planted switchers, so the assay cannot cleanly see within-body switching. **Do not run the full 20-job job on this setup.**
+
+## Fusion diagnosis
+
+- Placement is fine: at t=0, dmin≈19.9 cells on L=48 with `min_gap=4`, n=12, max_frac=0.084.
+- By t=200 every brain arm is n=2 with max_frac≈0.52. nobrain stays fragmented.
+- Cause: one food lobe (`lam=L=48`) plus chemotaxis (`kb=1`). `krep=10` gives median |krep ∇U_far| / |∇Ã| ≈ 0.109 (cap 0.225). Bodies share a destination and meet.
+- `hom=0.05` is secondary: after contact it mixes genomes (inputs mean |w_new| 0.37→0.13 by t=200). It does not create the spatial merge.
+- Tried and not chosen as the primary fix: `hom=0` alone; `lam=L/2` (more destinations but risks A/B overlap inside one body, already rejected in the setup notes).
+
+## Fusion fix (18c specs only)
+
+`KREP_18C = 90` in `run18c.py` / written into `b18c_*.json`. Ratio ≈ 0.98 vs food taxis. Parts 18/18b specs still use `krep=10`. No new `fl_season` flag; the raise is opt-in by writing the 18c specs.
+
+CPU check (L=32, n_init=4, min_gap=2, 150 steps, planted genomes):
+
+| condition | n(0) | fusion_t | n_end | max_frac_end |
+|---|---:|---:|---:|---:|
+| krep=10 (baseline) | 4 | 50 | 2 | 0.58 |
+| krep=90 | 4 | None | 4 | 0.25 |
+
+## Metric fix (Greptile P1)
+
+`decompose_switch` now splits same-cardinality nearby clusters into `uncertain` instead of `fusion`. Confirmed merges/splits (old/new cardinality differs) stay in `fusion`. Identity: within + fusion + uncertain + replacement = delta_mean. Unit test: bodies at centers 0 and 6, g=+1/−1, masses (1,1)→(0.1,1.9) ⇒ fusion=0, uncertain=−0.9.
+
+## Re-pilot cost
+
+Same as the first pilot: 5×H100 × 12k steps ≈ **$4.7 / ~12 min**. First pilot already spent ~$5; a second pilot keeps the 18c total near ~$10 before any full run (~$32). Hard cap $50. **Not launched here.**
+
 ## Unresolved
 
-- No GPU trajectories, so no measured diet, fusion time, or selection differential.
+- Need a GPU re-pilot at krep=90 before the full 20-run job.
 - The planted arm can look like adaptation if the within/replacement split is ignored. It must not be reported as learning.
-- `inputs` is predicted not to switch. If the full run agrees, that supports the CPU probe under mutation, fusion, and the weak reward. It does not test a different brain.
-- One food lobe (`λ=L=48`). A-seekers share a destination. Smaller `λ` reintroduces the Part 18 overlap of A and B inside one body, so it was not changed.
-- `hom=0.05` will mix genomes that touch. The logs have to show whether the six switchers are still distinguishable at the first B season.
-- `D` stores one step, not the mean of the 200-step chunk. Switch metrics have that resolution.
+- `inputs` is predicted not to switch. If the full run agrees, that supports the CPU probe under mutation and the weak reward.
+- `lam=L=48` is unchanged (one lobe); krep=90 is what keeps A-seekers from sharing one destination into a single body.
+- `hom=0.05` still mixes on contact; with stronger repulsion contact should be rarer. Logs must still show planted switcher diversity at the first B season.
+- `D` stores one step, not the mean of the 200-step chunk.
 - Four seeds, one season length, the Part 18b cost `cp=0.5`.

@@ -1,0 +1,66 @@
+[
+  {
+    "label": "planted_base",
+    "n0": 4,
+    "fusion_t": 50.0,
+    "n_end": 2,
+    "maxf": 0.583,
+    "std_new": 0.01,
+    "series": [
+      [
+        0,
+        4,
+        0.25
+      ],
+      [
+        50,
+        1,
+        1.0
+      ],
+      [
+        100,
+        2,
+        0.584
+      ],
+      [
+        150,
+        2,
+        0.583
+      ]
+    ],
+    "wall": 393,
+    "note": "L=32 n_init=4 min_gap=2 steps=150; valid placement"
+  },
+  {
+    "label": "planted_krep90",
+    "n0": 4,
+    "fusion_t": null,
+    "n_end": 4,
+    "maxf": 0.252,
+    "std_new": 0.017,
+    "series": [
+      [
+        0,
+        4,
+        0.25
+      ],
+      [
+        50,
+        4,
+        0.252
+      ],
+      [
+        100,
+        4,
+        0.253
+      ],
+      [
+        150,
+        4,
+        0.252
+      ]
+    ],
+    "wall": 340,
+    "note": "same setup; krep=90 keeps 4 separate bodies"
+  }
+]

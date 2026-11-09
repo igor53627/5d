@@ -856,6 +856,7 @@
  "notes": [
   "p_spread is 0 because every founder genome is stored in p_inits.",
   "min_gap is Chebyshev cells between 0.02 contours at placement only.",
-  "krep stays 10. taxis_repulsion is the reason a larger krep is not the fusion fix."
+  "krep is KREP_18C (90): taxis/repulsion ratio \u2248 1. Parts 18/18b specs still use 10.",
+  "Pilot fused by t=200 at krep=10; CPU L=32 probe kept n=4 through 150 steps at krep=90."
  ]
 }

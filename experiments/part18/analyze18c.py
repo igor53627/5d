@@ -77,7 +77,7 @@ def main(pat, L):
         for sw, diet in zip(s["switches"], s["diet"]):
             print(f"  t {sw['t_before']:.0f}->{sw['t_after']:.0f} σ {sw['sigma_before']:+.0f}->{sw['sigma_after']:+.0f} "
                   f"Δmean {sw['delta_mean']:+.3f} within {sw['within']:+.3f} fusion {sw['fusion']:+.3f} "
-                  f"replacement {sw['replacement']:+.3f} "
+                  f"uncertain {sw.get('uncertain', 0):+.3f} replacement {sw['replacement']:+.3f} "
                   f"flip {sw['sign_flip_mass_frac']} matched {sw['matched_mass_frac']:.2f} "
                   f"poison {diet['poison_before']:.2f}->{diet['poison_after']:.2f}")
         if s["init"]:
