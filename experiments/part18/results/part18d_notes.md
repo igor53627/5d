@@ -1,6 +1,6 @@
-# Part 18d — mutable output biases (setup)
+# Part 18d — mutable output biases
 
-**Status:** specs + CPU census ready; no Modal run yet.
+**Status:** pilot 1 done (`b18dp`, mut_bias=0.02) and pilot 2 done (`b18dp2`, mut_bias=0.05, ~$4.04). Next: full run (`archive/specs/b18d_full.json`, mut_bias=0.05).
 **Parent:** Part 18c full (`bfdb70e` / `d248d3b`): only planted switchers flipped within bodies; `inputs`/`cue` did not. Switching phenotype sits at bias RMS ~0.10–0.17 from founders; 18c init left `g_A`/`g_B` at founder values.
 
 ## How mutation works (pre-18d)
@@ -84,7 +84,7 @@ Offline RW census (48 genomes, no hom): mb=0.05 still yields switchers with fora
 
 Short CPU ecology (L=24, 800 steps, n_init=2) — **too short for selection**, hygiene only: mass floor identical; A-season poison rises with mb (`poiA` 0.18→0.26→0.43 at 0.02/0.05/0.10). Chose **0.05**.
 
-**No re-pilot.** Go full (~$30). Fusion/survival already OK at 0.02; 0.05 is a moderate raise inside the safe offline band.
+**Pilot 1 (mut_bias=0.02, prefix `b18dp`) and pilot 2 (mut_bias=0.05, prefix `b18dp2`, ~$4.04) are done.** Next: full run (`b18d_full.json`, mut_bias=0.05, ~$30). Fusion/survival already OK at 0.02; 0.05 is a moderate raise inside the safe offline band.
 
 Greptile P2: `tests/test_mut_bias_amp.py` — `step()` with `mut_bias≥0` mutates only `b2[g_A]/b2[g_B]` when `mutw=0`; `mut_bias<0` uses `mutw` for those channels.
 
