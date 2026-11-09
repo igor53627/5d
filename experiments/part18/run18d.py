@@ -26,7 +26,7 @@ MODAL = R18c.MODAL
 STEPS = dict(pilot=12000, full=20000)
 SEEDS = dict(pilot=(841,), full=(841, 842, 843, 844))
 # Elevated bias mutation for bias_* arms only. Default mut_bias=-1 keeps mutw (18c path).
-MUT_BIAS = 0.02
+MUT_BIAS = 0.05
 ARM_FLAGS = {
     "bias_cue": dict(mem=1.0, cue=1.0, kb=1.0, kr=10.0, mut_bias=MUT_BIAS),
     "bias_nocue": dict(mem=1.0, cue=0.0, kb=1.0, kr=10.0, mut_bias=MUT_BIAS),

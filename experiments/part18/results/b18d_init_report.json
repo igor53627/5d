@@ -20,7 +20,7 @@
   "coarse": true
  },
  "std_bias": 0.3,
- "mut_bias": 0.02,
+ "mut_bias": 0.05,
  "seeds": {
   "841": {
    "founder_seed": 621,
@@ -1132,7 +1132,7 @@
  },
  "notes": [
   "18c already mutated all NW weights (incl. g_A/g_B) at mutw=0.004; biases were only frozen at init.",
-  "bias_* arms: new-channel N(0,0.5) + bias N(0,0.3) at init; mut_bias=0.02 during run.",
+  "bias_* arms: new-channel N(0,0.5) + bias N(0,0.3) at init; mut_bias=0.05 during run.",
   "inputs_cue: 18c cue baseline (new channels only; mut_bias default -1 \u2192 mutw).",
   "planted / nobrain: same positive / floor controls as 18c.",
   "krep=90.0 (18c fusion fix). Seeds [841, 842, 843, 844] inherit founders 621\u2013624."

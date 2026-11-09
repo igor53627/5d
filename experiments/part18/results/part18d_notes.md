@@ -37,8 +37,8 @@ Bias noise alone never yields cue-switchers (founder cue column is 0). Chosen in
 
 | arm | init | cue | `mut_bias` | role |
 |-----|------|-----|------------|------|
-| `bias_cue` | new N(0,0.5) + bias N(0,0.3) | 1 | **0.02** | test: standing bias variation + faster bias drift + oracle |
-| `bias_nocue` | same genomes as `bias_cue` | 0 | **0.02** | control: bias variation without oracle |
+| `bias_cue` | new N(0,0.5) + bias N(0,0.3) | 1 | **0.05** | test: standing bias variation + faster bias drift + oracle |
+| `bias_nocue` | same genomes as `bias_cue` | 0 | **0.05** | control: bias variation without oracle |
 | `inputs_cue` | new N(0,0.5) only (18c) | 1 | default (−1 → `mutw`) | 18c cue baseline |
 | `planted` | 6 hand switchers + 6 founders | 1 | default | positive control |
 | `nobrain` | lo noise | 0 | default | floor (`kb=kr=mem=0`) |
@@ -75,3 +75,15 @@ PYTHONPATH=src:.:experiments/part18 python experiments/part18/analyze18c.py 'res
 - `archive/specs/b18d_pilot.json`, `b18d_full.json`
 - `tests/test_season18d.py`
 - `experiments/part18/results/b18d_init_report.json`, `part18d_notes.md`
+
+## Mut_bias tuning (post-pilot)
+
+Pilot at `mut_bias=0.02` drifted bias-diff toward 0 in **both** `bias_cue` and `bias_nocue` (mutation/hom, not selection). Naive RW std = `amp·√T` (step uses `amp·√m`); hom≈4× damps (pilot body RMS ~0.55 vs naive ~2.2 at 12k).
+
+Offline RW census (48 genomes, no hom): mb=0.05 still yields switchers with forage ≳40%; mb≥0.1 hurts forage; mb=0.2 ≈ useless for switchers.
+
+Short CPU ecology (L=24, 800 steps, n_init=2) — **too short for selection**, hygiene only: mass floor identical; A-season poison rises with mb (`poiA` 0.18→0.26→0.43 at 0.02/0.05/0.10). Chose **0.05**.
+
+**No re-pilot.** Go full (~$30). Fusion/survival already OK at 0.02; 0.05 is a moderate raise inside the safe offline band.
+
+Greptile P2: `tests/test_mut_bias_amp.py` — `step()` with `mut_bias≥0` mutates only `b2[g_A]/b2[g_B]` when `mutw=0`; `mut_bias<0` uses `mutw` for those channels.
