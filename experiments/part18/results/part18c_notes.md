@@ -134,9 +134,50 @@ CPU check (L=32, n_init=4, min_gap=2, 150 steps, planted genomes):
 
 Same as the first pilot: 5×H100 × 12k steps ≈ **$4.7 / ~12 min**. First pilot already spent ~$5; a second pilot keeps the 18c total near ~$10 before any full run (~$32). Hard cap $50. **Not launched here.**
 
+
+## Full run results (b18c, krep=90, 4 seeds × 5 arms, 20k steps)
+
+Launched after the krep=90 re-pilot passed go/no-go. Prefix `b18c` (20×H100). Specs from main `eb80eaf` (PR #4). Logs: Modal volume `fl-results/b18c_*.pkl`; local `results/eco18c/b18c_{0..19}.pkl`; summary `results/eco18c/full18c_summary.json`.
+
+**Cost:** walls 1121–1185 s (sum 23100 s = **6.42 GPU-h ≈ $30.4** at $4.73/GPU-h). Wall ~20 min parallel. All 20 survived. Cumulative with both pilots (~$10) ≈ **$40**, under the $50 hard cap.
+
+### Aggregate by arm (mean over seeds 731–734)
+
+| arm | n_end | mass_end | fusion_t | max_frac_end | poison A / B | mean_g end-A / end-B1 | sign-flip season | within-strong |
+|---|---:|---:|---|---:|---|---|---:|---:|
+| lo | 12 | 19.3 | none 4/4 | 0.10 | 0.19 / 0.81 | +1.16 / +1.15 | 0/4 | 0/4 |
+| inputs | 12 | 19.2 | none 4/4 | 0.10 | 0.20 / 0.79 | +1.10 / +1.13 | 0/4 | 0/4 |
+| cue | 11.2 | 18.0 | none 4/4 | 0.12 | 0.20 / 0.73 | +1.13 / +0.81 | 0/4 | 1/4 |
+| **planted** | **12** | **19.4** | **none 4/4** | **0.11** | **0.23 / 0.48** | **+1.08 / −0.12** | **3/4** | **4/4** |
+| nobrain | 12 | 15.4 | none 4/4 | 0.10 | 0.49 / 0.50 | +1.30 / +1.32 | 0/4 | 0/4 |
+
+within-strong = max |within| > 0.3 and max flip > 0.3 across the four season switches.
+
+### Planted switch metric (mean over 4 seeds, 4 switches)
+
+| switch | t | Δmean | within | fusion | uncertain | replacement | flip | matched | poison |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| A→B | 4000 | −0.70 | −0.26 | 0 | 0 | −0.44 | 0.23 | 0.39 | 0.21→0.62 |
+| B→A | 8000 | +1.10 | **+0.71** | 0 | 0 | +0.38 | **0.75** | 0.53 | 0.42→0.35 |
+| A→B | 12000 | −0.74 | −0.36 | 0 | 0 | −0.39 | 0.34 | 0.43 | 0.21→0.65 |
+| B→A | 16000 | +1.09 | **+0.58** | 0 | 0 | +0.52 | **0.57** | 0.50 | 0.43→0.38 |
+
+Per seed, planted keeps n=12, fusion_t=None; B-season poison 0.43–0.51 (vs ~0.76–0.84 on lo/inputs). mean_g at end of first B season is negative or near zero on all four seeds.
+
+### Key comparisons
+
+- **Planted vs inputs/cue/lo:** Only planted shows consistent within-body switching (4/4 within-strong; B→A within ≈ +0.6–0.7, flip ≈ 0.6–0.8). lo/inputs stay locked on A (mean_g ≳ +1 in B; poison_B ≈ 0.8). Cue slightly lowers mean_g in B (+0.81) and poison_B (0.73) but does **not** produce reliable sign flips (0/4 season sign-flips; 1/4 within-strong).
+- **Cue vs inputs:** Oracle cue alone is not enough. inputs and cue both fail to switch; cue is marginally less A-locked but still fails the assay.
+- **Nobrain:** Diet ≈ 0.50/0.50, no fusion, mass ≈ 15.4; floor for “no policy”.
+
+### Readout
+
+The krep=90 assay works at full length: no early fusion, planted phenotype is visible as within-body g flips and lower B-season poison, and the predicted null (inputs/cue do not unlock switching from the locked bias) holds across four seeds. Do not report planted as evolved learning — it is the planted control.
+
+
 ## Unresolved
 
-- Need a GPU re-pilot at krep=90 before the full 20-run job.
+- Full run at krep=90 completed; see Full run results.
 - The planted arm can look like adaptation if the within/replacement split is ignored. It must not be reported as learning.
 - `inputs` is predicted not to switch. If the full run agrees, that supports the CPU probe under mutation and the weak reward.
 - `lam=L=48` is unchanged (one lobe); krep=90 is what keeps A-seekers from sharing one destination into a single body.
