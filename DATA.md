@@ -3,8 +3,8 @@
 Simulation logs for the Hyperlife experiments are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d).
 
 - Public, license CC-BY-4.0.
-- 372 files under `part03`–`part18`, 1,539,236,073 bytes (1.54 GB). The dataset card and `.gitattributes` are extra.
-- Layout is `partXX/`. `part18/` includes both the part 18 runs (`eco18/`) and the part 18b runs (`eco18b/`, plus `warm18b.pkl`).
+- 408 files under `part03`–`part18`, 1,560,399,182 bytes (1.56 GB). The dataset card and `.gitattributes` are extra.
+- Layout is `partXX/`. `part18/` includes the part 18 runs (`eco18/`), the part 18b runs (`eco18b/`, plus `warm18b.pkl`), and the part 18c runs (`eco18c/`, plus `manifest.json` and summaries).
 
 ## Download
 
@@ -40,7 +40,7 @@ Sizes are the sum of file bytes on the dataset, in decimal MB (1 MB = 10^6 bytes
 | 15 | Micro-brain logs | 41 | 62.43 MB |
 | 16 | Fusion test | 7 | 2.84 MB |
 | 17 | Poison-food logs | 20 | 19.06 MB |
-| 18 | Seasons, including 18b | 49 | 32.85 MB |
+| 18 | Seasons, including 18b and 18c (`eco18c/`: pilots `b18cp_*`/`b18cp2_*`, full `b18c_*`, `manifest.json`, summaries) | 85 | 54.01 MB |
 
 ## Ecology log cadence
 
