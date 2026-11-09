@@ -30,6 +30,7 @@ Numbers below are copied from the part notes. There is no Part 11 notes file; th
 - **Part 18** ([notes](experiments/part18/results/part18_notes.md)). Seasons that swap which food is poisonous are too harsh on the original parameters: every population is extinct by 16k steps. A brain extends lifetime by about 1.4–1.8× (memory against no brain, $p=6\times10^{-4}$). Memory and a direct season cue do not separate from each other ($p\ge0.2$). What evolves is a fixed "A is good" reflex. Behaviour lags the 2000-step season by about 1200–1400 steps.
 - **Part 18b** ([notes](experiments/part18/results/part18b_notes.md)). A milder world and a warm start from Part 17 brains keep all 16 populations alive through 24k steps. No condition switches inside the bad season: the inherited "toward A" reflex lasts the whole 8000-step B season, and the poison fraction of the diet in the B season rises from 0.70 to 0.80–0.81. Memory, no-memory, and cue runs match ($p\ge0.2$); weights on the new inputs only reach about 0.02. The notes read this as evolution stalled: founders start nearly identical, bodies fuse, and the Price selection term is about 0.
 - **Part 18c** ([notes](experiments/part18/results/part18c_notes.md)). Setup only; no population has been run. On the four Part 18b founders, noise of standard deviation 0.5 on the new inputs does not produce a cue-conditional sign flip (0 of 48 genomes). The output bias locks $g_A-g_B$. The 18c specs keep the 18b world, use four new seeds, and compare a low-diversity control, that input-noise arm, an oracle cue on the same genomes, a planted switching control, and no brain. Repulsion at krep 10 is about a tenth of food taxis before the speed cap, so raising it is not used as a fusion fix.
+- **Part 18d** ([notes](experiments/part18/results/part18d_notes.md)). Mutable output biases $g_A/g_B$ (`mut_bias=0.05`) let evolution learn cue-switching. Full assay (4 seeds × 5 arms × 20k, ~$25): `bias_cue` ends A+/B− on 4/4 seeds vs 2/4 for `bias_nocue`; cue−nocue $\Delta(g_A-g_B)=+0.33$ (all seeds positive); B-season poison lower with cue in 3/4. Inputs baseline still fails. No early fusion. Oracle cue selects for seasonal switching across seeds.
 
 ## Installation
 
@@ -67,7 +68,7 @@ docs/                Notes and older reports
 archive/             Early searches, benchmarks, reservoir experiments
 ```
 
-## Table of Contents: Parts 1–18c
+## Table of Contents: Parts 1–18d
 
 | Part | Topic | Notes | Key Figure |
 |------|-------|-------|------------|
@@ -87,10 +88,11 @@ archive/             Early searches, benchmarks, reservoir experiments
 | 18 | Seasonal environments | [part18_notes.md](experiments/part18/results/part18_notes.md) | [glider_part18_dynamics.png](figures/glider_part18_dynamics.png) |
 | 18b | Memory and adaptation | [part18b_notes.md](experiments/part18/results/part18b_notes.md) | [glider_part18b_dynamics.png](figures/glider_part18b_dynamics.png) |
 | 18c | Seasonal assay (setup) | [part18c_notes.md](experiments/part18/results/part18c_notes.md) | — |
+| 18d | Mutable output biases | [part18d_notes.md](experiments/part18/results/part18d_notes.md) | — |
 
 ## Data
 
-Simulation logs are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (public, CC-BY-4.0, 408 files under `part03`–`part18`, 1.56 GB). Part 18 also holds the 18b and 18c runs. Per-part sizes, the log cadence, and where `bench_b300_0.pkl` and `bench_h100_0.pkl` sit are in [DATA.md](DATA.md).
+Simulation logs are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (public, CC-BY-4.0, 445 files under `part03`–`part18`, 1.58 GB). Part 18 also holds the 18b, 18c, and 18d runs. Per-part sizes, the log cadence, and where `bench_b300_0.pkl` and `bench_h100_0.pkl` sit are in [DATA.md](DATA.md).
 
 ```bash
 huggingface-cli download igor53627/5d --repo-type dataset

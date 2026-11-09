@@ -1,6 +1,6 @@
 # Part 18d — mutable output biases
 
-**Status:** pilot 1 done (`b18dp`, mut_bias=0.02) and pilot 2 done (`b18dp2`, mut_bias=0.05, ~$4.04). Next: full run (`archive/specs/b18d_full.json`, mut_bias=0.05).
+**Status:** full run done (`b18d`, mut_bias=0.05, 4 seeds × 5 arms × 20k, ~$25.3). Pilots `b18dp` (0.02) and `b18dp2` (0.05) kept.
 **Parent:** Part 18c full (`bfdb70e` / `d248d3b`): only planted switchers flipped within bodies; `inputs`/`cue` did not. Switching phenotype sits at bias RMS ~0.10–0.17 from founders; 18c init left `g_A`/`g_B` at founder values.
 
 ## How mutation works (pre-18d)
@@ -84,7 +84,7 @@ Offline RW census (48 genomes, no hom): mb=0.05 still yields switchers with fora
 
 Short CPU ecology (L=24, 800 steps, n_init=2) — **too short for selection**, hygiene only: mass floor identical; A-season poison rises with mb (`poiA` 0.18→0.26→0.43 at 0.02/0.05/0.10). Chose **0.05**.
 
-**Pilot 1 (mut_bias=0.02, prefix `b18dp`) and pilot 2 (mut_bias=0.05, prefix `b18dp2`, ~$4.04) are done.** Next: full run (`b18d_full.json`, mut_bias=0.05, ~$30). Fusion/survival already OK at 0.02; 0.05 is a moderate raise inside the safe offline band.
+**No re-pilot.** Go full (~$30). Fusion/survival already OK at 0.02; 0.05 is a moderate raise inside the safe offline band.
 
 Greptile P2: `tests/test_mut_bias_amp.py` — `step()` with `mut_bias≥0` mutates only `b2[g_A]/b2[g_B]` when `mutw=0`; `mut_bias<0` uses `mutw` for those channels.
 
@@ -113,4 +113,32 @@ Same world as pilot 1 (krep=90, Ts=8000, 12k steps) except `mut_bias=0.05` on bi
 **Readout:** raising mut_bias to 0.05 makes `bias_cue` **diverge** from `bias_nocue`: season-aligned mean g (A+/B−), larger within-body Δg at the B→A switch, and lower B-season poison. Mild mass cost (~25%). Hard `is_switcher` count at end is still ~0 (phenotype is continuous). Planted control still switches. No early fusion.
 
 **Go for full run (~$30)** with mut_bias=0.05. Logs: `results/eco18d/b18dp2_*.pkl`, `pilot18d2_summary.json`.
+
+## Full run results (b18d, mut_bias=0.05, 4 seeds × 5 arms × 20k, ~$25.3)
+
+Prefix `b18d` on H100. Specs from `fba18a3`. No early fusion in any arm/seed.
+
+### Per-arm means (4 seeds)
+
+| arm | n_end | mass | max_frac | mean g A/B | crossed% | poison B | mean within | msw end | sw end |
+|-----|-------|------|----------|------------|----------|----------|-------------|---------|--------|
+| bias_cue | 11.0 | 12.6 | 0.17 | **+0.36 / −0.13** | **100%** | **0.47** | +0.05 | 0.10 | 1.0 |
+| bias_nocue | 12.0 | 12.9 | 0.15 | +0.34 / +0.18 | 50% | 0.56 | +0.01 | 0.06 | 1.0 |
+| inputs_cue | 11.5 | 18.0 | 0.12 | +1.11 / +0.85 | 0% | 0.73 | −0.06 | 0.00 | 0.0 |
+| planted | 12.0 | 19.4 | 0.11 | +1.10 / −0.02 | 25% | 0.49 | +0.29 | 0.11 | 1.2 |
+| nobrain | 12.0 | 15.0 | 0.10 | +1.22 / +1.26 | 0% | 0.49 | 0.00 | 0.00 | 0.0 |
+
+### cue − nocue by seed (selection)
+
+| seed | Δ(gA−gB) | ΔpoiB | Δwithin | cue crossed | nocue crossed |
+|------|----------|-------|---------|-------------|---------------|
+| 841 | +0.05 | +0.03 | +0.12 | yes | yes |
+| 842 | +0.42 | −0.17 | +0.01 | yes | no |
+| 843 | +0.34 | −0.12 | +0.15 | yes | yes |
+| 844 | +0.50 | −0.10 | −0.12 | yes | no |
+| **mean** | **+0.33** | **−0.09** | +0.04 | **4/4** | 2/4 |
+
+**Readout:** Across seeds, oracle cue **selects for seasonal switching**: bias_cue always ends with A+/B− mean g; bias_nocue only half the time; cue−nocue Δ(gA−gB) positive in all 4 seeds (mean +0.33); B-season poison lower with cue in 3/4. Inputs baseline still fails. Mild mass cost vs inputs/planted. Hard `is_switcher` counts remain low (continuous phenotype).
+
+Logs: `results/eco18d/b18d_{0..19}.pkl`; summary `full18d_summary.json`.
 
