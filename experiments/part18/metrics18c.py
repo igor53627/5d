@@ -86,11 +86,14 @@ def _mean(objs, i_gA, i_gB):
 def decompose_switch(log, L, sigmas, i_gA, i_gB, radius=MATCH_RADIUS):
     """One record per sign change between consecutive snapshots.
 
-    All three terms are contributions to the change in the population mean, each
-    divided by the old population mass:
-    within + fusion + replacement = delta_mean.
-    within uses only exclusive one-to-one matches. fusion is every cluster that
-    is a merge or a split. replacement is births, deaths, and mass reweighting.
+    Terms are contributions to the change in the population mean, each divided
+    by the old population mass:
+    within + fusion + uncertain + replacement = delta_mean.
+    within uses only exclusive one-to-one matches. fusion is only clusters whose
+    old/new cardinality differs (a confirmed merge or split). uncertain is a
+    same-cardinality connected cluster of nearby bodies that never merged or
+    split (mass reweighting among neighbors inside the match radius). replacement
+    is births, deaths, and the residual mass reweighting.
     """
     if len(sigmas) != len(log):
         raise ValueError("sigmas must align with log")
@@ -116,7 +119,10 @@ def decompose_switch(log, L, sigmas, i_gA, i_gB, radius=MATCH_RADIUS):
         paired_old = {i for i, _, _ in pairs}
         paired_new = {j for _, j, _ in pairs}
         fusion = 0.0 if mass0 > 0 else np.nan
+        uncertain = 0.0 if mass0 > 0 else np.nan
         groups = _fusion_groups(prev, nxt, old_n, new_n, paired_old, paired_new) if mass0 > 0 else []
+        fusion_groups = []
+        uncertain_groups = []
         for olds, news in groups:
             mo = np.array([prev[i][0] for i in olds], float)
             mn = np.array([nxt[j][0] for j in news], float)
@@ -124,19 +130,29 @@ def decompose_switch(log, L, sigmas, i_gA, i_gB, radius=MATCH_RADIUS):
                 continue
             go = np.average([g_of(prev[i], i_gA, i_gB) for i in olds], weights=mo)
             gn = np.average([g_of(nxt[j], i_gA, i_gB) for j in news], weights=mn)
-            fusion += float(mo.sum() / mass0 * (gn - go))
+            contrib = float(mo.sum() / mass0 * (gn - go))
+            # Same cardinality: nearby bodies that never merged or split.
+            # Mass reweighting among them is not fusion (Greptile P1).
+            if len(olds) == len(news):
+                uncertain += contrib
+                uncertain_groups.append((olds, news))
+            else:
+                fusion += contrib
+                fusion_groups.append((olds, news))
         entrants = [nxt[j] for j in range(len(nxt)) if j not in paired_new and not new_n[j]]
         e_mean, e_mass = _mean(entrants, i_gA, i_gB)
-        replacement = (float(delta - within - fusion) if mass0 > 0 and delta == delta else np.nan)
+        replacement = (float(delta - within - fusion - uncertain) if mass0 > 0 and delta == delta else np.nan)
         out.append(dict(
             t_before=float(log[k - 1][0]), t_after=float(log[k][0]),
             sigma_before=float(sigmas[k - 1]), sigma_after=float(sigmas[k]),
             mean_before=mean0, mean_after=mean1, delta_mean=float(delta) if delta == delta else delta,
-            within=within, fusion=fusion, replacement=replacement,
+            within=within, fusion=fusion, uncertain=uncertain, replacement=replacement,
             sign_flip_mass_frac=flip, matched_mass_frac=matched_frac,
             n_before=len(prev), n_after=len(nxt), n_matched=len(pairs),
-            n_fusion_old=int(sum(len(a) for a, _ in groups)),
-            n_fusion_new=int(sum(len(b) for _, b in groups)),
+            n_fusion_old=int(sum(len(a) for a, _ in fusion_groups)),
+            n_fusion_new=int(sum(len(b) for _, b in fusion_groups)),
+            n_uncertain_old=int(sum(len(a) for a, _ in uncertain_groups)),
+            n_uncertain_new=int(sum(len(b) for _, b in uncertain_groups)),
             entrant_mean=e_mean, entrant_mass_frac=(e_mass / mass1 if mass1 else np.nan),
         ))
     return out

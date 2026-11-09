@@ -276,7 +276,7 @@ def test_switch_split_behavior_versus_replacement():
     assert got["within"] == pytest.approx(-4.0)
     assert got["fusion"] == pytest.approx(0.0)
     assert got["replacement"] == pytest.approx(0.0)
-    assert got["within"] + got["fusion"] + got["replacement"] == pytest.approx(got["delta_mean"])
+    assert got["within"] + got["fusion"] + got.get("uncertain", 0.0) + got["replacement"] == pytest.approx(got["delta_mean"])
     assert got["sign_flip_mass_frac"] == pytest.approx(1.0)
     repl = [
         (0, [_obj(1, [0, 0, 0, 0], 1, -1, 0, 0), _obj(1, [30, 0, 0, 0], -1, 1, 0, 0)]),
@@ -287,7 +287,7 @@ def test_switch_split_behavior_versus_replacement():
     assert got["fusion"] == pytest.approx(0.0)
     assert got["delta_mean"] == pytest.approx(-1.8)
     assert got["replacement"] == pytest.approx(-1.8)
-    assert got["within"] + got["fusion"] + got["replacement"] == pytest.approx(got["delta_mean"])
+    assert got["within"] + got["fusion"] + got.get("uncertain", 0.0) + got["replacement"] == pytest.approx(got["delta_mean"])
     assert got["sign_flip_mass_frac"] == pytest.approx(0.0)
     # Index 24 is 24 cells away on the 48-cell torus, outside the match radius.
     born = [
@@ -306,6 +306,28 @@ def test_switch_split_behavior_versus_replacement():
     assert M.fusion_time(tie) is None
 
 
+
+def test_nearby_mass_reweighting_is_not_fusion():
+    """Greptile P1: bodies at centers 0 and 6 stay two bodies; mass (1,1)->(0.1,1.9).
+
+    They sit inside the match radius so the old code put the mean shift into fusion.
+    Same-cardinality clusters are uncertain (or replacement), not fusion.
+    """
+    L = 48
+    log = [
+        (0, [_obj(1, [0, 0, 0, 0], 1, 0, 0, 0), _obj(1, [6, 0, 0, 0], -1, 0, 0, 0)]),
+        (200, [_obj(0.1, [0, 0, 0, 0], 1, 0, 0, 0), _obj(1.9, [6, 0, 0, 0], -1, 0, 0, 0)]),
+    ]
+    got = M.decompose_switch(log, L, [1.0, -1.0], Z.KB + 3, Z.KB + 4)[0]
+    assert got["n_matched"] == 0
+    assert got["fusion"] == pytest.approx(0.0)
+    assert got["delta_mean"] == pytest.approx(-0.9)
+    # uncertain absorbs the same-cardinality cluster; replacement is the residual (here 0).
+    assert got["uncertain"] == pytest.approx(-0.9)
+    assert got["replacement"] == pytest.approx(0.0)
+    assert got["within"] + got["fusion"] + got["uncertain"] + got["replacement"] == pytest.approx(got["delta_mean"])
+
+
 def test_fusion_is_not_a_within_body_flip():
     """Equal nearby bodies g=+0.5 and g=-1 merge into their mass-weighted mean. Mixing is not an individual flip."""
     L = 48
@@ -318,8 +340,9 @@ def test_fusion_is_not_a_within_body_flip():
     assert got["within"] == pytest.approx(0.0)
     assert got["sign_flip_mass_frac"] == pytest.approx(0.0)
     assert got["fusion"] == pytest.approx(0.0)
+    assert got["uncertain"] == pytest.approx(0.0)
     assert got["replacement"] == pytest.approx(0.0)
-    assert got["within"] + got["fusion"] + got["replacement"] == pytest.approx(got["delta_mean"])
+    assert got["within"] + got["fusion"] + got["uncertain"] + got["replacement"] == pytest.approx(got["delta_mean"])
     # One body splitting into two is the same kind of ambiguous cluster.
     split = [
         (0, [_obj(2, [0, 0, 0, 0], 1, 0, 0, 0)]),
@@ -329,7 +352,8 @@ def test_fusion_is_not_a_within_body_flip():
     assert got["n_matched"] == 0 and got["n_fusion_new"] == 2
     assert got["within"] == pytest.approx(0.0) and got["sign_flip_mass_frac"] == pytest.approx(0.0)
     assert got["fusion"] == pytest.approx(-1.0)
-    assert got["within"] + got["fusion"] + got["replacement"] == pytest.approx(got["delta_mean"])
+    assert got["uncertain"] == pytest.approx(0.0)
+    assert got["within"] + got["fusion"] + got["uncertain"] + got["replacement"] == pytest.approx(got["delta_mean"])
 
 
 def test_within_uses_the_old_population_mass():
@@ -344,7 +368,7 @@ def test_within_uses_the_old_population_mass():
     assert got["within"] == pytest.approx(0.1)
     assert got["fusion"] == pytest.approx(0.0)
     assert got["replacement"] == pytest.approx(0.0)
-    assert got["within"] + got["fusion"] + got["replacement"] == pytest.approx(got["delta_mean"])
+    assert got["within"] + got["fusion"] + got.get("uncertain", 0.0) + got["replacement"] == pytest.approx(got["delta_mean"])
 
 
 def test_repulsion_is_smaller_than_food_taxis():
@@ -367,6 +391,17 @@ def test_committed_specs_match_the_phenotype_contract():
     assert one(pilot, "planted_s731")["p_inits"] == one(full, "planted_s731")["p_inits"]
     assert one(pilot, "cue_s731")["steps"] == 12000 and one(full, "cue_s731")["steps"] == 20000
     assert one(full, "lo_s731")["ecos"][0]["season_rule"] == 1.0
+    assert one(pilot, "planted_s731")["ecos"][0]["krep"] == R.KREP_18C
+    assert one(full, "lo_s731")["ecos"][0]["krep"] == R.KREP_18C
+    # Parts 18/18b stay on the historical repulsion; the 18c raise is opt-in via specs only.
+    for path in sorted((ROOT / "archive" / "specs").glob("b18*.json")):
+        if path.name.startswith("b18c"):
+            continue
+        for item in json.loads(path.read_text()):
+            runs = item["runs"] if isinstance(item, dict) and "runs" in item else [item]
+            for run in runs:
+                if isinstance(run, dict) and run.get("ecos"):
+                    assert run["ecos"][0].get("krep", 10) == 10
     for item in full:
         run = item["runs"][0]
         rows = np.asarray(run["p_inits"], float)

@@ -19,6 +19,9 @@ TS = 8000.0
 EVERY = 200
 PROJ_EVERY = 400
 MIN_GAP = 4
+# 18c only: raise repulsion to ~parity with food taxis (ratio≈1 at krep=90).
+# Parts 18/18b keep krep=10 in their own specs; this is not a fl_season default.
+KREP_18C = 90.0
 MODAL = "modal run src/modal_app.py::spawn_h100 --kind ecolist --spec {spec} --prefix {prefix}"
 STEPS = dict(pilot=12000, full=20000)
 SEEDS = dict(pilot=(731,), full=(731, 732, 733, 734))
@@ -55,6 +58,7 @@ def base_world():
     eco = dict(run["ecos"][0])
     eco["Ts"] = TS
     eco["season_rule"] = 1.0
+    eco["krep"] = KREP_18C
     return dict(run["c"]), eco, list(run["opts"].items())
 
 
@@ -122,7 +126,8 @@ def report(pops):
         notes=[
             "p_spread is 0 because every founder genome is stored in p_inits.",
             "min_gap is Chebyshev cells between 0.02 contours at placement only.",
-            "krep stays 10. taxis_repulsion is the reason a larger krep is not the fusion fix.",
+            "krep is KREP_18C (90): taxis/repulsion ratio ≈ 1. Parts 18/18b specs still use 10.",
+            "Pilot fused by t=200 at krep=10; CPU L=32 probe kept n=4 through 150 steps at krep=90.",
         ],
     )
 
@@ -194,7 +199,9 @@ def smoke():
         raise SystemExit(f"full run has {rep['sign_changes']['full']} sign changes, need >= 4")
     ratio = rep["taxis_repulsion"]["ratio"]
     print(f"sign changes pilot {rep['sign_changes']['pilot']}  full {rep['sign_changes']['full']}")
+    ratio90 = M.taxis_repulsion_ratio(krep=KREP_18C)
     print(f"taxis/repulsion v_rep/v_food at krep=10: {ratio:.3f} (cap {rep['taxis_repulsion']['cap']:.3f})")
+    print(f"taxis/repulsion at krep={KREP_18C:g} (18c): {ratio90['ratio']:.3f}")
     for seed, rec in rep["seeds"].items():
         inp, lo, pl = rec["arms"]["inputs"], rec["arms"]["lo"], rec["arms"]["planted"]
         print(f"  seed {seed} founder {rec['founder_seed']}: inputs switch {inp['n_switch']}/{inp['n']} "
