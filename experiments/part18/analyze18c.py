@@ -76,12 +76,33 @@ def main(pat, L):
               f"fusion_t {s['fusion_t']}  divisions {s['divisions']}  Price S(g) {s['price_S_g']}")
         for sw, diet in zip(s["switches"], s["diet"]):
             print(f"  t {sw['t_before']:.0f}->{sw['t_after']:.0f} σ {sw['sigma_before']:+.0f}->{sw['sigma_after']:+.0f} "
-                  f"Δmean {sw['delta_mean']:+.3f} within {sw['within']:+.3f} replacement {sw['replacement']:+.3f} "
+                  f"Δmean {sw['delta_mean']:+.3f} within {sw['within']:+.3f} fusion {sw['fusion']:+.3f} "
+                  f"replacement {sw['replacement']:+.3f} "
                   f"flip {sw['sign_flip_mass_frac']} matched {sw['matched_mass_frac']:.2f} "
                   f"poison {diet['poison_before']:.2f}->{diet['poison_after']:.2f}")
         if s["init"]:
             print(f"  init std_new {s['init']['std_new']:.3f} std_old {s['init']['std_old']:.3f} |w_new| {s['init']['mean_abs_new']:.3f}")
     return summaries
+
+
+def json_ready(x):
+    """NaN and inf become null. NumPy scalars become Python numbers. Strict JSON can then encode the tree."""
+    if isinstance(x, dict):
+        return {str(k): json_ready(v) for k, v in x.items()}
+    if isinstance(x, (list, tuple)):
+        return [json_ready(v) for v in x]
+    if isinstance(x, np.ndarray):
+        return json_ready(x.tolist())
+    if isinstance(x, np.generic):
+        x = x.item()
+    if isinstance(x, float) and not np.isfinite(x):
+        return None
+    return x
+
+
+def dump_summary(out, dest):
+    with open(dest, "w") as f:
+        json.dump(json_ready(out), f, allow_nan=False)
 
 
 if __name__ == "__main__":
@@ -91,4 +112,4 @@ if __name__ == "__main__":
     if isinstance(out, list):
         dest = sys.argv[3] if len(sys.argv) > 3 else ""
         if dest:
-            json.dump(out, open(dest, "w"), default=lambda x: None if isinstance(x, float) and x != x else x)
+            dump_summary(out, dest)

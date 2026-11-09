@@ -1,6 +1,6 @@
 import _path  # noqa: F401
 """Часть 9: эксперименты экологии — свип параметров пищи, длинные прогоны популяции, контроли."""
-import time, numpy as np
+import time, warnings, numpy as np
 import glider_coll as GC
 
 def _pool(A, N, L, pool=2):
@@ -32,7 +32,8 @@ def masks_ok(A2, A, min_sep, min_gap=None):
 
     min_sep is the historical flag: None disables the overlap test, any other value rejects mask overlap
     (the numeric distance is not used). min_gap, if set, also rejects pairs whose 0.02 contours are
-    at Chebyshev distance <= min_gap. Leaving both unset keeps the historical placement.
+    at periodic Chebyshev distance <= min_gap. Leaving min_gap unset keeps the historical overlap test,
+    which does not dilate and does not wrap.
     """
     if min_sep is None and min_gap is None:
         return True
@@ -41,12 +42,18 @@ def masks_ok(A2, A, min_sep, min_gap=None):
     if min_sep is not None and (new & old).any():
         return False
     gap = 0 if min_gap is None else int(min_gap)
-    if gap > 0 and old.any():
-        from scipy import ndimage
-        dil = ndimage.binary_dilation(old, structure=np.ones((3,) * A.ndim, dtype=bool), iterations=gap)
-        if (new & dil).any():
-            return False
+    if gap > 0 and old.any() and (new & _dilate_periodic(old, gap)).any():
+        return False
     return True
+
+def _dilate_periodic(mask, gap):
+    """Chebyshev dilation on the torus. Used only by the min_gap path."""
+    from scipy import ndimage
+    gap = int(gap)
+    padded = np.pad(mask, gap, mode="wrap")
+    dil = ndimage.binary_dilation(padded, structure=np.ones((3,) * mask.ndim, dtype=bool), iterations=gap)
+    sl = tuple(slice(gap, gap + n) for n in mask.shape)
+    return dil[sl]
 
 def init_multi(st, rng, n_init, L, N, K, p0, p_spread, min_sep, min_gap=None, p_inits=None):
     """Place n_init copies. p_inits replaces the Gaussian draw but the draw is still consumed, so positions match a p_spread run."""
@@ -56,9 +63,17 @@ def init_multi(st, rng, n_init, L, N, K, p0, p_spread, min_sep, min_gap=None, p_
     perms = list(GC.signed_perms(N)); pinit = []
     for i in range(n_init):
         p, sg = perms[rng.integers(len(perms))]; S = GC.transform(st, p, sg)
+        placed = False
         for _try in range(200):     # перф: при подборе сдвига крутим только A, остальные поля — один раз
             sh = tuple(int(x) for x in rng.integers(0, L, N)); A2 = np.roll(S["A"], sh, axis=tuple(range(N)))
-            if masks_ok(A2, A, min_sep, min_gap): break
+            if masks_ok(A2, A, min_sep, min_gap):
+                placed = True
+                break
+        if not placed:
+            msg = f"no founder placement passed min_sep={min_sep} min_gap={min_gap} in 200 tries"
+            if min_gap is not None:
+                raise RuntimeError(msg)
+            warnings.warn(msg, UserWarning, stacklevel=2)
         S = {k: (A2 if k == "A" else np.roll(x, sh, axis=tuple(range(N)))) for k, x in S.items()}
         m = (S["A"] > 0.02) & (A < 0.02)
         noise = rng.standard_normal(K)

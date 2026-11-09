@@ -22,7 +22,7 @@ Checked on the four Part 18b founder genomes in `archive/specs/b18bm.json` (mapp
 
 Memory is still written from the pre-advection output onto the post-advection field (one-step spatial lag). Drift per step is far below the blur radius, and the cue result does not depend on it. The order was left as in 18/18b.
 
-`min_sep` is still a flag. `None` skips the test; any other value only rejects mask overlap. The number is not a distance. `min_gap` is the new distance, in Chebyshev cells.
+`min_sep` is still a flag. `None` skips the test; any other value only rejects mask overlap. The number is not a distance. `min_gap` is the new distance, in periodic Chebyshev cells. The historical path does not dilate, so a Part 18 or 18b placement is unchanged. If 200 shifts all fail, `min_gap` raises and the historical path warns and keeps the last shift.
 
 ## Arms
 
@@ -46,8 +46,9 @@ A switcher means, at the mixed-food probe, `g_A−g_B > 0.4` when the cue is +1 
 
 `analyze18c.py` splits each logged sign change:
 
-- **within**: mass-weighted change of `g_A−g_B` in bodies matched across the frame (centers within 8 cells). This is an individual change.
-- **replacement**: change of the population mean minus that within term. This is mass reweighting, births, and deaths.
+- **within**: contribution to the change in the population mean of `g_A−g_B` from exclusive one-to-one matches (centers within 8 cells, and neither body has another neighbor that close). Weights are old mass over the old population mass. A merge or a split is not an individual change.
+- **fusion**: the same contribution from clusters that are merges or splits.
+- **replacement**: the rest of the mean change (births, deaths, and mass reweighting). `within + fusion + replacement` equals the change in the population mean.
 - Diet in a two-snapshot window on each side of the frame (poison share).
 - `n`, max mass fraction, first time the largest body holds more than half the mass, division count, Price `S` on `g_A−g_B`, and the mass-weighted mean and between-body std of the new-channel weights.
 - Founder `p_init` std, which the pickle already stores.

@@ -180,6 +180,86 @@ def test_min_gap_and_p_inits_do_not_move_placement():
         GE.init_multi(st, np.random.default_rng(1), p_inits=np.zeros((2, K)), **kw)
 
 
+def _historical_init(st, rng, n_init, L, N, K, p0, p_spread, min_sep):
+    """The Part 18/18b placement loop, before min_gap. Overlap only, last shift kept after 200 misses."""
+    import glider_coll as GC
+    A = np.zeros_like(st["A"])
+    base = {k: x.copy() for k, x in st.items()}
+    perms = list(GC.signed_perms(N))
+    pinit = []
+    for _i in range(n_init):
+        p, sg = perms[rng.integers(len(perms))]
+        S = GC.transform(st, p, sg)
+        for _try in range(200):
+            sh = tuple(int(x) for x in rng.integers(0, L, N))
+            A2 = np.roll(S["A"], sh, axis=tuple(range(N)))
+            if min_sep is None or not ((A2 > 0.02) & (A > 0.02)).any():
+                break
+        S = {k: (A2 if k == "A" else np.roll(x, sh, axis=tuple(range(N)))) for k, x in S.items()}
+        m = (S["A"] > 0.02) & (A < 0.02)
+        pi = np.asarray(p0) + p_spread * rng.standard_normal(K)
+        pinit.append(pi.tolist())
+        for k in base:
+            if k != "A":
+                base[k] = np.where(m, S[k], base[k])
+        A = A + np.where(m, S["A"], 0)
+    base["A"] = A.astype(np.float32)
+    return base, pinit
+
+
+def test_min_gap_wraps_and_historical_placement_is_unchanged():
+    L = 20
+    old = np.zeros((L, L), np.float32)
+    old[0, 0] = 1.0
+    wrapped = np.zeros_like(old)
+    wrapped[0, L - 1] = 1.0                         # torus distance 1
+    assert not GE.masks_ok(wrapped, old, 1, 2)
+    edge = np.zeros_like(old)
+    edge[0, L - 2] = 1.0                            # torus distance 2, still inside the gap
+    assert not GE.masks_ok(edge, old, 1, 2)
+    clear = np.zeros_like(old)
+    clear[0, L - 3] = 1.0                           # torus distance 3
+    assert GE.masks_ok(clear, old, 1, 2)
+    # The historical overlap test does not wrap a gap, and these cells do not overlap.
+    assert GE.masks_ok(wrapped, old, 1, None)
+    assert GE.masks_ok(wrapped, old, None, None)
+
+    L2, N, K = 18, 2, 4
+    A = np.zeros((L2, L2), np.float32)
+    A[2:6, 2:6] = 0.6
+    st = {"A": A, "x": np.zeros_like(A), "y": np.zeros_like(A), "z": np.zeros_like(A), "c": np.full_like(A, 2.6)}
+    kw = dict(n_init=4, L=L2, N=N, K=K, p0=np.zeros(K), p_spread=0.2)
+    for seed, min_sep in ((3, None), (5, 1), (9, 1)):
+        new, _, p_new = GE.init_multi(st, np.random.default_rng(seed), min_sep=min_sep, min_gap=None, **kw)
+        old_b, p_old = _historical_init(st, np.random.default_rng(seed), min_sep=min_sep, **kw)
+        assert np.array_equal(new["A"], old_b["A"])
+        assert np.allclose(p_new, p_old)
+
+    full = np.full((8, 8), 0.6, np.float32)
+    crowded = {"A": full, "x": np.zeros_like(full), "y": np.zeros_like(full), "z": np.zeros_like(full), "c": np.full_like(full, 2.6)}
+    ckw = dict(n_init=2, L=8, N=2, K=3, p0=np.zeros(3), p_spread=0.0, min_sep=1)
+    with pytest.warns(UserWarning, match="200 tries"):
+        warned, _, _ = GE.init_multi(crowded, np.random.default_rng(1), min_gap=None, **ckw)
+    kept, _ = _historical_init(crowded, np.random.default_rng(1), **ckw)
+    assert np.array_equal(warned["A"], kept["A"])
+    with pytest.raises(RuntimeError, match="min_gap"):
+        GE.init_multi(crowded, np.random.default_rng(1), min_gap=2, **ckw)
+
+
+def test_part18_specs_omit_the_new_placement_keys():
+    spec_dir = ROOT / "archive" / "specs"
+    seen = 0
+    for path in sorted(spec_dir.glob("b18*.json")):
+        if path.name.startswith("b18c"):
+            continue
+        for item in json.loads(path.read_text()):
+            runs = item["runs"] if isinstance(item, dict) and "runs" in item else [item]
+            for run in runs:
+                assert "min_gap" not in run and "p_inits" not in run
+                seen += 1
+    assert seen >= 16
+
+
 def _obj(mass, center, gA, gB, eA, eB):
     q = [0.0] * (Z.KB + Z.ND)
     q[Z.KB], q[Z.KB + 1], q[Z.KB + 3], q[Z.KB + 4] = eA, eB, gA, gB
@@ -194,7 +274,9 @@ def test_switch_split_behavior_versus_replacement():
     ]
     got = M.decompose_switch(behav, L, [1.0, -1.0], Z.KB + 3, Z.KB + 4)[0]
     assert got["within"] == pytest.approx(-4.0)
+    assert got["fusion"] == pytest.approx(0.0)
     assert got["replacement"] == pytest.approx(0.0)
+    assert got["within"] + got["fusion"] + got["replacement"] == pytest.approx(got["delta_mean"])
     assert got["sign_flip_mass_frac"] == pytest.approx(1.0)
     repl = [
         (0, [_obj(1, [0, 0, 0, 0], 1, -1, 0, 0), _obj(1, [30, 0, 0, 0], -1, 1, 0, 0)]),
@@ -202,13 +284,15 @@ def test_switch_split_behavior_versus_replacement():
     ]
     got = M.decompose_switch(repl, L, [1.0, -1.0], Z.KB + 3, Z.KB + 4)[0]
     assert got["within"] == pytest.approx(0.0)
+    assert got["fusion"] == pytest.approx(0.0)
     assert got["delta_mean"] == pytest.approx(-1.8)
     assert got["replacement"] == pytest.approx(-1.8)
+    assert got["within"] + got["fusion"] + got["replacement"] == pytest.approx(got["delta_mean"])
     assert got["sign_flip_mass_frac"] == pytest.approx(0.0)
-    # A body that appears far from both parents is an entrant, not a within-body flip.
+    # Index 24 is 24 cells away on the 48-cell torus, outside the match radius.
     born = [
         (0, [_obj(1, [0, 0, 0, 0], 1, -1, 0, 0)]),
-        (200, [_obj(1, [0, 0, 0, 0], 1, -1, 0, 0), _obj(1, [40, 0, 0, 0], -1, 1, 0, 0)]),
+        (200, [_obj(1, [0, 0, 0, 0], 1, -1, 0, 0), _obj(1, [24, 0, 0, 0], -1, 1, 0, 0)]),
     ]
     got = M.decompose_switch(born, L, [1.0, -1.0], Z.KB + 3, Z.KB + 4)[0]
     assert got["within"] == pytest.approx(0.0)
@@ -220,6 +304,47 @@ def test_switch_split_behavior_versus_replacement():
     assert M.fusion_time(series) == 0.0
     tie = M.population_series([(0, [_obj(0.5, [0, 0, 0, 0], 0, 0, 0, 0), _obj(0.5, [5, 0, 0, 0], 0, 0, 0, 0)])])
     assert M.fusion_time(tie) is None
+
+
+def test_fusion_is_not_a_within_body_flip():
+    """Equal nearby bodies g=+0.5 and g=-1 merge into their mass-weighted mean. Mixing is not an individual flip."""
+    L = 48
+    merged = [
+        (0, [_obj(1, [0, 0, 0, 0], 0.5, 0, 0, 0), _obj(1, [2, 0, 0, 0], -1, 0, 0, 0)]),
+        (200, [_obj(2, [1, 0, 0, 0], -0.25, 0, 0, 0)]),
+    ]
+    got = M.decompose_switch(merged, L, [1.0, -1.0], Z.KB + 3, Z.KB + 4)[0]
+    assert got["n_matched"] == 0 and got["n_fusion_old"] == 2 and got["n_fusion_new"] == 1
+    assert got["within"] == pytest.approx(0.0)
+    assert got["sign_flip_mass_frac"] == pytest.approx(0.0)
+    assert got["fusion"] == pytest.approx(0.0)
+    assert got["replacement"] == pytest.approx(0.0)
+    assert got["within"] + got["fusion"] + got["replacement"] == pytest.approx(got["delta_mean"])
+    # One body splitting into two is the same kind of ambiguous cluster.
+    split = [
+        (0, [_obj(2, [0, 0, 0, 0], 1, 0, 0, 0)]),
+        (200, [_obj(1, [0, 0, 0, 0], 1, 0, 0, 0), _obj(1, [3, 0, 0, 0], 0, 1, 0, 0)]),
+    ]
+    got = M.decompose_switch(split, L, [1.0, -1.0], Z.KB + 3, Z.KB + 4)[0]
+    assert got["n_matched"] == 0 and got["n_fusion_new"] == 2
+    assert got["within"] == pytest.approx(0.0) and got["sign_flip_mass_frac"] == pytest.approx(0.0)
+    assert got["fusion"] == pytest.approx(-1.0)
+    assert got["within"] + got["fusion"] + got["replacement"] == pytest.approx(got["delta_mean"])
+
+
+def test_within_uses_the_old_population_mass():
+    """Ten equal bodies at g=0. One matched body goes to g=1. Nine are replaced by g=0."""
+    L = 400
+    old = [_obj(1, [30 * i, 0, 0, 0], 0, 0, 0, 0) for i in range(10)]
+    new = [_obj(1, [0.4, 0, 0, 0], 1, 0, 0, 0)]
+    new += [_obj(1, [30 * i + 15, 0, 0, 0], 0, 0, 0, 0) for i in range(1, 10)]
+    got = M.decompose_switch([(0, old), (200, new)], L, [1.0, -1.0], Z.KB + 3, Z.KB + 4)[0]
+    assert got["n_matched"] == 1 and got["n_fusion_old"] == 0
+    assert got["delta_mean"] == pytest.approx(0.1)
+    assert got["within"] == pytest.approx(0.1)
+    assert got["fusion"] == pytest.approx(0.0)
+    assert got["replacement"] == pytest.approx(0.0)
+    assert got["within"] + got["fusion"] + got["replacement"] == pytest.approx(got["delta_mean"])
 
 
 def test_repulsion_is_smaller_than_food_taxis():
@@ -272,6 +397,20 @@ def test_analyze18c_reads_the_modal_ecolist_pickle(tmp_path):
     assert summary["n_switch"] == 0 and summary["init"]["n"] == 2
     with pytest.raises(ValueError):
         A.summarize(dict(runs[0], eco=dict(Ts=8000.0)), 48)
+
+
+def test_summary_json_has_no_nan_tokens(tmp_path):
+    import analyze18c as A
+    payload = [dict(within=float("nan"), fusion=float("inf"), n=np.int64(3), x=np.float32(1.5), flag=np.bool_(True))]
+    dest = tmp_path / "out.json"
+    A.dump_summary(payload, dest)
+    text = dest.read_text()
+    assert "NaN" not in text and "Infinity" not in text
+    data = json.loads(text)
+    assert data[0]["within"] is None and data[0]["fusion"] is None
+    assert data[0]["n"] == 3 and isinstance(data[0]["n"], int)
+    assert data[0]["x"] == pytest.approx(1.5)
+    assert data[0]["flag"] is True
 
 
 def test_season_jit_matches_numpy():

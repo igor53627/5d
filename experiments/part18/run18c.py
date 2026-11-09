@@ -19,6 +19,7 @@ TS = 8000.0
 EVERY = 200
 PROJ_EVERY = 400
 MIN_GAP = 4
+MODAL = "modal run src/modal_app.py::spawn_h100 --kind ecolist --spec {spec} --prefix {prefix}"
 STEPS = dict(pilot=12000, full=20000)
 SEEDS = dict(pilot=(731,), full=(731, 732, 733, 734))
 # Flags that differ across arms. Ecology other than these is the Part 18b world, with Ts halved.
@@ -208,8 +209,6 @@ def smoke():
     print("full: ", MODAL.format(spec="archive/specs/b18c_full.json", prefix="b18c"))
     print("smoke ok")
 
-
-MODAL = "modal run src/modal_app.py::spawn_h100 --kind ecolist --spec {spec} --prefix {prefix}"
 
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "smoke"
