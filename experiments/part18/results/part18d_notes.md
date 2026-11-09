@@ -87,3 +87,30 @@ Short CPU ecology (L=24, 800 steps, n_init=2) — **too short for selection**, h
 **No re-pilot.** Go full (~$30). Fusion/survival already OK at 0.02; 0.05 is a moderate raise inside the safe offline band.
 
 Greptile P2: `tests/test_mut_bias_amp.py` — `step()` with `mut_bias≥0` mutates only `b2[g_A]/b2[g_B]` when `mutw=0`; `mut_bias<0` uses `mutw` for those channels.
+
+## Pilot 2 results (b18dp2, mut_bias=0.05, seed 841, ~$4.0, ~13 min wall)
+
+Same world as pilot 1 (krep=90, Ts=8000, 12k steps) except `mut_bias=0.05` on bias_* arms. Prefix `b18dp2` (pilot 1 kept as `b18dp`).
+
+| arm | n_end | mass | max_frac | fus | sw init→end (mass%) | mean g A/B | poison A/B | Δbias-diff | within@t8000 |
+|-----|-------|------|----------|-----|---------------------|------------|------------|------------|--------------|
+| bias_cue | 11 | 13.3 | 0.16 | none | 0→0 (0%) | **+0.36 / −0.37** | 0.39 / **0.43** | −0.95 | **+0.69** |
+| bias_nocue | 12 | 12.9 | 0.13 | none | 0→1 (13%) | +0.35 / −0.09 | 0.41 / 0.48 | −1.16 | +0.17 |
+| inputs_cue | 12 | 20.2 | 0.11 | none | 0→0 | +1.45 / +0.94 | 0.19 / 0.72 | +0.00 | +0.47 |
+| planted | 12 | 21.1 | 0.10 | none | 6→3 (23%) | +1.26 / +0.11 | 0.20 / 0.48 | −0.06 | +1.22 |
+| nobrain | 12 | 14.8 | 0.10 | none | 0→0 | +1.60 / +1.63 | 0.49 / 0.50 | −0.02 | 0.00 |
+
+### vs pilot 1 (mut_bias=0.02)
+
+| | bias_cue p1 | bias_cue p2 | bias_nocue p1 | bias_nocue p2 |
+|--|-------------|-------------|---------------|---------------|
+| mean g A/B | +0.99/+0.81 | **+0.36/−0.37** | +0.94/+0.85 | +0.35/−0.09 |
+| poison B | 0.73 | **0.43** | 0.71 | 0.48 |
+| within@8k | +0.06 | **+0.69** | −0.02 | +0.17 |
+| mass | 17.3 | 13.3 | 18.3 | 12.9 |
+| cue−nocue Δ(gA−gB) | +0.10 | **+0.29** | — | — |
+
+**Readout:** raising mut_bias to 0.05 makes `bias_cue` **diverge** from `bias_nocue`: season-aligned mean g (A+/B−), larger within-body Δg at the B→A switch, and lower B-season poison. Mild mass cost (~25%). Hard `is_switcher` count at end is still ~0 (phenotype is continuous). Planted control still switches. No early fusion.
+
+**Go for full run (~$30)** with mut_bias=0.05. Logs: `results/eco18d/b18dp2_*.pkl`, `pilot18d2_summary.json`.
+
