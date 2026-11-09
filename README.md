@@ -29,6 +29,7 @@ Numbers below are copied from the part notes. There is no Part 11 notes file; th
 - **Part 17** ([notes](experiments/part17/results/part17_notes.md)). With separate good food and poison (4D $56^4$, four seeds, poison cost 2), avoidance is in place by 2–3k steps: $g_P$ reaches −0.66 to −0.93 in every seed. Poison is 3.2% of the diet against 18.3% with no brain ($p=7\times10^{-4}$). A blind brain that sees only the mixture collapses below the no-brain control. The response is again an almost constant bias (nonlinear fraction at most 0.01). The Price split says $g_P$ falls through within-body transmission ($S=+0.017$, transmission −0.047).
 - **Part 18** ([notes](experiments/part18/results/part18_notes.md)). Seasons that swap which food is poisonous are too harsh on the original parameters: every population is extinct by 16k steps. A brain extends lifetime by about 1.4–1.8× (memory against no brain, $p=6\times10^{-4}$). Memory and a direct season cue do not separate from each other ($p\ge0.2$). What evolves is a fixed "A is good" reflex. Behaviour lags the 2000-step season by about 1200–1400 steps.
 - **Part 18b** ([notes](experiments/part18/results/part18b_notes.md)). A milder world and a warm start from Part 17 brains keep all 16 populations alive through 24k steps. No condition switches inside the bad season: the inherited "toward A" reflex lasts the whole 8000-step B season, and the poison fraction of the diet in the B season rises from 0.70 to 0.80–0.81. Memory, no-memory, and cue runs match ($p\ge0.2$); weights on the new inputs only reach about 0.02. The notes read this as evolution stalled: founders start nearly identical, bodies fuse, and the Price selection term is about 0.
+- **Part 18c** ([notes](experiments/part18/results/part18c_notes.md)). Setup only; no population has been run. On the four Part 18b founders, noise of standard deviation 0.5 on the new inputs does not produce a cue-conditional sign flip (0 of 48 genomes). The output bias locks $g_A-g_B$. The 18c specs keep the 18b world, use four new seeds, and compare a low-diversity control, that input-noise arm, an oracle cue on the same genomes, a planted switching control, and no brain. Repulsion at krep 10 is about a tenth of food taxis before the speed cap, so raising it is not used as a fusion fix.
 
 ## Installation
 
@@ -66,7 +67,7 @@ docs/                Notes and older reports
 archive/             Early searches, benchmarks, reservoir experiments
 ```
 
-## Table of Contents: Parts 1–18b
+## Table of Contents: Parts 1–18c
 
 | Part | Topic | Notes | Key Figure |
 |------|-------|-------|------------|
@@ -85,6 +86,7 @@ archive/             Early searches, benchmarks, reservoir experiments
 | 17 | Poison food (4D) | [part17_notes.md](experiments/part17/results/part17_notes.md) | [glider_part17_dynamics.png](figures/glider_part17_dynamics.png) |
 | 18 | Seasonal environments | [part18_notes.md](experiments/part18/results/part18_notes.md) | [glider_part18_dynamics.png](figures/glider_part18_dynamics.png) |
 | 18b | Memory and adaptation | [part18b_notes.md](experiments/part18/results/part18b_notes.md) | [glider_part18b_dynamics.png](figures/glider_part18b_dynamics.png) |
+| 18c | Seasonal assay (setup) | [part18c_notes.md](experiments/part18/results/part18c_notes.md) | — |
 
 ## Data
 

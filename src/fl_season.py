@@ -1,6 +1,9 @@
 """Часть 18: «сезоны» в 4D. На базе fl_poison: два корма A (поле F) и B (поле F2), оба восстанавливаются (rG) к взаимодополняющим
 движущимся пятнам: A* = F0·relu(c), B* = F0·relu(−c), c = cos(2πx0/λ+ωt)·cos(2πx1/λ−ωt).
-Сезон σ(t) = sign(sin(2πt/Ts)): при σ>0 A хороший, B — яд (стоит cp массы за единицу), при σ<0 наоборот.
+Сезон σ: при σ>0 A хороший, B — яд (стоит cp массы за единицу), при σ<0 наоборот.
+По умолчанию σ = sign(sin(2πt/Ts)) — так считались Части 18 и 18b. season_rule=1 (только 18c) берёт
+половину периода, t/Ts mod 1 <= 1/2, включая концы: float32 sin(kπ) ~ −1e-7 и на этих кадрах
+float32 и float64 расходились на один шаг.
 Мозг: входы s = [Ã, B̃, R, h, cue·σ, Ub/U1−1, Ufar/U1] (Ã = blur(A)/F0, B̃ = blur(B)/F0,
   R — «награда»: размытый по телу чистый прирост от еды за прошлый шаг на единицу массы, /(keat·F0);
   h — наследуемая переменная памяти (канал Q, переносится MUSCL и гомогенизируется по телу, как веса; не мутирует)).
@@ -16,8 +19,37 @@ NIN, H, NOUT = 7, 3, 4
 NW = H * NIN + H + NOUT * H + NOUT          # 40
 K0 = 2; iM = K0 + NW; KB = iM + 1           # 43 канала (последний — память h)
 ND = 5
-BKEYS = ["kb", "kr", "mutw", "ws", "mem", "cue", "alpha", "rG", "cp", "lam", "om", "Ts", "smooth"]
-BDEF = dict(kb=0.0, kr=0.0, mutw=None, ws=2.0, mem=1.0, cue=0.0, alpha=0.01, rG=0.001, cp=2.0, lam=28.0, om=2 * np.pi / 6000, Ts=6000.0, smooth=0.0)
+# Sensory columns of W1. R, h and the oracle cue are the channels Part 18 added; A, B, Ub, Ufar come from Part 17.
+IN_A, IN_B, IN_R, IN_H, IN_CUE, IN_UB, IN_UFAR = range(NIN)
+OUT_GA, OUT_GB, OUT_GR, OUT_H = range(NOUT)
+BKEYS = ["kb", "kr", "mutw", "ws", "mem", "cue", "alpha", "rG", "cp", "lam", "om", "Ts", "smooth", "season_rule"]
+BDEF = dict(kb=0.0, kr=0.0, mutw=None, ws=2.0, mem=1.0, cue=0.0, alpha=0.01, rG=0.001, cp=2.0, lam=28.0, om=2 * np.pi / 6000, Ts=6000.0, smooth=0.0, season_rule=0.0)
+
+def w1_flat(h, col):
+    """Index of W1[h, col] inside the flat NW weight vector (before the K0 offset)."""
+    return h * NIN + col
+
+def b2_flat(out):
+    return H * NIN + H + NOUT * H + out
+
+def w2_flat(out, h):
+    return H * NIN + H + out * H + h
+
+def new_channel_flat():
+    """Flat indices of the Part-18 channels: W1 columns R, h, cue, the o_h row, and b2[o_h]."""
+    idx = [w1_flat(h, col) for h in range(H) for col in (IN_R, IN_H, IN_CUE)]
+    idx += [w2_flat(OUT_H, h) for h in range(H)]
+    idx.append(b2_flat(OUT_H))
+    return tuple(idx)
+
+def food_gain(eA, eB, sigma, cp, xp=np):
+    """Mass added by one feeding event. sigma > 0 means A is food and B is poison.
+
+    With cost cp the sign flips only when the poison share of intake exceeds 1/(1+cp)
+    (2/3 at the Part 18b value cp=0.5). step() calls this with xp=jax.numpy.
+    """
+    sigma = xp.asarray(sigma)
+    return xp.where(sigma > 0, eA - cp * eB, eB - cp * eA)
 
 def params(c):
     P = E3.params(c)
@@ -37,7 +69,27 @@ def targets(cc, P, xp=jnp):
     sm = P["smooth"] > 0
     return P["F0"] * xp.where(sm, a1, a0), P["F0"] * xp.where(sm, b1, b0)
 
-def season(t, Ts, xp=jnp): return xp.where(xp.sin(2 * np.pi * t / Ts) >= 0, 1.0, -1.0)
+def season(t, Ts, xp=jnp):
+    """Historical Part 18/18b rule: +1 when sin(2πt/Ts) >= 0. Kept so old logs re-analyze the same way."""
+    return xp.where(xp.sin(2 * np.pi * t / Ts) >= 0, 1.0, -1.0)
+
+def season_half(t, Ts, xp=jnp):
+    """+1 on the closed first half of each period, including t = n·Ts/2.
+
+    float32 sin(kπ) is about −1e-7 and float64 sin(2kπ) is about −1e-16, so `season`
+    labels those endpoints differently in the simulator and in numpy. This rule does not.
+    """
+    tt = xp.asarray(t)
+    if getattr(tt.dtype, "kind", "f") not in "fc":
+        tt = tt.astype(xp.result_type(tt, xp.float32(0)))
+    Ts = xp.asarray(Ts, dtype=tt.dtype)
+    u = xp.mod(tt / Ts, xp.asarray(1.0, dtype=tt.dtype))
+    return xp.where(u <= 0.5, xp.asarray(1.0, dtype=tt.dtype), xp.asarray(-1.0, dtype=tt.dtype))
+
+def snapshot_season(t, Ts, xp=np):
+    """18c label of the feeding step recorded at log time t. That step read the clock t−1."""
+    t = float(t)
+    return float(season_half(0.0 if t <= 0.0 else t - 1.0, Ts, xp))
 
 def make_state(base, c, K=KB, p0=None, seed=0):
     st = E3.make_state(base, c, K=K, p0=p0, seed=seed)
@@ -82,7 +134,8 @@ def step(st, P, KA, Ko, KX, transport=True, coarse=False, fnoise=False, do_mut=T
     r = jnp.sqrt(x*x + y*y) + 1e-6; cs, sn = x / r, y / r
     UG = G + fb
     Ufar = wconv(A, KX["far"])
-    t = st.get("t", jnp.float32(0.0)); sg = season(t, P["Ts"])
+    t = st.get("t", jnp.float32(0.0))
+    sg = jnp.where(P["season_rule"] > 0, season_half(t, P["Ts"]), season(t, P["Ts"]))
     # --- мозг ---
     At = wconv(F, KX["blur"]) / P["F0"]; Bt = wconv(FB, KX["blur"]) / P["F0"]
     hm = p[iM] * P["mem"]
@@ -107,7 +160,9 @@ def step(st, P, KA, Ko, KX, transport=True, coarse=False, fnoise=False, do_mut=T
         Ab = wconv(An, KX["blur"]); Qb = jnp.stack([wconv(pn[k] * An, KX["blur"]) for k in range(K)])
         ps = Qb / jnp.maximum(Ab[None], 1e-6)
         pn = jnp.where(Ab[None] > 1e-4, (1 - hom) * pn + hom * ps, pn)
-    pn = pn.at[iM].set(jnp.where(P["mem"] > 0, pn[iM] + P["alpha"] * (o[3] - pn[iM]), pn[iM]))     # обновление памяти
+    # Memory write uses the pre-advection output on the post-advection field (one-step spatial lag).
+    # Bodies move far less than the blur radius per step, and Part 18c keeps this order so a re-run of 18/18b matches.
+    pn = pn.at[iM].set(jnp.where(P["mem"] > 0, pn[iM] + P["alpha"] * (o[3] - pn[iM]), pn[iM]))
     Ub = wconv(An, KX["big"])
     decl = P["dec"] * jnp.exp(P["ks"] * jnp.maximum(Ub / P["U1"] - 1.0, 0.0))
     rate = P["keat"] * jnp.exp(P["pk"] * pn[0])
@@ -116,7 +171,7 @@ def step(st, P, KA, Ko, KX, transport=True, coarse=False, fnoise=False, do_mut=T
     ta, tb = targets(cc, P)
     Fn = F + P["rG"] * (ta - F) - eA
     FBn = FB + P["rG"] * (tb - FB) - eB
-    gain = jnp.where(sg > 0, eA - P["cp"] * eB, eB - P["cp"] * eA)
+    gain = food_gain(eA, eB, sg, P["cp"], jnp)
     An2 = jnp.maximum(An + gain - decl * An, 0.0)
     Rn = wconv(gain, KX["blur"]) / jnp.maximum(wconv(An2, KX["blur"]), 1e-4) / (P["keat"] * P["F0"])
     Rn = jnp.clip(Rn, -3.0, 3.0)
