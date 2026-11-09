@@ -33,6 +33,7 @@ Numbers below are copied from the part notes. There is no Part 11 notes file; th
 - **Part 18d** ([notes](experiments/part18/results/part18d_notes.md)). Mutable output biases $g_A/g_B$ (`mut_bias=0.05`) let evolution learn cue-switching. Full assay (4 seeds × 5 arms × 20k, ~$25): `bias_cue` ends A+/B− on 4/4 seeds vs 2/4 for `bias_nocue`; cue−nocue $\Delta(g_A-g_B)=+0.33$ (all seeds positive); B-season poison lower with cue in 3/4. Inputs baseline still fails. No early fusion. Oracle cue selects for seasonal switching across seeds.
 - **Part 18e** ([notes](experiments/part18/results/part18e_notes.md)). Pilot to raise within-body seasonal switching for `bias_cue` (18d within_al≈+0.26 vs planted≈+0.68; selection mostly replacement). Tried lower decay (`dec` 2.5e-5) and new `cue_lead=400` (brain sees future σ; default 0=legacy). Neither beat baseline on σ-aligned within in an 8k/1-switch pilot (~$4.7); lowdec hurt alignment. Full run not recommended yet.
 - **Part 18f** ([notes](experiments/part18/results/part18f_notes.md)). Longer-horizon pilot (12k, both season directions): baseline `bias_cue` within_aligned≈+0.45 ≈ planted +0.51. Higher `mut_bias` (0.10) and weaker `hom` (0.0125) hurt; `cue_lead` on planted fails sanity (−0.02). No full on these variants; optional confirmatory full of bias_cue vs nocue/planted.
+- **Part 18g** ([notes](experiments/part18/results/part18g_notes.md)). Confirmatory full (seeds 851–854 × {bias_cue, bias_nocue, planted} × 20k): 18f’s near-planted within_al for bias_cue (+0.45) did **not** replicate (+0.07); planted stays robust (+0.42). Cue−nocue Δwithin_al only +0.05 (3/4 +); Δ(gA−gB) −0.25 (unlike 18d +0.33). Within-body switching for non-planted bias_cue is seed-dependent.
 
 ## Installation
 
@@ -70,7 +71,7 @@ docs/                Notes and older reports
 archive/             Early searches, benchmarks, reservoir experiments
 ```
 
-## Table of Contents: Parts 1–18f
+## Table of Contents: Parts 1–18g
 
 | Part | Topic | Notes | Key Figure |
 |------|-------|-------|------------|
@@ -93,10 +94,11 @@ archive/             Early searches, benchmarks, reservoir experiments
 | 18d | Mutable output biases | [part18d_notes.md](experiments/part18/results/part18d_notes.md) | — |
 | 18e | Within-body switching pilot | [part18e_notes.md](experiments/part18/results/part18e_notes.md) | — |
 | 18f | Longer-horizon within_aligned | [part18f_notes.md](experiments/part18/results/part18f_notes.md) | — |
+| 18g | Confirmatory within_aligned full | [part18g_notes.md](experiments/part18/results/part18g_notes.md) | — |
 
 ## Data
 
-Simulation logs are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (public, CC-BY-4.0, 467 files under `part03`–`part18`, 1.59 GB). Part 18 also holds the 18b–18f runs. Per-part sizes, the log cadence, and where `bench_b300_0.pkl` and `bench_h100_0.pkl` sit are in [DATA.md](DATA.md).
+Simulation logs are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (public, CC-BY-4.0, 481 files under `part03`–`part18`, 1.60 GB). Part 18 also holds the 18b–18g runs. Per-part sizes, the log cadence, and where `bench_b300_0.pkl` and `bench_h100_0.pkl` sit are in [DATA.md](DATA.md).
 
 ```bash
 huggingface-cli download igor53627/5d --repo-type dataset
