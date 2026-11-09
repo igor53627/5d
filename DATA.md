@@ -3,8 +3,8 @@
 Simulation logs for the Hyperlife experiments are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d).
 
 - Public, license CC-BY-4.0.
-- 455 files under `part03`–`part18`, 1,585,046,815 bytes (1.59 GB). The dataset card and `.gitattributes` are extra.
-- Layout is `partXX/`. `part18/` includes the part 18 runs (`eco18/`), the part 18b runs (`eco18b/`, plus `warm18b.pkl`), the part 18c runs (`eco18c/`, plus `manifest.json` and summaries), the part 18d runs (`eco18d/`: pilots `b18dp_*`/`b18dp2_*`, full `b18d_*`, `manifest.json`, summaries), and the part 18e pilot (`eco18e/`: `b18ep_*`, `manifest.json`, summary).
+- 467 files under `part03`–`part18`, 1,590,174,067 bytes (1.59 GB). The dataset card and `.gitattributes` are extra.
+- Layout is `partXX/`. `part18/` includes the part 18 runs (`eco18/`), the part 18b runs (`eco18b/`, plus `warm18b.pkl`), the part 18c runs (`eco18c/`, plus `manifest.json` and summaries), the part 18d runs (`eco18d/`: pilots `b18dp_*`/`b18dp2_*`, full `b18d_*`, `manifest.json`, summaries), the part 18e pilot (`eco18e/`: `b18ep_*`, `manifest.json`, summary), and the part 18f pilot (`eco18f/`: `b18fp_*`, `manifest.json`, summary).
 
 ## Download
 
@@ -40,7 +40,7 @@ Sizes are the sum of file bytes on the dataset, in decimal MB (1 MB = 10^6 bytes
 | 15 | Micro-brain logs | 41 | 62.43 MB |
 | 16 | Fusion test | 7 | 2.84 MB |
 | 17 | Poison-food logs | 20 | 19.06 MB |
-| 18 | Seasons, including 18b–18e (`eco18c/` pilots+full; `eco18d/` pilots+full mb=0.05; `eco18e/` pilot `b18ep_*` lowdec/cue_lead, `manifest.json`, summaries) | 130 | 78.65 MB |
+| 18 | Seasons, including 18b–18f (`eco18c/`–`eco18d/` pilots+full; `eco18e/` `b18ep_*`; `eco18f/` `b18fp_*` 12k mb10/lowhom/planted_lead, `manifest.json`, summaries) | 142 | 83.78 MB |
 
 ## Ecology log cadence
 

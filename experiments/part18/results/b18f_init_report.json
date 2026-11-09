@@ -1,0 +1,37 @@
+{
+ "numpy": "2.5.4",
+ "Ts": 8000.0,
+ "every": 200,
+ "steps": 12000,
+ "seeds": [
+  841,
+  842
+ ],
+ "mut_bias": 0.05,
+ "mut_bias_hi": 0.1,
+ "hom_base": 0.05,
+ "hom_low": 0.0125,
+ "cue_lead": 400.0,
+ "sign_changes": 2,
+ "taxis_repulsion": {
+  "v_rep": 0.10868857402238065,
+  "v_food": 0.11052904187783798,
+  "ratio": 0.9833485586757235,
+  "cap": 0.225,
+  "krep": 90.0,
+  "coarse": true
+ },
+ "arms": [
+  "bias_cue",
+  "bias_cue_mb10",
+  "bias_cue_lowhom",
+  "planted",
+  "planted_lead"
+ ],
+ "notes": [
+  "18f pilot: \u22652 season switches; raise within_aligned for bias_cue.",
+  "Variants: mut_bias=0.1, hom=0.0125; planted_lead cue_lead=400.0 sanity.",
+  "Dropped lowdec (18e: hurt within_aligned).",
+  "Budget target ~$5\u20138 for 10\u00d712000 H100 ecolist runs."
+ ]
+}
