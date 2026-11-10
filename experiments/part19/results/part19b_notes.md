@@ -10,7 +10,7 @@ Cost: 5.131 H100-hours (4649 s + 4612 s + 4617 s + 4593 s), about **$20.27** at 
 
 Raw logs: Hugging Face `part19/eco19b/` (`b19b_0.pkl`–`b19b_3.pkl`, `manifest.json`, `full19b_summary.json`).
 
-Primary readout is body-level coexistence: both species have at least one connected component of mass ≥ `0.15 M1` (the usual `run_eco` object cut). Time-to-loss is the first time a species drops all bodies and never recovers; held-to-end seeds are right-censored at 20k in the pooled CI. Mass can linger as a diffuse field with zero bodies, so mass-only “coexist” is secondary. Periods are FFT dominant period and autocorrelation; lags use the smallest `|lag|` among near-ties. Pooled 95% CIs are bootstrap percentile, 10,000 resamples, seed 19.
+Primary readout is body-level coexistence: both species have at least one connected component of mass ≥ `0.15 M1` (the usual `run_eco` object cut). Time-to-loss is the first time a species drops all bodies and never recovers. The pooled time-to-loss interval is a right-censored mean at 20k: held-to-end seeds enter as 20000, so the upper bound is the horizon, not an unrestricted time to permanent loss. The analyzer skips a run whose checkpoint is `partial` or whose log ends before that 20k horizon, so an unfinished job is not counted as held. Mass can linger as a diffuse field with zero bodies, so mass-only “coexist” is secondary. Periods are FFT dominant period and autocorrelation; lags use the smallest `|lag|` among near-ties. Pooled 95% CIs are bootstrap percentile, 10,000 resamples, seed 19.
 
 ## Results
 
@@ -33,7 +33,7 @@ Mass is in units of the founder soliton `M1`. Start of every pred-arm run: about
 
 Pooled (mean and 95% bootstrap CI):
 
-| arm | held bodies | coexist bodies t | time-to-loss | frac both-bodies | n_A end | n_P end | M_A end | M_P end |
+| arm | held bodies | coexist bodies t | time-to-loss (right-censored at 20k) | frac both-bodies | n_A end | n_P end | M_A end | M_P end |
 |-----|------------:|-----------------:|-------------:|-----------------:|--------:|--------:|--------:|--------:|
 | low | 2/4 | 16850 [10850, 20000] | 16950 [11000, 20000] | 0.69 [0.48, 0.87] | 7.8 [0.5, 18.3] | 1.5 [0.0, 3.0] | 8.24 [2.11, 15.05] | 0.96 [0.33, 1.43] |
 | mid | 0/4 | 4700 [4200, 5200] | 5050 [4700, 5400] | 0.21 [0.19, 0.23] | 1.8 [0.5, 3.3] | 0.0 [0.0, 0.0] | 8.18 [4.80, 11.55] | 1.23 [0.82, 1.59] |

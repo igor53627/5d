@@ -72,6 +72,11 @@ def _arm_block(sub):
         elif r.get("held_bodies"):
             loss_for_ci.append(r["t_final"])
     n_held = sum(1 for r in sub if r.get("held_bodies"))
+    # Held seeds enter as t_final, so this CI is right-censored at the horizon
+    # (20k), not an unrestricted mean time to permanent loss.
+    loss_ci = M.bootstrap_ci(loss_for_ci, seed=BOOT_SEED)
+    loss_ci["right_censored"] = True
+    loss_ci["censor_at"] = float(MIN_T_FINAL)
     return dict(
         n=len(sub),
         kpred=sub[0]["kpred"] if sub else None,
@@ -95,7 +100,7 @@ def _arm_block(sub):
         ci=dict(
             coexist_bodies_t=_ci(sub, "coexist_bodies_t"),
             frac_bodies=_ci(sub, "frac_bodies"),
-            time_to_loss=M.bootstrap_ci(loss_for_ci, seed=BOOT_SEED),
+            time_to_loss=loss_ci,
             mA_final=_ci(sub, "mA_final"),
             mP_final=_ci(sub, "mP_final"),
             nA_final=_ci(sub, "nA_final"),

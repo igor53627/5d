@@ -198,10 +198,21 @@ def step(st, P, KA, Ko, KX, transport=True, coarse=False, fnoise=False, do_mut=T
     # equals sum(AP*A_s) when the cap is slack. coarse=True (pool2 then up2)
     # can break that identity slightly, and the min cap can bind, so scale the
     # predator-side field to make total gain = eff * actual prey loss.
-    P_s = wconv(Pn, Ke); A_s = wconv(An, Ke)
+    # FFT rounding can leave tiny negatives when the fields do not overlap.
+    # Clamp those, and emit zero gain when the positive feeding total is ~0
+    # so a 1e-30 denominator cannot amplify that noise into a large gain.
+    P_s = jnp.maximum(wconv(Pn, Ke), 0.0)
+    A_s = jnp.maximum(wconv(An, Ke), 0.0)
     loss = jnp.minimum(P["kpred"] * An * P_s, An)
-    raw_gain = P["kpred"] * Pn * A_s
-    gain = raw_gain * (P["eff"] * loss.sum() / jnp.maximum(raw_gain.sum(), jnp.float32(1e-30)))
+    raw_gain = jnp.maximum(P["kpred"] * Pn * A_s, 0.0)
+    pos_sum = raw_gain.sum()
+    loss_sum = loss.sum()
+    scale = jnp.where(
+        (pos_sum > jnp.float32(1e-8)) & (loss_sum > jnp.float32(0.0)),
+        P["eff"] * loss_sum / pos_sum,
+        jnp.float32(0.0),
+    )
+    gain = raw_gain * scale
     UbP = wconv(Pn, KX["big"])
     decl_p = P["dec_p"] * jnp.exp(P["ks"] * jnp.maximum(UbP / P["U1"] - 1.0, 0.0))
     An2 = jnp.maximum(An + eat - decl * An - loss, 0.0)

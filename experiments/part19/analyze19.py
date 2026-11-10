@@ -126,6 +126,12 @@ def summarize_paths(paths, min_t=MIN_T_FINAL):
         )
     any_coexist = any(r["status"] == "coexist" for r in rows)
     any_bodies = any(r.get("status_bodies") == "coexist" for r in rows)
+    if not rows:
+        verdict = "no completed runs"
+    elif any_coexist:
+        verdict = "mass coexistence found; see status_bodies for intact prey/predator bodies"
+    else:
+        verdict = "no arm coexisted to the end; retune kpred/krep_x/eff before a full run"
     return dict(
         n_files=len(paths), n_runs=len(rows),
         n_skipped_incomplete=len(skipped),
@@ -136,9 +142,7 @@ def summarize_paths(paths, min_t=MIN_T_FINAL):
         runs=rows,
         any_coexist=any_coexist,
         any_bodies=any_bodies,
-        verdict=("mass coexistence found; see status_bodies for intact prey/predator bodies"
-                 if any_coexist else
-                 "no arm coexisted to the end; retune kpred/krep_x/eff before a full run"),
+        verdict=verdict,
     )
 
 

@@ -115,6 +115,35 @@ def test_predation_coarse_gain_matches_eff_times_loss():
     assert gain == pytest.approx(0.4 * loss, rel=1e-5, abs=1e-8)
 
 
+def _separated_step(coarse):
+    """Compact blobs far apart on the torus: feeding overlap should be ~0."""
+    L = 48
+    A = _blob(L, 6, 6, sig=1.2, amp=0.9)
+    AP = _blob(L, 30, 30, sig=1.2, amp=0.7)
+    st, P, KA, Ko, _, _, _ = _tiny(L, kpred=0.15, A=A, AP=AP)
+    KX = E3.kernels(L, 2, coarse=coarse)
+    s = {k: jnp.asarray(v) for k, v in st.items()}
+    return Z.step(s, P, KA, Ko, KX, do_mut=False, do_hom=False, coarse=coarse), AP
+
+
+def test_separated_fields_do_not_create_gain():
+    out, AP = _separated_step(False)
+    loss = float(np.asarray(out["D"][1]).sum())
+    gain = float(np.asarray(out["D"][2]).sum())
+    assert loss == pytest.approx(0.0, abs=1e-6)
+    assert gain == pytest.approx(0.0, abs=1e-6)
+    assert float(np.asarray(out["AP"]).sum()) == pytest.approx(float(AP.sum()), rel=1e-4, abs=1e-4)
+
+
+def test_separated_fields_coarse_do_not_create_gain():
+    out, AP = _separated_step(True)
+    loss = float(np.asarray(out["D"][1]).sum())
+    gain = float(np.asarray(out["D"][2]).sum())
+    assert loss == pytest.approx(0.0, abs=1e-6)
+    assert gain == pytest.approx(0.0, abs=1e-6)
+    assert float(np.asarray(out["AP"]).sum()) == pytest.approx(float(AP.sum()), rel=1e-4, abs=1e-4)
+
+
 def test_jsonable_bool_before_int_and_nonfinite_none():
     import json
     blob = M.jsonable(dict(flag=True, n=1, bad=float("nan"), inf=float("inf")))
@@ -147,6 +176,24 @@ def test_iter_runs_skips_partial_checkpoints():
     reasons = {tag: meta.get("incomplete") for tag, _, _, _, meta in flagged}
     assert reasons["pp_s191"] == "partial"
     assert reasons["pp_s192"] is None
+
+
+def test_no_completed_runs_verdict(tmp_path):
+    import pickle
+    import analyze19 as A
+    job = dict(
+        gpu="x", wall=1.0,
+        out={"pp_s191": dict(partial=True, runs=[
+            dict(eco=dict(kpred=0.015), log=[(0, [])], tot=[(8.0, 0.08)]),
+        ])},
+    )
+    path = tmp_path / "partial.pkl"
+    with open(path, "wb") as f:
+        pickle.dump(job, f)
+    summary = A.summarize_paths([path])
+    assert summary["n_runs"] == 0
+    assert summary["n_skipped_incomplete"] == 1
+    assert summary["verdict"] == "no completed runs"
 
 
 def test_avoidance_taxis_moves_prey_away():
@@ -224,8 +271,7 @@ def test_committed_19_specs():
 def test_committed_19b_specs():
     import run19b as Rb
     path = ROOT / "archive" / "specs" / "b19b_full.json"
-    if not path.exists():
-        Rb.write()
+    assert path.is_file(), "committed archive/specs/b19b_full.json is missing"
     spec = json.loads(path.read_text())
     assert len(spec) == 4
     assert Rb.SEEDS == (193, 194, 195, 196)

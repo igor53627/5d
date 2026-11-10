@@ -131,7 +131,9 @@
      "mean": 16950.0,
      "lo": 11000.0,
      "hi": 20000.0,
-     "n": 4
+     "n": 4,
+     "right_censored": true,
+     "censor_at": 20000.0
     },
     "mA_final": {
      "mean": 8.24199739471078,
@@ -324,7 +326,9 @@
      "mean": 5050.0,
      "lo": 4700.0,
      "hi": 5400.0,
-     "n": 4
+     "n": 4,
+     "right_censored": true,
+     "censor_at": 20000.0
     },
     "mA_final": {
      "mean": 8.177130937576294,
@@ -517,7 +521,9 @@
      "mean": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 4
+     "n": 4,
+     "right_censored": true,
+     "censor_at": 20000.0
     },
     "mA_final": {
      "mean": 26.348896503448486,
