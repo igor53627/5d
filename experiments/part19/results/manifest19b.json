@@ -1,0 +1,159 @@
+{
+ "part": "19b",
+ "dataset_path": "part19/eco19b/",
+ "project": "Hyperlife",
+ "description": "Part 19b confirmatory predator\u2013prey: 4 seeds (193\u2013196) \u00d7 kpred low 0.015 / mid 0.05 / prey-only control (kpred=0, n_pred=0), 4D L=48, 8 prey + 4 predators (or 0), 20000 steps. Primary readout: body-level coexistence and time-to-loss.",
+ "arms": [
+  "low",
+  "mid",
+  "preyonly"
+ ],
+ "kpred": {
+  "low": 0.015,
+  "mid": 0.05,
+  "preyonly": 0.0
+ },
+ "runs": {
+  "full": {
+   "prefix": "b19b",
+   "n": 4,
+   "seeds": [
+    193,
+    194,
+    195,
+    196
+   ],
+   "steps": 20000,
+   "pred_batch": 2,
+   "preyonly_batch": 1
+  }
+ },
+ "cost": {
+  "gpu_hours": 5.130755673845609,
+  "rate_usd_per_h100_h": 3.95,
+  "usd": 20.266484911690156,
+  "app": "ap-JBhs1xMKCsV6GXToX3hsEM"
+ },
+ "files": [
+  {
+   "file": "b19b_0.pkl",
+   "index": 0,
+   "run": "full",
+   "prefix": "b19b",
+   "seed": 193,
+   "tags": [
+    "pp_s193",
+    "preyonly_s193"
+   ],
+   "steps": 20000,
+   "L": 48,
+   "N": 4,
+   "n_prey": 8,
+   "n_pred": 4,
+   "arms": [
+    "low",
+    "mid",
+    "preyonly"
+   ],
+   "kpred": [
+    0.015,
+    0.05,
+    0.0
+   ],
+   "spec": "archive/specs/b19b_full.json",
+   "bytes": 1781489,
+   "wall_s": 4649.217153787613,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB"
+  },
+  {
+   "file": "b19b_1.pkl",
+   "index": 1,
+   "run": "full",
+   "prefix": "b19b",
+   "seed": 194,
+   "tags": [
+    "pp_s194",
+    "preyonly_s194"
+   ],
+   "steps": 20000,
+   "L": 48,
+   "N": 4,
+   "n_prey": 8,
+   "n_pred": 4,
+   "arms": [
+    "low",
+    "mid",
+    "preyonly"
+   ],
+   "kpred": [
+    0.015,
+    0.05,
+    0.0
+   ],
+   "spec": "archive/specs/b19b_full.json",
+   "bytes": 1922338,
+   "wall_s": 4611.661609172821,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB"
+  },
+  {
+   "file": "b19b_2.pkl",
+   "index": 2,
+   "run": "full",
+   "prefix": "b19b",
+   "seed": 195,
+   "tags": [
+    "pp_s195",
+    "preyonly_s195"
+   ],
+   "steps": 20000,
+   "L": 48,
+   "N": 4,
+   "n_prey": 8,
+   "n_pred": 4,
+   "arms": [
+    "low",
+    "mid",
+    "preyonly"
+   ],
+   "kpred": [
+    0.015,
+    0.05,
+    0.0
+   ],
+   "spec": "archive/specs/b19b_full.json",
+   "bytes": 1914723,
+   "wall_s": 4616.637893915176,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB"
+  },
+  {
+   "file": "b19b_3.pkl",
+   "index": 3,
+   "run": "full",
+   "prefix": "b19b",
+   "seed": 196,
+   "tags": [
+    "pp_s196",
+    "preyonly_s196"
+   ],
+   "steps": 20000,
+   "L": 48,
+   "N": 4,
+   "n_prey": 8,
+   "n_pred": 4,
+   "arms": [
+    "low",
+    "mid",
+    "preyonly"
+   ],
+   "kpred": [
+    0.015,
+    0.05,
+    0.0
+   ],
+   "spec": "archive/specs/b19b_full.json",
+   "bytes": 2384169,
+   "wall_s": 4593.203768968582,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB"
+  }
+ ]
+}

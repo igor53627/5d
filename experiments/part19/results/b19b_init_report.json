@@ -1,0 +1,47 @@
+{
+ "numpy": "2.5.4",
+ "steps": 20000,
+ "every": 200,
+ "seeds": [
+  193,
+  194,
+  195,
+  196
+ ],
+ "n_prey": 8,
+ "n_pred": 4,
+ "L": 48,
+ "N": 4,
+ "K": 33,
+ "kpred": {
+  "low": 0.015,
+  "mid": 0.05,
+  "preyonly": 0.0
+ },
+ "eff": 0.4,
+ "dec_p": 0.0006,
+ "ka": 1.0,
+ "kp": 1.0,
+ "krep_x": 5.0,
+ "arms": [
+  "low",
+  "mid",
+  "preyonly"
+ ],
+ "opts": {
+  "coarse": true,
+  "fnoise": true,
+  "m": 5
+ },
+ "keat": 0.01,
+ "dec": 0.0003,
+ "rF": 0.0001,
+ "F0": 0.08,
+ "notes": [
+  "Part 19b confirmatory: low (0.015) and mid (0.05) vs prey-only, 4 new seeds, 20k.",
+  "Same Part 15 world as the 19 pilot (4D L=48, 8 prey, 4 predators on pred arms).",
+  "Primary readout is body-level coexistence (n>=1 body of mass >=0.15 M1).",
+  "prey-only is kpred=0 and n_pred=0, a separate run_eco in the same container.",
+  "Budget target ~$15\u201320 (hard cap $28) for 4 H100 ecolist containers \u00d7 20000 steps."
+ ]
+}
