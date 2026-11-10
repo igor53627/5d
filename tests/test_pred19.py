@@ -255,9 +255,18 @@ def test_body_time_to_loss_and_acf():
     # Autocorr on a clean sine: period 1600.
     y = 2 + 0.5 * np.sin(2 * np.pi * t / 1600)
     per, r = M.autocorr_period(t, y)
-    assert per == pytest.approx(1600, rel=0.15)
+    assert per == 1600
     assert r > 0.5
     ci = M.bootstrap_ci([1.0, 2.0, 3.0, 4.0], n=2000, seed=1)
     assert ci["n"] == 4
     assert ci["lo"] < ci["mean"] < ci["hi"]
     assert ci["mean"] == pytest.approx(2.5)
+
+
+def test_autocorr_period_sine_is_exact():
+    """Peak lag is the sine period, not one logged frame short."""
+    t = np.arange(0, 8000, 200, dtype=float)
+    y = 2 + 0.5 * np.sin(2 * np.pi * t / 1600)
+    per, r = M.autocorr_period(t, y)
+    assert per == 1600
+    assert r > 0.5

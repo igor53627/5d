@@ -263,7 +263,7 @@ def autocorr_period(t, y, min_peaks=1, min_r=0.2):
     peaks = np.where((seg[1:-1] > seg[:-2]) & (seg[1:-1] > seg[2:]) & (seg[1:-1] >= min_r))[0]
     if len(peaks) < min_peaks:
         return None, None
-    k = int(peaks[0]) + lo
+    k = int(peaks[0]) + 1 + lo
     return float(k * dt), float(ac[k])
 
 
