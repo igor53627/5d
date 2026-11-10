@@ -34,6 +34,8 @@ Numbers below are copied from the part notes. There is no Part 11 notes file; th
 - **Part 18e** ([notes](experiments/part18/results/part18e_notes.md)). Pilot to raise within-body seasonal switching for `bias_cue` (18d within_al≈+0.26 vs planted≈+0.68; selection mostly replacement). Tried lower decay (`dec` 2.5e-5) and new `cue_lead=400` (brain sees future σ; default 0=legacy). Neither beat baseline on σ-aligned within in an 8k/1-switch pilot (~$4.7); lowdec hurt alignment. Full run not recommended yet.
 - **Part 18f** ([notes](experiments/part18/results/part18f_notes.md)). Longer-horizon pilot (12k, both season directions): baseline `bias_cue` within_aligned≈+0.45 ≈ planted +0.51. Higher `mut_bias` (0.10) and weaker `hom` (0.0125) hurt; `cue_lead` on planted fails sanity (−0.02). No full on these variants; optional confirmatory full of bias_cue vs nocue/planted.
 - **Part 18g** ([notes](experiments/part18/results/part18g_notes.md)). Confirmatory full (seeds 851–854 × {bias_cue, bias_nocue, planted} × 20k): 18f’s near-planted within_al for bias_cue (+0.45) did **not** replicate (+0.07); planted stays robust (+0.42). Cue−nocue Δwithin_al only +0.05 (3/4 +); Δ(gA−gB) −0.25 (unlike 18d +0.33). Within-body switching for non-planted bias_cue is seed-dependent.
+- **Part 18h** ([notes](experiments/part18/results/part18h_notes.md)). Competition pilot: 50/50 planted vs ordinary `bias_cue`, distinguished by a behavior-neutral lineage tag (`K=KB+1`). 18g season schedule, 20k, seeds 861–862, plus a tag-neutrality control (both halves `bias_cue`). Planted mass fraction rose 0.50→0.66 mean (0.56, 0.76) vs control ~0.54; no fixation. Planted within_own_aligned stayed large. Within-body switching looks hard to find, not selected against. Cost ~$5.24.
+- **Part 18i** ([notes](experiments/part18/results/part18i_notes.md)). Four new seeds (855–858) on the 18g assay, pooled to 8 seeds/arm. bias_cue within_al +0.20 [0.07, 0.34]; nocue +0.03 [−0.01, 0.07]; planted +0.45 [0.24, 0.68]. Cue−nocue Δwithin_al +0.17 [0.04, 0.32] (CI excludes 0); Δ(gA−gB) −0.00 [−0.23, 0.25] (ns). Cue raises within-body switching, but moderately and below planted; 18d’s strong Δ(gA−gB) does not hold. Cost ~$15.05.
 
 ## Installation
 
@@ -71,7 +73,7 @@ docs/                Notes and older reports
 archive/             Early searches, benchmarks, reservoir experiments
 ```
 
-## Table of Contents: Parts 1–18g
+## Table of Contents: Parts 1–18i
 
 | Part | Topic | Notes | Key Figure |
 |------|-------|-------|------------|
@@ -95,10 +97,12 @@ archive/             Early searches, benchmarks, reservoir experiments
 | 18e | Within-body switching pilot | [part18e_notes.md](experiments/part18/results/part18e_notes.md) | — |
 | 18f | Longer-horizon within_aligned | [part18f_notes.md](experiments/part18/results/part18f_notes.md) | — |
 | 18g | Confirmatory within_aligned full | [part18g_notes.md](experiments/part18/results/part18g_notes.md) | — |
+| 18h | Competition pilot (planted vs cue) | [part18h_notes.md](experiments/part18/results/part18h_notes.md) | — |
+| 18i | More seeds, pooled 18g+18i | [part18i_notes.md](experiments/part18/results/part18i_notes.md) | — |
 
 ## Data
 
-Simulation logs are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (public, CC-BY-4.0, 481 files under `part03`–`part18`, 1.60 GB). Part 18 also holds the 18b–18g runs. Per-part sizes, the log cadence, and where `bench_b300_0.pkl` and `bench_h100_0.pkl` sit are in [DATA.md](DATA.md).
+Simulation logs are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (public, CC-BY-4.0, 501 files under `part03`–`part18`, 1,613,810,237 bytes, 1.61 GB). Part 18 also holds the 18b–18i runs. Per-part sizes, the log cadence, and where `bench_b300_0.pkl` and `bench_h100_0.pkl` sit are in [DATA.md](DATA.md).
 
 ```bash
 huggingface-cli download igor53627/5d --repo-type dataset

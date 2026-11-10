@@ -18,6 +18,9 @@ from fl_eco3 import kernels, pool2, up2, _noise, U1_of
 NIN, H, NOUT = 7, 3, 4
 NW = H * NIN + H + NOUT * H + NOUT          # 40
 K0 = 2; iM = K0 + NW; KB = iM + 1           # 43 канала (последний — память h)
+# Optional lineage tag: p[iL] when K>KB (K=KB+1). Not used by the brain or feeding.
+# Mutation pads extra channels with 0, so K=KB stays the legacy amp. Default runs keep K=KB.
+iL = iM + 1
 ND = 5
 # Sensory columns of W1. R, h and the oracle cue are the channels Part 18 added; A, B, Ub, Ufar come from Part 17.
 IN_A, IN_B, IN_R, IN_H, IN_CUE, IN_UB, IN_UFAR = range(NIN)
@@ -192,7 +195,8 @@ def step(st, P, KA, Ko, KX, transport=True, coarse=False, fnoise=False, do_mut=T
             jnp.where(mb >= 0.0, mb, P["mutw"]),
             w_amp,
         )
-        amp = jnp.concatenate([jnp.full((K0,), P["mutn"]), w_amp, jnp.zeros((1,))]).reshape((K,) + (1,) * N)
+        # K=KB → zeros(1) on memory (legacy). K>KB (lineage) → extra channels do not mutate.
+        amp = jnp.concatenate([jnp.full((K0,), P["mutn"]), w_amp, jnp.zeros((K - K0 - NW,))]).reshape((K,) + (1,) * N)
         pn = jnp.clip(pn + amp * np.sqrt(m) * nz * (An2[None] > 0.05), -1.0, 1.0)
     pn = jnp.where(An2[None] > 1e-6, pn, 0.0)
     ct = P["c_lo"] + (P["c_hi"] - P["c_lo"]) * jnp.clip(An2, 0.0, 1.0)
