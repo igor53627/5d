@@ -33,6 +33,7 @@ py-modules = [
     "fl_glider",
     "fl_jax",
     "fl_poison",
+    "fl_pred",
     "fl_season",
     "glider_coll",
     "helpers",

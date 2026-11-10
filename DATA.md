@@ -3,8 +3,8 @@
 Simulation logs for the Hyperlife experiments are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d).
 
 - Public, license CC-BY-4.0.
-- 501 files under `part03`–`part18`, 1,613,810,237 bytes (1.61 GB). The dataset card and `.gitattributes` are extra.
-- Layout is `partXX/`. `part18/` includes the part 18 runs (`eco18/`), the part 18b runs (`eco18b/`, plus `warm18b.pkl`), the part 18c runs (`eco18c/`, plus `manifest.json` and summaries), the part 18d runs (`eco18d/`: pilots `b18dp_*`/`b18dp2_*`, full `b18d_*`, `manifest.json`, summaries), the part 18e pilot (`eco18e/`: `b18ep_*`, `manifest.json`, summary), the part 18f pilot (`eco18f/`: `b18fp_*`, `manifest.json`, summary), the part 18g confirmatory full (`eco18g/`: `b18g_*`, `manifest.json`, summary), the part 18h competition pilot (`eco18h/`: `b18hp_*`, `manifest.json`, summary), and the part 18i more-seeds full (`eco18i/`: `b18i_*`, `manifest.json`, summary; pool with 18g).
+- 505 files under `part03`–`part19`, 1,615,102,711 bytes (1.62 GB). The dataset card and `.gitattributes` are extra.
+- Layout is `partXX/`. `part18/` includes the part 18 runs (`eco18/`), the part 18b runs (`eco18b/`, plus `warm18b.pkl`), the part 18c runs (`eco18c/`, plus `manifest.json` and summaries), the part 18d runs (`eco18d/`: pilots `b18dp_*`/`b18dp2_*`, full `b18d_*`, `manifest.json`, summaries), the part 18e pilot (`eco18e/`: `b18ep_*`, `manifest.json`, summary), the part 18f pilot (`eco18f/`: `b18fp_*`, `manifest.json`, summary), the part 18g confirmatory full (`eco18g/`: `b18g_*`, `manifest.json`, summary), the part 18h competition pilot (`eco18h/`: `b18hp_*`, `manifest.json`, summary), and the part 18i more-seeds full (`eco18i/`: `b18i_*`, `manifest.json`, summary; pool with 18g). `part19/` holds the part 19 predator–prey pilot (`eco19/`: `b19p_*`, `manifest.json`, summary).
 
 ## Download
 
@@ -41,10 +41,11 @@ Sizes are the sum of file bytes on the dataset, in decimal MB (1 MB = 10^6 bytes
 | 16 | Fusion test | 7 | 2.84 MB |
 | 17 | Poison-food logs | 20 | 19.06 MB |
 | 18 | Seasons, including 18b–18i (`eco18c/`–`eco18g/` as before; `eco18h/` competition pilot `b18hp_*`; `eco18i/` more seeds `b18i_*` 855–858 × cue/nocue/planted × 20k; manifests, summaries) | 176 | 107.41 MB |
+| 19 | Predator–prey pilot (`eco19/`: `b19p_*` seeds 191–192 × low/mid/high kpred × 6k, `manifest.json`, summary) | 4 | 1.29 MB |
 
 ## Ecology log cadence
 
-`run_eco` (`experiments/part10/glider_eco.py`) writes object lists (mass, center, phenotype) every `every` steps (default 100), and the spatial mean of the food field `F` on those same steps. A 2D projection is stored only on an object-log step whose time is a multiple of `proj_every` (default 500), because the check is `(k * every) % proj_every == 0`. The effective projection interval is lcm(`every`, `proj_every`): 500 steps at the defaults, and 1000 steps when `every=200` and `proj_every=500`. Checkpoints use `partial=True` while a run is in progress and `partial=False` when it finishes. These pickles are not full N-D lattice snapshots.
+`run_eco` (`experiments/part10/glider_eco.py`) writes object lists (mass, center, phenotype) every `every` steps (default 100), and the spatial mean of the food field `F` on those same steps. A 2D projection is stored only on an object-log step whose time is a multiple of `proj_every` (default 500), because the check is `(k * every) % proj_every == 0`. The effective projection interval is lcm(`every`, `proj_every`): 500 steps at the defaults, and 1000 steps when `every=200` and `proj_every=500`. Checkpoints use `partial=True` while a run is in progress and `partial=False` when it finishes. These pickles are not full N-D lattice snapshots. For `model="pred"` (Part 19), predator objects and masses are stored as `plog` / `ptot` beside the usual prey `log` / `tot`.
 
 ## Other files in the repo
 

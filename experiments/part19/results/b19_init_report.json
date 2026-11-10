@@ -1,0 +1,44 @@
+{
+ "numpy": "2.5.4",
+ "steps": 6000,
+ "every": 200,
+ "seeds": [
+  191,
+  192
+ ],
+ "n_prey": 8,
+ "n_pred": 4,
+ "L": 48,
+ "N": 4,
+ "K": 33,
+ "kpred": {
+  "low": 0.015,
+  "mid": 0.05,
+  "high": 0.15
+ },
+ "eff": 0.4,
+ "dec_p": 0.0006,
+ "ka": 1.0,
+ "kp": 1.0,
+ "krep_x": 5.0,
+ "arms": [
+  "low",
+  "mid",
+  "high"
+ ],
+ "opts": {
+  "coarse": true,
+  "fnoise": true,
+  "m": 5
+ },
+ "keat": 0.01,
+ "dec": 0.0003,
+ "rF": 0.0001,
+ "F0": 0.08,
+ "notes": [
+  "Part 19 pilot: coexistence smoke on 2 seeds \u00d7 3 kpred values.",
+  "World is Part 15 micro-brain ecology on 4D L=48 (not 56), 8 prey + 4 predators.",
+  "Verdict is coexistence / immediate extinction, not an arms-race claim.",
+  "Budget target ~$5 (hard cap $8) for 2 batched H100 ecolist runs \u00d7 6000 steps."
+ ]
+}

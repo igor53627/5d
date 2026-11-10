@@ -36,6 +36,8 @@ Numbers below are copied from the part notes. There is no Part 11 notes file; th
 - **Part 18g** ([notes](experiments/part18/results/part18g_notes.md)). Confirmatory full (seeds 851–854 × {bias_cue, bias_nocue, planted} × 20k): 18f’s near-planted within_al for bias_cue (+0.45) did **not** replicate (+0.07); planted stays robust (+0.42). Cue−nocue Δwithin_al only +0.05 (3/4 +); Δ(gA−gB) −0.25 (unlike 18d +0.33). Within-body switching for non-planted bias_cue is seed-dependent.
 - **Part 18h** ([notes](experiments/part18/results/part18h_notes.md)). Competition pilot: 50/50 planted vs ordinary `bias_cue`, distinguished by a behavior-neutral lineage tag (`K=KB+1`). 18g season schedule, 20k, seeds 861–862, plus a tag-neutrality control (both halves `bias_cue`). Planted mass fraction rose 0.50→0.66 mean (0.56, 0.76) vs control ~0.54; no fixation. Planted within_own_aligned stayed large. Within-body switching looks hard to find, not selected against. Cost ~$5.24.
 - **Part 18i** ([notes](experiments/part18/results/part18i_notes.md)). Four new seeds (855–858) on the 18g assay, pooled to 8 seeds/arm. bias_cue within_al +0.20 [0.07, 0.34]; nocue +0.03 [−0.01, 0.07]; planted +0.45 [0.24, 0.68]. Cue−nocue Δwithin_al +0.17 [0.04, 0.32] (CI excludes 0); Δ(gA−gB) −0.00 [−0.23, 0.25] (ns). Cue raises within-body switching, but moderately and below planted; 18d’s strong Δ(gA−gB) does not hold. Cost ~$15.05.
+- **Part 19** ([notes](experiments/part19/results/part19_notes.md)). Predator–prey smoke/pilot on the Part 15 world (4D L=48, 8 prey + 4 predators, 6k steps, ~$3.23). A second mass field consumes nearby prey. No immediate mass extinction on any of 2 seeds × 3 kpred values. `kpred=0.015–0.05` keeps prey bodies and predator mass; `kpred=0.15` wipes prey bodies by 2–3k. At most one half-cycle in 6k, not a period claim.
+
 
 ## Installation
 
@@ -67,13 +69,14 @@ experiments/         Per-part experiment scripts and results
   part06/            Long 5D CMA-ES
   ...
   part18/            Seasonal environments
+  part19/            Predator–prey
 figures/             PNG figures by part
 videos/              MP4 videos by part
 docs/                Notes and older reports
 archive/             Early searches, benchmarks, reservoir experiments
 ```
 
-## Table of Contents: Parts 1–18i
+## Table of Contents: Parts 1–19
 
 | Part | Topic | Notes | Key Figure |
 |------|-------|-------|------------|
@@ -99,10 +102,11 @@ archive/             Early searches, benchmarks, reservoir experiments
 | 18g | Confirmatory within_aligned full | [part18g_notes.md](experiments/part18/results/part18g_notes.md) | — |
 | 18h | Competition pilot (planted vs cue) | [part18h_notes.md](experiments/part18/results/part18h_notes.md) | — |
 | 18i | More seeds, pooled 18g+18i | [part18i_notes.md](experiments/part18/results/part18i_notes.md) | — |
+| 19 | Predator–prey pilot | [part19_notes.md](experiments/part19/results/part19_notes.md) | — |
 
 ## Data
 
-Simulation logs are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (public, CC-BY-4.0, 501 files under `part03`–`part18`, 1,613,810,237 bytes, 1.61 GB). Part 18 also holds the 18b–18i runs. Per-part sizes, the log cadence, and where `bench_b300_0.pkl` and `bench_h100_0.pkl` sit are in [DATA.md](DATA.md).
+Simulation logs are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (public, CC-BY-4.0, 505 files under `part03`–`part19`, 1,615,102,711 bytes, 1.62 GB). Part 18 also holds the 18b–18i runs; Part 19 is the predator–prey pilot. Per-part sizes, the log cadence, and where `bench_b300_0.pkl` and `bench_h100_0.pkl` sit are in [DATA.md](DATA.md).
 
 ```bash
 huggingface-cli download igor53627/5d --repo-type dataset

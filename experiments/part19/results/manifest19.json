@@ -1,0 +1,84 @@
+{
+ "part": "19",
+ "dataset_path": "part19/eco19/",
+ "project": "Hyperlife",
+ "description": "Part 19 predator\u2013prey smoke/pilot: 2 seeds \u00d7 3 kpred values, 4D L=48, 8 prey + 4 predators, 6000 steps. Check coexistence (no immediate extinction).",
+ "arms": [
+  "low",
+  "mid",
+  "high"
+ ],
+ "kpred": {
+  "low": 0.015,
+  "mid": 0.05,
+  "high": 0.15
+ },
+ "runs": {
+  "pilot": {
+   "prefix": "b19p",
+   "n": 2,
+   "seeds": [
+    191,
+    192
+   ],
+   "steps": 6000,
+   "batch": 3
+  }
+ },
+ "files": [
+  {
+   "file": "b19p_0.pkl",
+   "index": 0,
+   "run": "pilot",
+   "prefix": "b19p",
+   "seed": 191,
+   "tag": "pp_s191",
+   "steps": 6000,
+   "L": 48,
+   "N": 4,
+   "n_prey": 8,
+   "n_pred": 4,
+   "arms": [
+    "low",
+    "mid",
+    "high"
+   ],
+   "kpred": [
+    0.015,
+    0.05,
+    0.15
+   ],
+   "spec": "archive/specs/b19_pilot.json",
+   "bytes": 612488,
+   "wall_s": 1454.7864105701447,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB"
+  },
+  {
+   "file": "b19p_1.pkl",
+   "index": 1,
+   "run": "pilot",
+   "prefix": "b19p",
+   "seed": 192,
+   "tag": "pp_s192",
+   "steps": 6000,
+   "L": 48,
+   "N": 4,
+   "n_prey": 8,
+   "n_pred": 4,
+   "arms": [
+    "low",
+    "mid",
+    "high"
+   ],
+   "kpred": [
+    0.015,
+    0.05,
+    0.15
+   ],
+   "spec": "archive/specs/b19_pilot.json",
+   "bytes": 671827,
+   "wall_s": 1491.3618323802948,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB"
+  }
+ ]
+}
