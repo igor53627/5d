@@ -1,4 +1,5 @@
 """Part 19 metrics: coexistence, cycles, overlap, arms-race indicators."""
+import math
 import numpy as np
 
 THRESH = 0.15  # in units of founder mass M1
@@ -338,3 +339,20 @@ def summarize_run(run, thresh=THRESH):
         body_loss_t=loss_t,
         held_bodies=status_bodies == "coexist",
     )
+
+
+def jsonable(x):
+    """Convert numpy scalars for JSON: bool before int, non-finite floats to None."""
+    if isinstance(x, dict):
+        return {k: jsonable(v) for k, v in x.items()}
+    if isinstance(x, (list, tuple)):
+        return [jsonable(v) for v in x]
+    if isinstance(x, (np.bool_, bool)):
+        return bool(x)
+    if isinstance(x, (np.floating, float)):
+        v = float(x)
+        return v if math.isfinite(v) else None
+    if isinstance(x, (np.integer, int)):
+        return int(x)
+    return x
+

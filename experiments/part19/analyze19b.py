@@ -7,6 +7,7 @@ import numpy as np
 import _path  # noqa: F401
 import metrics19 as M
 import run19b as R
+import analyze19 as A19
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "experiments" / "part19" / "results" / "full19b_summary.json"
@@ -14,6 +15,7 @@ OUT = ROOT / "experiments" / "part19" / "results" / "full19b_summary.json"
 ARMS = list(R.ARMS)
 KPRED = dict(R.KPRED)
 BOOT_SEED = 19
+MIN_T_FINAL = R.STEPS
 
 
 def load_job(path):
@@ -21,17 +23,18 @@ def load_job(path):
         return pickle.load(f)
 
 
-def iter_runs(job):
+def iter_runs(job, include_partial=False, min_t=None):
     out = job.get("out")
     payload = out[0] if isinstance(out, list) and out else out
     if not isinstance(payload, dict):
         return
-    meta = dict(gpu=job.get("gpu"), wall=job.get("wall"), kind=job.get("kind"))
+    base_meta = dict(gpu=job.get("gpu"), wall=job.get("wall"), kind=job.get("kind"))
     for tag, res in payload.items():
         if tag == "summary" or not isinstance(res, dict) or "runs" not in res:
             continue
         n_pred = int(res.get("n_pred") or 0)
         for run in res["runs"]:
+            reason = A19._incomplete_reason(res, run, min_t=min_t)
             eco = run.get("eco") or {}
             kpred = float(eco.get("kpred", float("nan")))
             arm = None
@@ -50,6 +53,9 @@ def iter_runs(job):
             for part in tag.split("_"):
                 if part.startswith("s") and part[1:].isdigit():
                     seed = int(part[1:])
+            meta = dict(base_meta, incomplete=reason, tag=tag)
+            if reason and not include_partial:
+                continue
             yield tag, arm, seed, run, meta
 
 
@@ -106,8 +112,9 @@ def _arm_block(sub):
     )
 
 
-def summarize_paths(paths):
+def summarize_paths(paths, min_t=MIN_T_FINAL):
     rows = []
+    skipped = []
     walls, gpus = [], set()
     for path in paths:
         job = load_job(path)
@@ -115,11 +122,15 @@ def summarize_paths(paths):
             walls.append(float(job["wall"]))
         if job.get("gpu"):
             gpus.add(str(job["gpu"]))
-        for tag, arm, seed, run, meta in iter_runs(job):
-            rec = M.summarize_run(run)
-            rec.update(file=Path(path).name, tag=tag, arm=arm, seed=seed,
+        for tag, arm, seed, run, meta in iter_runs(job, include_partial=True, min_t=min_t):
+            rec = dict(file=Path(path).name, tag=tag, arm=arm, seed=seed,
                        kpred=float((run.get("eco") or {}).get("kpred", float("nan"))),
-                       gpu=meta.get("gpu"), wall=meta.get("wall"))
+                       gpu=meta.get("gpu"), wall=meta.get("wall"),
+                       incomplete=meta.get("incomplete"))
+            if meta.get("incomplete"):
+                skipped.append(rec)
+                continue
+            rec.update(M.summarize_run(run))
             rows.append(rec)
     order = {a: i for i, a in enumerate(ARMS)}
     by_arm = {}
@@ -130,6 +141,8 @@ def summarize_paths(paths):
     n_held = sum(1 for r in pred_rows if r.get("held_bodies"))
     return dict(
         n_files=len(paths), n_runs=len(rows),
+        n_skipped_incomplete=len(skipped),
+        skipped_incomplete=skipped,
         walls_s=walls, gpu_hours=sum(walls) / 3600.0 if walls else 0.0,
         gpus=sorted(gpus),
         by_arm=by_arm,
@@ -139,27 +152,13 @@ def summarize_paths(paths):
     )
 
 
-def py(x):
-    if isinstance(x, dict):
-        return {k: py(v) for k, v in x.items()}
-    if isinstance(x, (list, tuple)):
-        return [py(v) for v in x]
-    if isinstance(x, (np.floating, float)):
-        return float(x)
-    if isinstance(x, (np.integer, int)):
-        return int(x)
-    if isinstance(x, (np.bool_, bool)):
-        return bool(x)
-    return x
-
-
 def main(argv):
     paths = [Path(p) for p in argv] if argv else []
     if not paths:
         raise SystemExit("analyze19b.py pickle [pickle ...]")
     summary = summarize_paths(paths)
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(py(summary), indent=1) + "\n")
+    OUT.write_text(json.dumps(M.jsonable(summary), indent=1, allow_nan=False) + "\n")
     print("wrote", OUT)
     print("gpu_hours", round(summary["gpu_hours"], 3),
           "held_bodies", summary["n_pred_arm_held"], "/", summary["n_pred_arm"])

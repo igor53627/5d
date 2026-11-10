@@ -12,16 +12,18 @@ import fl_eco3 as E3
 from fl_eco3 import kernels, pool2, up2, _noise, U1_of
 
 NIN, H, NOUT = 4, 3, 4
-NW = H * NIN + H + NOUT * H + NOUT          # 35
-K0 = 2; KB = K0 + NW                        # 37
+NW = H * NIN + H + NOUT * H + NOUT          # 31
+K0 = 2; KB = K0 + NW                        # 33
 ND = 4
 IN_F, IN_UB, IN_UFAR, IN_PRED = range(NIN)
 OUT_GF, OUT_GR, OUT_GE, OUT_AV = range(NOUT)
 BKEYS = ["kb", "kr", "ke", "ce", "mutw", "ws", "rclamp",
-         "kpred", "eff", "dec_p", "ka", "kp", "krep_x"]
+         "kpred", "eff", "dec_p", "ka", "kp", "krep_x",
+         "pred_pursuit_evolve"]
 # kpred/ka/kp/krep_x = 0 → legacy prey-only forces and no mass transfer.
 BDEF = dict(kb=0.0, kr=0.0, ke=0.0, ce=0.0, mutw=None, ws=2.0, rclamp=0.0,
-            kpred=0.0, eff=0.4, dec_p=0.0, ka=0.0, kp=0.0, krep_x=0.0)
+            kpred=0.0, eff=0.4, dec_p=0.0, ka=0.0, kp=0.0, krep_x=0.0,
+            pred_pursuit_evolve=1.0)
 
 
 def w1_flat(h, col):
@@ -169,7 +171,10 @@ def step(st, P, KA, Ko, KX, transport=True, coarse=False, fnoise=False, do_mut=T
     scale = P["dtA"] * 10.0
     v_prey = [(P["kb"] * o_pre_p[OUT_GF] * gF[k] - P["kr"] * o_pre_p[OUT_GR] * gU_a[k]
                - P["ka"] * o_pre_p[OUT_AV] * gP[k] - P["krep_x"] * gU_p[k]) * scale for k in range(N)]
-    v_pred = [(P["kb"] * o_pre_h[OUT_GF] * gA[k] - P["kr"] * o_pre_h[OUT_GR] * gU_p[k]
+    # pred_pursuit_evolve defaults to 1, matching Parts 19/19b (shared kb=1).
+    # Set it to 0 to keep only the fixed kp term, without changing prey kb.
+    v_pred = [(P["kb"] * P["pred_pursuit_evolve"] * o_pre_h[OUT_GF] * gA[k]
+               - P["kr"] * o_pre_h[OUT_GR] * gU_p[k]
                + P["kp"] * gA[k] - P["krep_x"] * gU_a[k]) * scale for k in range(N)]
     An, xn, yn, zn, pn, oA, vA, flA = _move(
         A, x, y, z, c, Q, s_prey, v_prey, P, KA, Ko, KX, wconv, conv, transport, do_hom, m, N)
@@ -189,10 +194,14 @@ def step(st, P, KA, Ko, KX, transport=True, coarse=False, fnoise=False, do_mut=T
     eat = e1 + e2
     F2n = F2 + P["rF"] * (P["F0"] - F2) - e2
     Fn = F + P["rF"] * (P["F0"] - F) - e1
-    # Neighborhood predation; Ke is DC-normalized so sums match when the cap is slack.
+    # Neighborhood predation. Ke is DC-normalized; on the fine grid, sum(A*P_s)
+    # equals sum(AP*A_s) when the cap is slack. coarse=True (pool2 then up2)
+    # can break that identity slightly, and the min cap can bind, so scale the
+    # predator-side field to make total gain = eff * actual prey loss.
     P_s = wconv(Pn, Ke); A_s = wconv(An, Ke)
     loss = jnp.minimum(P["kpred"] * An * P_s, An)
-    gain = P["eff"] * P["kpred"] * Pn * A_s
+    raw_gain = P["kpred"] * Pn * A_s
+    gain = raw_gain * (P["eff"] * loss.sum() / jnp.maximum(raw_gain.sum(), jnp.float32(1e-30)))
     UbP = wconv(Pn, KX["big"])
     decl_p = P["dec_p"] * jnp.exp(P["ks"] * jnp.maximum(UbP / P["U1"] - 1.0, 0.0))
     An2 = jnp.maximum(An + eat - decl * An - loss, 0.0)

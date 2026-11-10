@@ -108,7 +108,7 @@ archive/             Early searches, benchmarks, reservoir experiments
 
 ## Data
 
-Simulation logs are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (public, CC-BY-4.0, 511 files under `part03`–`part19`, 1,623,129,093 bytes, 1.62 GB). Part 18 also holds the 18b–18i runs; Part 19 also holds the 19b confirmatory run. Per-part sizes, the log cadence, and where `bench_b300_0.pkl` and `bench_h100_0.pkl` sit are in [DATA.md](DATA.md).
+Simulation logs are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (public, CC-BY-4.0, 511 files under `part03`–`part19`, 1,623,131,569 bytes, 1.62 GB). Part 18 also holds the 18b–18i runs; Part 19 also holds the 19b confirmatory run. Per-part sizes, the log cadence, and where `bench_b300_0.pkl` and `bench_h100_0.pkl` sit are in [DATA.md](DATA.md).
 
 ```bash
 huggingface-cli download igor53627/5d --repo-type dataset

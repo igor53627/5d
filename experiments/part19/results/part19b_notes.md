@@ -54,3 +54,8 @@ The usable window is narrower than the 6k pilot suggested. **`kpred=0.05` does n
 ## Recommended next step
 
 Do not start an arms-race arm (planted avoiders vs evolving avoidance / pursuit) until body-level coexistence is more reliable than 2/4 at 20k. A cheaper next probe, if wanted, is a short low-side scan around `kpred=0.015` (slightly lower kpred, or milder predator decay / higher `eff` / more founder predators) rather than another 20k mid run. Do not start a paid follow-up without an explicit yes.
+
+## Engine notes (what 19b actually ran)
+
+Same engine as the 19 pilot: `coarse=True`, `kb=1`, `kp=1`. See [part19_notes.md](part19_notes.md) for the coarse-gain bound and the `pred_pursuit_evolve` knob. In short: predator gain was not logged, so the coarse-path `gain/(eff·loss)` ratio cannot be read from `ptot`; operator checks put the mismatch well below 1% on 4D fields like these runs. Evolving pursuit (`kb·g_F·∇Ã`) was on, on top of fixed `kp`. All four `b19b_*.pkl` jobs have `partial=False` on every `run_eco` result, with logs through t=20000 (101 frames); none of the 12 counted runs were incomplete. The body-coexistence table and the mid-vs-low verdict are unchanged: a sub-percent conversion error and already-on evolving pursuit do not explain why mid loses predator bodies at ~5k while low only holds 2/4 seeds to 20k.
+

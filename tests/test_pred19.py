@@ -61,8 +61,11 @@ def test_defaults_are_off():
     P = Z.params({})
     assert float(P["kpred"]) == 0.0
     assert float(P["ka"]) == 0.0
+    assert Z.NW == 31 and Z.KB == 33
     assert Z.KB == Z.K0 + Z.NW
     assert Z.NIN == 4 and Z.NOUT == 4
+    assert Z.BDEF["pred_pursuit_evolve"] == 1.0
+    assert float(P["pred_pursuit_evolve"]) == 1.0
 
 
 def test_kpred_zero_transfers_no_mass():
@@ -94,6 +97,56 @@ def test_predation_transfers_mass_near_efficiency():
     assert 0.25 <= ratio <= 0.6
     assert float(np.asarray(out["A"]).sum()) < float(A.sum())
     assert float(np.asarray(out["AP"]).sum()) > float(AP.sum())
+
+
+def test_predation_coarse_gain_matches_eff_times_loss():
+    """Pilot path (coarse=True): total gain must equal eff * actual prey loss."""
+    L = 32
+    A = _blob(L, 8, 8, sig=3.0, amp=0.8)
+    # Offset, slightly sparse overlap — the case where pool2/up2 is least symmetric.
+    AP = _blob(L, 14, 20, sig=3.0, amp=0.6)
+    st, P, KA, Ko, _, _, eco = _tiny(L, kpred=0.05, A=A, AP=AP)
+    KX = E3.kernels(L, 2, coarse=True)
+    s = {k: jnp.asarray(v) for k, v in st.items()}
+    out = Z.step(s, P, KA, Ko, KX, do_mut=False, do_hom=False, coarse=True)
+    loss = float(np.asarray(out["D"][1]).sum())
+    gain = float(np.asarray(out["D"][2]).sum())
+    assert loss > 1e-4
+    assert gain == pytest.approx(0.4 * loss, rel=1e-5, abs=1e-8)
+
+
+def test_jsonable_bool_before_int_and_nonfinite_none():
+    import json
+    blob = M.jsonable(dict(flag=True, n=1, bad=float("nan"), inf=float("inf")))
+    assert blob["flag"] is True
+    assert blob["n"] == 1
+    assert blob["bad"] is None and blob["inf"] is None
+    json.dumps(blob, allow_nan=False)
+    # Numpy bool must not become 1.
+    assert M.jsonable(np.bool_(True)) is True
+
+
+def test_iter_runs_skips_partial_checkpoints():
+    import analyze19 as A
+    job = dict(
+        gpu="x", wall=1.0, kind="ecolist",
+        out={
+            "pp_s191": dict(partial=True, runs=[
+                dict(eco=dict(kpred=0.015), log=[(0, [])], tot=[(8.0, 0.08)]),
+            ]),
+            "pp_s192": dict(partial=False, runs=[
+                dict(eco=dict(kpred=0.015),
+                     log=[(t, []) for t in range(0, 6001, 200)],
+                     tot=[(8.0, 0.08)] * 31),
+            ]),
+        },
+    )
+    kept = list(A.iter_runs(job, min_t=A.MIN_T_FINAL))
+    assert [k[0] for k in kept] == ["pp_s192"]
+    flagged = list(A.iter_runs(job, include_partial=True, min_t=A.MIN_T_FINAL))
+    reasons = {tag: meta.get("incomplete") for tag, _, _, _, meta in flagged}
+    assert reasons["pp_s191"] == "partial"
+    assert reasons["pp_s192"] is None
 
 
 def test_avoidance_taxis_moves_prey_away():

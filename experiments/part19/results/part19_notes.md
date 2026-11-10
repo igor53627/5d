@@ -39,3 +39,12 @@ The mechanics work, and there is a usable window around **`kpred=0.015–0.05`**
 ## Recommended next step
 
 A confirmatory mid (and low) run at 20k steps, 4 seeds, plus a prey-only control was approved and run as Part 19b. Results: [part19b_notes.md](part19b_notes.md).
+
+## Engine notes (what the pilot actually ran)
+
+The 19 pilot used `opts={"coarse": true, "fnoise": true, "m": 5}` and the Part 15 ecology knob `kb=1`. That has two consequences, documented here rather than hidden by a silent engine change.
+
+- **Coarse predation mass.** With `coarse=True`, predator gain was computed as `eff * kpred * AP * A_s` independently of the actual (capped) prey loss. Predator gain is not stored in `ptot` (only predator mass and prey loss / M1 are), so the realized `gain / (eff * loss)` cannot be recovered from the logs. Recomputing the old operator on 4D fields like the run (smooth blobs and random mass on the same `pool2`/`up2` path) gives a relative mismatch of about 10^{-6} on random 4D fields and at most a few 10^{-4} on sparse ones; awkward 2D placements can reach ~0.3%. The `min` cap does not bind at the pilot `kpred` values unless predator density is unrealistically high (`P_s > 1/kpred`). The engine is now mass-consistent (`sum(gain) = eff * sum(loss)`), but the 19/19b numbers were produced with the old formula. A sub-percent efficiency offset cannot move the pilot verdict (high wipes prey bodies; mid/low keep prey and leftover predator mass).
+- **Evolving pursuit was on.** Predators share `kb` and `kr` with prey. With `kb=1`, a genome-dependent term `kb·g_F·∇Ã` was active in addition to the fixed `kp=1` term. Founder weights were random (`p_spread_pred=0.5`) and mutated (`mutw=0.004`). A new knob `pred_pursuit_evolve` (default 1) leaves that behaviour unchanged; set it to 0 later to isolate fixed `kp` without zeroing prey `kb`.
+- **No partial checkpoints were counted.** Both `b19p_*.pkl` jobs have `partial=False` and logs through t=6000 (31 frames). The analyzer now skips/flags unfinished checkpoints.
+

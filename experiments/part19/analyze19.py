@@ -13,6 +13,8 @@ OUT = ROOT / "experiments" / "part19" / "results" / "pilot19_summary.json"
 
 ARMS = list(R.ARMS)
 KPRED = dict(R.KPRED)
+# Default: only count finished run_eco results that reached the planned horizon.
+MIN_T_FINAL = R.STEPS
 
 
 def load_job(path):
@@ -21,8 +23,19 @@ def load_job(path):
     return d
 
 
-def iter_runs(job):
-    """Yield (tag, arm, seed, run_dict, meta)."""
+def _incomplete_reason(res, run, min_t=None):
+    """Why a run_eco result or one of its ecos should not count as finished."""
+    if res.get("partial") or run.get("partial"):
+        return "partial"
+    if min_t is not None:
+        t = run["log"][-1][0] if run.get("log") else None
+        if t is None or float(t) < float(min_t) - 1e-6:
+            return "short"
+    return None
+
+
+def iter_runs(job, include_partial=False, min_t=None):
+    """Yield (tag, arm, seed, run_dict, meta). Skips unfinished checkpoints by default."""
     out = job.get("out")
     if isinstance(out, list) and out:
         payload = out[0]
@@ -30,12 +43,13 @@ def iter_runs(job):
         payload = out
     if not isinstance(payload, dict):
         return
-    meta = dict(gpu=job.get("gpu"), wall=job.get("wall"), kind=job.get("kind"))
+    base_meta = dict(gpu=job.get("gpu"), wall=job.get("wall"), kind=job.get("kind"))
     # ecolist: {tag: run_eco_result, summary: ...}
     for tag, res in payload.items():
         if tag == "summary" or not isinstance(res, dict) or "runs" not in res:
             continue
         for i, run in enumerate(res["runs"]):
+            reason = _incomplete_reason(res, run, min_t=min_t)
             eco = run.get("eco") or {}
             kpred = float(eco.get("kpred", float("nan")))
             arm = None
@@ -52,11 +66,15 @@ def iter_runs(job):
                     seed = int(tag.split("s")[-1])
                 except ValueError:
                     seed = None
+            meta = dict(base_meta, incomplete=reason, tag=tag)
+            if reason and not include_partial:
+                continue
             yield tag, arm, seed, run, meta
 
 
-def summarize_paths(paths):
+def summarize_paths(paths, min_t=MIN_T_FINAL):
     rows = []
+    skipped = []
     walls = []
     gpus = set()
     for path in paths:
@@ -65,11 +83,15 @@ def summarize_paths(paths):
             walls.append(float(job["wall"]))
         if job.get("gpu"):
             gpus.add(str(job["gpu"]))
-        for tag, arm, seed, run, meta in iter_runs(job):
-            rec = M.summarize_run(run)
-            rec.update(file=Path(path).name, tag=tag, arm=arm, seed=seed,
+        for tag, arm, seed, run, meta in iter_runs(job, include_partial=True, min_t=min_t):
+            rec = dict(file=Path(path).name, tag=tag, arm=arm, seed=seed,
                        kpred=float((run.get("eco") or {}).get("kpred", float("nan"))),
-                       gpu=meta.get("gpu"), wall=meta.get("wall"))
+                       gpu=meta.get("gpu"), wall=meta.get("wall"),
+                       incomplete=meta.get("incomplete"))
+            if meta.get("incomplete"):
+                skipped.append(rec)
+                continue
+            rec.update(M.summarize_run(run))
             rows.append(rec)
     by_arm = {}
     for arm in sorted({r["arm"] for r in rows}, key=lambda a: KPRED.get(a, 99)):
@@ -106,6 +128,8 @@ def summarize_paths(paths):
     any_bodies = any(r.get("status_bodies") == "coexist" for r in rows)
     return dict(
         n_files=len(paths), n_runs=len(rows),
+        n_skipped_incomplete=len(skipped),
+        skipped_incomplete=skipped,
         walls_s=walls, gpu_hours=sum(walls) / 3600.0 if walls else 0.0,
         gpus=sorted(gpus),
         by_arm=by_arm,
@@ -124,20 +148,7 @@ def main(argv):
         raise SystemExit("analyze19.py pickle [pickle ...]")
     summary = summarize_paths(paths)
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    # numpy types
-    def py(x):
-        if isinstance(x, dict):
-            return {k: py(v) for k, v in x.items()}
-        if isinstance(x, (list, tuple)):
-            return [py(v) for v in x]
-        if isinstance(x, (np.floating, float)):
-            return float(x)
-        if isinstance(x, (np.integer, int)):
-            return int(x)
-        if isinstance(x, (np.bool_, bool)):
-            return bool(x)
-        return x
-    OUT.write_text(json.dumps(py(summary), indent=1) + "\n")
+    OUT.write_text(json.dumps(M.jsonable(summary), indent=1, allow_nan=False) + "\n")
     print("wrote", OUT)
     print("gpu_hours", round(summary["gpu_hours"], 3), "verdict:", summary["verdict"])
     for arm, rec in summary["by_arm"].items():

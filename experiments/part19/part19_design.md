@@ -40,9 +40,15 @@ consume nearby prey:
 - Let `K_eat` be the body-scale blur kernel, normalized so it sums to 1.
 - `P_s = conv(AP, K_eat)`, `A_s = conv(A, K_eat)`.
 - Prey loss at a cell: `loss = min(kpred * A * P_s, A)`.
-- Predator gain at a cell: `gain = eff * kpred * AP * A_s`.
-- For a symmetric normalized kernel, `sum(A * P_s) = sum(AP * A_s)` when the
-  `min` cap is not binding, so total gain is about `eff` times total loss.
+- Predator gain starts from the same kernel product,
+  `raw_gain = kpred * AP * A_s`, then is scaled so
+  `sum(gain) = eff * sum(loss)` (mass-consistent). The spatial pattern of
+  `raw_gain` is kept.
+- For a symmetric normalized kernel on the fine grid, `sum(A * P_s) = sum(AP * A_s)`
+  when the `min` cap is not binding, and the scale factor is then just `eff`.
+  `coarse=True` (the Part 15/19 option: `pool2` then `up2`) can break that
+  identity slightly, which is why the scale is applied rather than writing
+  `gain = eff * raw_gain` directly.
 
 `kpred=0` (the default) makes both terms zero. `eff` is the conversion
 efficiency (typical values 0.2–0.6). Predators decay at `dec_p` (set higher
@@ -71,14 +77,23 @@ usual weight mutations (`mutw`). A planted-avoidance control can set the
 Predators have the same brain layout. Their first input is prey scent
 `Ã = conv(A, blur) / U1` instead of food. A fixed pursuit term,
 `v += dtA·10·(kp·∇Ã)`, is the default hunting behaviour for the pilot
-(`kp=0` keeps it off). Evolving pursuit (`kb` on the predator brain) is
-reserved for a later arms-race arm.
+(`kp=0` keeps it off). Predators also share the prey `kb` and `kr` gains:
+with `kb=1` (the Part 15 ecology knob used in the 19 pilot and 19b) this
+adds a genome-dependent term `kb·pred_pursuit_evolve·g_F·∇Ã`. The knob
+`pred_pursuit_evolve` defaults to 1, which is what the 19/19b runs actually
+used (evolving pursuit was on). Set it to 0 to keep only the fixed `kp`
+term, without changing prey food taxis. A later arms-race arm can compare
+`pred_pursuit_evolve=0` (frozen/fixed pursuit) against `=1`.
 
 ## Metrics
 
-Computed from `run_eco` logs. Prey stay in the usual `log` / `tot` fields.
-Predators are stored alongside as `plog` / `ptot` (mass, object list, and
-the current-step kill rate). Thresholds use the founder soliton mass `M1`.
+Computed from `run_eco` logs. Prey stay in the usual `log` / `tot` fields:
+`log` is `(time, object_list)` and `tot` is `(prey mass / M1, mean food)`.
+Predators are stored alongside as `plog` / `ptot` with the same split:
+`plog` is `(time, predator object_list)` and `ptot` is
+`(predator mass / M1, prey loss / M1)`. The second `ptot` entry is the
+current-step prey loss (the kill-rate series in `metrics19`); predator gain
+is not logged there. Thresholds use the founder soliton mass `M1`.
 
 | Metric | Definition |
 |--------|------------|
@@ -110,8 +125,10 @@ Shared knobs: Part 15 ecology (`keat=0.01`, `dec=3e-4`, `rF=1e-4`, `F0=0.08`,
 than the Part 15 `56^4` grid, same `opts`: coarse / fnoise / m=5). `eff=0.4`,
 `dec_p=6e-4` (twice prey decay), `kp=1`, `ka=1`, `krep_x=5`. Founders:
 8 prey + 4 predators, `p_spread=0.5`, seeds 191 and 192, 6000 steps, log
-every 200. Avoidance and pursuit channels are on so they can start to move,
-but the pilot verdict is coexistence, not a claim that avoidance evolved.
+every 200. Avoidance (`ka=1`) and fixed pursuit (`kp=1`) are on. Because
+the shared `kb=1` is also on and `pred_pursuit_evolve` defaults to 1, the
+pilot (and later 19b) also had evolving predator pursuit on. The verdict is
+coexistence, not a claim that avoidance or pursuit evolved.
 
 ### Later full assay (not in this patch)
 
@@ -124,8 +141,10 @@ Only if the pilot finds a non-extinct window:
 3. **No avoidance** — `ka=0`. Prey cannot steer from `AP`.
 4. **Planted avoiders** — `g_Av` bias set positive at init, same genomes
    otherwise.
-5. **Evolving pursuit** — predator `kb>0`, compare mean pursuit output
-   against a frozen-pursuit control.
+5. **Evolving pursuit** — compare `pred_pursuit_evolve=1` (the 19/19b
+   default) against a frozen-pursuit control with `pred_pursuit_evolve=0`
+   (fixed `kp` only). Do not reuse “`kb=0` for predators” as the control:
+   `kb` is shared with prey food taxis.
 6. **More seeds, longer horizon** (20k) on the mid rate, for periods and
    coexistence time with confidence intervals.
 
