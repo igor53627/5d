@@ -72,10 +72,10 @@ def _arm_block(sub):
         elif r.get("held_bodies"):
             loss_for_ci.append(r["t_final"])
     n_held = sum(1 for r in sub if r.get("held_bodies"))
-    # Held seeds enter as t_final, so this CI is right-censored at the horizon
-    # (20k), not an unrestricted mean time to permanent loss.
+    # Held seeds enter as t_final. The interval is right-censored at the horizon
+    # only when at least one of those seeds is still in the sample.
     loss_ci = M.bootstrap_ci(loss_for_ci, seed=BOOT_SEED)
-    loss_ci["right_censored"] = True
+    loss_ci["right_censored"] = n_held > 0
     loss_ci["censor_at"] = float(MIN_T_FINAL)
     return dict(
         n=len(sub),

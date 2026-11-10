@@ -327,7 +327,7 @@
      "lo": 4700.0,
      "hi": 5400.0,
      "n": 4,
-     "right_censored": true,
+     "right_censored": false,
      "censor_at": 20000.0
     },
     "mA_final": {
@@ -522,7 +522,7 @@
      "lo": 0.0,
      "hi": 0.0,
      "n": 4,
-     "right_censored": true,
+     "right_censored": false,
      "censor_at": 20000.0
     },
     "mA_final": {

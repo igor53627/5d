@@ -196,6 +196,27 @@ def test_no_completed_runs_verdict(tmp_path):
     assert summary["verdict"] == "no completed runs"
 
 
+def test_right_censored_only_when_bodies_held():
+    import analyze19b as A
+    base = dict(
+        kpred=0.015, seed=1, status_bodies="coexist", coexist_bodies_t=20000.0,
+        frac_bodies=0.5, mA_final=1.0, mP_final=1.0, nA_final=1, nP_final=1,
+        nA_mean=1.0, nP_mean=1.0, kill_mean=0.0, period_A=None, period_P=None,
+        period_A_acf=None, period_P_acf=None, pred_lag=None, pred_lag_r=None,
+        body_loss_who=None, body_loss_t=None, held_bodies=True, t_final=20000.0,
+    )
+    held = A._arm_block([base])["ci"]["time_to_loss"]
+    assert held["right_censored"] is True
+    assert held["censor_at"] == 20000.0
+    lost = dict(base, held_bodies=False, body_loss_t=5000.0, body_loss_who="pred",
+                status_bodies="prey_only")
+    assert A._arm_block([lost])["ci"]["time_to_loss"]["right_censored"] is False
+    summary = json.loads((ROOT / "experiments" / "part19" / "results" / "full19b_summary.json").read_text())
+    flags = {arm: summary["by_arm"][arm]["ci"]["time_to_loss"]["right_censored"]
+             for arm in ("low", "mid", "preyonly")}
+    assert flags == {"low": True, "mid": False, "preyonly": False}
+
+
 def test_avoidance_taxis_moves_prey_away():
     L = 32
     # Prey at the centre, predator to the right. g_Av>0 and ka>0 should push prey left.
