@@ -188,7 +188,102 @@ def mean_g_av(run, out_av_offset=None):
     return float(np.mean(vals)) if vals else None
 
 
+def bodies_alive(n, m, thresh=THRESH):
+    """True where the species has at least one object of mass >= 0.15 M1."""
+    return (np.asarray(n) >= 1) & (np.asarray(m) > thresh)
+
+
+def both_bodies(nA, nP, mA, mP, thresh=THRESH):
+    return bodies_alive(nA, mA, thresh) & bodies_alive(nP, mP, thresh)
+
+
+def first_body_loss(nA, nP, mA, mP, t, thresh=THRESH):
+    """First log time both species do not both have a body (may later recover)."""
+    t = np.asarray(t)
+    alive = both_bodies(nA, nP, mA, mP, thresh)
+    if len(t) == 0:
+        return None
+    if bool(alive[0]) is False:
+        return float(t[0])
+    lost = np.where(~alive)[0]
+    return None if len(lost) == 0 else float(t[lost[0]])
+
+
+def body_time_to_loss(nA, nP, mA, mP, t, thresh=THRESH):
+    """First time a species drops all bodies and never recovers.
+
+    Returns (who, t) with who in ('prey','pred','both', None). t is None if
+    both still have a body at the end (possibly after a temporary dip).
+    """
+    t = np.asarray(t)
+    a_down = ~bodies_alive(nA, mA, thresh)
+    p_down = ~bodies_alive(nP, mP, thresh)
+
+    def first_stay(down):
+        if not np.any(down):
+            return None
+        for i in np.where(down)[0]:
+            if np.all(down[i:]):
+                return int(i)
+        return None
+
+    iA, iP = first_stay(a_down), first_stay(p_down)
+    if iA is None and iP is None:
+        return None, None
+    if iA is None:
+        return "pred", float(t[iP])
+    if iP is None:
+        return "prey", float(t[iA])
+    if iA == iP:
+        return "both", float(t[iA])
+    if iA < iP:
+        return "prey", float(t[iA])
+    return "pred", float(t[iP])
+
+
+def autocorr_period(t, y, min_peaks=1, min_r=0.2):
+    """Period from the first positive peak of the detrended autocorrelation."""
+    t = np.asarray(t, float); y = _detrend(y)
+    n = len(y)
+    if n < 16 or float(np.std(y)) < 1e-12:
+        return None, None
+    dt = float(np.median(np.diff(t)))
+    if dt <= 0:
+        return None, None
+    ac = np.correlate(y, y, mode="full")[n - 1:]
+    if ac[0] == 0:
+        return None, None
+    ac = ac / ac[0]
+    # Ignore lag 0 and very short lags (< 3 frames). Search to half the window.
+    lo, hi = 3, n // 2
+    if hi <= lo:
+        return None, None
+    seg = ac[lo:hi]
+    peaks = np.where((seg[1:-1] > seg[:-2]) & (seg[1:-1] > seg[2:]) & (seg[1:-1] >= min_r))[0]
+    if len(peaks) < min_peaks:
+        return None, None
+    k = int(peaks[0]) + lo
+    return float(k * dt), float(ac[k])
+
+
+def bootstrap_ci(values, n=10000, alpha=0.05, seed=0):
+    """Percentile CI for the mean, resampling seeds with replacement."""
+    xs = [float(v) for v in values if v is not None and np.isfinite(v)]
+    if not xs:
+        return dict(mean=None, lo=None, hi=None, n=0)
+    mean = float(np.mean(xs))
+    if len(xs) == 1:
+        return dict(mean=mean, lo=None, hi=None, n=1)
+    rng = np.random.default_rng(seed)
+    arr = np.asarray(xs, float)
+    draws = rng.choice(arr, size=(n, len(arr)), replace=True).mean(axis=1)
+    lo = float(np.percentile(draws, 100 * alpha / 2))
+    hi = float(np.percentile(draws, 100 * (1 - alpha / 2)))
+    return dict(mean=mean, lo=lo, hi=hi, n=len(xs))
+
+
 def summarize_run(run, thresh=THRESH):
+
     t, mA = prey_mass(run)
     _, mP = pred_mass(run)
     _, nA = counts(run, "log")
@@ -209,6 +304,9 @@ def summarize_run(run, thresh=THRESH):
         status_bodies = "pred_only"
     else:
         status_bodies = "no_bodies"
+    perA_acf, rA_acf = autocorr_period(t, mA)
+    perP_acf, rP_acf = autocorr_period(t, mP)
+    loss_who, loss_t = body_time_to_loss(nA, nP, mA, mP, t, thresh)
     return dict(
         t_final=float(t[-1]) if len(t) else 0.0,
         mA_final=float(mA[-1]) if len(mA) else 0.0,
@@ -226,6 +324,17 @@ def summarize_run(run, thresh=THRESH):
         peaks_P=peak_count(_detrend(mP)),
         period_A=dominant_period(t, mA),
         period_P=dominant_period(t, mP),
+        period_A_acf=perA_acf,
+        period_P_acf=perP_acf,
+        period_A_acf_r=rA_acf,
+        period_P_acf_r=rP_acf,
         pred_lag=lag, pred_lag_r=r,
         kill_mean=float(np.mean(kill)) if len(kill) else 0.0,
+        nA_mean=float(np.mean(nA)) if len(nA) else 0.0,
+        nP_mean=float(np.mean(nP)) if len(nP) else 0.0,
+        frac_bodies=float(np.mean(bodies)) if len(bodies) else 0.0,
+        body_loss_first=first_body_loss(nA, nP, mA, mP, t, thresh),
+        body_loss_who=loss_who,
+        body_loss_t=loss_t,
+        held_bodies=status_bodies == "coexist",
     )

@@ -166,3 +166,45 @@ def test_committed_19_specs():
             assert e["kp"] == R.KP
             assert e["eff"] == R.EFF
             assert e["dec_p"] == R.DEC_P
+
+
+def test_committed_19b_specs():
+    import run19b as Rb
+    path = ROOT / "archive" / "specs" / "b19b_full.json"
+    if not path.exists():
+        Rb.write()
+    spec = json.loads(path.read_text())
+    assert len(spec) == 4
+    assert Rb.SEEDS == (193, 194, 195, 196)
+    assert set(Rb.SEEDS).isdisjoint({191, 192})
+    for item, seed in zip(spec, Rb.SEEDS):
+        assert len(item["runs"]) == 2
+        pred, only = item["runs"]
+        assert pred["n_pred"] == 4 and only["n_pred"] == 0
+        assert pred["steps"] == 20000 and only["steps"] == 20000
+        assert pred["seed"] == only["seed"] == seed
+        assert [e["kpred"] for e in pred["ecos"]] == [0.015, 0.05]
+        assert only["ecos"][0]["kpred"] == 0.0
+        assert pred["L"] == 48 and pred["model"] == "pred"
+
+
+def test_body_time_to_loss_and_acf():
+    t = np.arange(0, 8000, 200, dtype=float)
+    # Both have bodies until 4000, then predator never returns.
+    nA = np.where(t < 7000, 4, 4)
+    nP = np.where(t < 4000, 3, 0)
+    mA = np.full_like(t, 4.0)
+    mP = np.where(t < 4000, 2.0, 0.8)  # mass may linger
+    who, when = M.body_time_to_loss(nA, nP, mA, mP, t)
+    assert who == "pred"
+    assert when == 4000
+    assert M.first_body_loss(nA, nP, mA, mP, t) == 4000
+    # Autocorr on a clean sine: period 1600.
+    y = 2 + 0.5 * np.sin(2 * np.pi * t / 1600)
+    per, r = M.autocorr_period(t, y)
+    assert per == pytest.approx(1600, rel=0.15)
+    assert r > 0.5
+    ci = M.bootstrap_ci([1.0, 2.0, 3.0, 4.0], n=2000, seed=1)
+    assert ci["n"] == 4
+    assert ci["lo"] < ci["mean"] < ci["hi"]
+    assert ci["mean"] == pytest.approx(2.5)

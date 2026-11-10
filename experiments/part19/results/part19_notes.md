@@ -38,4 +38,4 @@ The mechanics work, and there is a usable window around **`kpred=0.015–0.05`**
 
 ## Recommended next step
 
-A confirmatory mid (and low) run at 20k steps, 4 seeds, plus a prey-only control (`kpred=0` or `n_pred=0`) so food-driven mass wiggles are not mistaken for cycles. Keep body-level coexistence as the primary readout. Budget on the order of $15–20. Do not start that run without an explicit yes. An arms-race arm (planted avoiders vs evolving avoidance / pursuit) only makes sense after a longer mid run actually holds both species as bodies.
+A confirmatory mid (and low) run at 20k steps, 4 seeds, plus a prey-only control was approved and run as Part 19b. Results: [part19b_notes.md](part19b_notes.md).
