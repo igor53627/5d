@@ -1,0 +1,53 @@
+{
+ "numpy": "2.5.4",
+ "steps": 20000,
+ "every": 200,
+ "seeds": [
+  197,
+  198,
+  199,
+  200
+ ],
+ "n_prey": 8,
+ "n_pred": 4,
+ "L": 48,
+ "N": 4,
+ "K": 33,
+ "kpred": {
+  "k005": 0.005,
+  "k010": 0.01
+ },
+ "compare_kpred": 0.015,
+ "compare_seeds": [
+  193,
+  194,
+  195,
+  196
+ ],
+ "eff": 0.4,
+ "dec_p": 0.0006,
+ "ka": 1.0,
+ "kp": 1.0,
+ "krep_x": 5.0,
+ "arms": [
+  "k005",
+  "k010"
+ ],
+ "opts": {
+  "coarse": true,
+  "fnoise": true,
+  "m": 5
+ },
+ "keat": 0.01,
+ "dec": 0.0003,
+ "rF": 0.0001,
+ "F0": 0.08,
+ "notes": [
+  "Part 19c low-side scan: kpred 0.005 and 0.01, 4 new seeds, 20k.",
+  "Same Part 15 world as the 19b low arm (4D L=48, 8 prey, 4 predators, coarse/fnoise/m=5).",
+  "pred_pursuit_evolve defaults to 1, as in Parts 19/19b (not set in the eco dict).",
+  "One container per seed, both kpred values batched (batch=2, n_pred=4).",
+  "19b seeds 193\u2013196 at kpred=0.015 are the comparison arm in analyze19c, not rerun.",
+  "Budget target ~$14.10 (hard cap ~$16) for 4 H100 ecolist containers \u00d7 20000 steps."
+ ]
+}

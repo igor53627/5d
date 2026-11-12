@@ -210,6 +210,18 @@ def first_body_loss(nA, nP, mA, mP, t, thresh=THRESH):
     return None if len(lost) == 0 else float(t[lost[0]])
 
 
+def species_time_to_loss(n, m, t, thresh=THRESH):
+    """First time this species drops all bodies and never recovers. None if held."""
+    t = np.asarray(t)
+    down = ~bodies_alive(n, m, thresh)
+    if not np.any(down):
+        return None
+    for i in np.where(down)[0]:
+        if np.all(down[i:]):
+            return float(t[i])
+    return None
+
+
 def body_time_to_loss(nA, nP, mA, mP, t, thresh=THRESH):
     """First time a species drops all bodies and never recovers.
 
@@ -338,6 +350,10 @@ def summarize_run(run, thresh=THRESH):
         body_loss_who=loss_who,
         body_loss_t=loss_t,
         held_bodies=status_bodies == "coexist",
+        held_prey=bool(aB),
+        held_pred=bool(pB),
+        prey_loss_t=species_time_to_loss(nA, mA, t, thresh),
+        pred_loss_t=species_time_to_loss(nP, mP, t, thresh),
     )
 
 

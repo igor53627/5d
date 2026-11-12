@@ -337,3 +337,71 @@ def test_autocorr_period_sine_is_exact():
     per, r = M.autocorr_period(t, y)
     assert per == 1600
     assert r > 0.5
+
+
+def test_species_time_to_loss_and_held_flags():
+    t = np.arange(0, 8000, 200, dtype=float)
+    nA = np.full_like(t, 4)
+    nP = np.where(t < 4000, 3, 0)
+    mA = np.full_like(t, 4.0)
+    mP = np.where(t < 4000, 2.0, 0.8)
+    assert M.species_time_to_loss(nP, mP, t) == 4000
+    assert M.species_time_to_loss(nA, mA, t) is None
+
+
+def test_committed_19c_specs():
+    import run19c as Rc
+    import run19b as Rb
+    path = ROOT / "archive" / "specs" / "b19c_full.json"
+    assert path.is_file(), "committed archive/specs/b19c_full.json is missing"
+    spec = json.loads(path.read_text())
+    assert len(spec) == 4
+    assert Rc.SEEDS == (197, 198, 199, 200)
+    assert set(Rc.SEEDS).isdisjoint({191, 192, *Rb.SEEDS})
+    c, eco, opts = Rc.base_world()
+    assert opts.get("coarse") is True
+    low_19b = Rb.arm_eco(eco, "low")
+    for item, seed in zip(spec, Rc.SEEDS):
+        assert len(item["runs"]) == 1
+        pred = item["runs"][0]
+        assert pred["n_pred"] == 4 and pred["n_init"] == 8
+        assert pred["steps"] == 20000 and pred["seed"] == seed
+        assert pred["batch"] == 2 and pred["L"] == 48 and pred["model"] == "pred"
+        assert [e["kpred"] for e in pred["ecos"]] == [0.005, 0.01]
+        for e in pred["ecos"]:
+            for k, v in low_19b.items():
+                if k == "kpred":
+                    continue
+                assert e[k] == v, (k, e[k], v)
+
+
+def test_analyze19c_pred_loss_censored_only_if_held_pred():
+    """right_censored follows n_held_pred, not a first-of-either body loss."""
+    import analyze19c as C
+    observed = [
+        dict(kpred=0.005, seed=197, pred_loss_t=4800.0, held_pred=False,
+             held_prey=True, held_bodies=False, t_final=20000.0),
+        dict(kpred=0.005, seed=198, pred_loss_t=5600.0, held_pred=False,
+             held_prey=True, held_bodies=False, t_final=20000.0),
+        dict(kpred=0.005, seed=199, pred_loss_t=4600.0, held_pred=False,
+             held_prey=False, held_bodies=False, t_final=20000.0),
+        dict(kpred=0.005, seed=200, pred_loss_t=5200.0, held_pred=False,
+             held_prey=True, held_bodies=False, t_final=20000.0),
+    ]
+    mid = C._arm_block(observed)
+    assert mid["n_held_pred"] == 0
+    assert mid["n_held_prey"] == 3
+    assert mid["n_held_bodies"] == 0
+    assert mid["ci"]["time_to_pred_loss"]["right_censored"] is False
+    assert mid["ci"]["time_to_pred_loss"]["censor_at"] == 20000.0
+    mixed = [
+        dict(kpred=0.01, seed=197, pred_loss_t=8000.0, held_pred=False,
+             held_prey=True, held_bodies=False, t_final=20000.0),
+        dict(kpred=0.01, seed=198, pred_loss_t=None, held_pred=True,
+             held_prey=True, held_bodies=True, t_final=20000.0),
+    ]
+    low = C._arm_block(mixed)
+    assert low["n_held_pred"] == 1
+    assert low["n_held_bodies"] == 1
+    assert low["ci"]["time_to_pred_loss"]["right_censored"] is True
+    assert low["ci"]["time_to_pred_loss"]["censor_at"] == 20000.0

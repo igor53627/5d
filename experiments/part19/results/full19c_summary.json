@@ -1,0 +1,1209 @@
+{
+ "n_files": 8,
+ "n_runs": 12,
+ "n_skipped_incomplete": 0,
+ "skipped_incomplete": [],
+ "walls_s": [
+  3284.0962603092194,
+  2655.1298015117645,
+  3274.7129130363464,
+  3317.1842958927155
+ ],
+ "gpu_hours": 3.480867575208346,
+ "gpus": [
+  "NVIDIA H100 80GB HBM3, 81559 MiB",
+  "NVIDIA H200, 143771 MiB"
+ ],
+ "by_arm": {
+  "k005": {
+   "n": 4,
+   "kpred": 0.005,
+   "seeds": [
+    197,
+    198,
+    199,
+    200
+   ],
+   "status_bodies": [
+    "coexist",
+    "coexist",
+    "prey_only",
+    "coexist"
+   ],
+   "n_held_pred": 3,
+   "n_held_prey": 4,
+   "n_held_bodies": 3,
+   "frac_held_pred": 0.75,
+   "frac_held_prey": 1.0,
+   "frac_held_bodies": 0.75,
+   "pred_loss_t": [
+    null,
+    null,
+    12200.0,
+    null
+   ],
+   "prey_loss_t": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "body_loss_who": [
+    null,
+    null,
+    "pred",
+    null
+   ],
+   "body_loss_t": [
+    null,
+    null,
+    12200.0,
+    null
+   ],
+   "coexist_bodies_t": [
+    20000.0,
+    20000.0,
+    12000.0,
+    20000.0
+   ],
+   "frac_bodies": [
+    0.7326732673267327,
+    0.6732673267326733,
+    0.32673267326732675,
+    1.0
+   ],
+   "mA_final": [
+    19.449535369873047,
+    19.303815841674805,
+    19.308441162109375,
+    12.722243309020996
+   ],
+   "mP_final": [
+    1.0154579877853394,
+    1.0581836700439453,
+    1.0668566226959229,
+    1.22039794921875
+   ],
+   "nA_final": [
+    26,
+    20,
+    33,
+    15
+   ],
+   "nP_final": [
+    1,
+    1,
+    0,
+    3
+   ],
+   "period_A": [
+    6733.333333333332,
+    10100.0,
+    10100.0,
+    10100.0
+   ],
+   "period_P": [
+    10100.0,
+    10100.0,
+    10100.0,
+    6733.333333333332
+   ],
+   "period_A_acf": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "period_P_acf": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "pred_lag": [
+    1800.0,
+    400.0,
+    4800.0,
+    3800.0
+   ],
+   "pred_lag_r": [
+    0.7399507118594443,
+    0.8477260665417032,
+    0.8593234769403253,
+    0.863596003710022
+   ],
+   "ci": {
+    "coexist_bodies_t": {
+     "mean": 18000.0,
+     "lo": 14000.0,
+     "hi": 20000.0,
+     "n": 4
+    },
+    "frac_bodies": {
+     "mean": 0.6831683168316831,
+     "lo": 0.4282178217821782,
+     "hi": 0.9183168316831684,
+     "n": 4
+    },
+    "time_to_pred_loss": {
+     "mean": 18050.0,
+     "lo": 14150.0,
+     "hi": 20000.0,
+     "n": 4,
+     "right_censored": true,
+     "censor_at": 20000.0
+    },
+    "mA_final": {
+     "mean": 17.696008920669556,
+     "lo": 14.36879277229309,
+     "hi": 19.413105487823486,
+     "n": 4
+    },
+    "mP_final": {
+     "mean": 1.0902240574359894,
+     "lo": 1.0283076465129852,
+     "hi": 1.1798443794250488,
+     "n": 4
+    },
+    "nA_final": {
+     "mean": 23.5,
+     "lo": 17.5,
+     "hi": 29.75,
+     "n": 4
+    },
+    "nP_final": {
+     "mean": 1.25,
+     "lo": 0.25,
+     "hi": 2.5,
+     "n": 4
+    },
+    "nA_mean": {
+     "mean": 18.346534653465348,
+     "lo": 14.183168316831683,
+     "hi": 24.670792079207924,
+     "n": 4
+    },
+    "nP_mean": {
+     "mean": 1.6608910891089108,
+     "lo": 1.0792079207920793,
+     "hi": 2.366336633663366,
+     "n": 4
+    },
+    "period_A": {
+     "mean": 9258.333333333332,
+     "lo": 7574.999999999999,
+     "hi": 10100.0,
+     "n": 4
+    },
+    "period_P": {
+     "mean": 9258.333333333332,
+     "lo": 7574.999999999999,
+     "hi": 10100.0,
+     "n": 4
+    },
+    "period_A_acf": {
+     "mean": null,
+     "lo": null,
+     "hi": null,
+     "n": 0
+    },
+    "period_P_acf": {
+     "mean": null,
+     "lo": null,
+     "hi": null,
+     "n": 0
+    },
+    "pred_lag": {
+     "mean": 2700.0,
+     "lo": 1100.0,
+     "hi": 4300.0,
+     "n": 4
+    },
+    "kill_mean": {
+     "mean": 0.0011357913007684762,
+     "lo": 0.0009735526785695966,
+     "hi": 0.0013164127112313502,
+     "n": 4
+    }
+   }
+  },
+  "k010": {
+   "n": 4,
+   "kpred": 0.01,
+   "seeds": [
+    197,
+    198,
+    199,
+    200
+   ],
+   "status_bodies": [
+    "coexist",
+    "no_bodies",
+    "prey_only",
+    "prey_only"
+   ],
+   "n_held_pred": 1,
+   "n_held_prey": 3,
+   "n_held_bodies": 1,
+   "frac_held_pred": 0.25,
+   "frac_held_prey": 0.75,
+   "frac_held_bodies": 0.25,
+   "pred_loss_t": [
+    null,
+    13200.0,
+    9400.0,
+    19400.0
+   ],
+   "prey_loss_t": [
+    null,
+    15000.0,
+    null,
+    null
+   ],
+   "body_loss_who": [
+    null,
+    "pred",
+    "pred",
+    "pred"
+   ],
+   "body_loss_t": [
+    null,
+    13200.0,
+    9400.0,
+    19400.0
+   ],
+   "coexist_bodies_t": [
+    20000.0,
+    13000.0,
+    9200.0,
+    19200.0
+   ],
+   "frac_bodies": [
+    0.7821782178217822,
+    0.5742574257425742,
+    0.3564356435643564,
+    0.9603960396039604
+   ],
+   "mA_final": [
+    15.695195198059082,
+    1.7216923236846924,
+    14.44118881225586,
+    2.5892035961151123
+   ],
+   "mP_final": [
+    2.16861629486084,
+    0.04779914766550064,
+    1.202349066734314,
+    0.37289437651634216
+   ],
+   "nA_final": [
+    21,
+    0,
+    24,
+    3
+   ],
+   "nP_final": [
+    6,
+    0,
+    0,
+    0
+   ],
+   "period_A": [
+    4040.0,
+    10100.0,
+    10100.0,
+    10100.0
+   ],
+   "period_P": [
+    10100.0,
+    10100.0,
+    10100.0,
+    10100.0
+   ],
+   "period_A_acf": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "period_P_acf": [
+    null,
+    9200.0,
+    null,
+    null
+   ],
+   "pred_lag": [
+    600.0,
+    -6600.0,
+    2800.0,
+    2200.0
+   ],
+   "pred_lag_r": [
+    0.8782106529755647,
+    0.7008268748454783,
+    0.918059124940228,
+    0.7823031390658206
+   ],
+   "ci": {
+    "coexist_bodies_t": {
+     "mean": 15350.0,
+     "lo": 11100.0,
+     "hi": 19600.0,
+     "n": 4
+    },
+    "frac_bodies": {
+     "mean": 0.6683168316831682,
+     "lo": 0.46287128712871284,
+     "hi": 0.8712871287128713,
+     "n": 4
+    },
+    "time_to_pred_loss": {
+     "mean": 15500.0,
+     "lo": 11300.0,
+     "hi": 19700.0,
+     "n": 4,
+     "right_censored": true,
+     "censor_at": 20000.0
+    },
+    "mA_final": {
+     "mean": 8.611819982528687,
+     "lo": 2.1554479598999023,
+     "hi": 15.06819200515747,
+     "n": 4
+    },
+    "mP_final": {
+     "mean": 0.9479147214442492,
+     "lo": 0.2103467620909214,
+     "hi": 1.7196858152747154,
+     "n": 4
+    },
+    "nA_final": {
+     "mean": 12.0,
+     "lo": 1.5,
+     "hi": 22.5,
+     "n": 4
+    },
+    "nP_final": {
+     "mean": 1.5,
+     "lo": 0.0,
+     "hi": 4.5,
+     "n": 4
+    },
+    "nA_mean": {
+     "mean": 10.57178217821782,
+     "lo": 4.648514851485149,
+     "hi": 18.87128712871287,
+     "n": 4
+    },
+    "nP_mean": {
+     "mean": 1.8019801980198022,
+     "lo": 1.198019801980198,
+     "hi": 2.3613861386138613,
+     "n": 4
+    },
+    "period_A": {
+     "mean": 8585.0,
+     "lo": 5555.0,
+     "hi": 10100.0,
+     "n": 4
+    },
+    "period_P": {
+     "mean": 10100.0,
+     "lo": 10100.0,
+     "hi": 10100.0,
+     "n": 4
+    },
+    "period_A_acf": {
+     "mean": null,
+     "lo": null,
+     "hi": null,
+     "n": 0
+    },
+    "period_P_acf": {
+     "mean": 9200.0,
+     "lo": null,
+     "hi": null,
+     "n": 1
+    },
+    "pred_lag": {
+     "mean": -250.0,
+     "lo": -4400.0,
+     "hi": 2500.0,
+     "n": 4
+    },
+    "kill_mean": {
+     "mean": 0.0013430300928274491,
+     "lo": 0.0008896158547825525,
+     "hi": 0.0017798043737399102,
+     "n": 4
+    }
+   }
+  },
+  "k015": {
+   "n": 4,
+   "kpred": 0.015,
+   "seeds": [
+    193,
+    194,
+    195,
+    196
+   ],
+   "status_bodies": [
+    "prey_only",
+    "coexist",
+    "no_bodies",
+    "coexist"
+   ],
+   "n_held_pred": 2,
+   "n_held_prey": 3,
+   "n_held_bodies": 2,
+   "frac_held_pred": 0.5,
+   "frac_held_prey": 0.75,
+   "frac_held_bodies": 0.5,
+   "pred_loss_t": [
+    19800.0,
+    null,
+    9000.0,
+    null
+   ],
+   "prey_loss_t": [
+    null,
+    null,
+    8000.0,
+    null
+   ],
+   "body_loss_who": [
+    "pred",
+    null,
+    "prey",
+    null
+   ],
+   "body_loss_t": [
+    19800.0,
+    null,
+    8000.0,
+    null
+   ],
+   "coexist_bodies_t": [
+    19600.0,
+    20000.0,
+    7800.0,
+    20000.0
+   ],
+   "frac_bodies": [
+    0.7524752475247525,
+    0.7029702970297029,
+    0.38613861386138615,
+    0.9207920792079208
+   ],
+   "mA_final": [
+    10.044672966003418,
+    18.70133399963379,
+    0.13430990278720856,
+    4.087672710418701
+   ],
+   "mP_final": [
+    0.9949809312820435,
+    1.5324227809906006,
+    0.0007279415149241686,
+    1.317692518234253
+   ],
+   "nA_final": [
+    24,
+    1,
+    0,
+    6
+   ],
+   "nP_final": [
+    0,
+    3,
+    0,
+    3
+   ],
+   "period_A": [
+    10100.0,
+    6733.333333333332,
+    5050.0,
+    10100.0
+   ],
+   "period_P": [
+    10100.0,
+    10100.0,
+    10100.0,
+    10100.0
+   ],
+   "period_A_acf": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "period_P_acf": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "pred_lag": [
+    400.0,
+    1000.0,
+    0.0,
+    2600.0
+   ],
+   "pred_lag_r": [
+    0.5182783050301778,
+    0.8510386871288935,
+    0.7144827448202622,
+    0.502187422427375
+   ],
+   "ci": {
+    "coexist_bodies_t": {
+     "mean": 16850.0,
+     "lo": 10850.0,
+     "hi": 20000.0,
+     "n": 4
+    },
+    "frac_bodies": {
+     "mean": 0.6905940594059405,
+     "lo": 0.4777227722772277,
+     "hi": 0.8663366336633663,
+     "n": 4
+    },
+    "time_to_pred_loss": {
+     "mean": 17200.0,
+     "lo": 11750.0,
+     "hi": 20000.0,
+     "n": 4,
+     "right_censored": true,
+     "censor_at": 20000.0
+    },
+    "mA_final": {
+     "mean": 8.24199739471078,
+     "lo": 2.110991306602955,
+     "hi": 15.047918677330017,
+     "n": 4
+    },
+    "mP_final": {
+     "mean": 0.9614560430054553,
+     "lo": 0.32996908569475636,
+     "hi": 1.4250576496124268,
+     "n": 4
+    },
+    "nA_final": {
+     "mean": 7.75,
+     "lo": 0.5,
+     "hi": 18.25,
+     "n": 4
+    },
+    "nP_final": {
+     "mean": 1.5,
+     "lo": 0.0,
+     "hi": 3.0,
+     "n": 4
+    },
+    "nA_mean": {
+     "mean": 6.549504950495049,
+     "lo": 2.9653465346534658,
+     "hi": 11.123762376237623,
+     "n": 4
+    },
+    "nP_mean": {
+     "mean": 1.6534653465346534,
+     "lo": 1.2376237623762376,
+     "hi": 2.0792079207920793,
+     "n": 4
+    },
+    "period_A": {
+     "mean": 7995.833333333333,
+     "lo": 5891.666666666666,
+     "hi": 10100.0,
+     "n": 4
+    },
+    "period_P": {
+     "mean": 10100.0,
+     "lo": 10100.0,
+     "hi": 10100.0,
+     "n": 4
+    },
+    "period_A_acf": {
+     "mean": null,
+     "lo": null,
+     "hi": null,
+     "n": 0
+    },
+    "period_P_acf": {
+     "mean": null,
+     "lo": null,
+     "hi": null,
+     "n": 0
+    },
+    "pred_lag": {
+     "mean": 1000.0,
+     "lo": 200.0,
+     "hi": 2050.0,
+     "n": 4
+    },
+    "kill_mean": {
+     "mean": 0.0011889609392978897,
+     "lo": 0.0006400753711004746,
+     "hi": 0.0015362196654307811,
+     "n": 4
+    }
+   }
+  }
+ },
+ "runs": [
+  {
+   "file": "b19c_0.pkl",
+   "tag": "pp_s197",
+   "arm": "k005",
+   "seed": 197,
+   "kpred": 0.005,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB",
+   "wall": 3284.0962603092194,
+   "incomplete": null,
+   "source": "19c",
+   "t_final": 20000.0,
+   "mA_final": 19.449535369873047,
+   "mP_final": 1.0154579877853394,
+   "nA_final": 26,
+   "nP_final": 1,
+   "status_bodies": "coexist",
+   "coexist_bodies_t": 20000.0,
+   "mA_mean": 13.356811296821821,
+   "mP_mean": 0.9928448285796855,
+   "status": "coexist",
+   "coexist_t": 20000.0,
+   "extinct": null,
+   "extinct_t": null,
+   "peaks_A": 4,
+   "peaks_P": 4,
+   "period_A": 6733.333333333332,
+   "period_P": 10100.0,
+   "period_A_acf": null,
+   "period_P_acf": null,
+   "period_A_acf_r": null,
+   "period_P_acf_r": null,
+   "pred_lag": 1800.0,
+   "pred_lag_r": 0.7399507118594443,
+   "kill_mean": 0.0010912129506346797,
+   "nA_mean": 14.950495049504951,
+   "nP_mean": 1.7623762376237624,
+   "frac_bodies": 0.7326732673267327,
+   "body_loss_first": 11800.0,
+   "body_loss_who": null,
+   "body_loss_t": null,
+   "held_bodies": true,
+   "held_prey": true,
+   "held_pred": true,
+   "prey_loss_t": null,
+   "pred_loss_t": null
+  },
+  {
+   "file": "b19c_0.pkl",
+   "tag": "pp_s197",
+   "arm": "k010",
+   "seed": 197,
+   "kpred": 0.01,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB",
+   "wall": 3284.0962603092194,
+   "incomplete": null,
+   "source": "19c",
+   "t_final": 20000.0,
+   "mA_final": 15.695195198059082,
+   "mP_final": 2.16861629486084,
+   "nA_final": 21,
+   "nP_final": 6,
+   "status_bodies": "coexist",
+   "coexist_bodies_t": 20000.0,
+   "mA_mean": 7.911587770622556,
+   "mP_mean": 1.1418262484050032,
+   "status": "coexist",
+   "coexist_t": 20000.0,
+   "extinct": null,
+   "extinct_t": null,
+   "peaks_A": 3,
+   "peaks_P": 5,
+   "period_A": 4040.0,
+   "period_P": 10100.0,
+   "period_A_acf": null,
+   "period_P_acf": null,
+   "period_A_acf_r": null,
+   "period_P_acf_r": null,
+   "pred_lag": 600.0,
+   "pred_lag_r": 0.8782106529755647,
+   "kill_mean": 0.001453320559861817,
+   "nA_mean": 9.772277227722773,
+   "nP_mean": 2.1485148514851486,
+   "frac_bodies": 0.7821782178217822,
+   "body_loss_first": 10000.0,
+   "body_loss_who": null,
+   "body_loss_t": null,
+   "held_bodies": true,
+   "held_prey": true,
+   "held_pred": true,
+   "prey_loss_t": null,
+   "pred_loss_t": null
+  },
+  {
+   "file": "b19c_1.pkl",
+   "tag": "pp_s198",
+   "arm": "k005",
+   "seed": 198,
+   "kpred": 0.005,
+   "gpu": "NVIDIA H200, 143771 MiB",
+   "wall": 2655.1298015117645,
+   "incomplete": null,
+   "source": "19c",
+   "t_final": 20000.0,
+   "mA_final": 19.303815841674805,
+   "mP_final": 1.0581836700439453,
+   "nA_final": 20,
+   "nP_final": 1,
+   "status_bodies": "coexist",
+   "coexist_bodies_t": 20000.0,
+   "mA_mean": 12.818157361285522,
+   "mP_mean": 0.8729370525567839,
+   "status": "coexist",
+   "coexist_t": 20000.0,
+   "extinct": null,
+   "extinct_t": null,
+   "peaks_A": 5,
+   "peaks_P": 1,
+   "period_A": 10100.0,
+   "period_P": 10100.0,
+   "period_A_acf": null,
+   "period_P_acf": null,
+   "period_A_acf_r": null,
+   "period_P_acf_r": null,
+   "pred_lag": 400.0,
+   "pred_lag_r": 0.8477260665417032,
+   "kill_mean": 0.0009168688799680342,
+   "nA_mean": 13.415841584158416,
+   "nP_mean": 1.297029702970297,
+   "frac_bodies": 0.6732673267326733,
+   "body_loss_first": 4200.0,
+   "body_loss_who": null,
+   "body_loss_t": null,
+   "held_bodies": true,
+   "held_prey": true,
+   "held_pred": true,
+   "prey_loss_t": null,
+   "pred_loss_t": null
+  },
+  {
+   "file": "b19c_1.pkl",
+   "tag": "pp_s198",
+   "arm": "k010",
+   "seed": 198,
+   "kpred": 0.01,
+   "gpu": "NVIDIA H200, 143771 MiB",
+   "wall": 2655.1298015117645,
+   "incomplete": null,
+   "source": "19c",
+   "t_final": 20000.0,
+   "mA_final": 1.7216923236846924,
+   "mP_final": 0.04779914766550064,
+   "nA_final": 0,
+   "nP_final": 0,
+   "status_bodies": "no_bodies",
+   "coexist_bodies_t": 13000.0,
+   "mA_mean": 3.2562998607017026,
+   "mP_mean": 0.7990165463104697,
+   "status": "prey_only",
+   "coexist_t": 15800.0,
+   "extinct": "pred",
+   "extinct_t": 16000.0,
+   "peaks_A": 2,
+   "peaks_P": 1,
+   "period_A": 10100.0,
+   "period_P": 10100.0,
+   "period_A_acf": null,
+   "period_P_acf": 9200.0,
+   "period_A_acf_r": null,
+   "period_P_acf_r": 0.28584789765533153,
+   "pred_lag": -6600.0,
+   "pred_lag_r": 0.7008268748454783,
+   "kill_mean": 0.0007017142864227978,
+   "nA_mean": 3.4653465346534653,
+   "nP_mean": 1.603960396039604,
+   "frac_bodies": 0.5742574257425742,
+   "body_loss_first": 5800.0,
+   "body_loss_who": "pred",
+   "body_loss_t": 13200.0,
+   "held_bodies": false,
+   "held_prey": false,
+   "held_pred": false,
+   "prey_loss_t": 15000.0,
+   "pred_loss_t": 13200.0
+  },
+  {
+   "file": "b19c_2.pkl",
+   "tag": "pp_s199",
+   "arm": "k005",
+   "seed": 199,
+   "kpred": 0.005,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB",
+   "wall": 3274.7129130363464,
+   "incomplete": null,
+   "source": "19c",
+   "t_final": 20000.0,
+   "mA_final": 19.308441162109375,
+   "mP_final": 1.0668566226959229,
+   "nA_final": 33,
+   "nP_final": 0,
+   "status_bodies": "prey_only",
+   "coexist_bodies_t": 12000.0,
+   "mA_mean": 19.701824259049822,
+   "mP_mean": 1.0199671983718872,
+   "status": "coexist",
+   "coexist_t": 20000.0,
+   "extinct": null,
+   "extinct_t": null,
+   "peaks_A": 2,
+   "peaks_P": 1,
+   "period_A": 10100.0,
+   "period_P": 10100.0,
+   "period_A_acf": null,
+   "period_P_acf": null,
+   "period_A_acf_r": null,
+   "period_P_acf_r": null,
+   "pred_lag": 4800.0,
+   "pred_lag_r": 0.8593234769403253,
+   "kill_mean": 0.001143604074374284,
+   "nA_mean": 27.91089108910891,
+   "nP_mean": 0.8613861386138614,
+   "frac_bodies": 0.32673267326732675,
+   "body_loss_first": 4800.0,
+   "body_loss_who": "pred",
+   "body_loss_t": 12200.0,
+   "held_bodies": false,
+   "held_prey": true,
+   "held_pred": false,
+   "prey_loss_t": null,
+   "pred_loss_t": 12200.0
+  },
+  {
+   "file": "b19c_2.pkl",
+   "tag": "pp_s199",
+   "arm": "k010",
+   "seed": 199,
+   "kpred": 0.01,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB",
+   "wall": 3274.7129130363464,
+   "incomplete": null,
+   "source": "19c",
+   "t_final": 20000.0,
+   "mA_final": 14.44118881225586,
+   "mP_final": 1.202349066734314,
+   "nA_final": 24,
+   "nP_final": 0,
+   "status_bodies": "prey_only",
+   "coexist_bodies_t": 9200.0,
+   "mA_mean": 15.128169102243858,
+   "mP_mean": 1.5431685199831973,
+   "status": "coexist",
+   "coexist_t": 20000.0,
+   "extinct": null,
+   "extinct_t": null,
+   "peaks_A": 3,
+   "peaks_P": 6,
+   "period_A": 10100.0,
+   "period_P": 10100.0,
+   "period_A_acf": null,
+   "period_P_acf": null,
+   "period_A_acf_r": null,
+   "period_P_acf_r": null,
+   "pred_lag": 2800.0,
+   "pred_lag_r": 0.918059124940228,
+   "kill_mean": 0.0019510659849672292,
+   "nA_mean": 23.217821782178216,
+   "nP_mean": 0.8811881188118812,
+   "frac_bodies": 0.3564356435643564,
+   "body_loss_first": 5800.0,
+   "body_loss_who": "pred",
+   "body_loss_t": 9400.0,
+   "held_bodies": false,
+   "held_prey": true,
+   "held_pred": false,
+   "prey_loss_t": null,
+   "pred_loss_t": 9400.0
+  },
+  {
+   "file": "b19c_3.pkl",
+   "tag": "pp_s200",
+   "arm": "k005",
+   "seed": 200,
+   "kpred": 0.005,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB",
+   "wall": 3317.1842958927155,
+   "incomplete": null,
+   "source": "19c",
+   "t_final": 20000.0,
+   "mA_final": 12.722243309020996,
+   "mP_final": 1.22039794921875,
+   "nA_final": 15,
+   "nP_final": 3,
+   "status_bodies": "coexist",
+   "coexist_bodies_t": 20000.0,
+   "mA_mean": 14.559043166661027,
+   "mP_mean": 1.1656631060165934,
+   "status": "coexist",
+   "coexist_t": 20000.0,
+   "extinct": null,
+   "extinct_t": null,
+   "peaks_A": 3,
+   "peaks_P": 8,
+   "period_A": 10100.0,
+   "period_P": 6733.333333333332,
+   "period_A_acf": null,
+   "period_P_acf": null,
+   "period_A_acf_r": null,
+   "period_P_acf_r": null,
+   "pred_lag": 3800.0,
+   "pred_lag_r": 0.863596003710022,
+   "kill_mean": 0.001391479298096907,
+   "nA_mean": 17.10891089108911,
+   "nP_mean": 2.722772277227723,
+   "frac_bodies": 1.0,
+   "body_loss_first": null,
+   "body_loss_who": null,
+   "body_loss_t": null,
+   "held_bodies": true,
+   "held_prey": true,
+   "held_pred": true,
+   "prey_loss_t": null,
+   "pred_loss_t": null
+  },
+  {
+   "file": "b19c_3.pkl",
+   "tag": "pp_s200",
+   "arm": "k010",
+   "seed": 200,
+   "kpred": 0.01,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB",
+   "wall": 3317.1842958927155,
+   "incomplete": null,
+   "source": "19c",
+   "t_final": 20000.0,
+   "mA_final": 2.5892035961151123,
+   "mP_final": 0.37289437651634216,
+   "nA_final": 3,
+   "nP_final": 0,
+   "status_bodies": "prey_only",
+   "coexist_bodies_t": 19200.0,
+   "mA_mean": 5.562972958725278,
+   "mP_mean": 1.1850481903789067,
+   "status": "coexist",
+   "coexist_t": 20000.0,
+   "extinct": null,
+   "extinct_t": null,
+   "peaks_A": 10,
+   "peaks_P": 8,
+   "period_A": 10100.0,
+   "period_P": 10100.0,
+   "period_A_acf": null,
+   "period_P_acf": null,
+   "period_A_acf_r": null,
+   "period_P_acf_r": null,
+   "pred_lag": 2200.0,
+   "pred_lag_r": 0.7823031390658206,
+   "kill_mean": 0.0012660195400579527,
+   "nA_mean": 5.8316831683168315,
+   "nP_mean": 2.5742574257425743,
+   "frac_bodies": 0.9603960396039604,
+   "body_loss_first": 19400.0,
+   "body_loss_who": "pred",
+   "body_loss_t": 19400.0,
+   "held_bodies": false,
+   "held_prey": true,
+   "held_pred": false,
+   "prey_loss_t": null,
+   "pred_loss_t": 19400.0
+  },
+  {
+   "file": "b19b_0.pkl",
+   "tag": "pp_s193",
+   "arm": "k015",
+   "seed": 193,
+   "kpred": 0.015,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB",
+   "wall": 4649.217153787613,
+   "incomplete": null,
+   "source": "19b",
+   "t_final": 20000.0,
+   "mA_final": 10.044672966003418,
+   "mP_final": 0.9949809312820435,
+   "nA_final": 24,
+   "nP_final": 0,
+   "status_bodies": "prey_only",
+   "coexist_bodies_t": 19600.0,
+   "mA_mean": 7.652814629054306,
+   "mP_mean": 1.178156308018335,
+   "status": "coexist",
+   "coexist_t": 20000.0,
+   "extinct": null,
+   "extinct_t": null,
+   "peaks_A": 8,
+   "peaks_P": 6,
+   "period_A": 10100.0,
+   "period_P": 10100.0,
+   "period_A_acf": null,
+   "period_P_acf": null,
+   "period_A_acf_r": null,
+   "period_P_acf_r": null,
+   "pred_lag": 400.0,
+   "pred_lag_r": 0.5182783050301778,
+   "kill_mean": 0.0013655102729828409,
+   "nA_mean": 13.603960396039604,
+   "nP_mean": 1.6336633663366336,
+   "frac_bodies": 0.7524752475247525,
+   "body_loss_first": 6000.0,
+   "body_loss_who": "pred",
+   "body_loss_t": 19800.0,
+   "held_bodies": false,
+   "held_prey": true,
+   "held_pred": false,
+   "prey_loss_t": null,
+   "pred_loss_t": 19800.0
+  },
+  {
+   "file": "b19b_1.pkl",
+   "tag": "pp_s194",
+   "arm": "k015",
+   "seed": 194,
+   "kpred": 0.015,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB",
+   "wall": 4611.661609172821,
+   "incomplete": null,
+   "source": "19b",
+   "t_final": 20000.0,
+   "mA_final": 18.70133399963379,
+   "mP_final": 1.5324227809906006,
+   "nA_final": 1,
+   "nP_final": 3,
+   "status_bodies": "coexist",
+   "coexist_bodies_t": 20000.0,
+   "mA_mean": 11.89030903636819,
+   "mP_mean": 1.1632198827101452,
+   "status": "coexist",
+   "coexist_t": 20000.0,
+   "extinct": null,
+   "extinct_t": null,
+   "peaks_A": 3,
+   "peaks_P": 3,
+   "period_A": 6733.333333333332,
+   "period_P": 10100.0,
+   "period_A_acf": null,
+   "period_P_acf": null,
+   "period_A_acf_r": null,
+   "period_P_acf_r": null,
+   "pred_lag": 1000.0,
+   "pred_lag_r": 0.8510386871288935,
+   "kill_mean": 0.0014156652897419856,
+   "nA_mean": 3.6831683168316833,
+   "nP_mean": 1.6534653465346534,
+   "frac_bodies": 0.7029702970297029,
+   "body_loss_first": 4600.0,
+   "body_loss_who": null,
+   "body_loss_t": null,
+   "held_bodies": true,
+   "held_prey": true,
+   "held_pred": true,
+   "prey_loss_t": null,
+   "pred_loss_t": null
+  },
+  {
+   "file": "b19b_2.pkl",
+   "tag": "pp_s195",
+   "arm": "k015",
+   "seed": 195,
+   "kpred": 0.015,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB",
+   "wall": 4616.637893915176,
+   "incomplete": null,
+   "source": "19b",
+   "t_final": 20000.0,
+   "mA_final": 0.13430990278720856,
+   "mP_final": 0.0007279415149241686,
+   "nA_final": 0,
+   "nP_final": 0,
+   "status_bodies": "no_bodies",
+   "coexist_bodies_t": 7800.0,
+   "mA_mean": 1.78860140230396,
+   "mP_mean": 0.5996570707434825,
+   "status": "both_extinct",
+   "coexist_t": 10400.0,
+   "extinct": "prey",
+   "extinct_t": 10600.0,
+   "peaks_A": 2,
+   "peaks_P": 4,
+   "period_A": 5050.0,
+   "period_P": 10100.0,
+   "period_A_acf": null,
+   "period_P_acf": null,
+   "period_A_acf_r": null,
+   "period_P_acf_r": null,
+   "pred_lag": 0.0,
+   "pred_lag_r": 0.7144827448202622,
+   "kill_mean": 0.000381545398219971,
+   "nA_mean": 2.2475247524752477,
+   "nP_mean": 1.099009900990099,
+   "frac_bodies": 0.38613861386138615,
+   "body_loss_first": 5600.0,
+   "body_loss_who": "prey",
+   "body_loss_t": 8000.0,
+   "held_bodies": false,
+   "held_prey": false,
+   "held_pred": false,
+   "prey_loss_t": 8000.0,
+   "pred_loss_t": 9000.0
+  },
+  {
+   "file": "b19b_3.pkl",
+   "tag": "pp_s196",
+   "arm": "k015",
+   "seed": 196,
+   "kpred": 0.015,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB",
+   "wall": 4593.203768968582,
+   "incomplete": null,
+   "source": "19b",
+   "t_final": 20000.0,
+   "mA_final": 4.087672710418701,
+   "mP_final": 1.317692518234253,
+   "nA_final": 6,
+   "nP_final": 3,
+   "status_bodies": "coexist",
+   "coexist_bodies_t": 20000.0,
+   "mA_mean": 5.829721845022522,
+   "mP_mean": 1.296913713511854,
+   "status": "coexist",
+   "coexist_t": 20000.0,
+   "extinct": null,
+   "extinct_t": null,
+   "peaks_A": 5,
+   "peaks_P": 5,
+   "period_A": 10100.0,
+   "period_P": 10100.0,
+   "period_A_acf": null,
+   "period_P_acf": null,
+   "period_A_acf_r": null,
+   "period_P_acf_r": null,
+   "pred_lag": 2600.0,
+   "pred_lag_r": 0.502187422427375,
+   "kill_mean": 0.0015931227962467612,
+   "nA_mean": 6.663366336633663,
+   "nP_mean": 2.227722772277228,
+   "frac_bodies": 0.9207920792079208,
+   "body_loss_first": 4600.0,
+   "body_loss_who": null,
+   "body_loss_t": null,
+   "held_bodies": true,
+   "held_prey": true,
+   "held_pred": true,
+   "prey_loss_t": null,
+   "pred_loss_t": null
+  }
+ ]
+}
