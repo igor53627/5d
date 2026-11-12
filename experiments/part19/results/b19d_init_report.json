@@ -1,0 +1,51 @@
+{
+ "numpy": "2.5.4",
+ "steps": 20000,
+ "every": 200,
+ "seeds": [
+  201,
+  202,
+  203,
+  204,
+  205,
+  206,
+  207,
+  208
+ ],
+ "probe_seed": 201,
+ "n_prey": 8,
+ "n_pred": 4,
+ "L": 48,
+ "N": 4,
+ "K": 33,
+ "kpred": 0.005,
+ "arm": "k005",
+ "pool_seeds": [
+  197,
+  198,
+  199,
+  200
+ ],
+ "eff": 0.4,
+ "dec_p": 0.0006,
+ "ka": 1.0,
+ "kp": 1.0,
+ "krep_x": 5.0,
+ "opts": {
+  "coarse": true,
+  "fnoise": true,
+  "m": 5
+ },
+ "keat": 0.01,
+ "dec": 0.0003,
+ "rF": 0.0001,
+ "F0": 0.08,
+ "notes": [
+  "Part 19d: replicate 19c kpred=0.005 on 8 new seeds (201\u2013208), 20k, batch=1.",
+  "Same Part 15 world as the 19c k005 arm (4D L=48, 8 prey, 4 predators, coarse/fnoise/m=5).",
+  "pred_pursuit_evolve defaults to 1, as in Parts 19/19b/19c (not set in the eco dict).",
+  "One container per seed, single eco (batch=1, n_pred=4). Seed 201 is the timing probe.",
+  "19c seeds 197\u2013200 at kpred=0.005 are pooled in analyze19d, not rerun.",
+  "Hard cap $15 at $3.95/H100-h; remaining seeds launch only if the probe wall leaves room."
+ ]
+}

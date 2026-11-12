@@ -1,0 +1,271 @@
+{
+ "part": "19d",
+ "dataset_path": "part19/eco19d/",
+ "project": "Hyperlife",
+ "description": "Part 19d: replicate 19c kpred=0.005 on 8 new seeds (201\u2013208), 4D L=48, 8 prey + 4 predators, 20000 steps, batch=1. Pooled in analysis with 19c seeds 197\u2013200 at the same kpred (not rerun). Primary readout: predator/prey/both bodies held at 20k, time-to-predator-loss, ACF; 12-seed both-held binomial CI.",
+ "arms": [
+  "k005"
+ ],
+ "kpred": {
+  "k005": 0.005
+ },
+ "pool": {
+  "arm": "k005",
+  "kpred": 0.005,
+  "seeds": [
+   197,
+   198,
+   199,
+   200
+  ],
+  "source": "part19/eco19c/"
+ },
+ "runs": {
+  "full": {
+   "prefix": "b19d",
+   "n": 8,
+   "seeds": [
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208
+   ],
+   "steps": 20000,
+   "pred_batch": 1
+  }
+ },
+ "cost": {
+  "gpu_hours": 3.035941639741262,
+  "rate_usd_per_h100_h": 3.95,
+  "usd": 11.991969476977985,
+  "probe": {
+   "seed": 201,
+   "file": "b19d_0.pkl",
+   "app": "ap-Z2bTgwdjaXwlBV2lq96E36",
+   "timeout_s": 3600
+  },
+  "wave2": {
+   "seeds": [
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208
+   ],
+   "app": "ap-17DjzJXUZkZG5sSRQZa20Q",
+   "timeout_s": 1730
+  },
+  "gpus": [
+   "NVIDIA H100 80GB HBM3, 81559 MiB",
+   "NVIDIA H200, 143771 MiB"
+  ]
+ },
+ "files": [
+  {
+   "file": "b19d_0.pkl",
+   "index": 0,
+   "run": "full",
+   "prefix": "b19d",
+   "seed": 201,
+   "tags": [
+    "pp_s201"
+   ],
+   "steps": 20000,
+   "L": 48,
+   "N": 4,
+   "n_prey": 8,
+   "n_pred": 4,
+   "arms": [
+    "k005"
+   ],
+   "kpred": [
+    0.005
+   ],
+   "spec": "archive/specs/b19d_full.json",
+   "bytes": 1009407,
+   "wall_s": 1496.22372174263,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB"
+  },
+  {
+   "file": "b19d_1.pkl",
+   "index": 1,
+   "run": "full",
+   "prefix": "b19d",
+   "seed": 202,
+   "tags": [
+    "pp_s202"
+   ],
+   "steps": 20000,
+   "L": 48,
+   "N": 4,
+   "n_prey": 8,
+   "n_pred": 4,
+   "arms": [
+    "k005"
+   ],
+   "kpred": [
+    0.005
+   ],
+   "spec": "archive/specs/b19d_full.json",
+   "bytes": 921188,
+   "wall_s": 1405.5253500938416,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB"
+  },
+  {
+   "file": "b19d_2.pkl",
+   "index": 2,
+   "run": "full",
+   "prefix": "b19d",
+   "seed": 203,
+   "tags": [
+    "pp_s203"
+   ],
+   "steps": 20000,
+   "L": 48,
+   "N": 4,
+   "n_prey": 8,
+   "n_pred": 4,
+   "arms": [
+    "k005"
+   ],
+   "kpred": [
+    0.005
+   ],
+   "spec": "archive/specs/b19d_full.json",
+   "bytes": 1221135,
+   "wall_s": 1429.7437353134155,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB"
+  },
+  {
+   "file": "b19d_3.pkl",
+   "index": 3,
+   "run": "full",
+   "prefix": "b19d",
+   "seed": 204,
+   "tags": [
+    "pp_s204"
+   ],
+   "steps": 20000,
+   "L": 48,
+   "N": 4,
+   "n_prey": 8,
+   "n_pred": 4,
+   "arms": [
+    "k005"
+   ],
+   "kpred": [
+    0.005
+   ],
+   "spec": "archive/specs/b19d_full.json",
+   "bytes": 1346129,
+   "wall_s": 1064.2449176311493,
+   "gpu": "NVIDIA H200, 143771 MiB"
+  },
+  {
+   "file": "b19d_4.pkl",
+   "index": 4,
+   "run": "full",
+   "prefix": "b19d",
+   "seed": 205,
+   "tags": [
+    "pp_s205"
+   ],
+   "steps": 20000,
+   "L": 48,
+   "N": 4,
+   "n_prey": 8,
+   "n_pred": 4,
+   "arms": [
+    "k005"
+   ],
+   "kpred": [
+    0.005
+   ],
+   "spec": "archive/specs/b19d_full.json",
+   "bytes": 1400821,
+   "wall_s": 1454.6094336509705,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB"
+  },
+  {
+   "file": "b19d_5.pkl",
+   "index": 5,
+   "run": "full",
+   "prefix": "b19d",
+   "seed": 206,
+   "tags": [
+    "pp_s206"
+   ],
+   "steps": 20000,
+   "L": 48,
+   "N": 4,
+   "n_prey": 8,
+   "n_pred": 4,
+   "arms": [
+    "k005"
+   ],
+   "kpred": [
+    0.005
+   ],
+   "spec": "archive/specs/b19d_full.json",
+   "bytes": 1286780,
+   "wall_s": 1498.0666992664337,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB"
+  },
+  {
+   "file": "b19d_6.pkl",
+   "index": 6,
+   "run": "full",
+   "prefix": "b19d",
+   "seed": 207,
+   "tags": [
+    "pp_s207"
+   ],
+   "steps": 20000,
+   "L": 48,
+   "N": 4,
+   "n_prey": 8,
+   "n_pred": 4,
+   "arms": [
+    "k005"
+   ],
+   "kpred": [
+    0.005
+   ],
+   "spec": "archive/specs/b19d_full.json",
+   "bytes": 1085305,
+   "wall_s": 1080.9651827812195,
+   "gpu": "NVIDIA H200, 143771 MiB"
+  },
+  {
+   "file": "b19d_7.pkl",
+   "index": 7,
+   "run": "full",
+   "prefix": "b19d",
+   "seed": 208,
+   "tags": [
+    "pp_s208"
+   ],
+   "steps": 20000,
+   "L": 48,
+   "N": 4,
+   "n_prey": 8,
+   "n_pred": 4,
+   "arms": [
+    "k005"
+   ],
+   "kpred": [
+    0.005
+   ],
+   "spec": "archive/specs/b19d_full.json",
+   "bytes": 1177327,
+   "wall_s": 1500.0108625888824,
+   "gpu": "NVIDIA H100 80GB HBM3, 81559 MiB"
+  }
+ ]
+}

@@ -405,3 +405,42 @@ def test_analyze19c_pred_loss_censored_only_if_held_pred():
     assert low["n_held_bodies"] == 1
     assert low["ci"]["time_to_pred_loss"]["right_censored"] is True
     assert low["ci"]["time_to_pred_loss"]["censor_at"] == 20000.0
+
+
+def test_committed_19d_specs():
+    import run19d as Rd
+    import run19c as Rc
+    import run19b as Rb
+    path = ROOT / "archive" / "specs" / "b19d_full.json"
+    assert path.is_file(), "committed archive/specs/b19d_full.json is missing"
+    spec = json.loads(path.read_text())
+    assert len(spec) == 8
+    assert Rd.SEEDS == (201, 202, 203, 204, 205, 206, 207, 208)
+    assert set(Rd.SEEDS).isdisjoint({191, 192, *Rb.SEEDS, *Rc.SEEDS})
+    c, eco, opts = Rd.base_world()
+    assert opts.get("coarse") is True
+    eco_19c = Rc.arm_eco(eco, "k005")
+    for item, seed in zip(spec, Rd.SEEDS):
+        assert len(item["runs"]) == 1
+        pred = item["runs"][0]
+        assert pred["n_pred"] == 4 and pred["n_init"] == 8
+        assert pred["steps"] == 20000 and pred["seed"] == seed
+        assert pred["batch"] == 1 and pred["L"] == 48 and pred["model"] == "pred"
+        assert pred["ecos"][0]["kpred"] == 0.005
+        for k, v in eco_19c.items():
+            assert pred["ecos"][0][k] == v, (k, pred["ecos"][0][k], v)
+
+
+def test_binomial_ci_clopper_pearson():
+    import analyze19d as D
+    # 3/4 both-held as in 19c k005; interval must contain the point estimate.
+    ci = D.binomial_ci(3, 4)
+    assert ci["k"] == 3 and ci["n"] == 4
+    assert ci["p"] == 0.75
+    assert ci["method"] == "clopper-pearson"
+    assert 0 <= ci["lo"] < ci["p"] < ci["hi"] <= 1
+    # 0/n and n/n hit the boundaries.
+    z = D.binomial_ci(0, 12)
+    assert z["lo"] == 0.0 and z["hi"] < 1
+    o = D.binomial_ci(12, 12)
+    assert o["hi"] == 1.0 and o["lo"] > 0

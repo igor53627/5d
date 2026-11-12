@@ -39,6 +39,7 @@ Numbers below are copied from the part notes. There is no Part 11 notes file; th
 - **Part 19** ([notes](experiments/part19/results/part19_notes.md)). Predator–prey smoke/pilot on the Part 15 world (4D L=48, 8 prey + 4 predators, 6k steps, ~$3.23). A second mass field consumes nearby prey. No immediate mass extinction on any of 2 seeds × 3 kpred values. `kpred=0.015–0.05` keeps prey bodies and predator mass; `kpred=0.15` wipes prey bodies by 2–3k. At most one half-cycle in 6k, not a period claim.
 - **Part 19b** ([notes](experiments/part19/results/part19b_notes.md)). Confirmatory 20k run, 4 new seeds (193–196) × {kpred=0.015, 0.05, prey-only control}. Mid (0.05) loses predator bodies by ~5k on all four seeds (time-to-loss 5050 [4700, 5400]); prey usually recover. Low (0.015) holds both as bodies to 20k on 2/4 seeds (plus one loss at 19.8k); seed 195 collapses. Prey-only control booms (M_A≈26). No reliable oscillation period. Cost ~$20.27.
 - **Part 19c** ([notes](experiments/part19/results/part19c_notes.md)). Low-side kpred scan, 4 new seeds (197–200) × {0.005, 0.01} × 20k, plus the 19b 0.015 arm as comparison. At 0.005 both persist as bodies on 3/4 seeds (prey 4/4); 0.01 holds both on only 1/4, worse than 0.015 (2/4). No reliable oscillation period. Cost ~$13.75.
+- **Part 19d** ([notes](experiments/part19/results/part19d_notes.md)). Replicate of 19c kpred=0.005 on 8 new seeds (201–208) × 20k, `batch=1`. New seeds 4/8 both held (prey 8/8); pooled with 19c: 7/12 both held, Clopper–Pearson 95% CI [0.28, 0.85]. The 3/4 result does not hold up as a stable regime. No reliable oscillation. Cost ~$11.99.
 
 
 ## Installation
@@ -107,10 +108,11 @@ archive/             Early searches, benchmarks, reservoir experiments
 | 19 | Predator–prey pilot | [part19_notes.md](experiments/part19/results/part19_notes.md) | — |
 | 19b | Confirmatory predator–prey (20k) | [part19b_notes.md](experiments/part19/results/part19b_notes.md) | — |
 | 19c | Low-side kpred scan (20k) | [part19c_notes.md](experiments/part19/results/part19c_notes.md) | — |
+| 19d | kpred=0.005 replicate (8 seeds, 20k) | [part19d_notes.md](experiments/part19/results/part19d_notes.md) | — |
 
 ## Data
 
-Simulation logs are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (public, CC-BY-4.0, 515 files under `part03`–`part19`, 1,630,191,638 bytes, 1.63 GB). Part 18 also holds the 18b–18i runs; Part 19 also holds the 19b confirmatory run and the 19c low-side scan. Per-part sizes, the log cadence, and where `bench_b300_0.pkl` and `bench_h100_0.pkl` sit are in [DATA.md](DATA.md).
+Simulation logs are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (public, CC-BY-4.0, 525 files under `part03`–`part19`, 1,639,669,287 bytes, 1.64 GB). Part 18 also holds the 18b–18i runs; Part 19 also holds the 19b confirmatory run, the 19c low-side scan, and the 19d kpred=0.005 replicate. Per-part sizes, the log cadence, and where `bench_b300_0.pkl` and `bench_h100_0.pkl` sit are in [DATA.md](DATA.md).
 
 ```bash
 huggingface-cli download igor53627/5d --repo-type dataset
