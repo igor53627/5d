@@ -56,13 +56,14 @@ rules, not a measured error rate.
   trait, which could bias transmission toward 0. The check identifies ancestors by traits
   that do not enter the analysed trait: the neutral p0, p1 for brain outputs, p1 alone when
   p0 is analysed. The check rule uses fewer traits than the full rule (1 against 2, or 2
-  against 26 or 29), so it identifies a body less exactly: its division counts are about 2-4
-  times those of the full rule. It uses the same gate as the full rule, so the two rules are
+  against 26 or 29). Its division counts are about 2-4 times those of the full rule; the
+  logs cannot say which rule is closer to the true lineage. It uses the same gate as the full rule, so the two rules are
   not fully independent. A conclusion below is stated only where both rules agree in sign.
 - **Part 18 pairs.** `metrics18c.match_bodies` (radius 8, exclusive pairs) agrees with the
-  trait rule for 99.7-99.8% of its pairs in 18g and 18i. The agreement shows a line of
-  descent. Both rules accept a parent and a daughter that stays within 8 cells, so it does
-  not show one undivided body.
+  trait rule for 99.7-99.8% of its pairs in 18g and 18i. The agreement is consistent with a line
+  of descent as the trait rule infers it; the two rules can also agree on the same wrong
+  object. Both rules accept a parent and a daughter that stays within 8 cells, so the
+  agreement does not show one undivided body.
 
 ## Results
 
@@ -125,8 +126,8 @@ Tracking numbers (mean per run):
    5.3, 2.3 and 1.7.
 6. **Division counts are 2 to 19 times lower** in 3D-5D (the factor depends on the trait
    rule), because an object taken as the ancestor of two bodies counts as a division. The
-   order 3D < 4D < 5D stays. The published merge rates use the same rule and are inflated
-   too. "Merges about equal divisions on the plateau" and "response per generation falls
+   order 3D < 4D < 5D stays. The published merge rates use the nearest-in-space rule and are not
+   recomputed, so they are unresolved. "Merges about equal divisions on the plateau" and "response per generation falls
    with dimension" (Part 13) are not supported by these logs. In 2D the two rules differ for
    at most 1.2% of descendants, but the division counts differ: 4.5 and 5.6 per run become
    5.9 and 6.6 with 12 founders, and 91 and 42 become 24 and 24 with 48 founders. The upper
