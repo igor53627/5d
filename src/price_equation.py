@@ -12,11 +12,11 @@ the total descendant mass. Then::
 
 ``selection`` is the mass-weighted covariance of relative fitness and trait. ``transmission``
 holds every change inside a lineage: mutation, selection among the cells of one body, exchange
-between bodies, and tracking error. It is not a measurement of any single one of these.
+between bodies, and errors of the ancestor rule. It is not a measurement of any single one of these.
 
 Both terms depend on the ancestor of each descendant. Pass ``fingerprint_indices`` so that
 ``lineage_tracking.assign_ancestors`` identifies ancestors by heritable traits. The
-nearest-in-space rule assigns a wrong ancestor to most descendants in dense populations.
+nearest-in-space rule picks a different object for most descendants in dense populations.
 
 ``analyze_eco.selection_diff`` is the older estimator. It uses an unweighted covariance, so
 the remainder ``delta - S`` that older analysis scripts call "transmission" is not a

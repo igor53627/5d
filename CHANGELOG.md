@@ -30,7 +30,9 @@ All notable changes to this project are documented in this file. The format is b
   terms sum to the change of the mass-weighted mean.
 - `experiments/tracking_fix/`: `recompute_tracking.py` and `validate_tracking.py` recompute the
   lineage-based numbers of Parts 10, 12, 13, 15, 15b, 16 and 17 from the published logs;
-  `results/tracking_notes.md` reports them.
+  `results/tracking_notes.md` reports them. `validate_tracking.py` reports how often two
+  disjoint sets of traits pick the same ancestor, also for descendants with two or more
+  ancestors inside the gate.
 - `tests/test_price_equation.py`: tracking and Price terms on logs with a known answer.
 - Part 20 setup (issue #9), no population run: `experiments/part20/spec20.py` writes
   `archive/specs/b20_pilot.json` (16 paired runs of the Part 13 4D world with and without
@@ -49,7 +51,8 @@ All notable changes to this project are documented in this file. The format is b
 ### Fixed
 
 - Lineage tracking (issues #7, #11). The analysis took the nearest object in space as the
-  ancestor of a body, which is wrong for 10% to 85% of descendants, and mixed an unweighted
+  ancestor of a body, which differs from the ancestor identified by heritable traits for up to
+  85% of descendants (a disagreement rate; the logs hold no true ancestor), and mixed an unweighted
   selection term with a mass-weighted mean. With ancestors identified by heritable traits the
   Price selection terms of Parts 15 and 17 change sign, the negative plateau terms of Parts 12
   and 13 vanish, and division counts, parent-child correlations and lineage counts of Parts
@@ -60,5 +63,6 @@ All notable changes to this project are documented in this file. The format is b
   verdict is now "suggestive": the pooled bootstrap interval excludes 0, but the t-test gives
   p = 0.057 and the pool was formed after the null 18g run. The 18d and 18h bullets say what did
   not replicate and how many seeds they rest on.
-- Part 19d notes and README: 7/12 at `kpred=0.005` is not distinguishable from 2/4 and 1/4
-  (Fisher exact p = 1.00 and 0.57), so the text no longer calls it better.
+- Part 19d notes and README: 7/12 at `kpred=0.005` is not distinguishable from 2/4 at 0.015
+  (Fisher exact p = 1.00) or from 1/4 at 0.01 (exact McNemar p = 0.50 on the four shared
+  seeds; Fisher exact p = 0.58 on disjoint seeds), so the text no longer calls it better.

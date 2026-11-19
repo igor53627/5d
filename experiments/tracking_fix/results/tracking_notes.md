@@ -1,6 +1,7 @@
 # Lineage tracking fix: Price terms, heritability and lineages of Parts 10-17
 
-**Status:** done on the published logs (no new simulation, no GPU cost). Issues #7 and #11.
+**Status:** done for Parts 10, 12, 13, 15, 15b, 16 and 17 on the published logs (no new
+simulation, no GPU cost). Issues #7 and #11. Parts 9, 14, 18 and 18b are open in issue #13.
 **Scripts:** `recompute_tracking.py`, `validate_tracking.py` (this directory);
 `src/lineage_tracking.py`, `src/price_equation.py`.
 **Tables:** [tracking_recompute.md](tracking_recompute.md), [tracking_validation.md](tracking_validation.md).
@@ -9,42 +10,59 @@
 
 Two defects in the analysis, not in the simulations.
 
-1. **Wrong ancestors.** `analyze_eco.parents` takes the nearest object in space, one snapshot
-   (200 steps) earlier, as the ancestor. In that time a body moves 12-15 cells, and its
-   nearest neighbour is about 19 cells away. The nearest object is then often another body.
+1. **Ancestor rule.** `analyze_eco.parents` takes the nearest object in space, one snapshot
+   (200 steps) earlier, as the ancestor. In that time a body moves about 12 cells, and its
+   nearest neighbour is about 18-23 cells away (one-off measurements, not in the repository).
+   The nearest object can then be another body.
 2. **Mixed weights.** `analyze_eco.selection_diff` is an unweighted covariance over objects.
    The analysis scripts subtract it from the change of the mass-weighted mean and call the
    rest "transmission". The two terms do not add up to a Price identity.
 
-Defect 1 is the large one. Defect 2 alone changes little (columns "S published" and
-"S nearest" of the table are close).
+Defect 1 is the larger one in the growth phase and in the brain parts, where the columns
+"S published" and "S nearest" of the table are close. On the plateau of Parts 12 and 13 the
+weights matter too: with the same nearest-in-space ancestors, mass weights change the
+published -0.028, -0.034 and -0.025 to -0.015, -0.005 and -0.002.
+
+The logs hold no true ancestor. Every rate below is a rate of disagreement between two
+rules, not a measured error rate.
 
 ## The fix
 
 - `lineage_tracking.assign_ancestors` picks, among the objects within a gate radius, the one
   whose heritable traits are closest to the descendant's. Traits change little in 200 steps
-  (median distance 0.01 for p0, p1; 0.1 for the 24 or 31 brain weights) and differ much more between
+  (median distance 0.01 for p0, p1; 0.1 for the 24 or 27 brain weights) and differ much more between
   bodies (median 1-3.5 for brain weights).
 - `price_equation.price_terms` is mass-weighted. `selection + transmission` equals the change
   of the mass-weighted mean exactly; the code checks the identity to 1e-9 on every window.
 - The gate is 20 cells without brain taxis and 30 cells with it. The 99th percentile of the
-  ancestor distance is 16-17 cells without a brain and 26-29 with one.
+  ancestor distance is 16-17 cells without a brain and 26-29 with one. This percentile is
+  measured with the gate in place, so it does not show that the gate is wide enough.
 
 ## How the tracker was checked
 
 - **Split-half** (`tracking_validation.md`). The brain weights are split at random into two
   disjoint halves, and each half picks the ancestor alone. In 4D the halves agree for
-  95.1-98.3% of descendants in the evolving and frozen arms, and for 99.9-100% in the no-brain and blind arms. The nearest object in space agrees with the full fingerprint for only 24-31% of
-  descendants in the evolving 4D arms.
+  95.1-98.3% of descendants in the evolving and frozen arms, and for 99.9-100% in the
+  no-brain and blind arms. The nearest object in space agrees with the full fingerprint for
+  only 24-31% of descendants in the evolving and frozen arms. All descendants in these arms
+  except 56 of 122,662 have two or more ancestors inside the gate, so the gate does not
+  force the agreement. Both halves are carried by the same mass, so the check measures how
+  reproducible the rule is, not how accurate it is.
+- **Single traits** (`tracking_validation.md`). Parts 10, 12 and 13 have two heritable
+  traits and no brain. p0 alone and p1 alone pick the same ancestor for 91-97% of descendants
+  in neutral runs and for 76-96% in selection runs (lowest in 4D and 5D: 76-86%). The
+  two-trait rule is therefore less reliable in selection runs than in neutral runs.
 - **Independent fingerprint** (column "S check"). The full fingerprint contains the analysed
   trait, which could bias transmission toward 0. The check identifies ancestors by traits
   that do not enter the analysed trait: the neutral p0, p1 for brain outputs, p1 alone when
-  p0 is analysed. The check rule uses fewer traits than the full rule (1 against 2, or 2 against 26
-  or 33), so it identifies a body less exactly: its division counts are about 2-4 times
-  those of the full rule. A conclusion below
-  is stated only where both rules agree in sign.
+  p0 is analysed. The check rule uses fewer traits than the full rule (1 against 2, or 2
+  against 26 or 29), so it identifies a body less exactly: its division counts are about 2-4
+  times those of the full rule. It uses the same gate as the full rule, so the two rules are
+  not fully independent. A conclusion below is stated only where both rules agree in sign.
 - **Part 18 pairs.** `metrics18c.match_bodies` (radius 8, exclusive pairs) agrees with the
-  trait rule for 99.7-99.8% of its pairs in 18g and 18i. The within_al metric is not affected.
+  trait rule for 99.7-99.8% of its pairs in 18g and 18i. The agreement shows a line of
+  descent. Both rules accept a parent and a daughter that stays within 8 cells, so it does
+  not show one undivided body.
 
 ## Results
 
@@ -58,7 +76,7 @@ mass-weighted with the two trait rules. p is a one-sample t-test of the tracked 
 | 12 | sel 96^4, p0, plateau | 5 | -0.028 | +0.004 | +0.002 | -0.001 | 0.0015 |
 | 12 | neu 96^4, p0, plateau | 5 | +0.003 | -0.000 | +0.001 | -0.000 | 0.97 |
 | 13 | sel 3D / 4D / 5D, p0, growth | 8 | +0.057 / +0.020 / -0.017 | +0.072 / +0.060 / +0.064 | +0.075 / +0.056 / +0.056 | +0.001 / -0.001 / -0.007 | all < 0.001 |
-| 13 | sel 3D / 4D / 5D, p0, plateau | 8 | -0.033 / -0.025 / +0.009 | +0.008 / +0.006 / +0.007 | +0.005 / -0.001 / +0.003 | -0.002 / -0.001 / -0.003 | all < 0.001 |
+| 13 | sel 3D / 4D / 5D, p0, plateau | 8 | -0.034 / -0.025 / +0.009 | +0.009 / +0.007 / +0.007 | +0.006 / +0.000 / +0.004 | -0.002 / -0.001 / -0.003 | all < 0.001 |
 | 15 | evo 4D, g_F, growth | 6 | -0.183 | +0.092 | +0.054 | -0.036 | 0.005 |
 | 15 | frozen 4D, g_F, growth | 6 | -0.185 | +0.073 | +0.049 | -0.016 | 0.0009 |
 | 15 | nobrain 4D, g_F, growth | 6 | +0.013 | -0.000 | -0.002 | -0.001 | 0.94 |
@@ -80,28 +98,40 @@ Tracking numbers (mean per run):
 
 1. **Parts 15 and 17: the selection term changes sign.** The notes read a negative S for g_F
    (and a positive S for g_P) as "selection acts inside bodies, the between-body term is small
-   or opposite". With correct ancestors, g_F rises and g_P falls through selection **between**
+   or opposite". With ancestors identified by heritable traits, g_F rises and g_P falls through selection **between**
    bodies, in every 4D seed, under both trait rules. The transmission term is small and has
    the opposite sign (-0.036 for g_F in Part 15, p = 0.048). The data give no support for
    within-body selection as the driver in 4D.
 2. **Part 15 "evolving = frozen" stands and gets a mechanism.** The frozen arm has the same
    positive selection term (+0.073), so the response is sorting of founder variation.
-3. **Parts 12 and 13: the negative plateau S is an artefact.** The published value is -0.03.
-   The full rule gives +0.004 to +0.008 in every arm. The independent rule gives +0.002 in
-   Part 12 (4 of 5 seeds positive), +0.005 in 3D, +0.003 in 5D and -0.001 in 4D 56^4. Both
-   terms are small. Weak selection on the plateau has support in 3D and 5D; in 4D the sign
-   depends on the rule, so the mechanism of the slow rise of mean p0 is not resolved there.
-4. **Part 13: selection in growth does not depend on dimension.** S is +0.06 to +0.07 in 3D,
-   4D and 5D. The published values (+0.057, +0.020, -0.017) fell with dimension only because
-   tracking errors rise with dimension.
-5. **Part 13: lineage loss with dimension is mostly an artefact.** Neutral runs keep 11.2 of
-   12 founder lineages (effective number) in 3D and in 4D, and 7.7 in 5D (9.3, 8.1 and 5.3
-   with the independent rule). Published: 5.3, 2.3 and 1.7.
-6. **Division counts were inflated 2 to 19 times** in 3D-5D (the factor depends on the trait
-   rule), because a wrong ancestor with two
-   descendants counts as a division. The order 3D < 4D < 5D stays. The published merge rates
-   use the same rule and are inflated too. "Merges about equal divisions on the plateau" and
-   "response per generation falls with dimension" (Part 13) are not supported by these logs.
+3. **Parts 12 and 13: the negative plateau S has no support.** The published value is
+   -0.03. The full rule gives +0.004 to +0.009 in every arm, with every seed positive. The
+   independent rule gives +0.002 in Part 12 (4 of 5 seeds positive, p = 0.18), +0.006 in 3D
+   (6 of 8, p = 0.018), +0.004 in 5D (5 of 8, p = 0.17) and 0.000 in 4D 56^4 (4 of 8). Both
+   terms are small. A positive selection term on the plateau has support under both rules
+   only in 3D, so the mechanism of the slow rise of mean p0 is not resolved.
+4. **Part 13: no dependence of the growth-phase selection term on dimension is detected in
+   3D-5D.** With ancestors identified by heritable traits, S is +0.072, +0.060 and +0.064 in
+   3D, 4D and 5D (8 seeds each; Kruskal-Wallis p = 0.44, one-way ANOVA p = 0.53, on the
+   per-run values in `tracking_recompute.json`). With the independent rule it is +0.075,
+   +0.056 and +0.056 (p = 0.16 and 0.22). Eight seeds per dimension cannot show that the
+   terms are equal, and the 2D runs are lower (+0.015 and +0.026). The published values
+   (+0.057, +0.020, -0.017) fall with dimension (Kruskal-Wallis p = 0.012). The fall is
+   present with nearest-in-space ancestors and absent with both trait rules on the same logs
+   and windows, so it comes from the ancestor rule.
+5. **Part 13: lineage loss with dimension is much smaller than published.** Neutral runs
+   keep 11.2 founder lineages (effective number; the first snapshot has at most 12 objects)
+   in 3D and in 4D, and 7.7 in 5D (9.3, 8.1 and 5.3 with the independent rule). Published:
+   5.3, 2.3 and 1.7.
+6. **Division counts are 2 to 19 times lower** in 3D-5D (the factor depends on the trait
+   rule), because an object taken as the ancestor of two bodies counts as a division. The
+   order 3D < 4D < 5D stays. The published merge rates use the same rule and are inflated
+   too. "Merges about equal divisions on the plateau" and "response per generation falls
+   with dimension" (Part 13) are not supported by these logs. In 2D the two rules differ for
+   at most 1.2% of descendants, but the division counts differ: 4.5 and 5.6 per run become
+   5.9 and 6.6 with 12 founders, and 91 and 42 become 24 and 24 with 48 founders. The upper
+   end of the published 2D division rate (0.006-0.036 per individual per 1000 steps) is
+   therefore not confirmed.
 7. **Parent-child correlation is higher than published:** 0.62-0.86 with the independent rule
    in Parts 10-13, against 0.41-0.56. The value 0.96-0.98 from the full fingerprint is circular for p0 (the
    fingerprint contains p0) and must not be quoted.
@@ -121,8 +151,13 @@ Tracking numbers (mean per run):
 - **Fusion.** Each descendant has one ancestor. A fusion credits the fused body to one
   partner and appears as selection for that partner with an opposite transmission term.
 - **Not recomputed:** Parts 9 and 14 (heritability, lineages), Parts 18 and 18b (Price S),
-  merge rates, and the Part 13 response per generation. Part 18g/18i logs are sparse: the
-  nearest object differs from the trait rule for 3% of descendants there.
+  merge rates, division rates per individual, and the Part 13 response per generation. The
+  logs are available and the reason is time only; issue #13 tracks this work. Part 18g/18i
+  logs are sparse: the nearest object differs from the trait rule for 3% of descendants
+  there.
+- **No ground truth.** No log records the true ancestor. The checks above show that the
+  trait rule is reproducible; they do not measure its error. A small run that records the
+  true lineage is in issue #13.
 - **Sensitivity, one-off checks not in the repository:** for Part 17 `evo`, gates of 22, 30
   and 45 cells give S(g_F) = +0.022, +0.034, +0.036 and S(g_P) = -0.025, -0.033, -0.034. Lags
   of 1, 2, 5 and 10 snapshots give S(g_F) = +0.008, +0.014, +0.034, +0.062 (same sign, the
