@@ -41,6 +41,7 @@ py-modules = [
     "modal_app",
     "price_equation",
     "render",
+    "spend_cap",
 ]
 
 [tool.ruff]

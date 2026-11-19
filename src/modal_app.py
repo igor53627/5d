@@ -236,9 +236,15 @@ def gpu_job_h100(kind, payload, save_as=None):
     return gpu_job.local(kind, payload, save_as)
 
 @app.local_entrypoint()
-def spawn_h100(kind: str = "es5", spec: str = "", prefix: str = ""):
-    calls = json.load(open(spec)); t = time.time()
-    hs = [gpu_job_h100.spawn(kind, c, save_as=f"{prefix}_{i}.pkl") for i, c in enumerate(calls)]
+def spawn_h100(kind: str = "es5", spec: str = "", prefix: str = "", timeout_seconds: int = 0, cap_dollars: float = 15.0):
+    """timeout_seconds: Modal timeout of each container, required (the default 0 is refused). cap_dollars: cap on the GPU charge of this launch; the CPU and memory charge is not counted (spend_cap.py)."""
+    import spend_cap
+    calls = json.load(open(spec)); t = time.time(); rate = spend_cap.H100_DOLLARS_PER_HOUR
+    worst = spend_cap.worst_case_dollars(len(calls), timeout_seconds, rate)
+    print(f"spawn_h100: {len(calls)} calls, timeout {timeout_seconds} s each, rate ${rate}/h, worst-case GPU spend ${worst:.2f} (CPU and memory charge not included), cap ${cap_dollars:.2f}", flush=True)
+    spend_cap.require_spend_under_cap(len(calls), timeout_seconds, rate, cap_dollars)
+    fn = gpu_job_h100.with_options(timeout=timeout_seconds)
+    hs = [fn.spawn(kind, c, save_as=f"{prefix}_{i}.pkl") for i, c in enumerate(calls)]
     print("spawned", len(calls), flush=True)
     for h in hs:
         r = h.get(); _log("h100", r, time.time() - t, prefix); print(r["gpu"], f"{r['wall']:.0f}s", r.get("summary"), flush=True)

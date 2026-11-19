@@ -9,7 +9,7 @@ Exceptions and is not rewritten.
 
 ## Scope
 
-A research repository: `src/` (19 Python modules: the Flow-Lenia engines in JAX, the Modal
+A research repository: `src/` (21 Python modules: the Flow-Lenia engines in JAX, the Modal
 launcher, rendering, lineage tracking and the Price decomposition), `experiments/partNN/` (run
 and analysis scripts for each part), `archive/` (old searches, frozen) and `tests/`.
 
@@ -66,7 +66,7 @@ memory management (Python and JAX manage memory).
 | Function length | 70 lines               | Function | `test_style_limits.py`   | Fail the build  |
 | Line length     | 100 columns            | Line     | `test_style_limits.py`   | Fail the build  |
 | Modal job time  | 7,200 s                | Call     | Modal, `timeout=`        | Job is stopped  |
-| Spend           | $15 (Part 19d)         | Launch   | By hand (probe seed)     | Stop the launch |
+| Spend           | $15 by default         | Launch   | `spawn_h100` only        | Refuse to start |
 | Steps           | 20,000 (Parts 19b-19d) | Run      | Loop count; smoke        | Loop ends       |
 | Lattice         | N=4, L=48 (Part 19d)   | Run      | `run19d.py smoke`        | Smoke fails     |
 | Flow speed      | 0.45/sqrt(N) cell/step | Cell     | Engine step              | Scale down      |
@@ -76,7 +76,11 @@ memory management (Python and JAX manage memory).
 | CI job time     | 15 min                 | Job      | GitHub Actions           | Cancel the job  |
 
 `gpu_job_h100` and `gpu_job_b300` have 14,400 s. "Smoke" is `run19d.py smoke`, which runs before
-a launch. The spend cap is the one limit that no tool enforces; see Open questions.
+a launch. `spawn_h100` replaces the job time of `gpu_job_h100` with `--timeout-seconds`, which
+has no usable default. Before it starts a container it computes the worst-case spend, calls x
+timeout x $3.95 per H100-hour (`src/spend_cap.py`, checked by `tests/test_spend_cap.py`), and
+refuses to start when that exceeds `--cap-dollars`. The other entry points have no spend limit;
+see Open questions.
 
 ## Dependencies and tooling
 
@@ -117,7 +121,13 @@ mechanism for the listed files. They do not waive a baseline requirement.
 - `_advect_muscl` is not positivity-preserving for N >= 3 at the speed cap, and the clamp
   `jnp.maximum(An, 0.0)` in the engine step then creates mass. Four strict `xfail` tests in
   `tests/test_transport_mass.py` record it (issue #10).
-- The spend cap is a note in the run script and is kept by hand. No code enforces it.
+- The spend cap is enforced for `spawn_h100` only (issue #14). The other entry points of
+  `src/modal_app.py` have no cap and keep the fixed job time of their function: `smoke`, `bench`,
+  `res`, `alife`, `spawn`, `spawn_alife`, `spawn_glider`, `spawn_glider_lean`, `spawn_kind`,
+  `spawn_cheap` and `spawn_big` (7,200 s for each call), `spawn_b300` and `spawn_gpu` (14,400 s
+  for each call). For these the cap is still kept by hand. The check counts the GPU charge of
+  one launch at the H100 rate. It does not count CPU and memory charges, the start and idle
+  seconds of a container, or earlier launches.
 - Legacy files contain 10 `except Exception` clauses (`archive/bench.py`, `glider_rep.py`,
   `perf_eco.py`, `perf11.py`, `analyze19d.py`); two of them pass in silence. "Handle every
   error" is a baseline requirement, so these need a fix or a tracked issue.
