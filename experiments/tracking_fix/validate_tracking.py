@@ -88,7 +88,7 @@ def agreement_counts(run: recompute_tracking.Run, halves: Sequence[list[int]]) -
     ]
     counts: np.ndarray = np.zeros(len(SPLIT_COUNT_NAMES))
     for (time, ancestors), (_, descendants) in zip(run.log[:-1], run.log[1:]):
-        if time < SPLIT_TIME_MIN or len(ancestors) < 3 or not descendants:
+        if time < SPLIT_TIME_MIN or len(ancestors) < 2 or not descendants:
             continue
         full, first_half, second_half, by_space, by_neutral = (
             lineage_tracking.assign_ancestors(
