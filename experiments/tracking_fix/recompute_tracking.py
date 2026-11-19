@@ -1,4 +1,4 @@
-"""Recompute lineage-based numbers of Parts 10-17 with trait-fingerprint tracking.
+"""Recompute lineage-based numbers of Parts 10-18b with trait-fingerprint tracking.
 
 Usage: python recompute_tracking.py DATA_ROOT [OUTPUT_DIR]
 
@@ -17,6 +17,17 @@ It also reports how often the two ancestor rules differ, and the division count,
 parent-child correlation and the effective number of founder lineages under each rule.
 Runs without transport of the heritable field have no trait fingerprint; for them every
 column uses the nearest object in space.
+
+The adaptive score of Parts 18 and 18b is the season sign times (g_A - g_B), so it depends
+on the snapshot time. A trait function therefore receives the snapshot time. The selection
+term of a window uses the ancestors' score at the start of the window, as ``analyze18.one``
+does. The transmission term of a window that spans a season switch holds the flip of the
+sign; read it from the phase ``seasons``, whose windows do not span a switch. Parent and
+child share the season sign, so the lineage numbers of these parts are reported for p0, the
+first trait of the part.
+
+The JSON result also holds, for each run, the mean number of bodies per snapshot and the
+number of descendants behind the disagreement rate.
 """
 
 from __future__ import annotations
@@ -41,6 +52,7 @@ import analyze15b
 import analyze17
 import analyze_eco
 import fl_brain
+import fl_season
 import lineage_tracking
 import price_equation
 # isort: on
@@ -50,8 +62,12 @@ GATE_RADIUS_WITHOUT_TAXIS: float = 20.0
 GATE_RADIUS_WITH_TAXIS: float = 30.0
 TRACKING_TIME_MIN: float = 2000.0
 BRAIN_TRAIT_COUNT: int = fl_brain.K0 + fl_brain.NW
+SEASON_TRAIT_COUNT: int = fl_season.K0 + fl_season.NW
+SEASON_GAIN_A_INDEX: int = fl_season.KB + 3
+SEASON_GAIN_B_INDEX: int = fl_season.KB + 4
+SEASON_PERIOD_DEFAULT: float = 6000.0
 
-TraitFunction = Callable[[list, dict], np.ndarray]
+TraitFunction = Callable[[list, dict, float], np.ndarray]
 Window = tuple[float, float]
 
 
@@ -82,7 +98,7 @@ class PartConfig:
     phases: Callable[[Run], dict[str, list[Window]]]
 
 
-def trait_p0(objects: list, eco: dict) -> np.ndarray:
+def trait_p0(objects: list, eco: dict, time: float) -> np.ndarray:
     """Heritable parameter p0 of each object."""
     return np.array([o[2][0] for o in objects], float)
 
@@ -90,7 +106,7 @@ def trait_p0(objects: list, eco: dict) -> np.ndarray:
 def trait_gain_at_zero_input(output_index: int) -> TraitFunction:
     """Part 15: brain output at zero input, as in ``analyze15.augment``."""
 
-    def trait(objects: list, eco: dict) -> np.ndarray:
+    def trait(objects: list, eco: dict, time: float) -> np.ndarray:
         zero_input: np.ndarray = np.zeros(fl_brain.NIN)
         weights = [np.asarray(o[2], float)[fl_brain.K0 : BRAIN_TRAIT_COUNT] for o in objects]
         return np.array([fl_brain.brain(w, zero_input, 2.0)[output_index] for w in weights])
@@ -101,7 +117,7 @@ def trait_gain_at_zero_input(output_index: int) -> TraitFunction:
 def trait_gain_at_reference_input(output_index: int) -> TraitFunction:
     """Parts 15b and 16: brain output at the reference input ``analyze15b.SSTAR``."""
 
-    def trait(objects: list, eco: dict) -> np.ndarray:
+    def trait(objects: list, eco: dict, time: float) -> np.ndarray:
         weights: np.ndarray = np.array([o[2][fl_brain.K0 : BRAIN_TRAIT_COUNT] for o in objects])
         gains: np.ndarray = analyze15b.brain_batch(weights, analyze15b.SSTAR)[:, 0, output_index]
         is_clamped_repulsion: bool = output_index == 1 and eco.get("rclamp", 0) > 0
@@ -113,10 +129,22 @@ def trait_gain_at_reference_input(output_index: int) -> TraitFunction:
 def trait_own_gain(output_index: int) -> TraitFunction:
     """Part 17: realised gain of each object at its own inputs (``analyze17.own_gains``)."""
 
-    def trait(objects: list, eco: dict) -> np.ndarray:
+    def trait(objects: list, eco: dict, time: float) -> np.ndarray:
         return analyze17.own_gains(objects, eco.get("blind", 0) > 0)[:, output_index]
 
     return trait
+
+
+def season_sign(time: float, eco: dict) -> float:
+    """Parts 18 and 18b: +1 or -1, the season of ``analyze18.one`` at one snapshot time."""
+    return float(fl_season.season(time, eco.get("Ts", SEASON_PERIOD_DEFAULT), np))
+
+
+def trait_adaptive_score(objects: list, eco: dict, time: float) -> np.ndarray:
+    """Parts 18 and 18b: season sign times the realised (g_A - g_B) of each object."""
+    sign: float = season_sign(time, eco)
+    gains = [o[2][SEASON_GAIN_A_INDEX] - o[2][SEASON_GAIN_B_INDEX] for o in objects]
+    return sign * np.array(gains, float)
 
 
 def whole_run(run: Run) -> dict[str, list[Window]]:
@@ -132,6 +160,20 @@ def growth_and_capacity(run: Run) -> dict[str, list[Window]]:
         "capacity": [(10000.0, time_end)],
         "plateau": [(float(time_end // 2), time_end)],
     }
+
+
+def whole_run_and_seasons(run: Run) -> dict[str, list[Window]]:
+    """Parts 18 and 18b: the whole run as in ``analyze18.one``, and each season alone.
+
+    A season is a run of snapshots with one season sign, so no lag window of the phase
+    ``seasons`` spans a season switch.
+    """
+    times: list[float] = [float(snapshot[0]) for snapshot in run.log]
+    signs: list[float] = [season_sign(snapshot[0], run.eco) for snapshot in run.log]
+    starts: list[int] = [0] + [k for k in range(1, len(signs)) if signs[k] != signs[k - 1]]
+    ends: list[int] = [*starts[1:], len(signs)]
+    seasons: list[Window] = [(times[low], times[high - 1]) for low, high in zip(starts, ends)]
+    return {"all": whole_run(run)["all"], "seasons": seasons}
 
 
 def early_phase(run: Run) -> dict[str, list[Window]]:
@@ -196,6 +238,7 @@ OWN_GAINS: dict[str, TraitFunction] = {
     "gP": trait_own_gain(1),
     "p0": trait_p0,
 }
+SEASON_TRAITS: dict[str, TraitFunction] = {"p0": trait_p0, "adapt": trait_adaptive_score}
 PARTS: dict[str, PartConfig] = {
     "10": _part("part10/eco10/eco10m_*.pkl", {"p0": trait_p0}, growth_and_capacity, box_size=96),
     "12": _part(
@@ -206,6 +249,7 @@ PARTS: dict[str, PartConfig] = {
         tag_filter=r"^(sel|neu|res2k)_96_",
     ),
     "13": _part("part13/eco13/eco13m_*.pkl", {"p0": trait_p0}, sliding_growth_and_whole_plateau),
+    "14": _part("part14/eco14/eco14_*.pkl", {"p0": trait_p0}, sliding_growth_and_whole_plateau),
     "15": _brain_part(
         "part15/eco15/b15m_*.pkl", {"gF": trait_gain_at_zero_input(0)}, sliding_growth_and_plateau
     ),
@@ -217,6 +261,20 @@ PARTS: dict[str, PartConfig] = {
         whole_run,
         box_size=56,
         fingerprint_count=analyze17.iD,
+    ),
+    "18": _brain_part(
+        "part18/eco18/b18m_*.pkl",
+        SEASON_TRAITS,
+        whole_run_and_seasons,
+        box_size=56,
+        fingerprint_count=SEASON_TRAIT_COUNT,
+    ),
+    "18b": _brain_part(
+        "part18/eco18b/b18bm_*.pkl",
+        SEASON_TRAITS,
+        whole_run_and_seasons,
+        box_size=48,
+        fingerprint_count=SEASON_TRAIT_COUNT,
     ),
 }
 
@@ -260,7 +318,7 @@ def with_trait(log: list, eco: dict, fingerprint_count: int, trait: TraitFunctio
     """Copy of the log whose trait lists are the heritable traits followed by one trait value."""
     extended: list = []
     for time, objects in log:
-        values: np.ndarray = trait(objects, eco) if objects else np.zeros(0)
+        values: np.ndarray = trait(objects, eco, time) if objects else np.zeros(0)
         extended.append(
             (
                 time,
@@ -353,20 +411,32 @@ def check_indices(config: PartConfig, trait_name: str) -> tuple[int, ...]:
     return tuple(index for index in config.check_fingerprint if not (is_p0 and index == 0))
 
 
+def bodies_per_snapshot(log: list) -> float:
+    """Mean number of bodies over the snapshots that hold at least one body."""
+    counts: list[int] = [len(objects) for _, objects in log if objects]
+    return float(np.mean(counts)) if counts else float("nan")
+
+
 def analyse_run(run: Run) -> dict:
-    """All recomputed numbers of one run."""
+    """All recomputed numbers of one run.
+
+    ``descendants`` is the number of descendants behind ``tracking_disagreement``; it is 0
+    for a run without transport, where the two ancestor rules are not compared.
+    """
     config: PartConfig = PARTS[run.part]
     record: dict = {
         "part": run.part,
         "tag": run.tag,
         "condition": run.condition,
         "transport": run.transport,
+        "bodies_per_snapshot": bodies_per_snapshot(run.log),
+        "descendants": 0,
         "tracking_disagreement": float("nan"),
         "price": {},
         "lineage": {},
     }
     if run.transport:
-        fraction, _ = lineage_tracking.tracking_disagreement(
+        fraction, descendant_count = lineage_tracking.tracking_disagreement(
             run.log,
             run.box_size,
             list(range(config.fingerprint_count)),
@@ -374,6 +444,7 @@ def analyse_run(run: Run) -> dict:
             TRACKING_TIME_MIN,
         )
         record["tracking_disagreement"] = fraction
+        record["descendants"] = descendant_count
     phases = config.phases(run)
     for trait_name, trait in config.traits.items():
         log = with_trait(run.log, run.eco, config.fingerprint_count, trait)
@@ -422,7 +493,10 @@ def summarise(records: Sequence[dict]) -> list[dict]:
 
 
 def tracking_summary(records: Sequence[dict]) -> list[dict]:
-    """Per part and condition: ancestor disagreement and the lineage numbers of each rule."""
+    """Per part and condition: ancestor disagreement and the lineage numbers of each rule.
+
+    Every number is a mean over the runs, except ``descendants``, which is their sum.
+    """
     groups: dict[tuple, list[dict]] = {}
     for record in records:
         groups.setdefault((record["part"], record["condition"]), []).append(record)
@@ -431,6 +505,8 @@ def tracking_summary(records: Sequence[dict]) -> list[dict]:
         trait_name: str = next(iter(group[0]["lineage"]))
         row: dict = {"part": part, "condition": condition, "seeds": len(group)}
         row["trait"] = trait_name
+        row["bodies_per_snapshot"] = _finite_mean([r["bodies_per_snapshot"] for r in group])
+        row["descendants"] = int(sum(r["descendants"] for r in group))
         row["disagreement"] = _finite_mean([r["tracking_disagreement"] for r in group])
         for rule in ("nearest", "tracked", "check"):
             for name in ("divisions", "parent_child_r", "effective_lineages"):
