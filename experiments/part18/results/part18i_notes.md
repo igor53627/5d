@@ -31,12 +31,14 @@ Seed-level means, bootstrap 95% CIs (10,000 resamples).
 
 ### cue − nocue (8 pairs)
 
-| | mean | 95% CI | n_pos |
-|--|-----:|--------|------:|
-| Δwithin_al | **+0.173** | **[+0.039, +0.316]** | 6/8 |
-| Δ(gA−gB) | −0.003 | [−0.229, +0.249] | 4/8 |
-| ΔpoiB | **−0.060** | **[−0.115, −0.005]** | 3/8 (5/8 lower poiB) |
-| crossed | cue **4/8**, nocue 3/8 | | |
+| | mean | 95% CI | n_pos | t-test p | Wilcoxon p |
+|--|-----:|--------|------:|---------:|-----------:|
+| Δwithin_al | **+0.173** | **[+0.039, +0.316]** | 7/8 | 0.057 | 0.055 |
+| Δ(gA−gB) | −0.003 | [−0.229, +0.249] | 4/8 | 0.983 | 1.000 |
+| ΔpoiB | **−0.060** | **[−0.115, −0.005]** | 2/8 (6/8 lower poiB) | 0.084 | 0.148 |
+| crossed | cue **4/8**, nocue 3/8 | | | | |
+
+p-values are two-sided against 0 on the 8 paired differences: one-sample t-test and exact Wilcoxon signed-rank test. `pool18i.py` rebuilds this section from the per-run records (bootstrap seed 0) and writes `pool18i_summary.json`.
 
 ### vs earlier parts
 
@@ -49,12 +51,14 @@ Seed-level means, bootstrap 95% CIs (10,000 resamples).
 
 ## Readout
 
-1. **Cue raises within-body seasonal Δg.** Pooled Δwithin_al CI excludes 0. nocue stays near 0. This is the result 18g alone was too small to show.
+1. **Suggestive: cue may raise within-body seasonal Δg.** Pooled Δwithin_al is +0.17 (7/8 pairs positive). The bootstrap CI excludes 0, but the t-test (p=0.057) and the Wilcoxon signed-rank test (p=0.055) do not reach 0.05. nocue stays near 0. 18g alone gave +0.05.
 2. **Planted is still stronger** (+0.45 vs +0.20) and more often crossed (6/8 vs 4/8). Evolved bias_cue does not reliably match the planted control.
 3. **End-point Δ(gA−gB) is not a stable cue effect** (pool CI includes 0 and is far from 18d’s +0.33). Season-matched *mean* biases can come from replacement; within_al is the cleaner switching metric.
 4. **Asymmetry persists:** B→A within_al is large for cue; A→B is ~0.
-5. **Slightly lower B-season poison with cue** (ΔpoiB −0.06, CI just excludes 0).
+5. **Slightly lower B-season poison with cue, not significant** (ΔpoiB −0.06; the bootstrap CI just excludes 0, t-test p=0.084, Wilcoxon p=0.148).
 
-**Verdict:** Across 8 seeds, oracle cue **does select for more within-body switching** than nocue, but the effect is moderate, direction-asymmetric, and much noisier than planted. 18d’s strong Δ(gA−gB) does not hold in this pool.
+**Limits of the pool.** The pool was formed after the confirmatory 18g run (4 seeds) gave a null result (Δwithin_al +0.05), so the number of seeds was not fixed in advance. The primary metric also changed: 18d used the end-point difference Δ(gA−gB), and within_al replaced it after 18d. The 8 seeds use 4 founders: 851–854 and 855–858 both map to founders 621–624 (`run18g.py`, `run18i.py`), with new genome-noise and run seeds. A confirmatory claim needs a preregistered replicate.
 
-Logs: `results/eco18i/b18i_{0..11}.pkl` plus 18g `b18g_*`; summary `full18i_summary.json`.
+**Verdict:** Across 8 seeds, the result is **suggestive, not confirmatory**: oracle cue may select for more within-body switching than nocue (Δwithin_al +0.17, bootstrap CI excludes 0, t-test p=0.057, Wilcoxon p=0.055). The effect is moderate, direction-asymmetric, and much noisier than planted. 18d’s strong Δ(gA−gB) does not hold in this pool.
+
+Logs: `results/eco18i/b18i_{0..11}.pkl` plus 18g `b18g_*`; summary `full18i_summary.json`; pooled statistics `pool18i_summary.json` (from `pool18i.py`).

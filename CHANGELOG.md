@@ -21,6 +21,9 @@ All notable changes to this project are documented in this file. The format is b
 - `uv.lock`, and `ruff==0.17.5` in the `dev` extra with a `[tool.ruff]` configuration.
 - `.github/workflows/ci.yml`: format check, lint and tests on CPU for each push and pull request.
 - `CHANGELOG.md`, and a "Style" section in `README.md`.
+- `experiments/part18/pool18i.py` rebuilds the pooled 18g+18i statistics of Part 18i from the
+  committed run records (bootstrap seed 0) and adds a t-test, a Wilcoxon test and `n_pos` for
+  each paired difference. `tests/test_pool18i.py` checks it against `full18i_summary.json`.
 
 ### Changed
 
@@ -28,3 +31,12 @@ All notable changes to this project are documented in this file. The format is b
   `fl_season`, `fl_pred`) call `fl_glider.rossler_rk4_step` in place of their inline RK4 block.
   The outputs are bitwise identical.
 - `.gitignore` ignores `.DS_Store` and `.ruff_cache/`.
+
+### Fixed
+
+- Part 18i notes and README: `n_pos` was 6/8 and 3/8, the run records give 7/8 and 2/8. The
+  verdict is now "suggestive": the pooled bootstrap interval excludes 0, but the t-test gives
+  p = 0.057 and the pool was formed after the null 18g run. The 18d and 18h bullets say what did
+  not replicate and how many seeds they rest on.
+- Part 19d notes and README: 7/12 at `kpred=0.005` is not distinguishable from 2/4 and 1/4
+  (Fisher exact p = 1.00 and 0.57), so the text no longer calls it better.

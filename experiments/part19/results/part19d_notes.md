@@ -49,7 +49,7 @@ The 12-seed both-held fraction is **7/12 = 0.583**, Clopper–Pearson 95% CI **[
 
 ## Verdict
 
-**The 19c 3/4 result at `kpred=0.005` does not hold up as a “most seeds” coexistence regime.** The eight new seeds are 4/8 both held. Pooled over 12 seeds, both persist as bodies on **7/12** (prey on all 12); the binomial interval [0.28, 0.85] is wide and consistent with both a weak minority and a strong majority. Predator-body loss is still the failure mode, and its timing is seed-dependent rather than a tight horizon. Held runs remain an edge (few predator objects, large prey). There is still no reliable oscillation period. `kpred=0.005` is better than 19b’s 0.015 (2/4) and 19c’s 0.01 (1/4), but it is not a stable 20k coexistence window.
+**The 19c 3/4 result at `kpred=0.005` does not hold up as a “most seeds” coexistence regime.** The eight new seeds are 4/8 both held. Pooled over 12 seeds, both persist as bodies on **7/12** (prey on all 12); the binomial interval [0.28, 0.85] is wide and consistent with both a weak minority and a strong majority. Predator-body loss is still the failure mode, and its timing is seed-dependent rather than a tight horizon. Held runs remain an edge (few predator objects, large prey). There is still no reliable oscillation period. `kpred=0.005` (7/12) is not distinguishable at these sample sizes from 19b’s 0.015 (2/4; Fisher exact two-sided p=1.00) or 19c’s 0.01 (1/4; p=0.57), and it is not a stable 20k coexistence window.
 
 Do not start an arms-race arm, and do not start a paid follow-up, without an explicit yes.
 
