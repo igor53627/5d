@@ -40,6 +40,13 @@ All notable changes to this project are documented in this file. The format is b
   `results/part20_notes.md` reports the probes and the launch conditions.
   `tests/test_oscillator_ablation.py` checks that the mass field ignores the oscillators
   only when both terms are 0, and that the committed spec is the paired design.
+- `src/lineage_tracer.py`: passive tracer fractions that move with the mass of an `fl_eco3`
+  run and record the share of the mass of every body that comes from each earlier body. The
+  simulated state is bitwise the state of `fl_eco3.run_chunk` (`tests/test_lineage_tracer.py`).
+  `experiments/tracking_truth/run_truth.py` runs a Part 13 world with tracers, and
+  `analyze_truth.py` compares the ancestor rules with the measured ancestors (issue #13).
+- `price_equation.price_terms_from_shares` and `step_share_matrices`: the Price terms from
+  given share matrices, which can be fractions. `price_terms` uses them and is unchanged.
 - `src/spend_cap.py`: the worst-case spend of a Modal launch (calls x timeout x rate) and a
   check that raises `ValueError` when it exceeds a cap. `tests/test_spend_cap.py` checks the
   arithmetic (issue #14).
