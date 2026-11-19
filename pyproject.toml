@@ -35,6 +35,7 @@ py-modules = [
     "fl_poison",
     "fl_pred",
     "fl_season",
+    "lineage_tracer",
     "lineage_tracking",
     "glider_coll",
     "helpers",

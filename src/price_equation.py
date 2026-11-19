@@ -105,6 +105,82 @@ def _chained_shares(
     return chained
 
 
+def _credits_no_mass(descendants: Sequence[EcoObject], shares: np.ndarray) -> bool:
+    """True when the shares credit no descendant mass to an ancestor.
+
+    A share matrix of the wrong shape is left to ``window_terms``, which reports it.
+    """
+    if shares.shape[0] != len(descendants):
+        return False
+    descendant_mass: np.ndarray = np.array([o[0] for o in descendants], float)
+    return float(descendant_mass @ shares.sum(axis=1)) <= 0
+
+
+def step_share_matrices(
+    log: Sequence[Snapshot],
+    box_size: float,
+    fingerprint_indices: Sequence[int] | None = None,
+    gate_radius: float = GATE_RADIUS_DEFAULT,
+) -> list[np.ndarray | None]:
+    """Share matrix of every snapshot against the one before it, from ``assign_ancestors``.
+
+    Entry ``k`` belongs to the snapshots ``k - 1`` and ``k``. It is None for ``k = 0`` and
+    when one of the two snapshots has no objects. An empty log gives an empty list.
+    """
+    if not log:
+        return []
+    step_matrices: list[np.ndarray | None] = [None]
+    for (_, ancestors), (_, descendants) in zip(log[:-1], log[1:]):
+        if not ancestors or not descendants:
+            step_matrices.append(None)
+            continue
+        ancestor_of: np.ndarray = assign_ancestors(
+            ancestors, descendants, box_size, fingerprint_indices, gate_radius
+        )
+        step_matrices.append(step_shares(ancestor_of, len(ancestors)))
+    return step_matrices
+
+
+def price_terms_from_shares(
+    log: Sequence[Snapshot],
+    step_matrices: Sequence[np.ndarray | None],
+    lag: int = 5,
+    trait_index: int = 0,
+    time_min: float = 0.0,
+) -> PriceTerms:
+    """Decompose the change of the mass-weighted mean trait, given the shares of every step.
+
+    ``step_matrices`` has the layout of ``step_share_matrices``. The shares can be fractions,
+    for example measured tracer content. ``shares[j, i]`` is then the share of the whole mass
+    of descendant ``j`` that comes from ancestor ``i``, and a row sums to less than 1 when a
+    part of the mass comes from no object. That part is credited to no ancestor, also along a
+    chain of steps. A window is skipped when it starts before ``time_min``, when it has fewer
+    than two ancestors, when any snapshot inside it has no objects, or when no descendant mass
+    is credited to an ancestor.
+    """
+    if lag < 1:
+        raise ValueError(f"lag must be at least 1, got {lag}")
+    if len(step_matrices) != len(log):
+        raise ValueError(f"{len(step_matrices)} share matrices for {len(log)} snapshots")
+    rows: list[tuple[float, float, float, float]] = []
+    for start in range(len(log) - lag):
+        time, ancestors = log[start]
+        if time < time_min or len(ancestors) < 2:
+            continue
+        descendants: Sequence[EcoObject] = log[start + lag][1]
+        shares: np.ndarray | None = _chained_shares(step_matrices, start, lag)
+        if shares is None or _credits_no_mass(descendants, shares):
+            continue
+        terms: tuple[float, float, float] = window_terms(
+            ancestors, descendants, shares, trait_index
+        )
+        rows.append((float(time), *terms))
+    table: np.ndarray = np.array(rows, float).reshape(-1, 4)
+    return PriceTerms(
+        times=table[:, 0], selection=table[:, 1], transmission=table[:, 2], delta=table[:, 3]
+    )
+
+
 def price_terms(
     log: Sequence[Snapshot],
     box_size: float,
@@ -125,28 +201,5 @@ def price_terms(
     """
     if lag < 1:
         raise ValueError(f"lag must be at least 1, got {lag}")
-    step_matrices: list[np.ndarray | None] = [None]
-    for (_, ancestors), (_, descendants) in zip(log[:-1], log[1:]):
-        if not ancestors or not descendants:
-            step_matrices.append(None)
-            continue
-        ancestor_of: np.ndarray = assign_ancestors(
-            ancestors, descendants, box_size, fingerprint_indices, gate_radius
-        )
-        step_matrices.append(step_shares(ancestor_of, len(ancestors)))
-    rows: list[tuple[float, float, float, float]] = []
-    for start in range(len(log) - lag):
-        time, ancestors = log[start]
-        if time < time_min or len(ancestors) < 2:
-            continue
-        shares: np.ndarray | None = _chained_shares(step_matrices, start, lag)
-        if shares is None:
-            continue
-        terms: tuple[float, float, float] = window_terms(
-            ancestors, log[start + lag][1], shares, trait_index
-        )
-        rows.append((float(time), *terms))
-    table: np.ndarray = np.array(rows, float).reshape(-1, 4)
-    return PriceTerms(
-        times=table[:, 0], selection=table[:, 1], transmission=table[:, 2], delta=table[:, 3]
-    )
+    step_matrices = step_share_matrices(log, box_size, fingerprint_indices, gate_radius)
+    return price_terms_from_shares(log, step_matrices, lag, trait_index, time_min)

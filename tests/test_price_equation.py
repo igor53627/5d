@@ -139,6 +139,43 @@ def test_terms_sum_to_the_change_of_the_mean_on_random_logs():
             assert total == pytest.approx(means[1] - means[0], abs=1e-12)
 
 
+def test_untraced_mass_is_credited_to_no_ancestor_along_a_chain():
+    """Goal: fractional shares chain by mass. Method: half of one middle body is untraced.
+
+    Middle body X has mass 2: 1 from ancestor A and 1 from no object. Middle body Y has mass 2
+    from ancestor B. The descendant takes mass 1 from each. Its traced mass is 0.5 from A and
+    1 from B, so the credit is 1/3 and 2/3, and the ancestral mean of the trait is 2/3.
+    """
+    log = [
+        (0, [_body(1, 10, (0.0,)), _body(1, 30, (1.0,))]),
+        (200, [_body(2, 10, (0.0,)), _body(2, 30, (1.0,))]),
+        (400, [_body(2, 20, (0.9,))]),
+    ]
+    matrices = [None, np.array([[0.5, 0.0], [0.0, 1.0]]), np.array([[0.5, 0.5]])]
+    terms = PE.price_terms_from_shares(log, matrices, lag=2)
+    assert terms.window_count == 1
+    assert terms.selection[0] == pytest.approx(2 / 3 - 0.5)
+    assert terms.transmission[0] == pytest.approx(0.9 - 2 / 3)
+
+
+def test_a_window_whose_shares_credit_no_mass_is_skipped():
+    """Goal: no NaN term. Method: the only descendant with a share has mass 0."""
+    log = [
+        (0, [_body(1, 10, (0.0,)), _body(1, 30, (1.0,))]),
+        (200, [_body(0, 10, (0.0,)), _body(1, 30, (1.0,))]),
+    ]
+    matrices = [None, np.array([[1.0, 0.0], [0.0, 0.0]])]
+    assert PE.price_terms_from_shares(log, matrices, lag=1).window_count == 0
+
+
+def test_an_empty_log_has_no_windows():
+    """Goal: no error without snapshots. Method: the empty log, and a wrong matrix count."""
+    assert PE.step_share_matrices([], BOX_SIZE) == []
+    assert PE.price_terms([], BOX_SIZE).window_count == 0
+    with pytest.raises(ValueError, match="share matrices"):
+        PE.price_terms_from_shares(_moving_pair_log(), [None])
+
+
 def test_windows_with_an_empty_snapshot_or_one_ancestor_are_skipped():
     """Goal: the limits of a usable window. Method: one body, then no body, then two bodies."""
     pair = [_body(1, 10, (0.0,)), _body(1, 40, (1.0,))]
