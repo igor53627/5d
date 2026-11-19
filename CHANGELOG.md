@@ -24,6 +24,14 @@ All notable changes to this project are documented in this file. The format is b
 - `experiments/part18/pool18i.py` rebuilds the pooled 18g+18i statistics of Part 18i from the
   committed run records (bootstrap seed 0) and adds a t-test, a Wilcoxon test and `n_pos` for
   each paired difference. `tests/test_pool18i.py` checks it against `full18i_summary.json`.
+- `src/lineage_tracking.py`: ancestors identified by heritable traits (`assign_ancestors`),
+  division pairs, founder shares and the effective number of lineages.
+- `src/price_equation.py`: a mass-weighted Price decomposition whose selection and transmission
+  terms sum to the change of the mass-weighted mean.
+- `experiments/tracking_fix/`: `recompute_tracking.py` and `validate_tracking.py` recompute the
+  lineage-based numbers of Parts 10, 12, 13, 15, 15b, 16 and 17 from the published logs;
+  `results/tracking_notes.md` reports them.
+- `tests/test_price_equation.py`: tracking and Price terms on logs with a known answer.
 
 ### Changed
 
@@ -34,6 +42,14 @@ All notable changes to this project are documented in this file. The format is b
 
 ### Fixed
 
+- Lineage tracking (issues #7, #11). The analysis took the nearest object in space as the
+  ancestor of a body, which is wrong for 10% to 85% of descendants, and mixed an unweighted
+  selection term with a mass-weighted mean. With ancestors identified by heritable traits the
+  Price selection terms of Parts 15 and 17 change sign, the negative plateau terms of Parts 12
+  and 13 vanish, and division counts, parent-child correlations and lineage counts of Parts
+  10-13 change. The notes of Parts 10, 12, 13, 15, 15b, 16 and 17 open with a correction, and
+  README states the corrected results. `analyze_eco.selection_diff` and the old analysis
+  scripts are unchanged, so the published numbers stay reproducible.
 - Part 18i notes and README: `n_pos` was 6/8 and 3/8, the run records give 7/8 and 2/8. The
   verdict is now "suggestive": the pooled bootstrap interval excludes 0, but the t-test gives
   p = 0.057 and the pool was formed after the null 18g run. The 18d and 18h bullets say what did

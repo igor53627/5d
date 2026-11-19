@@ -35,9 +35,11 @@ py-modules = [
     "fl_poison",
     "fl_pred",
     "fl_season",
+    "lineage_tracking",
     "glider_coll",
     "helpers",
     "modal_app",
+    "price_equation",
     "render",
 ]
 

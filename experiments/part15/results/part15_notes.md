@@ -1,4 +1,7 @@
 # Part 15 — micro-brain (budget $80)
+
+**Correction (2026-11-19, lineage tracking fix).** The Price split below is wrong in sign. It used nearest-in-space ancestors, which are wrong for 68–76% of descendants in the brain runs. With ancestors identified by heritable traits and mass weights, the growth-phase selection term for g_F is +0.092 in `evo` (6/6 seeds, p = .005; +0.054 with ancestors identified by the neutral p0, p1) and +0.073 in `frozen`; transmission is −0.036 and −0.016. g_F rises through selection between bodies, not through within-body (cell-level) selection. Heritabilities of g_F become 0.63–0.81 and divisions per run fall from about 1280 to 310–640. The 5D run is not resolved (see Part 15b). See [tracking_notes.md](../../tracking_fix/results/tracking_notes.md).
+
 - 13:46 UTC: start; baseline billing $214.19
 - Design (fl_brain.py, model "brain" in glider_eco):
   - Q has 26 channels: p0, p1 and 24 weights of the net 3→3(tanh)→3. The weights are advected by MUSCL, homogenized over the body (hom) and mutated at body scale (mutw).

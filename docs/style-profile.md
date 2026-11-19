@@ -9,9 +9,9 @@ Exceptions and is not rewritten.
 
 ## Scope
 
-A research repository: `src/` (17 Python modules: the Flow-Lenia engines in JAX, the Modal
-launcher, rendering), `experiments/partNN/` (run and analysis scripts for each part), `archive/`
-(old searches, frozen) and `tests/`.
+A research repository: `src/` (19 Python modules: the Flow-Lenia engines in JAX, the Modal
+launcher, rendering, lineage tracking and the Price decomposition), `experiments/partNN/` (run
+and analysis scripts for each part), `archive/` (old searches, frozen) and `tests/`.
 
 Blocks in force:
 
@@ -102,10 +102,11 @@ or meets the limits, so the list can only shrink. Owner of every entry: igor5362
 - E3, 39 files in `archive/`. Reason: a frozen record of old searches.
 - E4, 52 scripts in `experiments/`. Reason: each is the record of a published run.
 - E5, 7 files in `tests/`. Reason: written before the profile.
-- E6, the 17 `_path.py` files and `analyze19b.py`, `analyze19c.py`, `analyze19d.py` in
-  `experiments/part19/`. They meet the length limits, which the test enforces, but predate the
-  formatter. They are excluded from `ruff format`; the three `analyze` files also from
-  `ruff check`. Markdown files are excluded from `ruff format` too.
+- E6, the `_path.py` files (the root bootstrap and its copies) and `analyze19b.py`,
+  `analyze19c.py`, `analyze19d.py` in `experiments/part19/`. They meet the length limits, which
+  the test enforces, but predate the formatter. They are excluded from `ruff format`; the
+  three `analyze` files also from `ruff check`. Markdown files are excluded from `ruff format`
+  too.
 
 E1-E5 waive the conventions (length, naming, layout, English docstrings) and the `assert`
 mechanism for the listed files. They do not waive a baseline requirement.

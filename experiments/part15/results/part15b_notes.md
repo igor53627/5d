@@ -1,4 +1,7 @@
 # Part 15b — what the evolved micro-brains encode (from saved Part 15 data only)
+
+**Correction (2026-11-19, lineage tracking fix).** The 5D Price split below (g_F: S −.21; g_R: S +.21, transmission −.28) is not supported. In the fused 5D population the ancestor of a body cannot be identified: two halves of the brain weights agree for 66% of descendants, and the sign of S depends on the rule (g_F +0.125 or −0.081, g_R −0.079 or +0.227). The split is unresolved, in both directions. The lineage and parent–child numbers below use nearest-in-space ancestors and are not recomputed. See [tracking_notes.md](../../tracking_fix/results/tracking_notes.md).
+
 - 16:56 UTC: start. Data: results/eco15/b15m_*.pkl (4D, 24 runs), b15d5_*.pkl (5D), b15p_*.pkl (pilot). Billing baseline $285.51 (no GPU planned).
 - Realistic input ranges (CPU, 4D soliton in 48^4, coarse kernels; scratch/inputs15b.py → results/eco15/inputs15b.pkl). Mass-weighted inside the body:
   - s1 = Ub/U1−1: mean −.40 (p5–p95 −.61…−.21) when alone; up to +.34 with a neighbour 8 cells away.
