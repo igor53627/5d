@@ -32,6 +32,12 @@ All notable changes to this project are documented in this file. The format is b
   lineage-based numbers of Parts 10, 12, 13, 15, 15b, 16 and 17 from the published logs;
   `results/tracking_notes.md` reports them.
 - `tests/test_price_equation.py`: tracking and Price terms on logs with a known answer.
+- Part 20 setup (issue #9), no population run: `experiments/part20/spec20.py` writes
+  `archive/specs/b20_pilot.json` (16 paired runs of the Part 13 4D world with and without
+  `beta = chi = 0`), `probe20.py` is the CPU probe of one soliton, and
+  `results/part20_notes.md` reports the probes and the launch conditions.
+  `tests/test_oscillator_ablation.py` checks that the mass field ignores the oscillators
+  only when both terms are 0, and that the committed spec is the paired design.
 
 ### Changed
 
