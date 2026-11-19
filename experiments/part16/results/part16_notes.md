@@ -1,4 +1,7 @@
 # Part 16 — fusion catastrophe test (5D micro-brain), budget ≈$50 (cap $60)
+
+**Correction (2026-11-19, lineage tracking fix).** The Price columns of the table and conclusion 4 below are not supported. They used nearest-in-space ancestors, which are wrong for 77–85% of descendants in the 5D brain runs. With ancestors identified by heritable traits the sign of S depends on the rule (evo g_R: −0.082 or +0.132; clamp g_F: +0.087 or −0.020), because fused bodies are one genotype. The fusion results (which runs fuse, when, the clamp test) do not use ancestors and stand. See [tracking_notes.md](../../tracking_fix/results/tracking_notes.md).
+
 - 17:03 UTC: start. Baseline billing $285.51. IDEAS.md: roadmap 'environments requiring computation' (good/poison food, sign-switching seasons, predator–prey) added.
 - fl_brain: new option rclamp (1 → effective g_R = max(g_R, 0): the brain cannot weaken repulsion). Default 0 changes nothing. CPU test: the clamp changes dynamics (|ΔA| .029 after 20 steps).
 - Plan (budget): a 5D 40^5 B300 run ≈ 3.6 steps/s + ~5 min setup + 3 min compile. 20k steps ≈ $11, too much for 5–6 seeds × 3 conditions.

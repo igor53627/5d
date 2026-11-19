@@ -57,6 +57,8 @@ p-values are two-sided against 0 on the 8 paired differences: one-sample t-test 
 4. **Asymmetry persists:** B→A within_al is large for cue; A→B is ~0.
 5. **Slightly lower B-season poison with cue, not significant** (ΔpoiB −0.06; the bootstrap CI just excludes 0, t-test p=0.084, Wilcoxon p=0.148).
 
+**What within_al covers.** `metrics18c.match_bodies` pairs a body with the only body within 8 cells one snapshot later. In the 18g and 18i logs, 99.7–99.8% of these pairs agree with the ancestor identified by heritable traits (`lineage_tracking.assign_ancestors`; table in `experiments/tracking_fix/results/tracking_validation.md`), so the pairs are the same bodies. They cover 37–49% of the old mass; every other body enters the `fusion`, `uncertain` or `replacement` term.
+
 **Limits of the pool.** The pool was formed after the confirmatory 18g run (4 seeds) gave a null result (Δwithin_al +0.05), so the number of seeds was not fixed in advance. The primary metric also changed: 18d used the end-point difference Δ(gA−gB), and within_al replaced it after 18d. The 8 seeds use 4 founders: 851–854 and 855–858 both map to founders 621–624 (`run18g.py`, `run18i.py`), with new genome-noise and run seeds. A confirmatory claim needs a preregistered replicate.
 
 **Verdict:** Across 8 seeds, the result is **suggestive, not confirmatory**: oracle cue may select for more within-body switching than nocue (Δwithin_al +0.17, bootstrap CI excludes 0, t-test p=0.057, Wilcoxon p=0.055). The effect is moderate, direction-asymmetric, and much noisier than planted. 18d’s strong Δ(gA−gB) does not hold in this pool.

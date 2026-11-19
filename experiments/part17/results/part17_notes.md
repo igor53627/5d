@@ -1,4 +1,7 @@
 # Part 17 — poison food in 4D (budget ≈$35, hard cap $45)
+
+**Correction (2026-11-19, lineage tracking fix).** Conclusion 5 below (Price) is wrong in sign. It used nearest-in-space ancestors, which are wrong for 66% of descendants in `evo`. With ancestors identified by heritable traits and mass weights: g_P falls through selection between bodies (S −0.033, 0/4 seeds positive, p = .001; transmission +0.003), and g_F rises through selection between bodies (S +0.034, 4/4 seeds, p = .010; transmission −0.006). With ancestors identified by the neutral p0, p1 the terms are −0.030 and +0.032. The reading "selection acts mainly inside bodies" has no support. All other conclusions do not use ancestors and stand. See [tracking_notes.md](../../tracking_fix/results/tracking_notes.md).
+
 - 10:50 (UTC+4, Дубай): старт. Модуль fl_poison.py (на базе fl_brain), модель "poison" в glider_eco.
 - 10:58: CPU-тест (scratch/test17.py, 4D 24^4, 300 шагов) ок: яд снижает массу (evo −14%, nopoison +10%). 10:59: пилот b17p запущен: 6×H100, 4D 56^4, 6k шагов, seed 501, cp∈{1,2,3} × {evo, nobrain}.
 - 11:08: пилот b17p завершён (6×H100, ~7 мин каждый), Часть 17 ≈ $3.4. 6k шагов, seed 501 (plateau = 2-я половина):

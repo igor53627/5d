@@ -1,4 +1,7 @@
 # Part 12 notes (selection & diversity at carrying capacity)
+
+**Correction (2026-11-19, lineage tracking fix).** The negative plateau S of the selection runs (−0.028, p = .013) is a tracking artefact. With ancestors identified by heritable traits and mass weights it is +0.004 (5/5 seeds positive) with a transmission term of −0.001; with ancestors identified by p1 alone it is +0.002 (4/5 positive) with a transmission term of +0.001. Both terms are small, and the selection term is not negative. Effective lineages become 3.5 (selection) and 11.9 (neutral), and h becomes 0.77–0.86. See [tracking_notes.md](../../tracking_fix/results/tracking_notes.md).
+
 - 08:36 UTC: billing baseline today = $86.3 (Part 12 cost = later total − this).
 - fl_eco3: new params (all off by default; CPU test: eco3 with F2/t state and defaults == eco2 bitwise): kn (niche strength), popt(x,t) = na·sin(2π x0/nl) + sa·sin(2π t/nt), eating rate keat·exp(pk·p0 − kn·(p0−popt)²); res2=1: two resources F, F2 (each F0), rates keat·((1±p0)/2)^g2 (g2>1 → generalists worse → disruptive, frequency-dependent via depletion). All conditions use all5 (coarse+fnoise+m5).
 - glider_eco.run_eco_list + kind "ecolist" (several runs per container).
