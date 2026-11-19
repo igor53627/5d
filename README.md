@@ -42,6 +42,7 @@ Numbers below are copied from the part notes. There is no Part 11 notes file; th
 - **Part 19d** ([notes](experiments/part19/results/part19d_notes.md)). Replicate of 19c kpred=0.005 on 8 new seeds (201–208) × 20k, `batch=1`. New seeds 4/8 both held (prey 8/8); pooled with 19c: 7/12 both held, Clopper–Pearson 95% CI [0.28, 0.85]. The 3/4 result does not hold up as a stable regime. 7/12 is not distinguishable at these sample sizes from kpred=0.015 (2/4; Fisher exact p=1.00) or 0.01 (1/4; p=0.57). No reliable oscillation. Cost ~$11.99.
 
 - **Tracking fix** ([notes](experiments/tracking_fix/results/tracking_notes.md)). Reanalysis of the published logs of Parts 10–17, no new runs. The analysis took the nearest object in space as the ancestor of a body; against ancestors identified by heritable traits this is wrong for 10% of descendants in neutral 4D $96^4$ runs, 40–57% in selection runs, and 66–85% in runs with an evolving brain. Two disjoint halves of the brain weights pick the same ancestor for 95–98% of descendants in 4D. The Price selection terms of Parts 15 and 17 change sign, the negative plateau terms of Parts 12 and 13 vanish (they are between −0.001 and +0.008), division counts of Parts 10–13 fall 2–19 times, and their parent–child correlations rise to 0.62–0.86. The 5D brain runs (Parts 15b, 16) stay unresolved. Parts 9, 14, 18, and 18b are not recomputed.
+- **Part 20** ([notes](experiments/part20/results/part20_notes.md)). Setup only; no population has been run. Ablation of the oscillator feedback on the mass field (`beta = chi = 0`). CPU probes in 4D $40^4$ (two seeds, one body, no food): without the feedback the soliton forms, holds its mass, and moves at 0.046–0.047 cells/step against 0.049–0.050 with it, but it is nearly at rest at the end of the 600-step preparation (0.005 against 0.045–0.052). The spec pairs 16 runs of the Part 13 4D world; the launch is paid and has not been started.
 
 
 ## Installation
@@ -112,6 +113,7 @@ archive/             Early searches, benchmarks, reservoir experiments
 | 19c | Low-side kpred scan (20k) | [part19c_notes.md](experiments/part19/results/part19c_notes.md) | — |
 | 19d | kpred=0.005 replicate (8 seeds, 20k) | [part19d_notes.md](experiments/part19/results/part19d_notes.md) | — |
 | — | Lineage tracking fix (Parts 10–17) | [tracking_notes.md](experiments/tracking_fix/results/tracking_notes.md) | — |
+| 20 | Oscillator ablation (setup) | [part20_notes.md](experiments/part20/results/part20_notes.md) | — |
 
 ## Data
 
