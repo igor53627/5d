@@ -54,11 +54,8 @@ def step(st, P, KA, Ko, KX, transport=True, coarse=False, fnoise=False, do_mut=T
     dt = P["dt"]
     ex, ey = conv(x, Ko) - x, conv(y, Ko) - y
     fx, fy = P["eps"] * ex, P["eps"] * ey
-    f = lambda x, y, z: (-y - z + fx, x + P["a"] * y + fy, P["b"] + z * (x - c))
-    k1 = f(x, y, z); k2 = f(x + .5*dt*k1[0], y + .5*dt*k1[1], z + .5*dt*k1[2])
-    k3 = f(x + .5*dt*k2[0], y + .5*dt*k2[1], z + .5*dt*k2[2]); k4 = f(x + dt*k3[0], y + dt*k3[1], z + dt*k3[2])
-    xn = x + dt/6*(k1[0] + 2*k2[0] + 2*k3[0] + k4[0]); yn = y + dt/6*(k1[1] + 2*k2[1] + 2*k3[1] + k4[1])
-    zn = jnp.clip(z + dt/6*(k1[2] + 2*k2[2] + 2*k3[2] + k4[2]), -50.0, 80.0)
+    xn, yn, zn = FG.rossler_rk4_step(
+        x, y, z, c=c, a=P["a"], b=P["b"], forcing_x=fx, forcing_y=fy, dt=dt)
     S = conv(jnp.exp(-(ex*ex + ey*ey) / P["sigA"] ** 2), Ko)
     fb = P["beta"] * (S - P["s0"]) - P["gam"] * (c - P["c_lo"]) / (P["c_hi"] - P["c_lo"])
     r = jnp.sqrt(x*x + y*y) + 1e-6; cs, sn = x / r, y / r

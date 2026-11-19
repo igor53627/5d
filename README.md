@@ -123,6 +123,10 @@ from huggingface_hub import snapshot_download
 snapshot_download("igor53627/5d", repo_type="dataset", allow_patterns="part07/*")
 ```
 
+## Style
+
+New code follows the project profile in [docs/style-profile.md](docs/style-profile.md), an adaptation of TigerStyle (revision r5). The test suite enforces its limits: lines of at most 100 columns and functions of at most 70 lines, outside an explicit legacy list.
+
 ## License
 
 Research code — see individual files for details.

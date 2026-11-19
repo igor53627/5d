@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest"]
+dev = ["pytest", "ruff==0.17.5"]
 modal = ["modal"]
 
 [project.readme]
@@ -39,4 +39,151 @@ py-modules = [
     "helpers",
     "modal_app",
     "render",
+]
+
+[tool.ruff]
+line-length = 100
+force-exclude = true
+# The legacy list: files that predate docs/style-profile.md and do not meet it. It mirrors
+# exceptions E1-E5 of the profile (scope, reason, owner). This is the only copy:
+# tests/test_style_limits.py reads it, applies the line and function limits to every other
+# Python file, and fails when an entry is missing or no longer exceeds a limit. The list
+# can only shrink. Do not add a file to it.
+extend-exclude = [
+    # E1, engines behind the published numbers of Parts 5-19: 8 files.
+    "src/fl_brain.py",
+    "src/fl_eco.py",
+    "src/fl_eco2.py",
+    "src/fl_eco3.py",
+    "src/fl_glider.py",
+    "src/fl_poison.py",
+    "src/fl_pred.py",
+    "src/fl_season.py",
+    # E2, other modules in src/ written before the profile: 7 files.
+    "src/alife_jax.py",
+    "src/analyze_eco.py",
+    "src/feigenbaum_lenia.py",
+    "src/fl_jax.py",
+    "src/glider_coll.py",
+    "src/modal_app.py",
+    "src/render.py",
+    # E3, archive/ (frozen): 39 files.
+    "archive/analyze_glider.py",
+    "archive/analyze_iso.py",
+    "archive/bench.py",
+    "archive/bench_report.py",
+    "archive/feature_rank.py",
+    "archive/glider_es.py",
+    "archive/glider_search.py",
+    "archive/make_glider_s2.py",
+    "archive/make_glider_s3.py",
+    "archive/make_glider_s4.py",
+    "archive/make_glider_specs.py",
+    "archive/peek_es.py",
+    "archive/peek_ver.py",
+    "archive/peek_ver5.py",
+    "archive/render_alife.py",
+    "archive/render_gliders.py",
+    "archive/render_swim.py",
+    "archive/report_gpu.py",
+    "archive/reservoir_experiment.py",
+    "archive/reservoir_gpu.py",
+    "archive/reservoir_report.py",
+    "archive/scratch/inputs15b.py",
+    "archive/scratch/p15b_1.py",
+    "archive/scratch/p15b_2.py",
+    "archive/scratch/p15b_3.py",
+    "archive/scratch/p15b_3b.py",
+    "archive/scratch/p15b_4.py",
+    "archive/scratch/quad12.py",
+    "archive/scratch/sum12.py",
+    "archive/scratch/test15.py",
+    "archive/scratch/test16.py",
+    "archive/scratch/test17.py",
+    "archive/scratch/test18.py",
+    "archive/scratch/trace11.py",
+    "archive/scratch/val11.py",
+    "archive/search_overview.py",
+    "archive/show_cand.py",
+    "archive/sweep_lamc.py",
+    "archive/validate_jax.py",
+    # E4, per-part run and analysis scripts in experiments/: 52 files.
+    "experiments/part05/analyze_cont.py",
+    "experiments/part05/glider_cont.py",
+    "experiments/part05/plot_cont.py",
+    "experiments/part06/glider_es5.py",
+    "experiments/part06/plot_es5.py",
+    "experiments/part06/render_es5.py",
+    "experiments/part07/plot_coll.py",
+    "experiments/part08/glider_rep.py",
+    "experiments/part08/plot_rep.py",
+    "experiments/part08/plot_rep2.py",
+    "experiments/part10/glider_eco.py",
+    "experiments/part10/perf_eco.py",
+    "experiments/part10/plot_eco.py",
+    "experiments/part10/plot_eco10.py",
+    "experiments/part10/plot_eco_sel.py",
+    "experiments/part10/plot_mp4_10.py",
+    "experiments/part11/perf11.py",
+    "experiments/part12/analyze12.py",
+    "experiments/part12/plot_eco12.py",
+    "experiments/part12/plot_mp4_12.py",
+    "experiments/part13/analyze13.py",
+    "experiments/part13/plot13.py",
+    "experiments/part13/plot_mp4_13.py",
+    "experiments/part14/analyze14.py",
+    "experiments/part15/analyze15.py",
+    "experiments/part15/analyze15b.py",
+    "experiments/part15/plot15.py",
+    "experiments/part16/analyze16.py",
+    "experiments/part17/analyze17.py",
+    "experiments/part17/fig17.py",
+    "experiments/part18/analyze18.py",
+    "experiments/part18/analyze18c.py",
+    "experiments/part18/analyze18h.py",
+    "experiments/part18/fig18.py",
+    "experiments/part18/init18c.py",
+    "experiments/part18/init18d.py",
+    "experiments/part18/metrics18c.py",
+    "experiments/part18/run18c.py",
+    "experiments/part18/run18d.py",
+    "experiments/part18/run18e.py",
+    "experiments/part18/run18f.py",
+    "experiments/part18/run18g.py",
+    "experiments/part18/run18h.py",
+    "experiments/part18/run18i.py",
+    "experiments/part18/summarize18d_style.py",
+    "experiments/part18/warm18b.py",
+    "experiments/part19/analyze19.py",
+    "experiments/part19/metrics19.py",
+    "experiments/part19/run19.py",
+    "experiments/part19/run19b.py",
+    "experiments/part19/run19c.py",
+    "experiments/part19/run19d.py",
+    # E5, tests written before the profile: 7 files.
+    "tests/conftest.py",
+    "tests/test_cue_lead.py",
+    "tests/test_lineage_tag.py",
+    "tests/test_mut_bias_amp.py",
+    "tests/test_pred19.py",
+    "tests/test_season18c.py",
+    "tests/test_season18d.py",
+]
+
+# Exception E6 of the profile: these files meet the length limits, which the test enforces,
+# but they predate the formatter. "_path.py" matches the root bootstrap and its 16 copies.
+[tool.ruff.format]
+exclude = [
+    "_path.py",
+    "experiments/part19/analyze19b.py",
+    "experiments/part19/analyze19c.py",
+    "experiments/part19/analyze19d.py",
+    "*.md",
+]
+
+[tool.ruff.lint]
+exclude = [
+    "experiments/part19/analyze19b.py",
+    "experiments/part19/analyze19c.py",
+    "experiments/part19/analyze19d.py",
 ]

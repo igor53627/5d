@@ -83,6 +83,40 @@ def _sgrad(F):
         out.append(jnp.fft.irfftn(Fh * (1j * kk.reshape(sh)).astype(np.complex64), s=F.shape))
     return out
 
+def rossler_rk4_step(
+    x: jax.Array,
+    y: jax.Array,
+    z: jax.Array,
+    *,
+    c: jax.Array,
+    a: jax.Array,
+    b: jax.Array,
+    forcing_x: jax.Array,
+    forcing_y: jax.Array,
+    dt: jax.Array,
+) -> tuple[jax.Array, jax.Array, jax.Array]:
+    """Advance the Rossler oscillator field by one classical Runge-Kutta 4 step.
+
+    The right-hand side is dx = -y - z + forcing_x, dy = x + a*y + forcing_y and
+    dz = b + z*(x - c). The coupling terms forcing_x and forcing_y stay fixed during the
+    step. The new z is clipped to [-50, 80], which keeps a diverging cell finite.
+
+    This is the one copy that every engine calls. The order of the floating-point
+    operations is the published one: a reordered term changes float32 results, and
+    tests/test_rossler_rk4.py compares this function with a frozen copy, bit for bit.
+    """
+    def rhs(x, y, z):
+        return (-y - z + forcing_x, x + a * y + forcing_y, b + z * (x - c))
+
+    k1 = rhs(x, y, z)
+    k2 = rhs(x + .5*dt*k1[0], y + .5*dt*k1[1], z + .5*dt*k1[2])
+    k3 = rhs(x + .5*dt*k2[0], y + .5*dt*k2[1], z + .5*dt*k2[2])
+    k4 = rhs(x + dt*k3[0], y + dt*k3[1], z + dt*k3[2])
+    x_next = x + dt/6*(k1[0] + 2*k2[0] + 2*k3[0] + k4[0])
+    y_next = y + dt/6*(k1[1] + 2*k2[1] + 2*k3[1] + k4[1])
+    z_next = jnp.clip(z + dt/6*(k1[2] + 2*k2[2] + 2*k3[2] + k4[2]), -50.0, 80.0)
+    return x_next, y_next, z_next
+
 def step(st, P, KA, Ko, mode="lenia", use_chi=False):
     A, x, y, z, c = st["A"], st["x"], st["y"], st["z"], st["c"]
     N = A.ndim; shape = A.shape
@@ -93,11 +127,8 @@ def step(st, P, KA, Ko, mode="lenia", use_chi=False):
     dt = P["dt"]
     ex, ey = conv(x, Ko) - x, conv(y, Ko) - y
     fx, fy = P["eps"] * ex, P["eps"] * ey
-    f = lambda x, y, z: (-y - z + fx, x + P["a"] * y + fy, P["b"] + z * (x - c))
-    k1 = f(x, y, z); k2 = f(x + .5*dt*k1[0], y + .5*dt*k1[1], z + .5*dt*k1[2])
-    k3 = f(x + .5*dt*k2[0], y + .5*dt*k2[1], z + .5*dt*k2[2]); k4 = f(x + dt*k3[0], y + dt*k3[1], z + dt*k3[2])
-    xn = x + dt/6*(k1[0] + 2*k2[0] + 2*k3[0] + k4[0]); yn = y + dt/6*(k1[1] + 2*k2[1] + 2*k3[1] + k4[1])
-    zn = jnp.clip(z + dt/6*(k1[2] + 2*k2[2] + 2*k3[2] + k4[2]), -50.0, 80.0)
+    xn, yn, zn = rossler_rk4_step(
+        x, y, z, c=c, a=P["a"], b=P["b"], forcing_x=fx, forcing_y=fy, dt=dt)
     S = conv(jnp.exp(-(ex*ex + ey*ey) / P["sigA"] ** 2), Ko)
     fb = P["beta"] * (S - P["s0"]) - P["gam"] * (c - P["c_lo"]) / (P["c_hi"] - P["c_lo"]) \
          + P["lag"] * (jnp.clip(A, 0.0, 1.0) - (c - P["c_lo"]) / (P["c_hi"] - P["c_lo"]))

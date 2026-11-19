@@ -19,3 +19,9 @@ env/
 # Build artifacts
 build/
 dist/
+
+# Tool caches
+.ruff_cache/
+
+# macOS
+.DS_Store
