@@ -1,6 +1,6 @@
 # Part 10 notes
 
-**Correction (2026-11-19, lineage tracking fix).** The Price S values and heritabilities below use nearest-in-space ancestors, which are wrong for 40% of descendants in the selection runs and 10% in the neutral runs. With ancestors identified by heritable traits and mass weights: S in growth is +0.062 (published +0.055), S at capacity is +0.006 (published −0.015), and the parent–child correlation of p0 is 0.72 (selection) and 0.79 (neutral) with ancestors identified by p1 alone (published 0.42–0.55). Division counts are 2–8 times lower. See [tracking_notes.md](../../tracking_fix/results/tracking_notes.md).
+**Correction (2026-11-19, lineage tracking fix).** The Price S values and heritabilities below use nearest-in-space ancestors, which differ from the ancestor identified by heritable traits for 40% of descendants in the selection runs and 10% in the neutral runs. With ancestors identified by heritable traits and mass weights: S in growth is +0.062 (published +0.055), S at capacity is +0.006 (published −0.015), and the parent–child correlation of p0 is 0.72 (selection) and 0.79 (neutral) with ancestors identified by p1 alone (published 0.42–0.55). Division counts are 2–8 times lower. See [tracking_notes.md](../../tracking_fix/results/tracking_notes.md).
 
 - B300 WORKS on Igor's account: gpu="B300" -> "NVIDIA B300 SXM6 AC, 275040 MiB" (gpu_job_b300 / spawn_b300 in modal_app.py)
 - bench (eco 4D 64^4, batch 2, 2000 steps incl. compile+prep): see results/bench_*.pkl

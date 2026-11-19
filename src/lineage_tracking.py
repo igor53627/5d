@@ -42,8 +42,9 @@ def assign_ancestors(
     Without ``fingerprint_indices`` the ancestor is the nearest object in space, which is the
     rule of ``analyze_eco.parents``. With ``fingerprint_indices``, the ancestor is the object
     within ``gate_radius`` whose heritable traits at those indices are closest to the
-    descendant's. A descendant with no object inside the gate falls back to the nearest
-    object in space.
+    descendant's. Objects at an equal trait distance, such as bodies with identical traits,
+    are told apart by their distance in space. A descendant with no object inside the gate
+    falls back to the nearest object in space.
     """
     if not ancestors or not descendants:
         raise ValueError("assign_ancestors needs at least one ancestor and one descendant")
@@ -59,8 +60,10 @@ def assign_ancestors(
     trait_offset: np.ndarray = descendant_traits[:, None, :] - ancestor_traits[None, :, :]
     trait_distances: np.ndarray = np.sqrt((trait_offset * trait_offset).sum(-1))
     gated: np.ndarray = np.where(distances <= gate_radius, trait_distances, np.inf)
-    nearest_in_traits: np.ndarray = gated.argmin(axis=1)
-    has_candidate: np.ndarray = np.isfinite(gated.min(axis=1))
+    trait_distance_min: np.ndarray = gated.min(axis=1, keepdims=True)
+    tied: np.ndarray = np.where(gated == trait_distance_min, distances, np.inf)
+    nearest_in_traits: np.ndarray = tied.argmin(axis=1)
+    has_candidate: np.ndarray = np.isfinite(trait_distance_min[:, 0])
     return np.where(has_candidate, nearest_in_traits, nearest_in_space)
 
 

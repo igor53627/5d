@@ -55,6 +55,18 @@ def test_gate_excludes_far_objects_and_falls_back_to_space():
     assert nothing_in_gate.tolist() == [1]
 
 
+def test_identical_fingerprints_are_told_apart_by_position():
+    """Goal: equal traits do not merge lineages. Method: two bodies at rest, same traits."""
+    bodies = [_body(1, 10, (0.5, 1.0)), _body(1, 20, (0.5, 0.0))]
+    log = [(200 * index, bodies) for index in range(3)]
+    assigned = LT.assign_ancestors(bodies, bodies, BOX_SIZE, fingerprint_indices=[0])
+    assert assigned.tolist() == [0, 1]
+    division_count, _ = LT.division_pairs(log, BOX_SIZE, 1, fingerprint_indices=[0])
+    assert division_count == 0
+    shares = LT.founder_mass_shares(log, BOX_SIZE, fingerprint_indices=[0])
+    assert shares == pytest.approx([0.5, 0.5])
+
+
 def test_selection_sign_depends_on_tracking():
     """Goal: show the published artefact. Method: only the high-trait body grows.
 

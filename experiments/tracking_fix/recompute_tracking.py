@@ -178,6 +178,15 @@ def _brain_part(pattern: str, traits: dict, phases: Callable, **overrides: objec
     return _part(pattern, traits, phases, **{**brain_settings, **overrides})
 
 
+def sliding_growth_and_whole_plateau(run: Run) -> dict[str, list[Window]]:
+    """Part 13 phases from ``analyze13.one``: sliding growth windows, one plateau window."""
+    time_end: float = float(run.log[-1][0])
+    return {
+        "growth": sliding_growth_and_plateau(run)["growth"],
+        "plateau": [(float(time_end // 2), time_end)],
+    }
+
+
 REFERENCE_GAINS: dict[str, TraitFunction] = {
     "gF": trait_gain_at_reference_input(0),
     "gR": trait_gain_at_reference_input(1),
@@ -196,7 +205,7 @@ PARTS: dict[str, PartConfig] = {
         box_size=96,
         tag_filter=r"^(sel|neu|res2k)_96_",
     ),
-    "13": _part("part13/eco13/eco13m_*.pkl", {"p0": trait_p0}, sliding_growth_and_plateau),
+    "13": _part("part13/eco13/eco13m_*.pkl", {"p0": trait_p0}, sliding_growth_and_whole_plateau),
     "15": _brain_part(
         "part15/eco15/b15m_*.pkl", {"gF": trait_gain_at_zero_input(0)}, sliding_growth_and_plateau
     ),
