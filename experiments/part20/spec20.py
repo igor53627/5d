@@ -27,7 +27,8 @@ FEEDBACK_KEYS: tuple[str, ...] = ("beta", "chi")
 OSCILLATOR_ARMS: tuple[str, ...] = ("osc", "noosc")
 LAUNCH_COMMAND: str = (
     "modal run src/modal_app.py::spawn_h100 --kind ecolist "
-    "--spec archive/specs/b20_pilot.json --prefix b20p"
+    "--spec archive/specs/b20_pilot.json --prefix b20p "
+    "--timeout-seconds 1200 --cap-dollars 15"
 )
 
 
