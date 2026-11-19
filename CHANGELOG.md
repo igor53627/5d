@@ -29,7 +29,8 @@ All notable changes to this project are documented in this file. The format is b
 - `src/price_equation.py`: a mass-weighted Price decomposition whose selection and transmission
   terms sum to the change of the mass-weighted mean.
 - `experiments/tracking_fix/`: `recompute_tracking.py` and `validate_tracking.py` recompute the
-  lineage-based numbers of Parts 10, 12, 13, 15, 15b, 16 and 17 from the published logs;
+  lineage-based numbers of Parts 10, 12, 13, 14, 15, 15b, 16, 17, 18 and 18b from the published
+  logs;
   `results/tracking_notes.md` reports them. `validate_tracking.py` reports how often two
   disjoint sets of traits pick the same ancestor, also for descendants with two or more
   ancestors inside the gate.
@@ -40,6 +41,12 @@ All notable changes to this project are documented in this file. The format is b
   `results/part20_notes.md` reports the probes and the launch conditions.
   `tests/test_oscillator_ablation.py` checks that the mass field ignores the oscillators
   only when both terms are 0, and that the committed spec is the paired design.
+- `recompute_tracking.py` also recomputes Parts 14, 18 and 18b (issue #13). A trait function
+  now receives the snapshot time, so the adaptive score of Parts 18 and 18b (season sign
+  times g_A - g_B) is a trait; the phase `seasons` uses only the windows inside one season.
+  Each run record in `tracking_recompute.json` has the new fields `bodies_per_snapshot` and
+  `descendants`. `tests/test_recompute_parts.py` checks the score and the season windows on
+  synthetic logs.
 - `src/lineage_tracer.py`: passive tracer fractions that move with the mass of an `fl_eco3`
   run and record the share of the mass of every body that comes from each earlier body. The
   simulated state is bitwise the state of `fl_eco3.run_chunk` (`tests/test_lineage_tracer.py`).

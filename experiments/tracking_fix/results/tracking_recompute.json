@@ -5,6 +5,8 @@
    "tag": "sel_s31",
    "condition": "sel",
    "transport": true,
+   "bodies_per_snapshot": 287.96031746031747,
+   "descendants": 36147,
    "tracking_disagreement": 0.29247240434890864,
    "price": {
     "p0": {
@@ -65,6 +67,8 @@
    "tag": "neu_s31",
    "condition": "neu",
    "transport": true,
+   "bodies_per_snapshot": 185.96825396825398,
+   "descendants": 23300,
    "tracking_disagreement": 0.10296137339055794,
    "price": {
     "p0": {
@@ -125,6 +129,8 @@
    "tag": "notr_s31",
    "condition": "notr",
    "transport": false,
+   "bodies_per_snapshot": 185.65873015873015,
+   "descendants": 0,
    "tracking_disagreement": null,
    "price": {
     "p0": {
@@ -175,6 +181,8 @@
    "tag": "sel_s32",
    "condition": "sel",
    "transport": true,
+   "bodies_per_snapshot": 424.73809523809524,
+   "descendants": 53369,
    "tracking_disagreement": 0.5243306039086361,
    "price": {
     "p0": {
@@ -235,6 +243,8 @@
    "tag": "neu_s32",
    "condition": "neu",
    "transport": true,
+   "bodies_per_snapshot": 184.21428571428572,
+   "descendants": 23079,
    "tracking_disagreement": 0.10715368950127822,
    "price": {
     "p0": {
@@ -295,6 +305,8 @@
    "tag": "notr_s32",
    "condition": "notr",
    "transport": false,
+   "bodies_per_snapshot": 183.97619047619048,
+   "descendants": 0,
    "tracking_disagreement": null,
    "price": {
     "p0": {
@@ -345,6 +357,8 @@
    "tag": "sel_s33",
    "condition": "sel",
    "transport": true,
+   "bodies_per_snapshot": 397.77777777777777,
+   "descendants": 49979,
    "tracking_disagreement": 0.3673142719942376,
    "price": {
     "p0": {
@@ -405,6 +419,8 @@
    "tag": "neu_s33",
    "condition": "neu",
    "transport": true,
+   "bodies_per_snapshot": 185.57142857142858,
+   "descendants": 23250,
    "tracking_disagreement": 0.09496774193548387,
    "price": {
     "p0": {
@@ -465,6 +481,8 @@
    "tag": "notr_s33",
    "condition": "notr",
    "transport": false,
+   "bodies_per_snapshot": 185.1984126984127,
+   "descendants": 0,
    "tracking_disagreement": null,
    "price": {
     "p0": {
@@ -515,6 +533,8 @@
    "tag": "sel_96_s81",
    "condition": "sel_96",
    "transport": true,
+   "bodies_per_snapshot": 349.42857142857144,
+   "descendants": 43891,
    "tracking_disagreement": 0.3828575334351006,
    "price": {
     "p0": {
@@ -575,6 +595,8 @@
    "tag": "sel_96_s82",
    "condition": "sel_96",
    "transport": true,
+   "bodies_per_snapshot": 457.0238095238095,
+   "descendants": 57433,
    "tracking_disagreement": 0.5194226315881114,
    "price": {
     "p0": {
@@ -635,6 +657,8 @@
    "tag": "res2k_96_s81",
    "condition": "res2k_96",
    "transport": true,
+   "bodies_per_snapshot": 468.41269841269843,
+   "descendants": 58880,
    "tracking_disagreement": 0.5241168478260869,
    "price": {
     "p0": {
@@ -695,6 +719,8 @@
    "tag": "res2k_96_s82",
    "condition": "res2k_96",
    "transport": true,
+   "bodies_per_snapshot": 497.23809523809524,
+   "descendants": 62500,
    "tracking_disagreement": 0.569504,
    "price": {
     "p0": {
@@ -755,6 +781,8 @@
    "tag": "res2k_96_s83",
    "condition": "res2k_96",
    "transport": true,
+   "bodies_per_snapshot": 446.6666666666667,
+   "descendants": 56139,
    "tracking_disagreement": 0.5873635084344218,
    "price": {
     "p0": {
@@ -815,6 +843,8 @@
    "tag": "res2k_96_s84",
    "condition": "res2k_96",
    "transport": true,
+   "bodies_per_snapshot": 471.76984126984127,
+   "descendants": 59302,
    "tracking_disagreement": 0.5868098883680146,
    "price": {
     "p0": {
@@ -875,6 +905,8 @@
    "tag": "res2k_96_s85",
    "condition": "res2k_96",
    "transport": true,
+   "bodies_per_snapshot": 487.1111111111111,
+   "descendants": 61229,
    "tracking_disagreement": 0.6037171928334613,
    "price": {
     "p0": {
@@ -935,6 +967,8 @@
    "tag": "sel_96_s83",
    "condition": "sel_96",
    "transport": true,
+   "bodies_per_snapshot": 399.6111111111111,
+   "descendants": 50201,
    "tracking_disagreement": 0.4845321806338519,
    "price": {
     "p0": {
@@ -995,6 +1029,8 @@
    "tag": "sel_96_s84",
    "condition": "sel_96",
    "transport": true,
+   "bodies_per_snapshot": 402.5,
+   "descendants": 50575,
    "tracking_disagreement": 0.5917350469599605,
    "price": {
     "p0": {
@@ -1055,6 +1091,8 @@
    "tag": "sel_96_s85",
    "condition": "sel_96",
    "transport": true,
+   "bodies_per_snapshot": 431.8095238095238,
+   "descendants": 54267,
    "tracking_disagreement": 0.6165625518270772,
    "price": {
     "p0": {
@@ -1115,6 +1153,8 @@
    "tag": "neu_96_s81",
    "condition": "neu_96",
    "transport": true,
+   "bodies_per_snapshot": 190.97619047619048,
+   "descendants": 23931,
    "tracking_disagreement": 0.11240650202665999,
    "price": {
     "p0": {
@@ -1175,6 +1215,8 @@
    "tag": "neu_96_s82",
    "condition": "neu_96",
    "transport": true,
+   "bodies_per_snapshot": 194.11904761904762,
+   "descendants": 24327,
    "tracking_disagreement": 0.10149216919472191,
    "price": {
     "p0": {
@@ -1235,6 +1277,8 @@
    "tag": "neu_96_s83",
    "condition": "neu_96",
    "transport": true,
+   "bodies_per_snapshot": 192.84920634920636,
+   "descendants": 24167,
    "tracking_disagreement": 0.08809533661604667,
    "price": {
     "p0": {
@@ -1295,6 +1339,8 @@
    "tag": "neu_96_s84",
    "condition": "neu_96",
    "transport": true,
+   "bodies_per_snapshot": 202.35714285714286,
+   "descendants": 25365,
    "tracking_disagreement": 0.11042775478020896,
    "price": {
     "p0": {
@@ -1355,6 +1401,8 @@
    "tag": "neu_96_s85",
    "condition": "neu_96",
    "transport": true,
+   "bodies_per_snapshot": 195.26984126984127,
+   "descendants": 24472,
    "tracking_disagreement": 0.09880679960771493,
    "price": {
     "p0": {
@@ -1415,6 +1463,8 @@
    "tag": "sel_5D40_s201",
    "condition": "sel_5D40",
    "transport": true,
+   "bodies_per_snapshot": 47.503311258278146,
+   "descendants": 7042,
    "tracking_disagreement": 0.5100823629650667,
    "price": {
     "p0": {
@@ -1465,6 +1515,8 @@
    "tag": "sel_5D40_s202",
    "condition": "sel_5D40",
    "transport": true,
+   "bodies_per_snapshot": 35.17218543046358,
+   "descendants": 5180,
    "tracking_disagreement": 0.3418918918918919,
    "price": {
     "p0": {
@@ -1515,6 +1567,8 @@
    "tag": "sel_4D56_s205",
    "condition": "sel_4D56",
    "transport": true,
+   "bodies_per_snapshot": 53.629139072847686,
+   "descendants": 7958,
    "tracking_disagreement": 0.4454636843427997,
    "price": {
     "p0": {
@@ -1565,6 +1619,8 @@
    "tag": "sel_4D56_s206",
    "condition": "sel_4D56",
    "transport": true,
+   "bodies_per_snapshot": 54.841059602649004,
+   "descendants": 8136,
    "tracking_disagreement": 0.48918387413962633,
    "price": {
     "p0": {
@@ -1615,6 +1671,8 @@
    "tag": "sel_4D56_s207",
    "condition": "sel_4D56",
    "transport": true,
+   "bodies_per_snapshot": 56.629139072847686,
+   "descendants": 8405,
    "tracking_disagreement": 0.5164782867340868,
    "price": {
     "p0": {
@@ -1665,6 +1723,8 @@
    "tag": "sel_4D56_s208",
    "condition": "sel_4D56",
    "transport": true,
+   "bodies_per_snapshot": 52.22516556291391,
+   "descendants": 7744,
    "tracking_disagreement": 0.5095557851239669,
    "price": {
     "p0": {
@@ -1715,6 +1775,8 @@
    "tag": "sel_3D96_s201",
    "condition": "sel_3D96",
    "transport": true,
+   "bodies_per_snapshot": 46.71523178807947,
+   "descendants": 6904,
    "tracking_disagreement": 0.09038238702201622,
    "price": {
     "p0": {
@@ -1765,6 +1827,8 @@
    "tag": "sel_3D96_s202",
    "condition": "sel_3D96",
    "transport": true,
+   "bodies_per_snapshot": 46.629139072847686,
+   "descendants": 6884,
    "tracking_disagreement": 0.11548518303312028,
    "price": {
     "p0": {
@@ -1815,6 +1879,8 @@
    "tag": "sel_3D96_s203",
    "condition": "sel_3D96",
    "transport": true,
+   "bodies_per_snapshot": 56.788079470198674,
+   "descendants": 8391,
    "tracking_disagreement": 0.24061494458348232,
    "price": {
     "p0": {
@@ -1865,6 +1931,8 @@
    "tag": "sel_3D96_s204",
    "condition": "sel_3D96",
    "transport": true,
+   "bodies_per_snapshot": 56.64238410596027,
+   "descendants": 8345,
    "tracking_disagreement": 0.20575194727381665,
    "price": {
     "p0": {
@@ -1915,6 +1983,8 @@
    "tag": "sel_3D96_s205",
    "condition": "sel_3D96",
    "transport": true,
+   "bodies_per_snapshot": 46.19205298013245,
+   "descendants": 6819,
    "tracking_disagreement": 0.14239624578383928,
    "price": {
     "p0": {
@@ -1965,6 +2035,8 @@
    "tag": "sel_3D96_s206",
    "condition": "sel_3D96",
    "transport": true,
+   "bodies_per_snapshot": 46.854304635761586,
+   "descendants": 6907,
    "tracking_disagreement": 0.10192558274214565,
    "price": {
     "p0": {
@@ -2015,6 +2087,8 @@
    "tag": "sel_3D96_s207",
    "condition": "sel_3D96",
    "transport": true,
+   "bodies_per_snapshot": 45.90728476821192,
+   "descendants": 6768,
    "tracking_disagreement": 0.12367021276595745,
    "price": {
     "p0": {
@@ -2065,6 +2139,8 @@
    "tag": "sel_3D96_s208",
    "condition": "sel_3D96",
    "transport": true,
+   "bodies_per_snapshot": 45.33774834437086,
+   "descendants": 6692,
    "tracking_disagreement": 0.12492528392109982,
    "price": {
     "p0": {
@@ -2115,6 +2191,8 @@
    "tag": "sel_2D512_s201",
    "condition": "sel_2D512",
    "transport": true,
+   "bodies_per_snapshot": 24.417218543046356,
+   "descendants": 3431,
    "tracking_disagreement": 0.0002914602156805596,
    "price": {
     "p0": {
@@ -2165,6 +2243,8 @@
    "tag": "sel_2D512_s202",
    "condition": "sel_2D512",
    "transport": true,
+   "bodies_per_snapshot": 24.192052980132452,
+   "descendants": 3389,
    "tracking_disagreement": 0.0005901445854234287,
    "price": {
     "p0": {
@@ -2215,6 +2295,8 @@
    "tag": "sel_2D512_s203",
    "condition": "sel_2D512",
    "transport": true,
+   "bodies_per_snapshot": 23.00662251655629,
+   "descendants": 3221,
    "tracking_disagreement": 0.0003104625892579944,
    "price": {
     "p0": {
@@ -2265,6 +2347,8 @@
    "tag": "sel_2D512_s204",
    "condition": "sel_2D512",
    "transport": true,
+   "bodies_per_snapshot": 27.629139072847682,
+   "descendants": 3890,
    "tracking_disagreement": 0.0005141388174807198,
    "price": {
     "p0": {
@@ -2315,6 +2399,8 @@
    "tag": "sel_2D512n48_s201",
    "condition": "sel_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 87.26490066225166,
+   "descendants": 12153,
    "tracking_disagreement": 0.0009874105159219946,
    "price": {
     "p0": {
@@ -2365,6 +2451,8 @@
    "tag": "sel_2D512n48_s202",
    "condition": "sel_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 71.39735099337749,
+   "descendants": 9725,
    "tracking_disagreement": 0.00442159383033419,
    "price": {
     "p0": {
@@ -2415,6 +2503,8 @@
    "tag": "sel_2D512n48_s203",
    "condition": "sel_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 85.7748344370861,
+   "descendants": 11932,
    "tracking_disagreement": 0.0011733154542406972,
    "price": {
     "p0": {
@@ -2465,6 +2555,8 @@
    "tag": "sel_2D512n48_s204",
    "condition": "sel_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 74.64238410596026,
+   "descendants": 10229,
    "tracking_disagreement": 0.00703881122299345,
    "price": {
     "p0": {
@@ -2515,6 +2607,8 @@
    "tag": "sel_2D512_s205",
    "condition": "sel_2D512",
    "transport": true,
+   "bodies_per_snapshot": 26.56953642384106,
+   "descendants": 3744,
    "tracking_disagreement": 0.002670940170940171,
    "price": {
     "p0": {
@@ -2565,6 +2659,8 @@
    "tag": "sel_2D512_s206",
    "condition": "sel_2D512",
    "transport": true,
+   "bodies_per_snapshot": 25.52980132450331,
+   "descendants": 3591,
    "tracking_disagreement": 0.001392369813422445,
    "price": {
     "p0": {
@@ -2615,6 +2711,8 @@
    "tag": "sel_2D512_s207",
    "condition": "sel_2D512",
    "transport": true,
+   "bodies_per_snapshot": 28.09271523178808,
+   "descendants": 3979,
    "tracking_disagreement": 0.0,
    "price": {
     "p0": {
@@ -2665,6 +2763,8 @@
    "tag": "sel_2D512_s208",
    "condition": "sel_2D512",
    "transport": true,
+   "bodies_per_snapshot": 33.847682119205295,
+   "descendants": 4844,
    "tracking_disagreement": 0.0,
    "price": {
     "p0": {
@@ -2715,6 +2815,8 @@
    "tag": "sel_2D512n48_s205",
    "condition": "sel_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 80.64238410596026,
+   "descendants": 11074,
    "tracking_disagreement": 0.008036843055806393,
    "price": {
     "p0": {
@@ -2765,6 +2867,8 @@
    "tag": "sel_2D512n48_s206",
    "condition": "sel_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 78.74172185430463,
+   "descendants": 10834,
    "tracking_disagreement": 0.01006091932804135,
    "price": {
     "p0": {
@@ -2815,6 +2919,8 @@
    "tag": "sel_2D512n48_s207",
    "condition": "sel_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 74.72185430463576,
+   "descendants": 10246,
    "tracking_disagreement": 0.005172750341596721,
    "price": {
     "p0": {
@@ -2865,6 +2971,8 @@
    "tag": "sel_2D512n48_s208",
    "condition": "sel_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 85.87417218543047,
+   "descendants": 11914,
    "tracking_disagreement": 0.0014268927312405574,
    "price": {
     "p0": {
@@ -2915,6 +3023,8 @@
    "tag": "neu_5D40_s201",
    "condition": "neu_5D40",
    "transport": true,
+   "bodies_per_snapshot": 35.76158940397351,
+   "descendants": 5273,
    "tracking_disagreement": 0.28219230039825527,
    "price": {
     "p0": {
@@ -2965,6 +3075,8 @@
    "tag": "neu_5D40_s202",
    "condition": "neu_5D40",
    "transport": true,
+   "bodies_per_snapshot": 35.36423841059602,
+   "descendants": 5210,
    "tracking_disagreement": 0.28195777351247603,
    "price": {
     "p0": {
@@ -3015,6 +3127,8 @@
    "tag": "neu_5D40_s203",
    "condition": "neu_5D40",
    "transport": true,
+   "bodies_per_snapshot": 36.794701986754966,
+   "descendants": 5425,
    "tracking_disagreement": 0.3270046082949309,
    "price": {
     "p0": {
@@ -3065,6 +3179,8 @@
    "tag": "neu_5D40_s204",
    "condition": "neu_5D40",
    "transport": true,
+   "bodies_per_snapshot": 35.77483443708609,
+   "descendants": 5272,
    "tracking_disagreement": 0.3143019726858877,
    "price": {
     "p0": {
@@ -3115,6 +3231,8 @@
    "tag": "sel_5D40_s203",
    "condition": "sel_5D40",
    "transport": true,
+   "bodies_per_snapshot": 44.370860927152314,
+   "descendants": 6563,
    "tracking_disagreement": 0.365686423891513,
    "price": {
     "p0": {
@@ -3165,6 +3283,8 @@
    "tag": "neu_5D40_s205",
    "condition": "neu_5D40",
    "transport": true,
+   "bodies_per_snapshot": 34.87417218543046,
+   "descendants": 5138,
    "tracking_disagreement": 0.2539898793304788,
    "price": {
     "p0": {
@@ -3215,6 +3335,8 @@
    "tag": "neu_5D40_s206",
    "condition": "neu_5D40",
    "transport": true,
+   "bodies_per_snapshot": 35.81456953642384,
+   "descendants": 5283,
    "tracking_disagreement": 0.2699223925799735,
    "price": {
     "p0": {
@@ -3265,6 +3387,8 @@
    "tag": "neu_5D40_s207",
    "condition": "neu_5D40",
    "transport": true,
+   "bodies_per_snapshot": 34.12582781456954,
+   "descendants": 5024,
    "tracking_disagreement": 0.23527070063694266,
    "price": {
     "p0": {
@@ -3315,6 +3439,8 @@
    "tag": "neu_5D40_s208",
    "condition": "neu_5D40",
    "transport": true,
+   "bodies_per_snapshot": 37.12582781456954,
+   "descendants": 5480,
    "tracking_disagreement": 0.3346715328467153,
    "price": {
     "p0": {
@@ -3365,6 +3491,8 @@
    "tag": "neu_4D56_s201",
    "condition": "neu_4D56",
    "transport": true,
+   "bodies_per_snapshot": 40.079470198675494,
+   "descendants": 5920,
    "tracking_disagreement": 0.2518581081081081,
    "price": {
     "p0": {
@@ -3415,6 +3543,8 @@
    "tag": "neu_4D56_s202",
    "condition": "neu_4D56",
    "transport": true,
+   "bodies_per_snapshot": 41.58278145695364,
+   "descendants": 6147,
    "tracking_disagreement": 0.282251504799089,
    "price": {
     "p0": {
@@ -3465,6 +3595,8 @@
    "tag": "neu_4D56_s203",
    "condition": "neu_4D56",
    "transport": true,
+   "bodies_per_snapshot": 41.76158940397351,
+   "descendants": 6175,
    "tracking_disagreement": 0.277246963562753,
    "price": {
     "p0": {
@@ -3515,6 +3647,8 @@
    "tag": "neu_4D56_s204",
    "condition": "neu_4D56",
    "transport": true,
+   "bodies_per_snapshot": 40.59602649006622,
+   "descendants": 5998,
    "tracking_disagreement": 0.2345781927309103,
    "price": {
     "p0": {
@@ -3565,6 +3699,8 @@
    "tag": "neu_4D56_s205",
    "condition": "neu_4D56",
    "transport": true,
+   "bodies_per_snapshot": 41.688741721854306,
+   "descendants": 6163,
    "tracking_disagreement": 0.2596138244361512,
    "price": {
     "p0": {
@@ -3615,6 +3751,8 @@
    "tag": "neu_4D56_s206",
    "condition": "neu_4D56",
    "transport": true,
+   "bodies_per_snapshot": 40.556291390728475,
+   "descendants": 5992,
    "tracking_disagreement": 0.2356475300400534,
    "price": {
     "p0": {
@@ -3665,6 +3803,8 @@
    "tag": "neu_4D56_s207",
    "condition": "neu_4D56",
    "transport": true,
+   "bodies_per_snapshot": 39.49006622516556,
+   "descendants": 5834,
    "tracking_disagreement": 0.24082961947206033,
    "price": {
     "p0": {
@@ -3715,6 +3855,8 @@
    "tag": "neu_4D56_s208",
    "condition": "neu_4D56",
    "transport": true,
+   "bodies_per_snapshot": 41.735099337748345,
+   "descendants": 6170,
    "tracking_disagreement": 0.24424635332252836,
    "price": {
     "p0": {
@@ -3765,6 +3907,8 @@
    "tag": "neu_3D96_s201",
    "condition": "neu_3D96",
    "transport": true,
+   "bodies_per_snapshot": 38.19205298013245,
+   "descendants": 5612,
    "tracking_disagreement": 0.1286528866714184,
    "price": {
     "p0": {
@@ -3815,6 +3959,8 @@
    "tag": "neu_3D96_s202",
    "condition": "neu_3D96",
    "transport": true,
+   "bodies_per_snapshot": 40.7682119205298,
+   "descendants": 5998,
    "tracking_disagreement": 0.16138712904301433,
    "price": {
     "p0": {
@@ -3865,6 +4011,8 @@
    "tag": "neu_3D96_s203",
    "condition": "neu_3D96",
    "transport": true,
+   "bodies_per_snapshot": 38.13907284768212,
+   "descendants": 5594,
    "tracking_disagreement": 0.1301394351090454,
    "price": {
     "p0": {
@@ -3915,6 +4063,8 @@
    "tag": "neu_3D96_s204",
    "condition": "neu_3D96",
    "transport": true,
+   "bodies_per_snapshot": 35.45695364238411,
+   "descendants": 5183,
    "tracking_disagreement": 0.08026239629558171,
    "price": {
     "p0": {
@@ -3965,6 +4115,8 @@
    "tag": "neu_3D96_s205",
    "condition": "neu_3D96",
    "transport": true,
+   "bodies_per_snapshot": 39.35761589403973,
+   "descendants": 5783,
    "tracking_disagreement": 0.11084212346532941,
    "price": {
     "p0": {
@@ -4015,6 +4167,8 @@
    "tag": "neu_3D96_s206",
    "condition": "neu_3D96",
    "transport": true,
+   "bodies_per_snapshot": 39.49006622516556,
+   "descendants": 5808,
    "tracking_disagreement": 0.12310606060606061,
    "price": {
     "p0": {
@@ -4065,6 +4219,8 @@
    "tag": "neu_3D96_s207",
    "condition": "neu_3D96",
    "transport": true,
+   "bodies_per_snapshot": 37.90728476821192,
+   "descendants": 5573,
    "tracking_disagreement": 0.11017405347209762,
    "price": {
     "p0": {
@@ -4115,6 +4271,8 @@
    "tag": "neu_3D96_s208",
    "condition": "neu_3D96",
    "transport": true,
+   "bodies_per_snapshot": 37.920529801324506,
+   "descendants": 5565,
    "tracking_disagreement": 0.138544474393531,
    "price": {
     "p0": {
@@ -4165,6 +4323,8 @@
    "tag": "sel_5D40_s204",
    "condition": "sel_5D40",
    "transport": true,
+   "bodies_per_snapshot": 44.56953642384106,
+   "descendants": 6597,
    "tracking_disagreement": 0.5194785508564499,
    "price": {
     "p0": {
@@ -4215,6 +4375,8 @@
    "tag": "neu_2D512_s201",
    "condition": "neu_2D512",
    "transport": true,
+   "bodies_per_snapshot": 24.04635761589404,
+   "descendants": 3379,
    "tracking_disagreement": 0.0,
    "price": {
     "p0": {
@@ -4265,6 +4427,8 @@
    "tag": "neu_2D512_s202",
    "condition": "neu_2D512",
    "transport": true,
+   "bodies_per_snapshot": 24.05960264900662,
+   "descendants": 3369,
    "tracking_disagreement": 0.0014841199168892847,
    "price": {
     "p0": {
@@ -4315,6 +4479,8 @@
    "tag": "neu_2D512_s203",
    "condition": "neu_2D512",
    "transport": true,
+   "bodies_per_snapshot": 24.172185430463575,
+   "descendants": 3397,
    "tracking_disagreement": 0.0,
    "price": {
     "p0": {
@@ -4365,6 +4531,8 @@
    "tag": "neu_2D512_s204",
    "condition": "neu_2D512",
    "transport": true,
+   "bodies_per_snapshot": 25.60927152317881,
+   "descendants": 3600,
    "tracking_disagreement": 0.0,
    "price": {
     "p0": {
@@ -4415,6 +4583,8 @@
    "tag": "neu_2D512n48_s201",
    "condition": "neu_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 95.55629139072848,
+   "descendants": 13396,
    "tracking_disagreement": 0.00029859659599880563,
    "price": {
     "p0": {
@@ -4465,6 +4635,8 @@
    "tag": "neu_2D512n48_s202",
    "condition": "neu_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 80.19205298013244,
+   "descendants": 11053,
    "tracking_disagreement": 0.022708766850628788,
    "price": {
     "p0": {
@@ -4515,6 +4687,8 @@
    "tag": "neu_2D512n48_s203",
    "condition": "neu_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 95.76821192052981,
+   "descendants": 13440,
    "tracking_disagreement": 0.0004464285714285714,
    "price": {
     "p0": {
@@ -4565,6 +4739,8 @@
    "tag": "neu_2D512n48_s204",
    "condition": "neu_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 83.31788079470199,
+   "descendants": 11497,
    "tracking_disagreement": 0.01635209185004784,
    "price": {
     "p0": {
@@ -4615,6 +4791,8 @@
    "tag": "neu_2D512_s205",
    "condition": "neu_2D512",
    "transport": true,
+   "bodies_per_snapshot": 25.6158940397351,
+   "descendants": 3598,
    "tracking_disagreement": 0.0008337965536409116,
    "price": {
     "p0": {
@@ -4665,6 +4843,8 @@
    "tag": "neu_2D512_s206",
    "condition": "neu_2D512",
    "transport": true,
+   "bodies_per_snapshot": 24.158940397350992,
+   "descendants": 3384,
    "tracking_disagreement": 0.0,
    "price": {
     "p0": {
@@ -4715,6 +4895,8 @@
    "tag": "neu_2D512_s207",
    "condition": "neu_2D512",
    "transport": true,
+   "bodies_per_snapshot": 24.960264900662253,
+   "descendants": 3505,
    "tracking_disagreement": 0.0011412268188302425,
    "price": {
     "p0": {
@@ -4765,6 +4947,8 @@
    "tag": "neu_2D512_s208",
    "condition": "neu_2D512",
    "transport": true,
+   "bodies_per_snapshot": 24.920529801324502,
+   "descendants": 3499,
    "tracking_disagreement": 0.0,
    "price": {
     "p0": {
@@ -4815,6 +4999,8 @@
    "tag": "neu_2D512n48_s205",
    "condition": "neu_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 91.17880794701986,
+   "descendants": 12656,
    "tracking_disagreement": 0.019832490518331226,
    "price": {
     "p0": {
@@ -4865,6 +5051,8 @@
    "tag": "neu_2D512n48_s206",
    "condition": "neu_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 77.75496688741723,
+   "descendants": 10685,
    "tracking_disagreement": 0.02030884417407581,
    "price": {
     "p0": {
@@ -4915,6 +5103,8 @@
    "tag": "neu_2D512n48_s207",
    "condition": "neu_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 80.00662251655629,
+   "descendants": 11038,
    "tracking_disagreement": 0.01476716796521109,
    "price": {
     "p0": {
@@ -4965,6 +5155,8 @@
    "tag": "neu_2D512n48_s208",
    "condition": "neu_2D512n48",
    "transport": true,
+   "bodies_per_snapshot": 96.01324503311258,
+   "descendants": 13442,
    "tracking_disagreement": 0.0006695432227347121,
    "price": {
     "p0": {
@@ -5015,6 +5207,8 @@
    "tag": "sel_5D40_s205",
    "condition": "sel_5D40",
    "transport": true,
+   "bodies_per_snapshot": 47.5364238410596,
+   "descendants": 7045,
    "tracking_disagreement": 0.4369056068133428,
    "price": {
     "p0": {
@@ -5065,6 +5259,8 @@
    "tag": "sel_5D40_s206",
    "condition": "sel_5D40",
    "transport": true,
+   "bodies_per_snapshot": 40.62251655629139,
+   "descendants": 6008,
    "tracking_disagreement": 0.4344207723035952,
    "price": {
     "p0": {
@@ -5115,6 +5311,8 @@
    "tag": "sel_5D40_s207",
    "condition": "sel_5D40",
    "transport": true,
+   "bodies_per_snapshot": 42.9271523178808,
+   "descendants": 6353,
    "tracking_disagreement": 0.5164489217692428,
    "price": {
     "p0": {
@@ -5165,6 +5363,8 @@
    "tag": "sel_5D40_s208",
    "condition": "sel_5D40",
    "transport": true,
+   "bodies_per_snapshot": 48.28476821192053,
+   "descendants": 7156,
    "tracking_disagreement": 0.6437954164337619,
    "price": {
     "p0": {
@@ -5215,6 +5415,8 @@
    "tag": "sel_4D56_s201",
    "condition": "sel_4D56",
    "transport": true,
+   "bodies_per_snapshot": 65.05960264900662,
+   "descendants": 9672,
    "tracking_disagreement": 0.46732837055417703,
    "price": {
     "p0": {
@@ -5265,6 +5467,8 @@
    "tag": "sel_4D56_s202",
    "condition": "sel_4D56",
    "transport": true,
+   "bodies_per_snapshot": 57.27814569536424,
+   "descendants": 8506,
    "tracking_disagreement": 0.424994121796379,
    "price": {
     "p0": {
@@ -5315,6 +5519,8 @@
    "tag": "sel_4D56_s203",
    "condition": "sel_4D56",
    "transport": true,
+   "bodies_per_snapshot": 62.602649006622514,
+   "descendants": 9301,
    "tracking_disagreement": 0.47048704440382755,
    "price": {
     "p0": {
@@ -5365,6 +5571,8 @@
    "tag": "sel_4D56_s204",
    "condition": "sel_4D56",
    "transport": true,
+   "bodies_per_snapshot": 57.3046357615894,
+   "descendants": 8508,
    "tracking_disagreement": 0.581805359661495,
    "price": {
     "p0": {
@@ -5411,10 +5619,116 @@
    }
   },
   {
+   "part": "14",
+   "tag": "sel_6D28_s301",
+   "condition": "sel_6D28",
+   "transport": true,
+   "bodies_per_snapshot": 12.683168316831683,
+   "descendants": 1197,
+   "tracking_disagreement": 0.5012531328320802,
+   "price": {
+    "p0": {
+     "growth": {
+      "published_S": 0.015502810741203259,
+      "nearest_S": 0.0024836197216040736,
+      "nearest_T": 0.021539077795856565,
+      "tracked_S": 0.04705638619701033,
+      "tracked_T": -0.02303368867954969,
+      "check_S": 0.022648039214714998,
+      "check_T": 0.0013746583027456453,
+      "delta": 0.02402269751746064
+     },
+     "plateau": {
+      "published_S": -0.0058412962930071265,
+      "nearest_S": -0.002914788077478134,
+      "nearest_T": 0.0049116634696550945,
+      "tracked_S": 0.008171268675592824,
+      "tracked_T": -0.006174393283415862,
+      "check_S": 0.016299728118023167,
+      "check_T": -0.014302852725846204,
+      "delta": 0.0019968753921769606
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 295,
+      "parent_child_r": 0.35919819674924003,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 201,
+      "parent_child_r": 0.7230387139536807,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 241,
+      "parent_child_r": 0.42602244190414446,
+      "effective_lineages": 1.0
+     }
+    }
+   }
+  },
+  {
+   "part": "14",
+   "tag": "neu_6D28_s301",
+   "condition": "neu_6D28",
+   "transport": true,
+   "bodies_per_snapshot": 10.306930693069306,
+   "descendants": 961,
+   "tracking_disagreement": 0.3173777315296566,
+   "price": {
+    "p0": {
+     "growth": {
+      "published_S": 0.03223145280968184,
+      "nearest_S": 0.023154697037933745,
+      "nearest_T": -0.022179316870651524,
+      "tracked_S": -0.021151273315467994,
+      "tracked_T": 0.0221266534827502,
+      "check_S": -0.028022330870633275,
+      "check_T": 0.028997711037915486,
+      "delta": 0.0009753801672822087
+     },
+     "plateau": {
+      "published_S": -0.0014031885655890358,
+      "nearest_S": -0.0019305788074505737,
+      "nearest_T": 0.002097254056962856,
+      "tracked_S": -0.011002764119015103,
+      "tracked_T": 0.011169439368527385,
+      "check_S": -0.019954494065747445,
+      "check_T": 0.020121169315259722,
+      "delta": 0.0001666752495122818
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 200,
+      "parent_child_r": 0.4164222477277472,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 57,
+      "parent_child_r": 0.732273936226263,
+      "effective_lineages": 1.9246524482980212
+     },
+     "check": {
+      "divisions": 77,
+      "parent_child_r": 0.5079941919995556,
+      "effective_lineages": 1.0
+     }
+    }
+   }
+  },
+  {
    "part": "15",
    "tag": "evo_4D56_s311",
    "condition": "evo_4D56",
    "transport": true,
+   "bodies_per_snapshot": 54.50413223140496,
+   "descendants": 6454,
    "tracking_disagreement": 0.7640223117446545,
    "price": {
     "gF": {
@@ -5465,6 +5779,8 @@
    "tag": "evo_4D56_s312",
    "condition": "evo_4D56",
    "transport": true,
+   "bodies_per_snapshot": 51.289256198347104,
+   "descendants": 6048,
    "tracking_disagreement": 0.5380291005291006,
    "price": {
     "gF": {
@@ -5515,6 +5831,8 @@
    "tag": "frozen_4D56_s315",
    "condition": "frozen_4D56",
    "transport": true,
+   "bodies_per_snapshot": 45.46280991735537,
+   "descendants": 5359,
    "tracking_disagreement": 0.8356036573987684,
    "price": {
     "gF": {
@@ -5565,6 +5883,8 @@
    "tag": "frozen_4D56_s316",
    "condition": "frozen_4D56",
    "transport": true,
+   "bodies_per_snapshot": 44.34710743801653,
+   "descendants": 5211,
    "tracking_disagreement": 0.7660717712531184,
    "price": {
     "gF": {
@@ -5615,6 +5935,8 @@
    "tag": "nobrain_4D56_s311",
    "condition": "nobrain_4D56",
    "transport": true,
+   "bodies_per_snapshot": 38.446280991735534,
+   "descendants": 4522,
    "tracking_disagreement": 0.18332596196373285,
    "price": {
     "gF": {
@@ -5665,6 +5987,8 @@
    "tag": "nobrain_4D56_s312",
    "condition": "nobrain_4D56",
    "transport": true,
+   "bodies_per_snapshot": 39.14876033057851,
+   "descendants": 4606,
    "tracking_disagreement": 0.21102909248805907,
    "price": {
     "gF": {
@@ -5715,6 +6039,8 @@
    "tag": "nobrain_4D56_s313",
    "condition": "nobrain_4D56",
    "transport": true,
+   "bodies_per_snapshot": 40.27272727272727,
+   "descendants": 4742,
    "tracking_disagreement": 0.21910586250527203,
    "price": {
     "gF": {
@@ -5765,6 +6091,8 @@
    "tag": "nobrain_4D56_s314",
    "condition": "nobrain_4D56",
    "transport": true,
+   "bodies_per_snapshot": 40.86776859504132,
+   "descendants": 4813,
    "tracking_disagreement": 0.23041761894868065,
    "price": {
     "gF": {
@@ -5815,6 +6143,8 @@
    "tag": "nobrain_4D56_s315",
    "condition": "nobrain_4D56",
    "transport": true,
+   "bodies_per_snapshot": 39.29752066115702,
+   "descendants": 4623,
    "tracking_disagreement": 0.1836469824789098,
    "price": {
     "gF": {
@@ -5865,6 +6195,8 @@
    "tag": "nobrain_4D56_s316",
    "condition": "nobrain_4D56",
    "transport": true,
+   "bodies_per_snapshot": 39.96694214876033,
+   "descendants": 4704,
    "tracking_disagreement": 0.21301020408163265,
    "price": {
     "gF": {
@@ -5915,6 +6247,8 @@
    "tag": "evo_rep_4D56_s311",
    "condition": "evo_rep_4D56",
    "transport": true,
+   "bodies_per_snapshot": 55.13223140495868,
+   "descendants": 6522,
    "tracking_disagreement": 0.7778288868445262,
    "price": {
     "gF": {
@@ -5965,6 +6299,8 @@
    "tag": "evo_rep_4D56_s312",
    "condition": "evo_rep_4D56",
    "transport": true,
+   "bodies_per_snapshot": 53.900826446280995,
+   "descendants": 6370,
    "tracking_disagreement": 0.6800627943485086,
    "price": {
     "gF": {
@@ -6015,6 +6351,8 @@
    "tag": "evo_4D56_s313",
    "condition": "evo_4D56",
    "transport": true,
+   "bodies_per_snapshot": 42.80165289256198,
+   "descendants": 5046,
    "tracking_disagreement": 0.38307570352754655,
    "price": {
     "gF": {
@@ -6065,6 +6403,8 @@
    "tag": "evo_rep_4D56_s313",
    "condition": "evo_rep_4D56",
    "transport": true,
+   "bodies_per_snapshot": 41.47933884297521,
+   "descendants": 4888,
    "tracking_disagreement": 0.44189852700491,
    "price": {
     "gF": {
@@ -6115,6 +6455,8 @@
    "tag": "evo_rep_4D56_s314",
    "condition": "evo_rep_4D56",
    "transport": true,
+   "bodies_per_snapshot": 56.93388429752066,
+   "descendants": 6741,
    "tracking_disagreement": 0.8040350096424863,
    "price": {
     "gF": {
@@ -6165,6 +6507,8 @@
    "tag": "evo_rep_4D56_s315",
    "condition": "evo_rep_4D56",
    "transport": true,
+   "bodies_per_snapshot": 51.52892561983471,
+   "descendants": 6102,
    "tracking_disagreement": 0.7463126843657817,
    "price": {
     "gF": {
@@ -6215,6 +6559,8 @@
    "tag": "evo_rep_4D56_s316",
    "condition": "evo_rep_4D56",
    "transport": true,
+   "bodies_per_snapshot": 56.12396694214876,
+   "descendants": 6649,
    "tracking_disagreement": 0.7977139419461573,
    "price": {
     "gF": {
@@ -6265,6 +6611,8 @@
    "tag": "evo_4D56_s314",
    "condition": "evo_4D56",
    "transport": true,
+   "bodies_per_snapshot": 56.289256198347104,
+   "descendants": 6649,
    "tracking_disagreement": 0.8714092344713491,
    "price": {
     "gF": {
@@ -6315,6 +6663,8 @@
    "tag": "evo_4D56_s315",
    "condition": "evo_4D56",
    "transport": true,
+   "bodies_per_snapshot": 39.82644628099174,
+   "descendants": 4678,
    "tracking_disagreement": 0.7667806755023514,
    "price": {
     "gF": {
@@ -6365,6 +6715,8 @@
    "tag": "evo_4D56_s316",
    "condition": "evo_4D56",
    "transport": true,
+   "bodies_per_snapshot": 50.396694214876035,
+   "descendants": 5954,
    "tracking_disagreement": 0.7744373530399731,
    "price": {
     "gF": {
@@ -6415,6 +6767,8 @@
    "tag": "frozen_4D56_s311",
    "condition": "frozen_4D56",
    "transport": true,
+   "bodies_per_snapshot": 56.46280991735537,
+   "descendants": 6692,
    "tracking_disagreement": 0.7906455469216975,
    "price": {
     "gF": {
@@ -6465,6 +6819,8 @@
    "tag": "frozen_4D56_s312",
    "condition": "frozen_4D56",
    "transport": true,
+   "bodies_per_snapshot": 53.77685950413223,
+   "descendants": 6353,
    "tracking_disagreement": 0.6711789705650874,
    "price": {
     "gF": {
@@ -6515,6 +6871,8 @@
    "tag": "frozen_4D56_s313",
    "condition": "frozen_4D56",
    "transport": true,
+   "bodies_per_snapshot": 46.05785123966942,
+   "descendants": 5442,
    "tracking_disagreement": 0.613561190738699,
    "price": {
     "gF": {
@@ -6565,6 +6923,8 @@
    "tag": "frozen_4D56_s314",
    "condition": "frozen_4D56",
    "transport": true,
+   "bodies_per_snapshot": 56.30578512396694,
+   "descendants": 6644,
    "tracking_disagreement": 0.8881697772426249,
    "price": {
     "gF": {
@@ -6615,6 +6975,8 @@
    "tag": "evo_5D40_s401",
    "condition": "evo_5D40",
    "transport": true,
+   "bodies_per_snapshot": 10.138613861386139,
+   "descendants": 907,
    "tracking_disagreement": 0.743109151047409,
    "price": {
     "gF": {
@@ -6684,6 +7046,8 @@
    "tag": "nobrain_5D40_s401",
    "condition": "nobrain_5D40",
    "transport": true,
+   "bodies_per_snapshot": 33.504950495049506,
+   "descendants": 3254,
    "tracking_disagreement": 0.2993239090350338,
    "price": {
     "gF": {
@@ -6753,6 +7117,8 @@
    "tag": "evo_5D40_s402",
    "condition": "evo_5D40",
    "transport": true,
+   "bodies_per_snapshot": 10.508196721311476,
+   "descendants": 510,
    "tracking_disagreement": 0.7372549019607844,
    "price": {
     "gF": {
@@ -6822,6 +7188,8 @@
    "tag": "evo_5D40_s403",
    "condition": "evo_5D40",
    "transport": true,
+   "bodies_per_snapshot": 24.918032786885245,
+   "descendants": 1393,
    "tracking_disagreement": 0.8549892318736539,
    "price": {
     "gF": {
@@ -6891,6 +7259,8 @@
    "tag": "evo_5D40_s404",
    "condition": "evo_5D40",
    "transport": true,
+   "bodies_per_snapshot": 17.40983606557377,
+   "descendants": 939,
    "tracking_disagreement": 0.7209797657082002,
    "price": {
     "gF": {
@@ -6960,6 +7330,8 @@
    "tag": "clamp_5D40_s402",
    "condition": "clamp_5D40",
    "transport": true,
+   "bodies_per_snapshot": 13.344262295081966,
+   "descendants": 666,
    "tracking_disagreement": 0.7882882882882883,
    "price": {
     "gF": {
@@ -7029,6 +7401,8 @@
    "tag": "clamp_5D40_s403",
    "condition": "clamp_5D40",
    "transport": true,
+   "bodies_per_snapshot": 32.19672131147541,
+   "descendants": 1825,
    "tracking_disagreement": 0.9035616438356164,
    "price": {
     "gF": {
@@ -7098,6 +7472,8 @@
    "tag": "nobrain_5D40_s402",
    "condition": "nobrain_5D40",
    "transport": true,
+   "bodies_per_snapshot": 25.75409836065574,
+   "descendants": 1441,
    "tracking_disagreement": 0.24011103400416378,
    "price": {
     "gF": {
@@ -7167,6 +7543,8 @@
    "tag": "evo_s511",
    "condition": "evo",
    "transport": true,
+   "bodies_per_snapshot": 38.917355371900825,
+   "descendants": 4547,
    "tracking_disagreement": 0.7734770178139433,
    "price": {
     "gF": {
@@ -7265,6 +7643,8 @@
    "tag": "blind_s511",
    "condition": "blind",
    "transport": true,
+   "bodies_per_snapshot": 3.371900826446281,
+   "descendants": 296,
    "tracking_disagreement": 0.006756756756756757,
    "price": {
     "gF": {
@@ -7363,6 +7743,8 @@
    "tag": "blind_s514",
    "condition": "blind",
    "transport": true,
+   "bodies_per_snapshot": 4.677685950413223,
+   "descendants": 445,
    "tracking_disagreement": 0.02247191011235955,
    "price": {
     "gF": {
@@ -7461,6 +7843,8 @@
    "tag": "nobrain_s514",
    "condition": "nobrain",
    "transport": true,
+   "bodies_per_snapshot": 11.991735537190083,
+   "descendants": 1320,
    "tracking_disagreement": 0.08636363636363636,
    "price": {
     "gF": {
@@ -7559,6 +7943,8 @@
    "tag": "nobrain_s511",
    "condition": "nobrain",
    "transport": true,
+   "bodies_per_snapshot": 12.115702479338843,
+   "descendants": 1334,
    "tracking_disagreement": 0.03223388305847077,
    "price": {
     "gF": {
@@ -7657,6 +8043,8 @@
    "tag": "evo_s512",
    "condition": "evo",
    "transport": true,
+   "bodies_per_snapshot": 43.33057851239669,
+   "descendants": 5107,
    "tracking_disagreement": 0.803994517329156,
    "price": {
     "gF": {
@@ -7755,6 +8143,8 @@
    "tag": "blind_s512",
    "condition": "blind",
    "transport": true,
+   "bodies_per_snapshot": 3.8016528925619837,
+   "descendants": 325,
    "tracking_disagreement": 0.003076923076923077,
    "price": {
     "gF": {
@@ -7853,6 +8243,8 @@
    "tag": "nobrain_s512",
    "condition": "nobrain",
    "transport": true,
+   "bodies_per_snapshot": 11.991735537190083,
+   "descendants": 1320,
    "tracking_disagreement": 0.09848484848484848,
    "price": {
     "gF": {
@@ -7951,6 +8343,8 @@
    "tag": "evo_s513",
    "condition": "evo",
    "transport": true,
+   "bodies_per_snapshot": 9.148760330578513,
+   "descendants": 973,
    "tracking_disagreement": 0.25488180883864336,
    "price": {
     "gF": {
@@ -8049,6 +8443,8 @@
    "tag": "blind_s513",
    "condition": "blind",
    "transport": true,
+   "bodies_per_snapshot": 7.521739130434782,
+   "descendants": 216,
    "tracking_disagreement": 0.018518518518518517,
    "price": {
     "gF": {
@@ -8147,6 +8543,8 @@
    "tag": "nobrain_s513",
    "condition": "nobrain",
    "transport": true,
+   "bodies_per_snapshot": 12.0,
+   "descendants": 1320,
    "tracking_disagreement": 0.12121212121212122,
    "price": {
     "gF": {
@@ -8245,6 +8643,8 @@
    "tag": "evo_s514",
    "condition": "evo",
    "transport": true,
+   "bodies_per_snapshot": 36.13223140495868,
+   "descendants": 4233,
    "tracking_disagreement": 0.7906921804866525,
    "price": {
     "gF": {
@@ -8334,6 +8734,2554 @@
       "divisions": 891,
       "parent_child_r": 0.7403054812498225,
       "effective_lineages": 1.90636422238678
+     }
+    }
+   }
+  },
+  {
+   "part": "18",
+   "tag": "mem_s611",
+   "condition": "mem",
+   "transport": true,
+   "bodies_per_snapshot": 7.983333333333333,
+   "descendants": 332,
+   "tracking_disagreement": 0.4006024096385542,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.006898146354343429,
+      "nearest_S": -0.017632284224702074,
+      "nearest_T": 0.014537370977645311,
+      "tracked_S": 0.018762772076957996,
+      "tracked_T": -0.021857685324014768,
+      "check_S": 0.0271484438805421,
+      "check_T": -0.03024335712759887,
+      "delta": -0.003094913247056769
+     },
+     "seasons": {
+      "published_S": -0.03813363348039728,
+      "nearest_S": -0.05961591138042406,
+      "nearest_T": 0.04180564850433697,
+      "tracked_S": -0.006821770318738254,
+      "tracked_T": -0.010988492557348833,
+      "check_S": 0.0086078325888718,
+      "check_T": -0.026418095464958886,
+      "delta": -0.017810262876087092
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.2568744058947417,
+      "nearest_S": 0.22579430877012333,
+      "nearest_T": -0.29340745745016866,
+      "tracked_S": 0.21321622236459625,
+      "tracked_T": -0.28082937104464156,
+      "check_S": 0.18480108316853622,
+      "check_T": -0.2524142318485815,
+      "delta": -0.06761314868004532
+     },
+     "seasons": {
+      "published_S": 0.5702234833112747,
+      "nearest_S": 0.5195328158143145,
+      "nearest_T": -0.10981880785225218,
+      "tracked_S": 0.40312478549511094,
+      "tracked_T": 0.006589222466951492,
+      "check_S": 0.3758028279781853,
+      "check_T": 0.03391117998387712,
+      "delta": 0.4097140079620624
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 47,
+      "parent_child_r": 0.5390513494508122,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 7,
+      "parent_child_r": 0.887658214536037,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 21,
+      "parent_child_r": 0.5999579661778482,
+      "effective_lineages": null
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 47,
+      "parent_child_r": 0.6555308626725238,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 7,
+      "parent_child_r": 0.7764122678523843,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 8,
+      "parent_child_r": 0.7185527763703077,
+      "effective_lineages": null
+     }
+    }
+   }
+  },
+  {
+   "part": "18",
+   "tag": "nomem_s611",
+   "condition": "nomem",
+   "transport": true,
+   "bodies_per_snapshot": 7.188679245283019,
+   "descendants": 250,
+   "tracking_disagreement": 0.372,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.07697514474629678,
+      "nearest_S": -0.07035136046779498,
+      "nearest_T": 0.06987283674122569,
+      "tracked_S": -0.010760892459396348,
+      "tracked_T": 0.01028236873282705,
+      "check_S": -0.036253452767828424,
+      "check_T": 0.03577492904125913,
+      "delta": -0.0004785237265692952
+     },
+     "seasons": {
+      "published_S": -0.11198343726236418,
+      "nearest_S": -0.09530096022149565,
+      "nearest_T": 0.09219853909022768,
+      "tracked_S": -0.009481255002317834,
+      "tracked_T": 0.006378833871049865,
+      "check_S": -0.024604997464956698,
+      "check_T": 0.021502576333688732,
+      "delta": -0.0031024211312679646
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.431711712408467,
+      "nearest_S": 0.32594099933153253,
+      "nearest_T": -0.3754203047617595,
+      "tracked_S": 0.32738847912972835,
+      "tracked_T": -0.37686778455995534,
+      "check_S": 0.3026499887724034,
+      "check_T": -0.3521292942026304,
+      "delta": -0.04947930543022693
+     },
+     "seasons": {
+      "published_S": 0.7581999327120316,
+      "nearest_S": 0.5932252707841732,
+      "nearest_T": -0.026797847194664663,
+      "tracked_S": 0.5673680990706711,
+      "tracked_T": -0.0009406754811626013,
+      "check_S": 0.5115421174556685,
+      "check_T": 0.05488530613384014,
+      "delta": 0.5664274235895085
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 49,
+      "parent_child_r": 0.5344792012584515,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 6,
+      "parent_child_r": 0.7642714074456691,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 18,
+      "parent_child_r": 0.4298908114778173,
+      "effective_lineages": null
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 49,
+      "parent_child_r": 0.6674386669061337,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 6,
+      "parent_child_r": 0.6579550050308282,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 9,
+      "parent_child_r": 0.7101284532279336,
+      "effective_lineages": null
+     }
+    }
+   }
+  },
+  {
+   "part": "18",
+   "tag": "cue_s613",
+   "condition": "cue",
+   "transport": true,
+   "bodies_per_snapshot": 4.808219178082192,
+   "descendants": 219,
+   "tracking_disagreement": 0.1095890410958904,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.08318071194950091,
+      "nearest_S": -0.04258222275972462,
+      "nearest_T": 0.03492325853320234,
+      "tracked_S": -0.03948125439611985,
+      "tracked_T": 0.031822290169597575,
+      "check_S": -0.028451225648782847,
+      "check_T": 0.020792261422260563,
+      "delta": -0.0076589642265222834
+     },
+     "seasons": {
+      "published_S": -0.11117053970815023,
+      "nearest_S": -0.0652630596566092,
+      "nearest_T": 0.06178544355995537,
+      "tracked_S": -0.020634856073455412,
+      "tracked_T": 0.017157239976801575,
+      "check_S": -0.038016059438107916,
+      "check_T": 0.034538443341454075,
+      "delta": -0.003477616096653844
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.12573344380374182,
+      "nearest_S": 0.11589366954608296,
+      "nearest_T": -0.06001076477379429,
+      "tracked_S": 0.12335229253491019,
+      "tracked_T": -0.06746938776262154,
+      "check_S": 0.12235635138031604,
+      "check_T": -0.0664734466080274,
+      "delta": 0.05588290477228867
+     },
+     "seasons": {
+      "published_S": 0.2261609074225408,
+      "nearest_S": 0.31681598290279905,
+      "nearest_T": -0.08280636865791727,
+      "tracked_S": 0.21281644703735117,
+      "tracked_T": 0.021193167207530644,
+      "check_S": 0.2227900923370228,
+      "check_T": 0.011219521907859045,
+      "delta": 0.23400961424488184
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 13,
+      "parent_child_r": 0.5055003587686865,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 6,
+      "parent_child_r": 0.9802493384079393,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 14,
+      "parent_child_r": 0.5439156908613819,
+      "effective_lineages": null
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 13,
+      "parent_child_r": 0.3101477316174604,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 6,
+      "parent_child_r": -0.14341856827214267,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 6,
+      "parent_child_r": 0.3832343665056788,
+      "effective_lineages": null
+     }
+    }
+   }
+  },
+  {
+   "part": "18",
+   "tag": "nobrain_s613",
+   "condition": "nobrain",
+   "transport": true,
+   "bodies_per_snapshot": 9.75,
+   "descendants": 258,
+   "tracking_disagreement": 0.15891472868217055,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.03384277990245047,
+      "nearest_S": -0.040908374351150086,
+      "nearest_T": 0.11562807535426108,
+      "tracked_S": 0.07359380362734899,
+      "tracked_T": 0.001125897375761992,
+      "check_S": 0.06084024259710617,
+      "check_T": 0.013879458406004819,
+      "delta": 0.074719701003111
+     },
+     "seasons": {
+      "published_S": -0.020190480037190962,
+      "nearest_S": -0.017778887911838043,
+      "nearest_T": 0.19203575523559063,
+      "tracked_S": 0.17139991736146354,
+      "tracked_T": 0.002856949962289029,
+      "check_S": 0.1952287751453518,
+      "check_T": -0.020971907821599245,
+      "delta": 0.17425686732375256
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.07652972944071207,
+      "nearest_S": 0.1017880551112947,
+      "nearest_T": -0.06152290640276227,
+      "tracked_S": 0.055219991804091706,
+      "tracked_T": -0.014954843095559275,
+      "check_S": 0.055219991804091706,
+      "check_T": -0.014954843095559275,
+      "delta": 0.04026514870853243
+     },
+     "seasons": {
+      "published_S": -0.01863130404725375,
+      "nearest_S": -0.0009116856281823904,
+      "nearest_T": -0.023845382055479127,
+      "tracked_S": 0.04214980114277868,
+      "tracked_T": -0.06690686882644022,
+      "check_S": 0.04214980114277868,
+      "check_T": -0.06690686882644022,
+      "delta": -0.024757067683661527
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 21,
+      "parent_child_r": 0.5494103735403547,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 0,
+      "parent_child_r": null,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 19,
+      "parent_child_r": 0.41658522666380726,
+      "effective_lineages": null
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 21,
+      "parent_child_r": 0.2857314766919352,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 0,
+      "parent_child_r": null,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 0,
+      "parent_child_r": null,
+      "effective_lineages": null
+     }
+    }
+   }
+  },
+  {
+   "part": "18",
+   "tag": "cue_s611",
+   "condition": "cue",
+   "transport": true,
+   "bodies_per_snapshot": 5.746835443037975,
+   "descendants": 315,
+   "tracking_disagreement": 0.3142857142857143,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": 0.022046539674595002,
+      "nearest_S": -0.007801103768380328,
+      "nearest_T": 0.010644511467239225,
+      "tracked_S": 0.006972394427419234,
+      "tracked_T": -0.0041289867285603365,
+      "check_S": -0.006814618998380386,
+      "check_T": 0.009658026697239284,
+      "delta": 0.0028434076988588983
+     },
+     "seasons": {
+      "published_S": 0.02222678957780827,
+      "nearest_S": 0.0044341490041994724,
+      "nearest_T": -0.0027954925291358177,
+      "tracked_S": 0.010297380372722487,
+      "tracked_T": -0.008658723897658835,
+      "check_S": 0.004249354573350498,
+      "check_T": -0.002610698098286851,
+      "delta": 0.001638656475063649
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.1855421810284873,
+      "nearest_S": 0.1068033056005245,
+      "nearest_T": -0.12860021410888917,
+      "tracked_S": 0.23599036905418871,
+      "tracked_T": -0.2577872775625534,
+      "check_S": 0.1547059958078732,
+      "check_T": -0.17650290431623786,
+      "delta": -0.021796908508364653
+     },
+     "seasons": {
+      "published_S": 0.4554433811562929,
+      "nearest_S": 0.33057614822975073,
+      "nearest_T": -0.09550991817020804,
+      "tracked_S": 0.4312277305114128,
+      "tracked_T": -0.19616150045187014,
+      "check_S": 0.33314919646188734,
+      "check_T": -0.09808296640234468,
+      "delta": 0.2350662300595426
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 42,
+      "parent_child_r": 0.5468988953911949,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 16,
+      "parent_child_r": 0.7630397709864922,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 29,
+      "parent_child_r": 0.6188172521563058,
+      "effective_lineages": null
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 42,
+      "parent_child_r": 0.6133050479728809,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 16,
+      "parent_child_r": 0.8189359106301217,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 19,
+      "parent_child_r": 0.7667745966765159,
+      "effective_lineages": null
+     }
+    }
+   }
+  },
+  {
+   "part": "18",
+   "tag": "nobrain_s611",
+   "condition": "nobrain",
+   "transport": true,
+   "bodies_per_snapshot": 8.627906976744185,
+   "descendants": 238,
+   "tracking_disagreement": 0.13865546218487396,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.034574033480833745,
+      "nearest_S": -0.05495416287044601,
+      "nearest_T": 0.10076283243562612,
+      "tracked_S": 0.038296319000207434,
+      "tracked_T": 0.007512350564972673,
+      "check_S": 0.01802736970708633,
+      "check_T": 0.027781299858093765,
+      "delta": 0.045808669565180093
+     },
+     "seasons": {
+      "published_S": -0.07455303589427537,
+      "nearest_S": -0.07323955768096044,
+      "nearest_T": 0.09646563268919463,
+      "tracked_S": 0.015649129967161304,
+      "tracked_T": 0.007576945041072895,
+      "check_S": 0.002997886462365763,
+      "check_T": 0.020228188545868435,
+      "delta": 0.023226075008234197
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.09550526583399316,
+      "nearest_S": 0.09480054065232371,
+      "nearest_T": -0.02719628928019891,
+      "tracked_S": 0.043081517305517424,
+      "tracked_T": 0.02452273406660735,
+      "check_S": 0.043081517305517424,
+      "check_T": 0.02452273406660735,
+      "delta": 0.06760425137212477
+     },
+     "seasons": {
+      "published_S": 0.06334955271879483,
+      "nearest_S": -0.016321468472876022,
+      "nearest_T": 0.14885866943302267,
+      "tracked_S": 0.13993687797630708,
+      "tracked_T": -0.007399677016160445,
+      "check_S": 0.13993687797630708,
+      "check_T": -0.007399677016160445,
+      "delta": 0.13253720096014662
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 15,
+      "parent_child_r": 0.27647319885499877,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 0,
+      "parent_child_r": null,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 2,
+      "parent_child_r": -0.02665216993382538,
+      "effective_lineages": null
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 15,
+      "parent_child_r": 0.04729329317672883,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 0,
+      "parent_child_r": null,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 0,
+      "parent_child_r": null,
+      "effective_lineages": null
+     }
+    }
+   }
+  },
+  {
+   "part": "18",
+   "tag": "mem_s612",
+   "condition": "mem",
+   "transport": true,
+   "bodies_per_snapshot": 6.444444444444445,
+   "descendants": 277,
+   "tracking_disagreement": 0.1444043321299639,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.03712644288733849,
+      "nearest_S": -0.01392800128669537,
+      "nearest_T": 0.04814081071369876,
+      "tracked_S": 0.04726399847588234,
+      "tracked_T": -0.013051189048878961,
+      "check_S": 0.019060913593389565,
+      "check_T": 0.01515189583361382,
+      "delta": 0.03421280942700338
+     },
+     "seasons": {
+      "published_S": -0.05527267288705758,
+      "nearest_S": -0.017073068218199365,
+      "nearest_T": 0.04309817156243231,
+      "tracked_S": 0.0528697170725552,
+      "tracked_T": -0.026844613728322267,
+      "check_S": 0.003579112867022593,
+      "check_T": 0.02244599047721034,
+      "delta": 0.02602510334423293
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": -0.022528278394633554,
+      "nearest_S": -0.05803578044437433,
+      "nearest_T": -0.12712124454548385,
+      "tracked_S": 0.083686316542862,
+      "tracked_T": -0.26884334153272016,
+      "check_S": 0.13056411363170337,
+      "check_T": -0.3157211386215616,
+      "delta": -0.1851570249898582
+     },
+     "seasons": {
+      "published_S": 0.002077431026971166,
+      "nearest_S": 0.12173314566009574,
+      "nearest_T": 0.10533476978561805,
+      "tracked_S": 0.13327179023042265,
+      "tracked_T": 0.09379612521529111,
+      "check_S": 0.17726362453872122,
+      "check_T": 0.04980429090699254,
+      "delta": 0.22706791544571372
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 26,
+      "parent_child_r": 0.21260524187990354,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 7,
+      "parent_child_r": 0.4084190281961432,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 27,
+      "parent_child_r": 0.40016312052446834,
+      "effective_lineages": null
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 26,
+      "parent_child_r": 0.7396952133318283,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 7,
+      "parent_child_r": 0.6561599515200826,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 11,
+      "parent_child_r": 0.06300087538659481,
+      "effective_lineages": null
+     }
+    }
+   }
+  },
+  {
+   "part": "18",
+   "tag": "nomem_s612",
+   "condition": "nomem",
+   "transport": true,
+   "bodies_per_snapshot": 6.101449275362318,
+   "descendants": 299,
+   "tracking_disagreement": 0.31438127090301005,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": 0.0921042312895841,
+      "nearest_S": 0.08189670916278456,
+      "nearest_T": -0.05549580871728837,
+      "tracked_S": 0.017668531900274915,
+      "tracked_T": 0.008732368545221272,
+      "check_S": -0.009383428799648043,
+      "check_T": 0.03578432924514423,
+      "delta": 0.026400900445496183
+     },
+     "seasons": {
+      "published_S": 0.08147652519177391,
+      "nearest_S": 0.07050357702589784,
+      "nearest_T": -0.038526593777270475,
+      "tracked_S": 0.027633927537257255,
+      "tracked_T": 0.004343055711370102,
+      "check_S": -0.019534742710540103,
+      "check_T": 0.051511725959167455,
+      "delta": 0.031976983248627355
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.007148164754070575,
+      "nearest_S": 0.00577218376789946,
+      "nearest_T": -0.027610853100795214,
+      "tracked_S": 0.06775389707234827,
+      "tracked_T": -0.08959256640524402,
+      "check_S": 0.0769656164243193,
+      "check_T": -0.09880428575721503,
+      "delta": -0.021838669332895744
+     },
+     "seasons": {
+      "published_S": 0.0920217274824951,
+      "nearest_S": 0.09606012324833342,
+      "nearest_T": 0.18363261483218704,
+      "tracked_S": 0.17508912077721417,
+      "tracked_T": 0.10460361730330632,
+      "check_S": 0.1700082970544543,
+      "check_T": 0.10968444102606617,
+      "delta": 0.27969273808052053
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 39,
+      "parent_child_r": 0.4395998159957688,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 7,
+      "parent_child_r": 0.5800423672863048,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 23,
+      "parent_child_r": 0.5657588007248552,
+      "effective_lineages": null
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 39,
+      "parent_child_r": 0.5605247052937861,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 7,
+      "parent_child_r": 0.15790792949929489,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 10,
+      "parent_child_r": 0.2710538492672572,
+      "effective_lineages": null
+     }
+    }
+   }
+  },
+  {
+   "part": "18",
+   "tag": "cue_s612",
+   "condition": "cue",
+   "transport": true,
+   "bodies_per_snapshot": 6.545454545454546,
+   "descendants": 249,
+   "tracking_disagreement": 0.27309236947791166,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.00245181598792019,
+      "nearest_S": 0.0003804203131173256,
+      "nearest_T": 0.011215120409110742,
+      "tracked_S": 0.018972716795105527,
+      "tracked_T": -0.00737717607287746,
+      "check_S": -0.017160126067672487,
+      "check_T": 0.02875566678990055,
+      "delta": 0.011595540722228063
+     },
+     "seasons": {
+      "published_S": -0.005173880004299097,
+      "nearest_S": 0.01122503882483214,
+      "nearest_T": -0.003090028794466323,
+      "tracked_S": 0.00868056794985075,
+      "tracked_T": -0.0005455579194849241,
+      "check_S": -0.037682883242686524,
+      "check_T": 0.04581789327305234,
+      "delta": 0.00813501003036582
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": -0.023200922995030186,
+      "nearest_S": -0.020542141719549233,
+      "nearest_T": -0.07135351050066614,
+      "tracked_S": 0.03560174989510464,
+      "tracked_T": -0.12749740211532,
+      "check_S": 0.020507125116419403,
+      "check_T": -0.11240277733663476,
+      "delta": -0.09189565222021535
+     },
+     "seasons": {
+      "published_S": 0.08514747204400991,
+      "nearest_S": 0.10712378039960042,
+      "nearest_T": 0.022408904388449252,
+      "tracked_S": 0.08614337064998961,
+      "tracked_T": 0.04338931413806005,
+      "check_S": 0.07595823666134752,
+      "check_T": 0.053574448126702146,
+      "delta": 0.12953268478804966
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 40,
+      "parent_child_r": 0.31990612168400934,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 16,
+      "parent_child_r": 0.6968815217799929,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 30,
+      "parent_child_r": 0.4288296100351819,
+      "effective_lineages": null
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 40,
+      "parent_child_r": 0.4537190056964262,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 16,
+      "parent_child_r": 0.48477917355176514,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 18,
+      "parent_child_r": 0.5650954841401676,
+      "effective_lineages": null
+     }
+    }
+   }
+  },
+  {
+   "part": "18",
+   "tag": "nobrain_s612",
+   "condition": "nobrain",
+   "transport": true,
+   "bodies_per_snapshot": 10.0,
+   "descendants": 229,
+   "tracking_disagreement": 0.15283842794759825,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": 0.03088077717259682,
+      "nearest_S": 0.013459578442764599,
+      "nearest_T": 0.029852448035068306,
+      "tracked_S": 0.04126181719280688,
+      "tracked_T": 0.0020502092850260317,
+      "check_S": 0.06807521243257969,
+      "check_T": -0.024763185954746785,
+      "delta": 0.0433120264778329
+     },
+     "seasons": {
+      "published_S": -0.010820612196832176,
+      "nearest_S": -0.04367121799325724,
+      "nearest_T": 0.053102522410182505,
+      "tracked_S": 0.005289227760815625,
+      "tracked_T": 0.004142076656109616,
+      "check_S": 0.011675791001622983,
+      "check_T": -0.002244486584697739,
+      "delta": 0.00943130441692524
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.16666269064922046,
+      "nearest_S": 0.18077378394254864,
+      "nearest_T": -0.24075064235379512,
+      "tracked_S": -0.003342734032326845,
+      "tracked_T": -0.056634124378919674,
+      "check_S": -0.003342734032326845,
+      "check_T": -0.056634124378919674,
+      "delta": -0.059976858411246524
+     },
+     "seasons": {
+      "published_S": 0.16471791183509638,
+      "nearest_S": 0.1314291107461458,
+      "nearest_T": -0.16391160410809322,
+      "tracked_S": 0.03137085751787012,
+      "tracked_T": -0.06385335087981754,
+      "check_S": 0.03137085751787012,
+      "check_T": -0.06385335087981754,
+      "delta": -0.032482493361947425
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 19,
+      "parent_child_r": 0.24702633149415454,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 1,
+      "parent_child_r": null,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 10,
+      "parent_child_r": 0.42338412829542393,
+      "effective_lineages": null
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 19,
+      "parent_child_r": 0.3706814180615695,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 1,
+      "parent_child_r": null,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 1,
+      "parent_child_r": null,
+      "effective_lineages": null
+     }
+    }
+   }
+  },
+  {
+   "part": "18",
+   "tag": "mem_s613",
+   "condition": "mem",
+   "transport": true,
+   "bodies_per_snapshot": 6.314814814814815,
+   "descendants": 206,
+   "tracking_disagreement": 0.16019417475728157,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.04291168185591274,
+      "nearest_S": -0.05433332029722102,
+      "nearest_T": 0.05487816800117429,
+      "tracked_S": 0.001597525185717528,
+      "tracked_T": -0.0010526774817642736,
+      "check_S": 0.07219223761366549,
+      "check_T": -0.07164738990971223,
+      "delta": 0.0005448477039532564
+     },
+     "seasons": {
+      "published_S": -0.05687640276443442,
+      "nearest_S": -0.07406050006732184,
+      "nearest_T": 0.05628168164459626,
+      "tracked_S": -0.02069667874317027,
+      "tracked_T": 0.002917860320444685,
+      "check_S": 0.08486340887027924,
+      "check_T": -0.10264222729300483,
+      "delta": -0.017778818422725585
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.26881157125796373,
+      "nearest_S": 0.23045708987701036,
+      "nearest_T": -0.16369861750274592,
+      "tracked_S": 0.21403760026796587,
+      "tracked_T": -0.14727912789370134,
+      "check_S": 0.1883236637262368,
+      "check_T": -0.12156519135197223,
+      "delta": 0.06675847237426451
+     },
+     "seasons": {
+      "published_S": 0.5082203139186363,
+      "nearest_S": 0.4347573342593359,
+      "nearest_T": -0.005005752007562791,
+      "tracked_S": 0.4260122905702701,
+      "tracked_T": 0.0037392916815029986,
+      "check_S": 0.3574840792225781,
+      "check_T": 0.07226750302919507,
+      "delta": 0.4297515822517731
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 34,
+      "parent_child_r": 0.4502461182638995,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 6,
+      "parent_child_r": 0.8645432511356507,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 15,
+      "parent_child_r": 0.5977853732724498,
+      "effective_lineages": null
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 34,
+      "parent_child_r": 0.8158832472551643,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 6,
+      "parent_child_r": 0.7685099661802491,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 8,
+      "parent_child_r": 0.29813734950115117,
+      "effective_lineages": null
+     }
+    }
+   }
+  },
+  {
+   "part": "18",
+   "tag": "nomem_s613",
+   "condition": "nomem",
+   "transport": true,
+   "bodies_per_snapshot": 6.6938775510204085,
+   "descendants": 190,
+   "tracking_disagreement": 0.13157894736842105,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.09081508336383556,
+      "nearest_S": -0.07033873282159425,
+      "nearest_T": 0.086845563766678,
+      "tracked_S": 0.010597562029070567,
+      "tracked_T": 0.00590926891601318,
+      "check_S": -0.02525228605347348,
+      "check_T": 0.041759116998557236,
+      "delta": 0.016506830945083744
+     },
+     "seasons": {
+      "published_S": -0.12887409000316602,
+      "nearest_S": -0.08734113916978761,
+      "nearest_T": 0.08544270808091052,
+      "tracked_S": -0.00843699509411382,
+      "tracked_T": 0.006538564005236724,
+      "check_S": -0.03482951932829596,
+      "check_T": 0.03293108823941887,
+      "delta": -0.0018984310888770992
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.20702398714951442,
+      "nearest_S": 0.1727924510024544,
+      "nearest_T": -0.15312996928684605,
+      "tracked_S": 0.19838186683140738,
+      "tracked_T": -0.17871938511579902,
+      "check_S": 0.17971283713405095,
+      "check_T": -0.16005035541844256,
+      "delta": 0.019662481715608346
+     },
+     "seasons": {
+      "published_S": 0.3019766479657323,
+      "nearest_S": 0.27193431456286943,
+      "nearest_T": 0.06836423559845964,
+      "tracked_S": 0.30568183409781713,
+      "tracked_T": 0.0346167160635119,
+      "check_S": 0.26363322423380753,
+      "check_T": 0.07666532592752145,
+      "delta": 0.34029855016132904
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 22,
+      "parent_child_r": 0.8066445676824915,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 3,
+      "parent_child_r": 0.9613489739737777,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 13,
+      "parent_child_r": 0.40567480369338155,
+      "effective_lineages": null
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 22,
+      "parent_child_r": 0.7220119772660892,
+      "effective_lineages": null
+     },
+     "tracked": {
+      "divisions": 3,
+      "parent_child_r": 0.943404575538916,
+      "effective_lineages": null
+     },
+     "check": {
+      "divisions": 2,
+      "parent_child_r": 0.9992006751354331,
+      "effective_lineages": null
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "mem_s621",
+   "condition": "mem",
+   "transport": true,
+   "bodies_per_snapshot": 4.371900826446281,
+   "descendants": 482,
+   "tracking_disagreement": 0.4107883817427386,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": 0.0029735336616299834,
+      "nearest_S": 0.0025735014394581415,
+      "nearest_T": -0.0032207914182229395,
+      "tracked_S": 0.00036075519912130217,
+      "tracked_T": -0.0010080451778861005,
+      "check_S": -0.00035023670322248293,
+      "check_T": -0.0002970532755423155,
+      "delta": -0.0006472899787647985
+     },
+     "seasons": {
+      "published_S": 0.0030057519186371118,
+      "nearest_S": 0.0026549327072939288,
+      "nearest_T": -0.0035158203803329585,
+      "tracked_S": 0.0004452845501826442,
+      "tracked_T": -0.0013061722232216731,
+      "check_S": -0.0008047825154208522,
+      "check_T": -5.6105157618176336e-05,
+      "delta": -0.000860887673039029
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.006551045789433814,
+      "nearest_S": 0.004732150261492531,
+      "nearest_T": 0.00888455667717924,
+      "tracked_S": 0.0027728571787365218,
+      "tracked_T": 0.010843849759935256,
+      "check_S": 0.004474198658220276,
+      "check_T": 0.009142508280451505,
+      "delta": 0.013616706938671772
+     },
+     "seasons": {
+      "published_S": 0.00704218787130444,
+      "nearest_S": 0.004652719489039891,
+      "nearest_T": 0.01819308796778626,
+      "tracked_S": 0.0032686549510059977,
+      "tracked_T": 0.01957715250582016,
+      "check_S": 0.004831522098072304,
+      "check_T": 0.01801428535875385,
+      "delta": 0.022845807456826156
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 91,
+      "parent_child_r": 0.2484883236226784,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 18,
+      "parent_child_r": 0.8611360115294856,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 75,
+      "parent_child_r": 0.18373779811069485,
+      "effective_lineages": 1.0
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 91,
+      "parent_child_r": 0.9753106078426973,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 18,
+      "parent_child_r": 0.7946107968668212,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 33,
+      "parent_child_r": 0.8572026595073502,
+      "effective_lineages": 1.0
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "nomem_s621",
+   "condition": "nomem",
+   "transport": true,
+   "bodies_per_snapshot": 4.148760330578512,
+   "descendants": 456,
+   "tracking_disagreement": 0.3333333333333333,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.0007717743711827862,
+      "nearest_S": -0.0012218062468665168,
+      "nearest_T": 0.0010474830750756324,
+      "tracked_S": -0.001265907196745647,
+      "tracked_T": 0.0010915840249547627,
+      "check_S": 0.0008211516039824035,
+      "check_T": -0.000995474775773288,
+      "delta": -0.0001743231717908845
+     },
+     "seasons": {
+      "published_S": -0.0010461787685685723,
+      "nearest_S": -0.0013901611172666068,
+      "nearest_T": 0.0010280705737814053,
+      "tracked_S": -0.001543338785012415,
+      "tracked_T": 0.0011812482415272134,
+      "check_S": 0.0004472391150330967,
+      "check_T": -0.0008093296585182979,
+      "delta": -0.00036209054348520153
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": -0.0024662980323385867,
+      "nearest_S": -0.0018412199320431125,
+      "nearest_T": 0.017939109613095302,
+      "tracked_S": 0.000916125989665418,
+      "tracked_T": 0.015181763691386773,
+      "check_S": -0.000991971217379252,
+      "check_T": 0.01708986089843145,
+      "delta": 0.016097889681052188
+     },
+     "seasons": {
+      "published_S": -0.002382550624814146,
+      "nearest_S": -0.0015504793406757166,
+      "nearest_T": 0.021383986403271747,
+      "tracked_S": 0.0014730388096830674,
+      "tracked_T": 0.018360468252912963,
+      "check_S": -0.0013235440733293758,
+      "check_T": 0.021157051135925406,
+      "delta": 0.01983350706259603
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 94,
+      "parent_child_r": 0.5614934733193576,
+      "effective_lineages": 1.9995141475698925
+     },
+     "tracked": {
+      "divisions": 15,
+      "parent_child_r": 0.7767236560831295,
+      "effective_lineages": 1.9995141475698925
+     },
+     "check": {
+      "divisions": 61,
+      "parent_child_r": 0.4799187750341544,
+      "effective_lineages": 1.9995141475698925
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 94,
+      "parent_child_r": 0.976912454033304,
+      "effective_lineages": 1.9995141475698925
+     },
+     "tracked": {
+      "divisions": 15,
+      "parent_child_r": 0.9998104856054192,
+      "effective_lineages": 1.9995141475698925
+     },
+     "check": {
+      "divisions": 31,
+      "parent_child_r": 0.8399388271951685,
+      "effective_lineages": 1.9995141475698925
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "cue_s623",
+   "condition": "cue",
+   "transport": true,
+   "bodies_per_snapshot": 2.4297520661157024,
+   "descendants": 262,
+   "tracking_disagreement": 0.27099236641221375,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.0007130016259494068,
+      "nearest_S": -0.001690630535872147,
+      "nearest_T": 0.0026045348321384657,
+      "tracked_S": -0.0029815729755803223,
+      "tracked_T": 0.003895477271846641,
+      "check_S": -0.002337259904458964,
+      "check_T": 0.0032511642007252827,
+      "delta": 0.0009139042962663187
+     },
+     "seasons": {
+      "published_S": -0.00041125880384256034,
+      "nearest_S": -0.0011767830189030547,
+      "nearest_T": 0.0019442520887560553,
+      "tracked_S": -0.002817529647623177,
+      "tracked_T": 0.0035849987174761777,
+      "check_S": -0.0020486910251535997,
+      "check_T": 0.0028161600950066,
+      "delta": 0.0007674690698530008
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.0026938345628000626,
+      "nearest_S": 0.005861251029720803,
+      "nearest_T": 0.09976222563508426,
+      "tracked_S": 0.011924009260949638,
+      "tracked_T": 0.09369946740385542,
+      "check_S": 0.016853488523071346,
+      "check_T": 0.08876998814173372,
+      "delta": 0.10562347666480508
+     },
+     "seasons": {
+      "published_S": 0.0015653005066702242,
+      "nearest_S": 0.004126561402682551,
+      "nearest_T": 0.04211720428439853,
+      "tracked_S": 0.011281031964561053,
+      "tracked_T": 0.03496273372252004,
+      "check_S": 0.017100309303900416,
+      "check_T": 0.02914345638318068,
+      "delta": 0.0462437656870811
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 26,
+      "parent_child_r": 0.6564799486547127,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 16,
+      "parent_child_r": 0.5507395219354174,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 23,
+      "parent_child_r": 0.5335321253343349,
+      "effective_lineages": 1.0
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 26,
+      "parent_child_r": 0.9976107915826018,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 16,
+      "parent_child_r": 0.984427189928003,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 19,
+      "parent_child_r": 0.9862644052152132,
+      "effective_lineages": 1.0
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "nobrain_s623",
+   "condition": "nobrain",
+   "transport": true,
+   "bodies_per_snapshot": 20.950413223140497,
+   "descendants": 2404,
+   "tracking_disagreement": 0.17221297836938437,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.0036405454284330926,
+      "nearest_S": -0.0035915868604883567,
+      "nearest_T": 0.0035564982066831,
+      "tracked_S": -0.0006426785272238474,
+      "tracked_T": 0.0006075898734185897,
+      "check_S": 0.001118995757083663,
+      "check_T": -0.0011540844108889206,
+      "delta": -3.508865380525771e-05
+     },
+     "seasons": {
+      "published_S": -0.0016238981736268442,
+      "nearest_S": -0.0013293981188265338,
+      "nearest_T": 0.0014139012404296046,
+      "tracked_S": -0.0006554725895877147,
+      "tracked_T": 0.0007399757111907854,
+      "check_S": -0.00019198628597136627,
+      "check_T": 0.00027648940757443713,
+      "delta": 8.450312160307074e-05
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.00043700780645462405,
+      "nearest_S": 0.0035790353767190365,
+      "nearest_T": 0.0036334698103216386,
+      "tracked_S": -0.0005848552129623672,
+      "tracked_T": 0.007797360400003042,
+      "check_S": -0.012530751837199343,
+      "check_T": 0.019743257024240016,
+      "delta": 0.007212505187040676
+     },
+     "seasons": {
+      "published_S": 0.00017874177546889705,
+      "nearest_S": 0.0019676233094675956,
+      "nearest_T": 0.0069004230417696625,
+      "tracked_S": -0.000792776447105699,
+      "tracked_T": 0.009660822798342955,
+      "check_S": -0.013500433516928709,
+      "check_T": 0.022368479868165966,
+      "delta": 0.008868046351237256
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 281,
+      "parent_child_r": 0.5159341562299895,
+      "effective_lineages": 2.254517183672172
+     },
+     "tracked": {
+      "divisions": 25,
+      "parent_child_r": 0.9932214644249491,
+      "effective_lineages": 9.844575981619823
+     },
+     "check": {
+      "divisions": 551,
+      "parent_child_r": 0.32968591959117016,
+      "effective_lineages": 1.835290001116544
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 281,
+      "parent_child_r": 0.8209033276089455,
+      "effective_lineages": 2.254517183672172
+     },
+     "tracked": {
+      "divisions": 25,
+      "parent_child_r": 0.9768944164049518,
+      "effective_lineages": 9.844575981619823
+     },
+     "check": {
+      "divisions": 170,
+      "parent_child_r": 0.8975058580872193,
+      "effective_lineages": 4.442899804961116
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "mem_s624",
+   "condition": "mem",
+   "transport": true,
+   "bodies_per_snapshot": 8.115702479338843,
+   "descendants": 915,
+   "tracking_disagreement": 0.692896174863388,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.00029045930900108206,
+      "nearest_S": 0.0013173053341919462,
+      "nearest_T": -0.0005763950730852679,
+      "tracked_S": -0.0005699719852987131,
+      "tracked_T": 0.0013108822464053915,
+      "check_S": -0.0005878059070883879,
+      "check_T": 0.0013287161681950666,
+      "delta": 0.0007409102611066785
+     },
+     "seasons": {
+      "published_S": -0.0004710592564957118,
+      "nearest_S": 0.0011547060909335915,
+      "nearest_T": -0.00018044438091590202,
+      "tracked_S": -0.0009289804951633481,
+      "tracked_T": 0.0019032422051810376,
+      "check_S": -0.001591383268217874,
+      "check_T": 0.002565644978235564,
+      "delta": 0.0009742617100176893
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": -0.006114656039240972,
+      "nearest_S": -0.009395187164338714,
+      "nearest_T": 0.05063869834534624,
+      "tracked_S": 0.0035512561308140922,
+      "tracked_T": 0.037692255050193454,
+      "check_S": 0.013661228247438484,
+      "check_T": 0.02758228293356905,
+      "delta": 0.041243511181007546
+     },
+     "seasons": {
+      "published_S": -0.004752855330240878,
+      "nearest_S": -0.006926524277771979,
+      "nearest_T": 0.024983352511297404,
+      "tracked_S": 0.003122380324000694,
+      "tracked_T": 0.014934447909524735,
+      "check_S": 0.014916505812725871,
+      "check_T": 0.003140322420799551,
+      "delta": 0.01805682823352542
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 210,
+      "parent_child_r": 0.1047430844884904,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 110,
+      "parent_child_r": 0.5343388867272922,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 216,
+      "parent_child_r": 0.2313154079082309,
+      "effective_lineages": 1.0
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 210,
+      "parent_child_r": 0.9750064673619313,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 110,
+      "parent_child_r": 0.9985046943045705,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 166,
+      "parent_child_r": 0.9862758622113282,
+      "effective_lineages": 1.0
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "nomem_s624",
+   "condition": "nomem",
+   "transport": true,
+   "bodies_per_snapshot": 8.49586776859504,
+   "descendants": 963,
+   "tracking_disagreement": 0.731048805815161,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": 0.006345931670090648,
+      "nearest_S": 0.00538390689296603,
+      "nearest_T": -0.004945103898985933,
+      "tracked_S": 0.0020206912600881223,
+      "tracked_T": -0.0015818882661080254,
+      "check_S": 0.003864846246902456,
+      "check_T": -0.003426043252922359,
+      "delta": 0.00043880299398009703
+     },
+     "seasons": {
+      "published_S": 0.00520247984836992,
+      "nearest_S": 0.004465404434654331,
+      "nearest_T": -0.004160912005729738,
+      "tracked_S": 0.002632594282215917,
+      "tracked_T": -0.002328101853291324,
+      "check_S": 0.003769527542492971,
+      "check_T": -0.0034650351135683773,
+      "delta": 0.000304492428924593
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": -0.01272074960655749,
+      "nearest_S": -0.018110608934021055,
+      "nearest_T": 0.15892967804749786,
+      "tracked_S": 0.0030607072281746664,
+      "tracked_T": 0.13775836188530216,
+      "check_S": -0.005019855201233648,
+      "check_T": 0.1458389243147105,
+      "delta": 0.14081906911347683
+     },
+     "seasons": {
+      "published_S": -0.01239066059785343,
+      "nearest_S": -0.01850197713359447,
+      "nearest_T": 0.03276914322124011,
+      "tracked_S": 0.0029925537010691765,
+      "tracked_T": 0.011274612386576462,
+      "check_S": -0.0053429825372168826,
+      "check_T": 0.01961014862486252,
+      "delta": 0.014267166087645637
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 209,
+      "parent_child_r": 0.1882850522315384,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 110,
+      "parent_child_r": 0.6291392031085984,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 231,
+      "parent_child_r": 0.40487827004129107,
+      "effective_lineages": 1.0
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 209,
+      "parent_child_r": 0.987642300641063,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 110,
+      "parent_child_r": 0.9989650449618865,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 171,
+      "parent_child_r": 0.9866327625455534,
+      "effective_lineages": 1.0
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "cue_s624",
+   "condition": "cue",
+   "transport": true,
+   "bodies_per_snapshot": 6.983471074380165,
+   "descendants": 768,
+   "tracking_disagreement": 0.5455729166666666,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": 0.0026155172672848908,
+      "nearest_S": -0.0009729443090352928,
+      "nearest_T": 0.001743373815730716,
+      "tracked_S": -0.0004471132937173156,
+      "tracked_T": 0.0012175428004127385,
+      "check_S": -0.0009395706222972446,
+      "check_T": 0.0017100001289926678,
+      "delta": 0.0007704295066954231
+     },
+     "seasons": {
+      "published_S": 0.003308693001842526,
+      "nearest_S": -0.0006188551819681728,
+      "nearest_T": 0.001410229199350546,
+      "tracked_S": -0.00044951217572857275,
+      "tracked_T": 0.001240886193110946,
+      "check_S": -0.000802591669174582,
+      "check_T": 0.0015939656865569557,
+      "delta": 0.0007913740173823737
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": -0.031175479806032833,
+      "nearest_S": -0.036676380531479515,
+      "nearest_T": 0.04943612886840631,
+      "tracked_S": -0.011171714996923056,
+      "tracked_T": 0.023931463333849833,
+      "check_S": 0.0007991538471738682,
+      "check_T": 0.011960594489752925,
+      "delta": 0.012759748336926781
+     },
+     "seasons": {
+      "published_S": -0.03549256290267618,
+      "nearest_S": -0.03671089622570672,
+      "nearest_T": 0.051110193182157294,
+      "tracked_S": -0.01233847553555397,
+      "tracked_T": 0.026737772492004545,
+      "check_S": 0.00032226551633276487,
+      "check_T": 0.014077031440117807,
+      "delta": 0.014399296956450572
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 195,
+      "parent_child_r": 0.5052273278538806,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 114,
+      "parent_child_r": 0.6498136728776118,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 177,
+      "parent_child_r": 0.39461602848790867,
+      "effective_lineages": 1.0
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 195,
+      "parent_child_r": 0.9576974764979256,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 114,
+      "parent_child_r": 0.9652803654948604,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 137,
+      "parent_child_r": 0.9582999981574214,
+      "effective_lineages": 1.0
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "nobrain_s624",
+   "condition": "nobrain",
+   "transport": true,
+   "bodies_per_snapshot": 20.85123966942149,
+   "descendants": 2393,
+   "tracking_disagreement": 0.20936063518595904,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.002972097494858649,
+      "nearest_S": -0.003315290572111415,
+      "nearest_T": 0.0035650077232660445,
+      "tracked_S": 0.00038756776328253506,
+      "tracked_T": -0.00013785061212790613,
+      "check_S": -0.0027790260141041887,
+      "check_T": 0.0030287431652588166,
+      "delta": 0.00024971715115462896
+     },
+     "seasons": {
+      "published_S": -0.0014600793498558767,
+      "nearest_S": -0.0019919096953035214,
+      "nearest_T": 0.0019631071250273235,
+      "tracked_S": 0.0003163314481760857,
+      "tracked_T": -0.0003451340184522841,
+      "check_S": -0.0023581006069818182,
+      "check_T": 0.0023292980367056204,
+      "delta": -2.8802570276198453e-05
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": -0.0038327635168369694,
+      "nearest_S": 0.001028142309456116,
+      "nearest_T": 0.0008581001549382342,
+      "tracked_S": 0.004547649253702655,
+      "tracked_T": -0.002661406789308307,
+      "check_S": 0.0017206338147374826,
+      "check_T": 0.00016560864965685422,
+      "delta": 0.001886242464394333
+     },
+     "seasons": {
+      "published_S": -0.011345028603987997,
+      "nearest_S": -0.006849009593232862,
+      "nearest_T": 0.03048562708940092,
+      "tracked_S": 0.005233888612746954,
+      "tracked_T": 0.018402728883421104,
+      "check_S": 0.0007635157111430827,
+      "check_T": 0.022873101785024972,
+      "delta": 0.02363661749616806
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 338,
+      "parent_child_r": 0.4387264689244081,
+      "effective_lineages": 2.8305754088603483
+     },
+     "tracked": {
+      "divisions": 25,
+      "parent_child_r": 0.9745541230924396,
+      "effective_lineages": 9.280528285347874
+     },
+     "check": {
+      "divisions": 575,
+      "parent_child_r": 0.5465382037754356,
+      "effective_lineages": 1.9998931848995671
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 338,
+      "parent_child_r": 0.8772824103562942,
+      "effective_lineages": 2.8305754088603483
+     },
+     "tracked": {
+      "divisions": 25,
+      "parent_child_r": 0.8406136475568032,
+      "effective_lineages": 9.280528285347874
+     },
+     "check": {
+      "divisions": 194,
+      "parent_child_r": 0.8905130622933596,
+      "effective_lineages": 2.2221123063714203
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "cue_s621",
+   "condition": "cue",
+   "transport": true,
+   "bodies_per_snapshot": 5.024793388429752,
+   "descendants": 555,
+   "tracking_disagreement": 0.5801801801801801,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -5.198216416370098e-06,
+      "nearest_S": -0.00021523278160818365,
+      "nearest_T": 0.0005969176308735939,
+      "tracked_S": 0.00011787771019113215,
+      "tracked_T": 0.00026380713907427815,
+      "check_S": -0.0005298033211757032,
+      "check_T": 0.0009114881704411135,
+      "delta": 0.0003816848492654103
+     },
+     "seasons": {
+      "published_S": -6.971189001280427e-05,
+      "nearest_S": -0.0003447618635704112,
+      "nearest_T": 0.00024636210394590394,
+      "tracked_S": 0.00024366162786283385,
+      "tracked_T": -0.00034206138748734115,
+      "check_S": -0.0006829673378405833,
+      "check_T": 0.000584567578216076,
+      "delta": -9.839975962450734e-05
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.0003031060641363776,
+      "nearest_S": -9.291199467500914e-05,
+      "nearest_T": 0.017189682377783344,
+      "tracked_S": 0.0007594497347820782,
+      "tracked_T": 0.016337320648326263,
+      "check_S": -0.0025935136757700905,
+      "check_T": 0.019690284058878436,
+      "delta": 0.017096770383108348
+     },
+     "seasons": {
+      "published_S": 0.0005919557069610391,
+      "nearest_S": -6.362360428591896e-05,
+      "nearest_T": 0.024181015544039605,
+      "tracked_S": 0.0012497778914398274,
+      "tracked_T": 0.022867614048313858,
+      "check_S": -0.0035322319771224305,
+      "check_T": 0.027649623916876115,
+      "delta": 0.024117391939753683
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 82,
+      "parent_child_r": 0.1766677332697155,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 20,
+      "parent_child_r": 0.7818094669360084,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 65,
+      "parent_child_r": 0.28227499555419416,
+      "effective_lineages": 1.0
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 82,
+      "parent_child_r": 0.967096235234996,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 20,
+      "parent_child_r": 0.884541252846753,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 42,
+      "parent_child_r": 0.8587653546480141,
+      "effective_lineages": 1.0
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "nobrain_s621",
+   "condition": "nobrain",
+   "transport": true,
+   "bodies_per_snapshot": 19.892561983471076,
+   "descendants": 2276,
+   "tracking_disagreement": 0.17135325131810195,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": 0.0007268564109224418,
+      "nearest_S": -7.548014466438118e-05,
+      "nearest_T": -0.000924504243582538,
+      "tracked_S": -0.00015962801479192106,
+      "tracked_T": -0.000840356373454998,
+      "check_S": -0.000524072188881495,
+      "check_T": -0.00047591219936542423,
+      "delta": -0.0009999843882469192
+     },
+     "seasons": {
+      "published_S": -0.0001241318937239052,
+      "nearest_S": -0.0004896479368071474,
+      "nearest_T": -0.0004821384209795948,
+      "tracked_S": -0.0001889579618976222,
+      "tracked_T": -0.0007828283958891197,
+      "check_S": 0.0007875256259304756,
+      "check_T": -0.0017593119837172177,
+      "delta": -0.0009717863577867417
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.0004896882597545789,
+      "nearest_S": -0.00010493964139418801,
+      "nearest_T": 0.010326905322986695,
+      "tracked_S": -0.0005130932596805978,
+      "tracked_T": 0.010735058941273117,
+      "check_S": 0.005670446773654898,
+      "check_T": 0.00455151890793761,
+      "delta": 0.010221965681592527
+     },
+     "seasons": {
+      "published_S": 0.0004260630800889784,
+      "nearest_S": -0.00039949099037654636,
+      "nearest_T": 0.015074385631674762,
+      "tracked_S": -0.0007738199838724265,
+      "tracked_T": 0.015448714625170641,
+      "check_S": 0.006421995671684076,
+      "check_T": 0.00825289896961414,
+      "delta": 0.014674894641298215
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 284,
+      "parent_child_r": 0.4533524781415612,
+      "effective_lineages": 2.432336880836502
+     },
+     "tracked": {
+      "divisions": 21,
+      "parent_child_r": 0.9743792343024885,
+      "effective_lineages": 10.303103485656958
+     },
+     "check": {
+      "divisions": 495,
+      "parent_child_r": 0.39600505992213425,
+      "effective_lineages": 2.505913952384549
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 284,
+      "parent_child_r": 0.9230365447322678,
+      "effective_lineages": 2.432336880836502
+     },
+     "tracked": {
+      "divisions": 21,
+      "parent_child_r": 0.887166794477631,
+      "effective_lineages": 10.303103485656958
+     },
+     "check": {
+      "divisions": 179,
+      "parent_child_r": 0.9653304040798035,
+      "effective_lineages": 3.502387077949492
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "mem_s622",
+   "condition": "mem",
+   "transport": true,
+   "bodies_per_snapshot": 28.628099173553718,
+   "descendants": 3334,
+   "tracking_disagreement": 0.3815236952609478,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": 0.0036175405232292414,
+      "nearest_S": 0.0018770588968462778,
+      "nearest_T": -0.001738640704676242,
+      "tracked_S": -0.0013524878979920322,
+      "tracked_T": 0.001490906090162068,
+      "check_S": 0.001610574525149441,
+      "check_T": -0.001472156332979405,
+      "delta": 0.00013841819217003595
+     },
+     "seasons": {
+      "published_S": 0.0031963831505567777,
+      "nearest_S": 0.0016515924693618154,
+      "nearest_T": -0.0014476743672906132,
+      "tracked_S": -0.0013975657445651015,
+      "tracked_T": 0.0016014838466363035,
+      "check_S": 0.0016326022969020458,
+      "check_T": -0.0014286841948308437,
+      "delta": 0.00020391810207120208
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": -0.003042052292735574,
+      "nearest_S": -0.009742515860319892,
+      "nearest_T": 0.016874155098561123,
+      "tracked_S": 0.04126231658638284,
+      "tracked_T": -0.034130677348141604,
+      "check_S": 0.018777111964742653,
+      "check_T": -0.011645472726501419,
+      "delta": 0.007131639238241235
+     },
+     "seasons": {
+      "published_S": 0.0008702221695157664,
+      "nearest_S": -0.006366278857070783,
+      "nearest_T": 0.0410774980859507,
+      "tracked_S": 0.04453169024814573,
+      "tracked_T": -0.009820471019265812,
+      "check_S": 0.02451629420003572,
+      "check_T": 0.010194925028844197,
+      "delta": 0.03471121922887991
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 512,
+      "parent_child_r": 0.4195520134908,
+      "effective_lineages": 1.9725976623885457
+     },
+     "tracked": {
+      "divisions": 180,
+      "parent_child_r": 0.8017147441309499,
+      "effective_lineages": 3.6756327333521654
+     },
+     "check": {
+      "divisions": 804,
+      "parent_child_r": 0.26933940583121707,
+      "effective_lineages": 1.6655497877661274
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 512,
+      "parent_child_r": 0.9153602560913173,
+      "effective_lineages": 1.9725976623885457
+     },
+     "tracked": {
+      "divisions": 180,
+      "parent_child_r": 0.9266359041213031,
+      "effective_lineages": 3.6756327333521654
+     },
+     "check": {
+      "divisions": 498,
+      "parent_child_r": 0.9051770617836286,
+      "effective_lineages": 1.0
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "nomem_s622",
+   "condition": "nomem",
+   "transport": true,
+   "bodies_per_snapshot": 29.628099173553718,
+   "descendants": 3455,
+   "tracking_disagreement": 0.4182344428364689,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": 0.003111917293730684,
+      "nearest_S": 0.0020300537011991916,
+      "nearest_T": -0.0024529091610154723,
+      "tracked_S": -0.0002783953708657694,
+      "tracked_T": -0.00014446008895051122,
+      "check_S": 0.0019387732019532807,
+      "check_T": -0.002361628661769561,
+      "delta": -0.0004228554598162806
+     },
+     "seasons": {
+      "published_S": 0.003142356899697858,
+      "nearest_S": 0.002322969532080259,
+      "nearest_T": -0.002649267090421502,
+      "tracked_S": -0.0005707434074248983,
+      "tracked_T": 0.00024444584908365536,
+      "check_S": 0.002404737399263943,
+      "check_T": -0.0027310349576051864,
+      "delta": -0.00032629755834124295
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.016075711455731424,
+      "nearest_S": 0.00831502102835483,
+      "nearest_T": 0.0019384431112588684,
+      "tracked_S": 0.04213960443200386,
+      "tracked_T": -0.03188614029239015,
+      "check_S": 0.02275356945006352,
+      "check_T": -0.012500105310449821,
+      "delta": 0.0102534641396137
+     },
+     "seasons": {
+      "published_S": 0.015739370910341898,
+      "nearest_S": 0.00882788288817358,
+      "nearest_T": 0.02164020596733947,
+      "tracked_S": 0.04379032366729032,
+      "tracked_T": -0.013322234811777259,
+      "check_S": 0.025063387861404357,
+      "check_T": 0.005404700994108693,
+      "delta": 0.030468088855513054
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 517,
+      "parent_child_r": 0.48758663277296677,
+      "effective_lineages": 1.8956343487369751
+     },
+     "tracked": {
+      "divisions": 172,
+      "parent_child_r": 0.8131164116643699,
+      "effective_lineages": 3.08558370851762
+     },
+     "check": {
+      "divisions": 866,
+      "parent_child_r": 0.3764725513119938,
+      "effective_lineages": 2.288767633170165
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 517,
+      "parent_child_r": 0.9160731908648578,
+      "effective_lineages": 1.8956343487369751
+     },
+     "tracked": {
+      "divisions": 172,
+      "parent_child_r": 0.9372725048123318,
+      "effective_lineages": 3.08558370851762
+     },
+     "check": {
+      "divisions": 461,
+      "parent_child_r": 0.9180925152922157,
+      "effective_lineages": 2.301396701502068
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "cue_s622",
+   "condition": "cue",
+   "transport": true,
+   "bodies_per_snapshot": 30.231404958677686,
+   "descendants": 3527,
+   "tracking_disagreement": 0.4652679330876099,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": 0.0018596758199786268,
+      "nearest_S": 0.002396465416967355,
+      "nearest_T": -0.002106095751672622,
+      "tracked_S": 0.0019120752554742247,
+      "tracked_T": -0.0016217055901794916,
+      "check_S": 0.000580000689041505,
+      "check_T": -0.00028963102374677174,
+      "delta": 0.0002903696652947332
+     },
+     "seasons": {
+      "published_S": 0.0017545123225270812,
+      "nearest_S": 0.0019858376421583806,
+      "nearest_T": -0.0017343695330279355,
+      "tracked_S": 0.0024149105467811904,
+      "tracked_T": -0.0021634424376507453,
+      "check_S": 0.0007478653570249295,
+      "check_T": -0.0004963972478944854,
+      "delta": 0.0002514681091304443
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": -0.013001551178678504,
+      "nearest_S": -0.013632921410255773,
+      "nearest_T": 0.024085386410300544,
+      "tracked_S": 0.03721427604650335,
+      "tracked_T": -0.02676181104645857,
+      "check_S": 0.006753348534867285,
+      "check_T": 0.003699116465177487,
+      "delta": 0.010452465000044766
+     },
+     "seasons": {
+      "published_S": -0.011791482670956673,
+      "nearest_S": -0.01196430722564581,
+      "nearest_T": 0.041460730990456995,
+      "tracked_S": 0.0403002843671437,
+      "tracked_T": -0.010803860602332528,
+      "check_S": 0.0011238825957482813,
+      "check_T": 0.028372541169062907,
+      "delta": 0.029496423764811177
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 603,
+      "parent_child_r": 0.4111707656004363,
+      "effective_lineages": 1.40980836506401
+     },
+     "tracked": {
+      "divisions": 228,
+      "parent_child_r": 0.8113394113658383,
+      "effective_lineages": 2.5533417895235675
+     },
+     "check": {
+      "divisions": 878,
+      "parent_child_r": 0.409805675141264,
+      "effective_lineages": 1.0
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 603,
+      "parent_child_r": 0.9222122981204984,
+      "effective_lineages": 1.40980836506401
+     },
+     "tracked": {
+      "divisions": 228,
+      "parent_child_r": 0.9659010686248205,
+      "effective_lineages": 2.5533417895235675
+     },
+     "check": {
+      "divisions": 640,
+      "parent_child_r": 0.894899009413085,
+      "effective_lineages": 1.0
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "nobrain_s622",
+   "condition": "nobrain",
+   "transport": true,
+   "bodies_per_snapshot": 22.24793388429752,
+   "descendants": 2561,
+   "tracking_disagreement": 0.24834049199531433,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": 0.00042642806582042465,
+      "nearest_S": 0.0003322842237434947,
+      "nearest_T": -0.0011252488693415128,
+      "tracked_S": -0.0008047435278920313,
+      "tracked_T": 1.1778882294013356e-05,
+      "check_S": 0.006353500948443712,
+      "check_T": -0.00714646559404173,
+      "delta": -0.000792964645598018
+     },
+     "seasons": {
+      "published_S": 0.0018034733253818264,
+      "nearest_S": 0.0018444457974908705,
+      "nearest_T": -0.002354413192589902,
+      "tracked_S": -0.0007441350689729947,
+      "tracked_T": 0.0002341676738739629,
+      "check_S": 0.008463028351533652,
+      "check_T": -0.008972995746632685,
+      "delta": -0.0005099673950990318
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.03219159381515191,
+      "nearest_S": 0.030727812337251626,
+      "nearest_T": -0.028216866201993072,
+      "tracked_S": -0.0029709903359755327,
+      "tracked_T": 0.005481936471234103,
+      "check_S": 0.01327287289081144,
+      "check_T": -0.010761926755552887,
+      "delta": 0.0025109461352585587
+     },
+     "seasons": {
+      "published_S": 0.030356728404161506,
+      "nearest_S": 0.028507550582987876,
+      "nearest_T": -0.02857663725851262,
+      "tracked_S": -0.0028033912496442585,
+      "tracked_T": 0.0027343045741195083,
+      "check_S": 0.016842677751161172,
+      "check_T": -0.016911764426685922,
+      "delta": -6.908667552475017e-05
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 395,
+      "parent_child_r": 0.4875841639649272,
+      "effective_lineages": 1.8065884981142095
+     },
+     "tracked": {
+      "divisions": 28,
+      "parent_child_r": 0.9941384145087009,
+      "effective_lineages": 9.53874505210541
+     },
+     "check": {
+      "divisions": 572,
+      "parent_child_r": 0.3116846746359259,
+      "effective_lineages": 1.2063025138517915
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 395,
+      "parent_child_r": 0.7939692879452619,
+      "effective_lineages": 1.8065884981142095
+     },
+     "tracked": {
+      "divisions": 28,
+      "parent_child_r": 0.9477171965336185,
+      "effective_lineages": 9.53874505210541
+     },
+     "check": {
+      "divisions": 179,
+      "parent_child_r": 0.8439383893835742,
+      "effective_lineages": 5.053896986023503
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "mem_s623",
+   "condition": "mem",
+   "transport": true,
+   "bodies_per_snapshot": 3.5289256198347108,
+   "descendants": 396,
+   "tracking_disagreement": 0.5151515151515151,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.00025744625363680556,
+      "nearest_S": -0.0004160834135327531,
+      "nearest_T": 0.0006669731780653597,
+      "tracked_S": 0.0009542659626877811,
+      "tracked_T": -0.0007033761981551746,
+      "check_S": -0.0010557503060865353,
+      "check_T": 0.001306640070619142,
+      "delta": 0.0002508897645326066
+     },
+     "seasons": {
+      "published_S": -0.00026129831534574304,
+      "nearest_S": -0.00034077363510647284,
+      "nearest_T": 0.00045891548776736714,
+      "tracked_S": 0.0012334357164422904,
+      "tracked_T": -0.001115293863781396,
+      "check_S": -0.0010851207631905888,
+      "check_T": 0.0012032626158514834,
+      "delta": 0.00011814185266089429
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.0023017314835758708,
+      "nearest_S": 0.0021397770156519518,
+      "nearest_T": 0.013177737283292707,
+      "tracked_S": 0.006283930628215808,
+      "tracked_T": 0.009033583670728856,
+      "check_S": 0.002009580854446132,
+      "check_T": 0.013307933444498533,
+      "delta": 0.015317514298944674
+     },
+     "seasons": {
+      "published_S": 0.002608667023619032,
+      "nearest_S": 0.002579949919219971,
+      "nearest_T": 0.04634727959436938,
+      "tracked_S": 0.006412017604083328,
+      "tracked_T": 0.04251521190950602,
+      "check_S": 0.001578179523578046,
+      "check_T": 0.047349049990011306,
+      "delta": 0.048927229513589354
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 41,
+      "parent_child_r": 0.5210962801640819,
+      "effective_lineages": 1.9062161671477182
+     },
+     "tracked": {
+      "divisions": 22,
+      "parent_child_r": 0.5848170826563676,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 41,
+      "parent_child_r": 0.5830921424661716,
+      "effective_lineages": 1.0
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 41,
+      "parent_child_r": 0.9448205314744831,
+      "effective_lineages": 1.9062161671477182
+     },
+     "tracked": {
+      "divisions": 22,
+      "parent_child_r": 0.8508364344469646,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 27,
+      "parent_child_r": 0.910451768399672,
+      "effective_lineages": 1.0
+     }
+    }
+   }
+  },
+  {
+   "part": "18b",
+   "tag": "nomem_s623",
+   "condition": "nomem",
+   "transport": true,
+   "bodies_per_snapshot": 2.9173553719008263,
+   "descendants": 322,
+   "tracking_disagreement": 0.35093167701863354,
+   "price": {
+    "p0": {
+     "all": {
+      "published_S": -0.00131063605158839,
+      "nearest_S": -0.0016793581505777336,
+      "nearest_T": 0.0016923518582549217,
+      "tracked_S": -0.0003838260997140825,
+      "tracked_T": 0.00039681980739127056,
+      "check_S": -0.0014052447697248424,
+      "check_T": 0.0014182384774020303,
+      "delta": 1.2993707677188013e-05
+     },
+     "seasons": {
+      "published_S": -0.001418621866316249,
+      "nearest_S": -0.0018918102334146054,
+      "nearest_T": 0.001786726103993994,
+      "tracked_S": -0.00048798882553665793,
+      "tracked_T": 0.00038290469611604636,
+      "check_S": -0.0014721262584232997,
+      "check_T": 0.0013670421290026883,
+      "delta": -0.00010508412942061162
+     }
+    },
+    "adapt": {
+     "all": {
+      "published_S": 0.002452780606132411,
+      "nearest_S": 0.00265738396867204,
+      "nearest_T": 0.029314176520957375,
+      "tracked_S": -0.0016979154062634666,
+      "tracked_T": 0.033669475895892885,
+      "check_S": 0.0005405285603534209,
+      "check_T": 0.031431031929275995,
+      "delta": 0.03197156048962941
+     },
+     "seasons": {
+      "published_S": 0.002545948002456555,
+      "nearest_S": 0.0023945004673766195,
+      "nearest_T": 0.042718581447853315,
+      "tracked_S": -0.0008345135095722101,
+      "tracked_T": 0.045947595424802146,
+      "check_S": 0.00043787963232015307,
+      "check_T": 0.0446752022829098,
+      "delta": 0.04511308191522994
+     }
+    }
+   },
+   "lineage": {
+    "p0": {
+     "nearest": {
+      "divisions": 38,
+      "parent_child_r": 0.26480186182449506,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 23,
+      "parent_child_r": 0.3072690935436609,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 39,
+      "parent_child_r": 0.2830522914580153,
+      "effective_lineages": 1.0
+     }
+    },
+    "adapt": {
+     "nearest": {
+      "divisions": 38,
+      "parent_child_r": 0.9981493785360493,
+      "effective_lineages": 1.0
+     },
+     "tracked": {
+      "divisions": 23,
+      "parent_child_r": 0.9029372703132391,
+      "effective_lineages": 1.0
+     },
+     "check": {
+      "divisions": 32,
+      "parent_child_r": 0.9897495875587762,
+      "effective_lineages": 1.0
      }
     }
    }
@@ -9025,6 +11973,78 @@
    "tracked_S_positive": 8
   },
   {
+   "part": "14",
+   "condition": "neu_6D28",
+   "trait": "p0",
+   "phase": "growth",
+   "seeds": 1,
+   "published_S": 0.03223145280968184,
+   "nearest_S": 0.023154697037933745,
+   "nearest_T": -0.022179316870651524,
+   "tracked_S": -0.021151273315467994,
+   "tracked_T": 0.0221266534827502,
+   "check_S": -0.028022330870633275,
+   "check_T": 0.028997711037915486,
+   "delta": 0.0009753801672822087,
+   "tracked_S_p": null,
+   "tracked_T_p": null,
+   "tracked_S_positive": 0
+  },
+  {
+   "part": "14",
+   "condition": "neu_6D28",
+   "trait": "p0",
+   "phase": "plateau",
+   "seeds": 1,
+   "published_S": -0.0014031885655890358,
+   "nearest_S": -0.0019305788074505737,
+   "nearest_T": 0.002097254056962856,
+   "tracked_S": -0.011002764119015103,
+   "tracked_T": 0.011169439368527385,
+   "check_S": -0.019954494065747445,
+   "check_T": 0.020121169315259722,
+   "delta": 0.0001666752495122818,
+   "tracked_S_p": null,
+   "tracked_T_p": null,
+   "tracked_S_positive": 0
+  },
+  {
+   "part": "14",
+   "condition": "sel_6D28",
+   "trait": "p0",
+   "phase": "growth",
+   "seeds": 1,
+   "published_S": 0.015502810741203259,
+   "nearest_S": 0.0024836197216040736,
+   "nearest_T": 0.021539077795856565,
+   "tracked_S": 0.04705638619701033,
+   "tracked_T": -0.02303368867954969,
+   "check_S": 0.022648039214714998,
+   "check_T": 0.0013746583027456453,
+   "delta": 0.02402269751746064,
+   "tracked_S_p": null,
+   "tracked_T_p": null,
+   "tracked_S_positive": 1
+  },
+  {
+   "part": "14",
+   "condition": "sel_6D28",
+   "trait": "p0",
+   "phase": "plateau",
+   "seeds": 1,
+   "published_S": -0.0058412962930071265,
+   "nearest_S": -0.002914788077478134,
+   "nearest_T": 0.0049116634696550945,
+   "tracked_S": 0.008171268675592824,
+   "tracked_T": -0.006174393283415862,
+   "check_S": 0.016299728118023167,
+   "check_T": -0.014302852725846204,
+   "delta": 0.0019968753921769606,
+   "tracked_S_p": null,
+   "tracked_T_p": null,
+   "tracked_S_positive": 1
+  },
+  {
    "part": "15",
    "condition": "evo_4D56",
    "trait": "gF",
@@ -9509,6 +12529,582 @@
    "tracked_S_p": 0.3767030568447958,
    "tracked_T_p": 0.13771955135119118,
    "tracked_S_positive": 2
+  },
+  {
+   "part": "18",
+   "condition": "cue",
+   "trait": "adapt",
+   "phase": "all",
+   "seeds": 3,
+   "published_S": 0.09602490061239966,
+   "nearest_S": 0.06738494447568608,
+   "nearest_T": -0.08665482979444987,
+   "tracked_S": 0.13164813716140117,
+   "tracked_T": -0.15091802248016498,
+   "check_S": 0.0991898241015362,
+   "check_T": -0.1184597094203,
+   "delta": -0.01926988531876378,
+   "tracked_S_p": 0.1512441693766995,
+   "tracked_T_p": 0.11511020618693277,
+   "tracked_S_positive": 3
+  },
+  {
+   "part": "18",
+   "condition": "cue",
+   "trait": "adapt",
+   "phase": "seasons",
+   "seeds": 3,
+   "published_S": 0.2555839202076145,
+   "nearest_S": 0.25150530384405007,
+   "nearest_T": -0.05196912747989202,
+   "tracked_S": 0.24339584939958456,
+   "tracked_T": -0.04385967303542648,
+   "check_S": 0.21063250848675252,
+   "check_T": -0.011096332122594496,
+   "delta": 0.19953617636415802,
+   "tracked_S_p": 0.13706933672187124,
+   "tracked_T_p": 0.6239576349715338,
+   "tracked_S_positive": 3
+  },
+  {
+   "part": "18",
+   "condition": "cue",
+   "trait": "p0",
+   "phase": "all",
+   "seeds": 3,
+   "published_S": -0.021195329420942034,
+   "nearest_S": -0.016667635404995874,
+   "nearest_T": 0.018927630136517437,
+   "tracked_S": -0.004512047724531698,
+   "tracked_T": 0.006772042456053259,
+   "check_S": -0.017475323571611908,
+   "check_T": 0.019735318303133464,
+   "delta": 0.0022599947315215595,
+   "tracked_S_p": 0.8238049313118156,
+   "tracked_T_p": 0.6437624161619778,
+   "tracked_S_positive": 2
+  },
+  {
+   "part": "18",
+   "condition": "cue",
+   "trait": "p0",
+   "phase": "seasons",
+   "seeds": 3,
+   "published_S": -0.031372543378213685,
+   "nearest_S": -0.01653462394252586,
+   "nearest_T": 0.018633307412117744,
+   "tracked_S": -0.0005523025836273917,
+   "tracked_T": 0.002650986053219272,
+   "check_S": -0.023816529369147982,
+   "check_T": 0.02591521283873986,
+   "delta": 0.002098683469591875,
+   "tracked_S_p": 0.961178083160322,
+   "tracked_T_p": 0.761176309662715,
+   "tracked_S_positive": 2
+  },
+  {
+   "part": "18",
+   "condition": "mem",
+   "trait": "adapt",
+   "phase": "all",
+   "seeds": 3,
+   "published_S": 0.1677192329193573,
+   "nearest_S": 0.13273853940091979,
+   "nearest_T": -0.19474243983279949,
+   "tracked_S": 0.17031337972514138,
+   "tracked_T": -0.23231728015702102,
+   "check_S": 0.16789628684215877,
+   "check_T": -0.2299001872740384,
+   "delta": -0.062003900431879665,
+   "tracked_S_p": 0.05901170878527172,
+   "tracked_T_p": 0.032103803352419136,
+   "tracked_S_positive": 3
+  },
+  {
+   "part": "18",
+   "condition": "mem",
+   "trait": "adapt",
+   "phase": "seasons",
+   "seeds": 3,
+   "published_S": 0.360173742752294,
+   "nearest_S": 0.3586744319112487,
+   "nearest_T": -0.0031632633580656387,
+   "tracked_S": 0.32080295543193454,
+   "tracked_T": 0.034708213121248534,
+   "check_S": 0.3035168439131615,
+   "check_T": 0.05199432464002157,
+   "delta": 0.3555111685531831,
+   "tracked_S_p": 0.07617384119628862,
+   "tracked_T_p": 0.361154525436894,
+   "tracked_S_positive": 3
+  },
+  {
+   "part": "18",
+   "condition": "mem",
+   "trait": "p0",
+   "phase": "all",
+   "seeds": 3,
+   "published_S": -0.028978757032531555,
+   "nearest_S": -0.028631201936206153,
+   "nearest_T": 0.039185449897506115,
+   "tracked_S": 0.022541431912852624,
+   "tracked_T": -0.011987183951552668,
+   "check_S": 0.03946719836253238,
+   "check_T": -0.028912950401232426,
+   "delta": 0.010554247961299957,
+   "tracked_S_p": 0.23260355398361626,
+   "tracked_T_p": 0.18512964729469292,
+   "tracked_S_positive": 3
+  },
+  {
+   "part": "18",
+   "condition": "mem",
+   "trait": "p0",
+   "phase": "seasons",
+   "seeds": 3,
+   "published_S": -0.05009423637729643,
+   "nearest_S": -0.05024982655531509,
+   "nearest_T": 0.047061833903788514,
+   "tracked_S": 0.008450422670215557,
+   "tracked_T": -0.011638415321742139,
+   "check_S": 0.03235011810872455,
+   "check_T": -0.035538110760251124,
+   "delta": -0.003187992651526582,
+   "tracked_S_p": 0.744047836388134,
+   "tracked_T_p": 0.30853205010839796,
+   "tracked_S_positive": 1
+  },
+  {
+   "part": "18",
+   "condition": "nobrain",
+   "trait": "adapt",
+   "phase": "all",
+   "seeds": 3,
+   "published_S": 0.11289922864130857,
+   "nearest_S": 0.12578745990205567,
+   "nearest_T": -0.10982327934558545,
+   "tracked_S": 0.03165292502576076,
+   "tracked_T": -0.01568874446929053,
+   "check_S": 0.03165292502576076,
+   "check_T": -0.01568874446929053,
+   "delta": 0.015964180556470222,
+   "tracked_S_p": 0.21810367659372298,
+   "tracked_T_p": 0.5720775389299679,
+   "tracked_S_positive": 2
+  },
+  {
+   "part": "18",
+   "condition": "nobrain",
+   "trait": "adapt",
+   "phase": "seasons",
+   "seeds": 3,
+   "published_S": 0.06981205350221249,
+   "nearest_S": 0.038065318881695794,
+   "nearest_T": -0.012966105576849888,
+   "tracked_S": 0.07115251221231862,
+   "tracked_T": -0.04605329890747273,
+   "check_S": 0.07115251221231862,
+   "check_T": -0.04605329890747273,
+   "delta": 0.02509921330484589,
+   "tracked_S_p": 0.17552122625118155,
+   "tracked_T_p": 0.14028054544310878,
+   "tracked_S_positive": 3
+  },
+  {
+   "part": "18",
+   "condition": "nobrain",
+   "trait": "p0",
+   "phase": "all",
+   "seeds": 3,
+   "published_S": -0.012512012070229131,
+   "nearest_S": -0.027467652926277165,
+   "nearest_T": 0.0820811186083185,
+   "tracked_S": 0.05105064660678777,
+   "tracked_T": 0.0035628190752535656,
+   "check_S": 0.04898094157892407,
+   "check_T": 0.0056325241031172655,
+   "delta": 0.05461346568204133,
+   "tracked_S_p": 0.04569581244349934,
+   "tracked_T_p": 0.21569213112691052,
+   "tracked_S_positive": 3
+  },
+  {
+   "part": "18",
+   "condition": "nobrain",
+   "trait": "p0",
+   "phase": "seasons",
+   "seeds": 3,
+   "published_S": -0.03518804270943283,
+   "nearest_S": -0.04489655452868524,
+   "nearest_T": 0.1138679701116559,
+   "tracked_S": 0.06411275836314682,
+   "tracked_T": 0.004858657219823846,
+   "check_S": 0.06996748420311351,
+   "check_T": -0.0009960686201428497,
+   "delta": 0.06897141558297067,
+   "tracked_S_p": 0.355108191025664,
+   "tracked_T_p": 0.07477395940628905,
+   "tracked_S_positive": 3
+  },
+  {
+   "part": "18",
+   "condition": "nomem",
+   "trait": "adapt",
+   "phase": "all",
+   "seeds": 3,
+   "published_S": 0.21529462143735068,
+   "nearest_S": 0.1681685447006288,
+   "nearest_T": -0.1853870423831336,
+   "tracked_S": 0.19784141434449465,
+   "tracked_T": -0.21505991202699945,
+   "check_S": 0.18644281411025787,
+   "check_T": -0.20366131179276267,
+   "delta": -0.017218497682504778,
+   "tracked_S_p": 0.1185378182353966,
+   "tracked_T_p": 0.1268512297550304,
+   "tracked_S_positive": 3
+  },
+  {
+   "part": "18",
+   "condition": "nomem",
+   "trait": "adapt",
+   "phase": "seasons",
+   "seeds": 3,
+   "published_S": 0.3840661027200863,
+   "nearest_S": 0.32040656953179203,
+   "nearest_T": 0.075066334411994,
+   "tracked_S": 0.3493796846485675,
+   "tracked_T": 0.04609321929521854,
+   "check_S": 0.31506121291464345,
+   "check_T": 0.08041169102914258,
+   "delta": 0.39547290394378604,
+   "tracked_S_p": 0.0938735055956179,
+   "tracked_T_p": 0.2754500725452993,
+   "tracked_S_positive": 3
+  },
+  {
+   "part": "18",
+   "condition": "nomem",
+   "trait": "p0",
+   "phase": "all",
+   "seeds": 3,
+   "published_S": -0.025228665606849415,
+   "nearest_S": -0.019597794708868226,
+   "nearest_T": 0.03374086393020511,
+   "tracked_S": 0.005835067156649711,
+   "tracked_T": 0.008308002064687169,
+   "check_S": -0.023629722540316648,
+   "check_T": 0.03777279176165353,
+   "delta": 0.014143069221336879,
+   "tracked_S_p": 0.565193350008223,
+   "tracked_T_p": 0.022927882894703485,
+   "tracked_S_positive": 2
+  },
+  {
+   "part": "18",
+   "condition": "nomem",
+   "trait": "p0",
+   "phase": "seasons",
+   "seeds": 3,
+   "published_S": -0.05312700069125209,
+   "nearest_S": -0.037379507455128476,
+   "nearest_T": 0.04637155113128924,
+   "tracked_S": 0.003238559146941867,
+   "tracked_T": 0.005753484529218897,
+   "check_S": -0.02632308650126426,
+   "check_T": 0.03531513017742502,
+   "delta": 0.008992043676160764,
+   "tracked_S_p": 0.815536926451129,
+   "tracked_T_p": 0.014754944061448448,
+   "tracked_S_positive": 1
+  },
+  {
+   "part": "18b",
+   "condition": "cue",
+   "trait": "adapt",
+   "phase": "all",
+   "seeds": 4,
+   "published_S": -0.010295022589443724,
+   "nearest_S": -0.011135240726672373,
+   "nearest_T": 0.047618355822893615,
+   "tracked_S": 0.009681505011328003,
+   "tracked_T": 0.02680161008489324,
+   "check_S": 0.0054531193073356025,
+   "check_T": 0.03102999578888564,
+   "delta": 0.03648311509622124,
+   "tracked_S_p": 0.4173057827040172,
+   "tracked_T_p": 0.36122065656010083,
+   "tracked_S_positive": 3
+  },
+  {
+   "part": "18b",
+   "condition": "cue",
+   "trait": "adapt",
+   "phase": "seasons",
+   "seeds": 4,
+   "published_S": -0.011281697340000398,
+   "nearest_S": -0.011153066413238974,
+   "nearest_T": 0.039717286000263106,
+   "tracked_S": 0.010123154671897653,
+   "tracked_T": 0.018441064915126478,
+   "check_S": 0.003753556359714758,
+   "check_T": 0.024810663227309376,
+   "delta": 0.028564219587024132,
+   "tracked_S_p": 0.43132734471180834,
+   "tracked_T_p": 0.16443421076535028,
+   "tracked_S_positive": 3
+  },
+  {
+   "part": "18b",
+   "condition": "cue",
+   "trait": "p0",
+   "phase": "all",
+   "seeds": 4,
+   "published_S": 0.0009392483112244351,
+   "nearest_S": -0.00012058555238706706,
+   "nearest_T": 0.0007096826317675382,
+   "tracked_S": -0.0003496833259080702,
+   "tracked_T": 0.0009387804052885416,
+   "check_S": -0.0008066582897226017,
+   "check_T": 0.001395755369103073,
+   "delta": 0.0005890970793804714,
+   "tracked_S_p": 0.7523168596112266,
+   "tracked_T_p": 0.4736142339441032,
+   "tracked_S_positive": 2
+  },
+  {
+   "part": "18b",
+   "condition": "cue",
+   "trait": "p0",
+   "phase": "seasons",
+   "seeds": 4,
+   "published_S": 0.0011455586576285606,
+   "nearest_S": -3.864060557081457e-05,
+   "nearest_T": 0.00046661846475614245,
+   "tracked_S": -0.00015211741217693137,
+   "tracked_T": 0.0005800952713622594,
+   "check_S": -0.0006965961687859589,
+   "check_T": 0.0011245740279712867,
+   "delta": 0.0004279778591853279,
+   "tracked_S_p": 0.8967034728502766,
+   "tracked_T_p": 0.6667693376621904,
+   "tracked_S_positive": 2
+  },
+  {
+   "part": "18b",
+   "condition": "mem",
+   "trait": "adapt",
+   "phase": "all",
+   "seeds": 4,
+   "published_S": -7.598276474171542e-05,
+   "nearest_S": -0.0030664439368785308,
+   "nearest_T": 0.022393786851094825,
+   "tracked_S": 0.013467590131037314,
+   "tracked_T": 0.005859752783178991,
+   "check_S": 0.009730529931211885,
+   "check_T": 0.009596812983004417,
+   "delta": 0.019327342914216308,
+   "tracked_S_p": 0.24322994587050975,
+   "tracked_T_p": 0.7195791352464574,
+   "tracked_S_positive": 4
+  },
+  {
+   "part": "18b",
+   "condition": "mem",
+   "trait": "adapt",
+   "phase": "seasons",
+   "seeds": 4,
+   "published_S": 0.0014420554335495901,
+   "nearest_S": -0.001515033431645725,
+   "nearest_T": 0.03265030453985093,
+   "tracked_S": 0.01433368578180894,
+   "tracked_T": 0.016801585326396275,
+   "check_S": 0.011460625408602985,
+   "check_T": 0.019674645699602228,
+   "delta": 0.031135271108205208,
+   "tracked_S_p": 0.2507043692887741,
+   "tracked_T_p": 0.215297901837637,
+   "tracked_S_positive": 4
+  },
+  {
+   "part": "18b",
+   "condition": "mem",
+   "trait": "p0",
+   "phase": "all",
+   "seeds": 4,
+   "published_S": 0.0015107921555553342,
+   "nearest_S": 0.001337945564240903,
+   "nearest_T": -0.0012172135044797724,
+   "tracked_S": -0.00015185968037041548,
+   "tracked_T": 0.0002725917401315461,
+   "check_S": -9.58045978119913e-05,
+   "check_T": 0.000216536657573122,
+   "delta": 0.00012073205976113064,
+   "tracked_S_p": 0.7846957609316012,
+   "tracked_T_p": 0.7054402378392557,
+   "tracked_S_positive": 2
+  },
+  {
+   "part": "18b",
+   "condition": "mem",
+   "trait": "p0",
+   "phase": "seasons",
+   "seeds": 4,
+   "published_S": 0.001367444374338109,
+   "nearest_S": 0.0012801144081207158,
+   "nearest_T": -0.0011712559101930268,
+   "tracked_S": -0.00016195649327587874,
+   "tracked_T": 0.000270814991203568,
+   "check_S": -0.00046217106248181734,
+   "check_T": 0.0005710295604095068,
+   "delta": 0.00010885849792768917,
+   "tracked_S_p": 0.80710260720354,
+   "tracked_T_p": 0.7730823564124726,
+   "tracked_S_positive": 2
+  },
+  {
+   "part": "18b",
+   "condition": "nobrain",
+   "trait": "adapt",
+   "phase": "all",
+   "seeds": 4,
+   "published_S": 0.007321381591131036,
+   "nearest_S": 0.008807512595508148,
+   "nearest_T": -0.003349597728436626,
+   "tracked_S": 0.00011967761127103943,
+   "tracked_T": 0.0053382372558004884,
+   "check_S": 0.0020333004105011197,
+   "check_T": 0.0034246144565703977,
+   "delta": 0.005457914867071523,
+   "tracked_S_p": 0.944481634057191,
+   "tracked_T_p": 0.1603423738157539,
+   "tracked_S_positive": 1
+  },
+  {
+   "part": "18b",
+   "condition": "nobrain",
+   "trait": "adapt",
+   "phase": "seasons",
+   "seeds": 4,
+   "published_S": 0.0049041261639328464,
+   "nearest_S": 0.005806668327211516,
+   "nearest_T": 0.005970949626083181,
+   "tracked_S": 0.00021597523303114243,
+   "tracked_T": 0.011561642720263552,
+   "check_S": 0.0026319389042649055,
+   "check_T": 0.009145679049029787,
+   "delta": 0.011777617953294696,
+   "tracked_S_p": 0.9090198419600671,
+   "tracked_T_p": 0.0442552768711131,
+   "tracked_S_positive": 1
+  },
+  {
+   "part": "18b",
+   "condition": "nobrain",
+   "trait": "p0",
+   "phase": "all",
+   "seeds": 4,
+   "published_S": -0.0013648396116372188,
+   "nearest_S": -0.0016625183383801646,
+   "nearest_T": 0.0012679382042562733,
+   "tracked_S": -0.0003048705766563162,
+   "tracked_T": -8.970955746757528e-05,
+   "check_S": 0.001042349625635423,
+   "check_T": -0.0014369297597593145,
+   "delta": -0.0003945801341238915,
+   "tracked_S_p": 0.33856013944873886,
+   "tracked_T_p": 0.7827168090318016,
+   "tracked_S_positive": 1
+  },
+  {
+   "part": "18b",
+   "condition": "nobrain",
+   "trait": "p0",
+   "phase": "seasons",
+   "seeds": 4,
+   "published_S": -0.00035115902295619985,
+   "nearest_S": -0.0004916274883615831,
+   "nearest_T": 0.00013511418797185779,
+   "tracked_S": -0.00031805854307056147,
+   "tracked_T": -3.845475731916388e-05,
+   "check_S": 0.0016751167711277358,
+   "check_T": -0.002031630071517461,
+   "delta": -0.0003565133003897253,
+   "tracked_S_p": 0.28343176355495425,
+   "tracked_T_p": 0.9152896783882714,
+   "tracked_S_positive": 1
+  },
+  {
+   "part": "18b",
+   "condition": "nomem",
+   "trait": "adapt",
+   "phase": "all",
+   "seeds": 4,
+   "published_S": 0.0008353611057419396,
+   "nearest_S": -0.0022448559672593243,
+   "nearest_T": 0.052030351823202356,
+   "tracked_S": 0.01110463056089512,
+   "tracked_T": 0.03868086529504792,
+   "check_S": 0.00432056789795101,
+   "check_T": 0.04546492795799203,
+   "delta": 0.04978549585594303,
+   "tracked_S_p": 0.36355341917134204,
+   "tracked_T_p": 0.358963143345686,
+   "tracked_S_positive": 3
+  },
+  {
+   "part": "18b",
+   "condition": "nomem",
+   "trait": "adapt",
+   "phase": "seasons",
+   "seeds": 4,
+   "published_S": 0.0008780269225327196,
+   "nearest_S": -0.0022075182796799974,
+   "nearest_T": 0.02962797925992616,
+   "tracked_S": 0.011855350667117587,
+   "tracked_T": 0.015565110313128579,
+   "check_S": 0.004708685220794563,
+   "check_T": 0.022711775759451602,
+   "delta": 0.027420460980246163,
+   "tracked_S_p": 0.3477212838087226,
+   "tracked_T_p": 0.2915837454690855,
+   "tracked_S_positive": 3
+  },
+  {
+   "part": "18b",
+   "condition": "nomem",
+   "trait": "p0",
+   "phase": "all",
+   "seeds": 4,
+   "published_S": 0.001843859635262539,
+   "nearest_S": 0.001128199049180243,
+   "nearest_T": -0.0011645445316677127,
+   "tracked_S": 2.314064819065584e-05,
+   "tracked_T": -5.948613067812585e-05,
+   "check_S": 0.0013048815707783243,
+   "check_T": -0.0013412270532657945,
+   "delta": -3.634548248747002e-05,
+   "tracked_S_p": 0.9757631711422228,
+   "tracked_T_p": 0.923067698507671,
+   "tracked_S_positive": 1
+  },
+  {
+   "part": "18b",
+   "condition": "nomem",
+   "trait": "p0",
+   "phase": "seasons",
+   "seeds": 4,
+   "published_S": 0.0014700090282957392,
+   "nearest_S": 0.0008766006540133445,
+   "nearest_T": -0.0009988456045939603,
+   "tracked_S": 7.630816060486459e-06,
+   "tracked_T": -0.00012987576664110216,
+   "check_S": 0.0012873444495916776,
+   "check_T": -0.0014095894001722932,
+   "delta": -0.00012224495058061577,
+   "tracked_S_p": 0.9938168236752757,
+   "tracked_T_p": 0.8753914916457113,
+   "tracked_S_positive": 1
   }
  ],
  "tracking": [
@@ -9517,6 +13113,8 @@
    "condition": "neu",
    "seeds": 3,
    "trait": "p0",
+   "bodies_per_snapshot": 185.25132275132276,
+   "descendants": 69629,
    "disagreement": 0.10169426827577334,
    "divisions_nearest": 2065.6666666666665,
    "parent_child_r_nearest": 0.5350029671158794,
@@ -9533,6 +13131,8 @@
    "condition": "notr",
    "seeds": 3,
    "trait": "p0",
+   "bodies_per_snapshot": 184.94444444444443,
+   "descendants": 0,
    "disagreement": null,
    "divisions_nearest": 2189.0,
    "parent_child_r_nearest": 0.01951581658549844,
@@ -9549,6 +13149,8 @@
    "condition": "sel",
    "seeds": 3,
    "trait": "p0",
+   "bodies_per_snapshot": 370.1587301587302,
+   "descendants": 139495,
    "disagreement": 0.39470576008392744,
    "divisions_nearest": 8909.0,
    "parent_child_r_nearest": 0.44352133029831103,
@@ -9565,6 +13167,8 @@
    "condition": "neu_96",
    "seeds": 5,
    "trait": "p0",
+   "bodies_per_snapshot": 195.11428571428573,
+   "descendants": 122262,
    "disagreement": 0.1022457124450705,
    "divisions_nearest": 2168.8,
    "parent_child_r_nearest": 0.5340181350100535,
@@ -9581,6 +13185,8 @@
    "condition": "res2k_96",
    "seeds": 5,
    "trait": "p0",
+   "bodies_per_snapshot": 474.2396825396825,
+   "descendants": 298050,
    "disagreement": 0.5743022874923969,
    "divisions_nearest": 12815.6,
    "parent_child_r_nearest": 0.4556401044596424,
@@ -9597,6 +13203,8 @@
    "condition": "sel_96",
    "seeds": 5,
    "trait": "p0",
+   "bodies_per_snapshot": 408.07460317460317,
+   "descendants": 256367,
    "disagreement": 0.5190219888888203,
    "divisions_nearest": 10582.0,
    "parent_child_r_nearest": 0.4070224493199947,
@@ -9613,6 +13221,8 @@
    "condition": "neu_2D512",
    "seeds": 8,
    "trait": "p0",
+   "bodies_per_snapshot": 24.69288079470199,
+   "descendants": 27731,
    "disagreement": 0.00043239291117005486,
    "divisions_nearest": 4.5,
    "parent_child_r_nearest": 0.7756327486135519,
@@ -9629,6 +13239,8 @@
    "condition": "neu_2D512n48",
    "seeds": 8,
    "trait": "p0",
+   "bodies_per_snapshot": 87.47350993377484,
+   "descendants": 97207,
    "disagreement": 0.011922991218557106,
    "divisions_nearest": 90.75,
    "parent_child_r_nearest": 0.5878802690678149,
@@ -9645,6 +13257,8 @@
    "condition": "neu_3D96",
    "seeds": 8,
    "trait": "p0",
+   "bodies_per_snapshot": 38.40397350993378,
+   "descendants": 45116,
    "disagreement": 0.1228885698820098,
    "divisions_nearest": 559.75,
    "parent_child_r_nearest": 0.5605631689209325,
@@ -9661,6 +13275,8 @@
    "condition": "neu_4D56",
    "seeds": 8,
    "trait": "p0",
+   "bodies_per_snapshot": 40.93625827814569,
+   "descendants": 48399,
    "disagreement": 0.25328401205895673,
    "divisions_nearest": 978.75,
    "parent_child_r_nearest": 0.4988309781364355,
@@ -9677,6 +13293,8 @@
    "condition": "neu_5D40",
    "seeds": 8,
    "trait": "p0",
+   "bodies_per_snapshot": 35.704470198675494,
+   "descendants": 42105,
    "disagreement": 0.28741389503570747,
    "divisions_nearest": 966.375,
    "parent_child_r_nearest": 0.4693591005842178,
@@ -9693,6 +13311,8 @@
    "condition": "sel_2D512",
    "seeds": 8,
    "trait": "p0",
+   "bodies_per_snapshot": 26.660596026490065,
+   "descendants": 30089,
    "disagreement": 0.0007211895240256648,
    "divisions_nearest": 5.625,
    "parent_child_r_nearest": 0.8321043938908167,
@@ -9709,6 +13329,8 @@
    "condition": "sel_2D512n48",
    "seeds": 8,
    "trait": "p0",
+   "bodies_per_snapshot": 79.88245033112582,
+   "descendants": 88107,
    "disagreement": 0.00478981706002192,
    "divisions_nearest": 41.75,
    "parent_child_r_nearest": 0.7653213865065847,
@@ -9725,6 +13347,8 @@
    "condition": "sel_3D96",
    "seeds": 8,
    "trait": "p0",
+   "bodies_per_snapshot": 48.883278145695364,
+   "descendants": 57710,
    "disagreement": 0.1431439733906847,
    "divisions_nearest": 632.0,
    "parent_child_r_nearest": 0.4671282513750349,
@@ -9741,6 +13365,8 @@
    "condition": "sel_4D56",
    "seeds": 8,
    "trait": "p0",
+   "bodies_per_snapshot": 57.44619205298014,
+   "descendants": 68230,
    "disagreement": 0.4881620658445448,
    "divisions_nearest": 1707.5,
    "parent_child_r_nearest": 0.4315042470604564,
@@ -9757,6 +13383,8 @@
    "condition": "sel_5D40",
    "seeds": 8,
    "trait": "p0",
+   "bodies_per_snapshot": 43.87334437086093,
+   "descendants": 51944,
    "disagreement": 0.471088743365608,
    "divisions_nearest": 1448.625,
    "parent_child_r_nearest": 0.4569834337406954,
@@ -9769,10 +13397,48 @@
    "effective_lineages_check": 2.0856901945068604
   },
   {
+   "part": "14",
+   "condition": "neu_6D28",
+   "seeds": 1,
+   "trait": "p0",
+   "bodies_per_snapshot": 10.306930693069306,
+   "descendants": 961,
+   "disagreement": 0.3173777315296566,
+   "divisions_nearest": 200.0,
+   "parent_child_r_nearest": 0.4164222477277472,
+   "effective_lineages_nearest": 1.0,
+   "divisions_tracked": 57.0,
+   "parent_child_r_tracked": 0.732273936226263,
+   "effective_lineages_tracked": 1.9246524482980212,
+   "divisions_check": 77.0,
+   "parent_child_r_check": 0.5079941919995556,
+   "effective_lineages_check": 1.0
+  },
+  {
+   "part": "14",
+   "condition": "sel_6D28",
+   "seeds": 1,
+   "trait": "p0",
+   "bodies_per_snapshot": 12.683168316831683,
+   "descendants": 1197,
+   "disagreement": 0.5012531328320802,
+   "divisions_nearest": 295.0,
+   "parent_child_r_nearest": 0.35919819674924003,
+   "effective_lineages_nearest": 1.0,
+   "divisions_tracked": 201.0,
+   "parent_child_r_tracked": 0.7230387139536807,
+   "effective_lineages_tracked": 1.0,
+   "divisions_check": 241.0,
+   "parent_child_r_check": 0.42602244190414446,
+   "effective_lineages_check": 1.0
+  },
+  {
    "part": "15",
    "condition": "evo_4D56",
    "seeds": 6,
    "trait": "gF",
+   "bodies_per_snapshot": 49.184573002754824,
+   "descendants": 34829,
    "disagreement": 0.6829590631358292,
    "divisions_nearest": 1278.6666666666667,
    "parent_child_r_nearest": 0.42236668758381796,
@@ -9789,6 +13455,8 @@
    "condition": "evo_rep_4D56",
    "seeds": 6,
    "trait": "gF",
+   "bodies_per_snapshot": 52.51652892561983,
+   "descendants": 37272,
    "disagreement": 0.7079753073587284,
    "divisions_nearest": 1321.0,
    "parent_child_r_nearest": 0.36591835761993957,
@@ -9805,6 +13473,8 @@
    "condition": "frozen_4D56",
    "seeds": 6,
    "trait": "gF",
+   "bodies_per_snapshot": 50.40220385674931,
+   "descendants": 35701,
    "disagreement": 0.7608718190199992,
    "divisions_nearest": 1336.0,
    "parent_child_r_nearest": 0.4061739183850219,
@@ -9821,6 +13491,8 @@
    "condition": "nobrain_4D56",
    "seeds": 6,
    "trait": "gF",
+   "bodies_per_snapshot": 39.666666666666664,
+   "descendants": 28010,
    "disagreement": 0.20675595374438116,
    "divisions_nearest": 673.8333333333334,
    "parent_child_r_nearest": 0.5063750160882238,
@@ -9837,6 +13509,8 @@
    "condition": "evo_5D40",
    "seeds": 1,
    "trait": "gF",
+   "bodies_per_snapshot": 10.138613861386139,
+   "descendants": 907,
    "disagreement": 0.743109151047409,
    "divisions_nearest": 235.0,
    "parent_child_r_nearest": 0.4134091102379556,
@@ -9853,6 +13527,8 @@
    "condition": "nobrain_5D40",
    "seeds": 1,
    "trait": "gF",
+   "bodies_per_snapshot": 33.504950495049506,
+   "descendants": 3254,
    "disagreement": 0.2993239090350338,
    "divisions_nearest": 607.0,
    "parent_child_r_nearest": 0.4302389521991097,
@@ -9869,6 +13545,8 @@
    "condition": "clamp_5D40",
    "seeds": 2,
    "trait": "gF",
+   "bodies_per_snapshot": 22.770491803278688,
+   "descendants": 2491,
    "disagreement": 0.8459249660619523,
    "divisions_nearest": 329.0,
    "parent_child_r_nearest": 0.4116396442262167,
@@ -9885,6 +13563,8 @@
    "condition": "evo_5D40",
    "seeds": 3,
    "trait": "gF",
+   "bodies_per_snapshot": 17.612021857923498,
+   "descendants": 2842,
    "disagreement": 0.7710746331808794,
    "divisions_nearest": 264.0,
    "parent_child_r_nearest": 0.42237841256134073,
@@ -9901,6 +13581,8 @@
    "condition": "nobrain_5D40",
    "seeds": 1,
    "trait": "gF",
+   "bodies_per_snapshot": 25.75409836065574,
+   "descendants": 1441,
    "disagreement": 0.24011103400416378,
    "divisions_nearest": 240.0,
    "parent_child_r_nearest": 0.5146982295757516,
@@ -9917,6 +13599,8 @@
    "condition": "blind",
    "seeds": 4,
    "trait": "gF",
+   "bodies_per_snapshot": 4.8432446999640675,
+   "descendants": 1282,
    "disagreement": 0.012706027116139475,
    "divisions_nearest": 13.25,
    "parent_child_r_nearest": 0.2859660025023565,
@@ -9933,6 +13617,8 @@
    "condition": "evo",
    "seeds": 4,
    "trait": "gF",
+   "bodies_per_snapshot": 31.882231404958674,
+   "descendants": 14860,
    "disagreement": 0.6557613811170988,
    "divisions_nearest": 722.0,
    "parent_child_r_nearest": 0.4677044614882737,
@@ -9949,6 +13635,8 @@
    "condition": "nobrain",
    "seeds": 4,
    "trait": "gF",
+   "bodies_per_snapshot": 12.024793388429751,
+   "descendants": 5294,
    "disagreement": 0.08457362227976921,
    "divisions_nearest": 85.5,
    "parent_child_r_nearest": 0.5441363446787686,
@@ -9959,6 +13647,150 @@
    "divisions_check": 2.5,
    "parent_child_r_check": 0.4753213506053207,
    "effective_lineages_check": 9.672408418043958
+  },
+  {
+   "part": "18",
+   "condition": "cue",
+   "seeds": 3,
+   "trait": "p0",
+   "bodies_per_snapshot": 5.700169722191571,
+   "descendants": 783,
+   "disagreement": 0.23232237495317212,
+   "divisions_nearest": 31.666666666666668,
+   "parent_child_r_nearest": 0.45743512528129693,
+   "effective_lineages_nearest": null,
+   "divisions_tracked": 12.666666666666666,
+   "parent_child_r_tracked": 0.8133902103914749,
+   "effective_lineages_tracked": null,
+   "divisions_check": 24.333333333333332,
+   "parent_child_r_check": 0.5305208510176231,
+   "effective_lineages_check": null
+  },
+  {
+   "part": "18",
+   "condition": "mem",
+   "seeds": 3,
+   "trait": "p0",
+   "bodies_per_snapshot": 6.914197530864198,
+   "descendants": 815,
+   "disagreement": 0.23506697217526654,
+   "divisions_nearest": 35.666666666666664,
+   "parent_child_r_nearest": 0.40063423653153846,
+   "effective_lineages_nearest": null,
+   "divisions_tracked": 6.666666666666667,
+   "parent_child_r_tracked": 0.720206831289277,
+   "effective_lineages_tracked": null,
+   "divisions_check": 21.0,
+   "parent_child_r_check": 0.5326354866582554,
+   "effective_lineages_check": null
+  },
+  {
+   "part": "18",
+   "condition": "nobrain",
+   "seeds": 3,
+   "trait": "p0",
+   "bodies_per_snapshot": 9.459302325581396,
+   "descendants": 725,
+   "disagreement": 0.15013620627154758,
+   "divisions_nearest": 18.333333333333332,
+   "parent_child_r_nearest": 0.357636634629836,
+   "effective_lineages_nearest": null,
+   "divisions_tracked": 0.3333333333333333,
+   "parent_child_r_tracked": null,
+   "effective_lineages_tracked": null,
+   "divisions_check": 10.333333333333334,
+   "parent_child_r_check": 0.27110572834180197,
+   "effective_lineages_check": null
+  },
+  {
+   "part": "18",
+   "condition": "nomem",
+   "seeds": 3,
+   "trait": "p0",
+   "bodies_per_snapshot": 6.661335357221915,
+   "descendants": 739,
+   "disagreement": 0.272653406090477,
+   "divisions_nearest": 36.666666666666664,
+   "parent_child_r_nearest": 0.5935745283122372,
+   "effective_lineages_nearest": null,
+   "divisions_tracked": 5.333333333333333,
+   "parent_child_r_tracked": 0.7685542495685839,
+   "effective_lineages_tracked": null,
+   "divisions_check": 18.0,
+   "parent_child_r_check": 0.467108138632018,
+   "effective_lineages_check": null
+  },
+  {
+   "part": "18b",
+   "condition": "cue",
+   "seeds": 4,
+   "trait": "p0",
+   "bodies_per_snapshot": 11.167355371900825,
+   "descendants": 5112,
+   "disagreement": 0.46550334908666763,
+   "divisions_nearest": 226.5,
+   "parent_child_r_nearest": 0.4373864438446863,
+   "effective_lineages_nearest": 1.1024520912660025,
+   "divisions_tracked": 94.5,
+   "parent_child_r_tracked": 0.6984255182787189,
+   "effective_lineages_tracked": 1.388335447380892,
+   "divisions_check": 285.75,
+   "parent_child_r_check": 0.4050572061294254,
+   "effective_lineages_check": 1.0
+  },
+  {
+   "part": "18b",
+   "condition": "mem",
+   "seeds": 4,
+   "trait": "p0",
+   "bodies_per_snapshot": 11.161157024793388,
+   "descendants": 5127,
+   "disagreement": 0.5000899417546474,
+   "divisions_nearest": 213.5,
+   "parent_child_r_nearest": 0.3234699254415127,
+   "effective_lineages_nearest": 1.469703457384066,
+   "divisions_tracked": 82.5,
+   "parent_child_r_tracked": 0.6955016812610239,
+   "effective_lineages_tracked": 1.6689081833380413,
+   "divisions_check": 284.0,
+   "parent_child_r_check": 0.3168711885790786,
+   "effective_lineages_check": 1.1663874469415318
+  },
+  {
+   "part": "18b",
+   "condition": "nobrain",
+   "seeds": 4,
+   "trait": "p0",
+   "bodies_per_snapshot": 20.985537190082646,
+   "descendants": 9634,
+   "disagreement": 0.2003168392171899,
+   "divisions_nearest": 324.5,
+   "parent_child_r_nearest": 0.4738993168152215,
+   "effective_lineages_nearest": 2.331004492870808,
+   "divisions_tracked": 24.75,
+   "parent_child_r_tracked": 0.9840733090821445,
+   "effective_lineages_tracked": 9.741738201182516,
+   "divisions_check": 548.25,
+   "parent_child_r_check": 0.39597846448116647,
+   "effective_lineages_check": 1.886849913063113
+  },
+  {
+   "part": "18b",
+   "condition": "nomem",
+   "seeds": 4,
+   "trait": "p0",
+   "bodies_per_snapshot": 11.297520661157023,
+   "descendants": 5196,
+   "disagreement": 0.45838706475089913,
+   "divisions_nearest": 214.5,
+   "parent_child_r_nearest": 0.3755417550370894,
+   "effective_lineages_nearest": 1.473787124076717,
+   "divisions_tracked": 80.0,
+   "parent_child_r_tracked": 0.6315620910999397,
+   "effective_lineages_tracked": 1.7712744640218783,
+   "divisions_check": 299.25,
+   "parent_child_r_check": 0.38608047196136364,
+   "effective_lineages_check": 1.5720704451850145
   }
  ]
 }
