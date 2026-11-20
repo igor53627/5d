@@ -15,9 +15,11 @@ state that ``fl_eco3.run_chunk`` produces: the tracers are passive.
 The output is ``truth_<TAG>_L<BOX_SIZE>_s<SEED>.json`` with the log in the format of the
 published logs and one share matrix for each pair of snapshots. The run uses the CPU.
 
-The output is raw data and does not belong in this repository. Write it to the folder
-``tracking_truth`` of a local copy of the Hugging Face dataset ``igor53627/5d``, where
-``analyze_truth.py`` reads it.
+The output is raw data and does not belong in this repository. The published files are in
+the folder ``tracking_truth`` of the Hugging Face dataset ``igor53627/5d``. Write a new run to
+a folder ``tracking_truth`` under a root of its own, not into a downloaded copy of the
+dataset: a run with the tag, box size and seed of a published run has the same file name.
+The script refuses to replace a file. ``analyze_truth.py`` takes the root.
 """
 
 from __future__ import annotations
@@ -216,10 +218,13 @@ def main(arguments: Sequence[str]) -> int:
         return 2
     tag, box_size, step_count, seed = arguments[0], *(int(value) for value in arguments[1:4])
     output_directory: Path = Path(arguments[4])
+    output: Path = output_directory / f"truth_{tag}_L{box_size}_s{seed}.json"
+    if output.exists():
+        raise FileExistsError(f"{output} exists; give another output directory")
     output_directory.mkdir(parents=True, exist_ok=True)
     result: dict = run(tag, box_size, step_count, seed)
-    output: Path = output_directory / f"truth_{tag}_L{box_size}_s{seed}.json"
-    output.write_text(json.dumps(result) + "\n")
+    with output.open("x") as file:
+        file.write(json.dumps(result) + "\n")
     print(f"wrote {output}")
     return 0
 
