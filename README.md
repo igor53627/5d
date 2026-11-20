@@ -119,11 +119,13 @@ archive/             Early searches, benchmarks, reservoir experiments
 
 ## Data
 
-Simulation logs are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (public, CC-BY-4.0, 525 files under `part03`–`part19`, 1,639,669,287 bytes, 1.64 GB). Part 18 also holds the 18b–18i runs; Part 19 also holds the 19b confirmatory run, the 19c low-side scan, and the 19d kpred=0.005 replicate. Per-part sizes, the log cadence, and where `bench_b300_0.pkl` and `bench_h100_0.pkl` sit are in [DATA.md](DATA.md).
+Simulation logs are published on the Hugging Face dataset [igor53627/5d](https://huggingface.co/datasets/igor53627/5d) (public, CC-BY-4.0, 531 files, 1,641,050,480 bytes, 1.64 GB: 525 files under `part03`–`part19` and 6 tracer-run files under `tracking_truth`). Part 18 also holds the 18b–18i runs; Part 19 also holds the 19b confirmatory run, the 19c low-side scan, and the 19d kpred=0.005 replicate. Per-part sizes, the log cadence, and where `bench_b300_0.pkl` and `bench_h100_0.pkl` sit are in [DATA.md](DATA.md).
 
 ```bash
-huggingface-cli download igor53627/5d --repo-type dataset
+hf download igor53627/5d --repo-type dataset
 ```
+
+The `hf` command comes with current `huggingface_hub` releases. Older releases have `huggingface-cli download` with the same arguments.
 
 ```python
 from huggingface_hub import snapshot_download
