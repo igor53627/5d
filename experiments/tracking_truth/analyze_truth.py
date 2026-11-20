@@ -22,6 +22,12 @@ which rule is right where the nearest object and the (p0, p1) rule differ, and w
 gives for the Price terms of p0, the division count and the effective number
 of founder lineages. It writes ``truth_summary.md`` and ``truth_summary.json`` to
 OUTPUT_DIRECTORY, which is ``results`` next to this script when it is not given.
+
+A share is measured over one snapshot step (200 simulation steps), because ``run_truth.py``
+gives every body a new tracer at each snapshot. Over a longer span the ``truth`` estimator
+multiplies these shares, as the rules do. The product is exact only when the mass that a body
+passes on has the same mix of origins as the whole body. The agreement counts and the division
+counts use single steps and do not depend on this.
 """
 
 from __future__ import annotations
@@ -59,6 +65,10 @@ ESTIMATE_HEADER: str = (
     "| T second half | divisions | effective lineages |"
 )
 
+CHAIN_NOTE: str = (
+    "The `truth` rows multiply the measured 200-step shares over the span. "
+    "The notes state the assumption (Limits of the chained numbers)."
+)
 DISAGREEMENT_HEADER: str = (
     "| run | seed | descendants | nearest differs from tracked | tracked is right "
     "| nearest is right | neither is right |"
@@ -184,6 +194,7 @@ def run_summary(run: dict) -> dict:
     log: list = run["log"]
     matrices = rule_matrices(run)
     half_time: float = log[-1][0] / 2
+    background: list[float] = [value for record in run["truth"] for value in record["background"]]
     summary: dict = {
         "tag": run["tag"],
         "condition": run["tag"].split("_")[0],
@@ -192,7 +203,7 @@ def run_summary(run: dict) -> dict:
         "seed": run["seed"],
         "steps": run["steps"],
         "objects_mean": float(np.mean([len(objects) for _, objects in log])),
-        "background_mean": float(np.mean([v for r in run["truth"] for v in r["background"]])),
+        "background_mean": float(np.mean(background)) if background else None,
         "fraction_sum_error_max": max(r["fraction_sum_error"] for r in run["truth"]),
         "counts": agreement_counts(matrices),
         "disagreement": disagreement_counts(matrices),
@@ -223,9 +234,9 @@ def signed(value: float | None) -> str:
     return "n/a" if value is None or not np.isfinite(value) else f"{value:+.4f}"
 
 
-def count(value: float | None) -> str:
-    """A number with two decimals, or n/a."""
-    return "n/a" if value is None else f"{value:.2f}"
+def count(value: float | None, digits: int = 2) -> str:
+    """A number with the given number of decimals, or n/a."""
+    return "n/a" if value is None else f"{value:.{digits}f}"
 
 
 def separator(header: str) -> str:
@@ -258,11 +269,12 @@ def markdown(summaries: Sequence[dict]) -> str:
             f"| {s['tag']} | {s['dimension']} | {s['box_size']} | {s['seed']} | {s['steps']} "
             f"| {s['objects_mean']:.1f} | {c['traced']} | {share(c['pure'], c['traced'])} "
             f"| {' | '.join(right)} | {' | '.join(right_pure)} "
-            f"| {s['background_mean']:.3f} | {s['fraction_sum_error_max']:.4f} |"
+            f"| {count(s['background_mean'], 3)} | {s['fraction_sum_error_max']:.4f} |"
         )
     lines += ["", "## Where the nearest object and the (p0, p1) rule differ", ""]
     lines += [DISAGREEMENT_HEADER, separator(DISAGREEMENT_HEADER), *disagreement_rows(summaries)]
     lines += ["", "## What each rule gives (p0, lag 1000 steps)", ""]
+    lines += [CHAIN_NOTE, ""]
     lines += [ESTIMATE_HEADER, separator(ESTIMATE_HEADER)]
     for s in summaries:
         for name in ESTIMATORS:
