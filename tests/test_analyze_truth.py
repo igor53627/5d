@@ -4,6 +4,7 @@ Method: hand-made share matrices with a known answer; no simulation is run.
 """
 
 import importlib.util
+import json
 import sys
 from pathlib import Path
 from types import ModuleType
@@ -83,3 +84,25 @@ def test_divisions_and_lineages_follow_the_shares():
     assert module.effective_lineages(log, [None, None]) is None
     light = [(0, [_body(2.0), _body(1.0)]), (200, [_body(1.5), _body(0.2), _body(1.0)])]
     assert module.division_count(light, shares) == 0
+
+
+def test_a_run_that_goes_extinct_still_gives_a_summary():
+    """Goal: the summary of an extinct run is valid JSON. Method: no body after the start."""
+    module = _analyze_truth()
+    record = {"shares": [], "background": [], "fraction_sum_error": 0.0}
+    start = [(1.0, [0.0, 0.0], [0.1, 0.2]), (1.0, [9.0, 9.0], [0.3, 0.4])]
+    run = {
+        "tag": "neu_test",
+        "dimension": 2,
+        "box_size": 32,
+        "seed": 1,
+        "steps": 400,
+        "log": [(0, start), (200, []), (400, [])],
+        "truth": [record, record],
+        "truth_matrices": [None, None, None],
+    }
+    summary = module.run_summary(run)
+    assert summary["background_mean"] is None
+    assert summary["truth"]["effective_lineages"] is None
+    json.dumps(summary, allow_nan=False)
+    assert "n/a" in module.markdown([summary])

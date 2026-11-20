@@ -22,6 +22,8 @@
 
 ## What each rule gives (p0, lag 1000 steps)
 
+The `truth` rows multiply the measured 200-step shares over the span. The notes state the assumption (Limits of the chained numbers).
+
 | run | seed | estimator | S first half | S second half | T first half | T second half | divisions | effective lineages |
 |---|---|---|---|---|---|---|---|---|
 | neu_3D96_s201 | 301 | truth | -0.0008 | +0.0019 | +0.0028 | +0.0006 | 11 | 10.33 |

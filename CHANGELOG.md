@@ -67,7 +67,9 @@ All notable changes to this project are documented in this file. The format is b
 - `modal_app.spawn_h100` takes `--timeout-seconds` (required; the default 0 is refused) and
   `--cap-dollars` (default 15). It prints the worst-case GPU spend and refuses to start over the
   cap, and it passes the timeout to Modal with `Function.with_options(timeout=...)`, which
-  needs Modal 1.4.3 or later. Command lines without `--timeout-seconds` no longer start a
+  needs Modal 1.4.3 or later. The `modal` extra is now `modal>=1.4.3` for Python 3.10 or later
+  and installs nothing on Python 3.9, for which Modal has no such release; `uv.lock` loses
+  Modal 1.2.6 and the packages that only it needed. Command lines without `--timeout-seconds` no longer start a
   launch; the launch commands in the notes and run scripts of Parts 18 and 19 predate this.
 - The eight engines (`fl_glider`, `fl_eco`, `fl_eco2`, `fl_eco3`, `fl_brain`, `fl_poison`,
   `fl_season`, `fl_pred`) call `fl_glider.rossler_rk4_step` in place of their inline RK4 block.

@@ -58,7 +58,9 @@ with the closest (p0, p1) inside a 20-cell gate. "check" is the same with p1 alo
 3. **One ancestor per body is adequate at 200 steps.** At least 99.6% of descendants get 90%
    or more of their mass from one earlier object. Mass from outside every earlier object is
    1.4-1.8% of an object.
-4. **Price terms of p0** (lag 1000 steps, means over the first and the second half of a run):
+4. **Price terms of p0** (lag 1000 steps, means over the first and the second half of a run;
+   the measured term multiplies the measured 200-step shares over five snapshots, see
+   "Limits of the chained numbers"):
    - The (p0, p1) rule is within 0.013 of the measured selection term in all 12 half-runs,
      with the same sign wherever the measured term is above 0.003 in size.
    - The nearest rule differs by up to 0.079. In the neutral runs, where the measured term is
@@ -71,7 +73,8 @@ with the closest (p0, p1) inside a 20-cell gate. "check" is the same with p1 alo
      bias.
 5. **Divisions per run:** measured 8-13; (p0, p1) rule 10-19; p1 rule 24-80; nearest rule
    46-266.
-6. **Effective founder lineages at the end:** measured 10.3 and 8.4 (3D neutral), 3.6 and 2.9
+6. **Effective founder lineages at the end** (the measured number multiplies the measured
+   200-step shares over the whole run): measured 10.3 and 8.4 (3D neutral), 3.6 and 2.9
    (3D selection), 7.2 and 6.3 (4D, after 4000 steps). The (p0, p1) rule gives 10.3, 8.0,
    3.9, 3.7, 7.4 and 7.0. The nearest rule gives 1.0 to 2.4 in every run.
 
@@ -97,6 +100,23 @@ with the closest (p0, p1) inside a 20-cell gate. "check" is the same with p1 alo
     not measured; it is probably lower than here.
 - Each condition has one or two seeds. The numbers are measurements of these runs, not
   estimates with an interval.
+
+## Limits of the chained numbers
+
+- `run_truth.py` gives every body a new tracer at each snapshot. A share is thus measured over
+  200 steps only.
+- The Price terms at 1000 steps (result 4) and the effective founder lineages (result 6)
+  multiply these 200-step shares. The rules are chained in the same way.
+- The product is exact when the mass that a body passes on has the same mix of origins as the
+  whole body. It is not exact when a body holds mass of two origins and one part grows more or
+  splits off. Example: a body that is a 50/50 merge stays 50/50 in the product, also when only
+  one side grows.
+- At least 99.6% of descendants get 90% or more of their mass from one earlier object
+  (result 3). This shows that a merge is rare in one 200-step interval. It does not bound the
+  number of bodies that hold mass of two origins after many intervals, because a merged body
+  and its descendants keep the mix. It does not bound the error of the product.
+- The size of the error is not measured: that needs tracers that stay for the whole span.
+- Results 1, 2, 3 and 5 use single 200-step shares and do not depend on this.
 
 ## Records
 
