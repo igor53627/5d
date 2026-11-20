@@ -25,11 +25,11 @@ OUTPUT_DIRECTORY, which is ``results`` next to this script when it is not given.
 
 A share is measured over one snapshot step (200 simulation steps), because ``run_truth.py``
 gives every body a new tracer at each snapshot. Over a longer span the ``truth`` estimator
-multiplies these shares, as the rules do. The product is exact only when the mass that a body
-passes on has the same mix of origins as the whole body. It also credits no ancestor for mass
-that is outside every body at a snapshot, so ancestry that leaves every body and enters a body
-later is lost. The agreement counts and the division counts use single steps and do not depend
-on this.
+multiplies these shares, as the rules do. The product is exact only when two conditions hold.
+First, the mass that a body passes on has the same mix of origins as the whole body. Second, no
+mass passes from one body to another through background: the product credits no ancestor for
+mass that is outside every body at a snapshot. The agreement counts and the division counts use
+single steps and do not depend on this.
 """
 
 from __future__ import annotations
