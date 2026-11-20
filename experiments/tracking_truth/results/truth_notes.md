@@ -156,11 +156,14 @@ The `hf` command comes with current `huggingface_hub` releases; older releases h
 ```bash
 cd experiments/tracking_truth
 hf download igor53627/5d --repo-type dataset --include "tracking_truth/*" --local-dir DATA
-python analyze_truth.py DATA                      # DATA: a local copy of the dataset
+python analyze_truth.py DATA                      # writes results/truth_summary.*: the committed tables
 python run_truth.py neu_3D96_s201 64 20000 301 RERUN/tracking_truth   # about 2.2 hours on CPU
 python run_truth.py sel_4D56_s201 40 4000 301 RERUN/tracking_truth    # about 3.5 hours on CPU
 python analyze_truth.py RERUN RERUN/summary       # does not replace results/
 ```
+
+The first `analyze_truth.py` command writes the two generated files in `results/` again; from
+the published records they come out as committed.
 
 A new run has the file name of the published run with the same tag, box and seed. Write it
 to a directory of its own, as above, so that the downloaded records stay as they are;
