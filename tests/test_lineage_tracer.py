@@ -128,6 +128,31 @@ def test_fractions_do_not_depend_on_the_reaction():
     assert np.array_equal(carried[5.0], carried[0.0])
 
 
+def test_mass_that_lives_only_in_the_simulation_keeps_its_ancestry():
+    """Goal: no tracer is cleared where the copy dies and the simulation lives.
+
+    Method: the first trait is +1 in one part of the lattice and -1 in the other part, food
+    uptake rises steeply with it, and decay is above 1. The copy has no homogenization, so its
+    cells with -1 eat little; with the decay of the world they lose all mass in one step. The
+    simulation homogenizes fully, eats more near the border of the two parts and lives there.
+    """
+    state, (parameters, *kernels), labels = _two_bodies()
+    mass = np.asarray(state["A"])
+    first_trait = np.where(np.arange(LATTICE_SIZE)[:, None] < 8, 1.0, -1.0) * mass
+    state = {**state, "Q": jnp.asarray(np.stack([first_trait, 0.0 * mass]), jnp.float32)}
+    harsh = {"dec": 1.5, "ks": 0.0, "keat": 100.0, "pk": 3.0, "hom": 1.0}
+    world = {**parameters, **{name: jnp.float32(value) for name, value in harsh.items()}}
+    fractions = jnp.asarray(LT.fractions_from_labels(labels, 3))
+    copy_with_decay = fl_eco3.step(state, world, *kernels, coarse=True, do_mut=False, do_hom=False)
+    simulated, moved = LT.run_chunk_with_tracers(state, fractions, world, *kernels, 1, coarse=True)
+    simulated_mass = np.asarray(simulated["A"])
+    lives_only_in_simulation = (np.asarray(copy_with_decay["A"]) <= LT.MASS_EPSILON) & (
+        simulated_mass > 1e-3
+    )
+    assert simulated_mass[lives_only_in_simulation].sum() > 0.1 * simulated_mass.sum()
+    assert np.asarray(moved).sum(axis=0)[lives_only_in_simulation].min() > 0.8
+
+
 def test_object_shares_are_weighted_by_mass():
     """Goal: shares follow mass, not cell counts. Method: a hand-made mixture and a background."""
     mass = np.array([[1.0, 3.0, 2.0, 0.0]])
