@@ -111,6 +111,23 @@ def test_each_body_keeps_its_own_tracer():
     assert LT.fraction_sum_error(np.asarray(fractions), mass) < 0.05
 
 
+def test_fractions_do_not_depend_on_the_reaction():
+    """Goal: a cell keeps its ancestry whatever decay does. Method: one step, lethal decay.
+
+    With a decay rate of 5 per step no cell of the copy would keep mass, and the engine would
+    clear every tracer. The fractions must equal those of the same step without decay.
+    """
+    state, (parameters, *kernels), labels = _two_bodies()
+    fractions = jnp.asarray(LT.fractions_from_labels(labels, 3))
+    carried = {}
+    for decay in (0.0, 5.0):
+        world = {**parameters, LT.DECAY_PARAMETER: jnp.float32(decay)}
+        _, moved = LT.run_chunk_with_tracers(state, fractions, world, *kernels, 1, coarse=True)
+        carried[decay] = np.asarray(moved)
+    assert carried[0.0][1:].sum() > 1.0
+    assert np.array_equal(carried[5.0], carried[0.0])
+
+
 def test_object_shares_are_weighted_by_mass():
     """Goal: shares follow mass, not cell counts. Method: a hand-made mixture and a background."""
     mass = np.array([[1.0, 3.0, 2.0, 0.0]])

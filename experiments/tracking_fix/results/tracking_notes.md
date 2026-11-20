@@ -131,10 +131,14 @@ switch. In Part 18b a season has 8000 steps, and 9-10 of the 110-116 windows spa
 (one-off counts of the windows with two or more ancestors, not in the repository).
 
 The logs of these three parts are small. Bodies per snapshot is a mean over the snapshots
-with one body or more; descendants are counted from step 2000 and summed over the runs:
+with one body or more; descendants are counted from step 2000 and summed over the runs. The
+last column is the mean of the per-run rates, not the rate over the summed descendants. The
+two differ by 5 points for 18b `mem` (45.0% over the summed descendants) and by less than 2
+points for the other arms of these three parts (a one-off calculation from
+`tracking_recompute.json`):
 
-| part | arm | runs | bodies per snapshot | descendants | nearest differs from tracked |
-|------|-----|-----:|--------------------:|------------:|-----------------------------:|
+| part | arm | runs | bodies per snapshot | descendants | nearest differs from tracked (mean per run) |
+|------|-----|-----:|--------------------:|------------:|--------------------------------------------:|
 | 14 | sel / neu 6D | 1 / 1 | 12.7 / 10.3 | 1197 / 961 | 50.1% / 31.7% |
 | 18 | mem / nomem / cue / nobrain | 3 each | 6.9 / 6.7 / 5.7 / 9.5 | 815 / 739 / 783 / 725 | 23.5% / 27.3% / 23.2% / 15.0% |
 | 18b | mem / nomem / cue / nobrain | 4 each | 11.2 / 11.3 / 11.2 / 21.0 | 5127 / 5196 / 5112 / 9634 | 50.0% / 45.8% / 46.6% / 20.0% |

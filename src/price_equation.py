@@ -105,12 +105,14 @@ def _chained_shares(
     return chained
 
 
-def _credits_no_mass(descendants: Sequence[EcoObject], shares: np.ndarray) -> bool:
+def _credits_no_mass(
+    ancestors: Sequence[EcoObject], descendants: Sequence[EcoObject], shares: np.ndarray
+) -> bool:
     """True when the shares credit no descendant mass to an ancestor.
 
     A share matrix of the wrong shape is left to ``window_terms``, which reports it.
     """
-    if shares.shape[0] != len(descendants):
+    if shares.shape != (len(descendants), len(ancestors)):
         return False
     descendant_mass: np.ndarray = np.array([o[0] for o in descendants], float)
     return float(descendant_mass @ shares.sum(axis=1)) <= 0
@@ -169,7 +171,7 @@ def price_terms_from_shares(
             continue
         descendants: Sequence[EcoObject] = log[start + lag][1]
         shares: np.ndarray | None = _chained_shares(step_matrices, start, lag)
-        if shares is None or _credits_no_mass(descendants, shares):
+        if shares is None or _credits_no_mass(ancestors, descendants, shares):
             continue
         terms: tuple[float, float, float] = window_terms(
             ancestors, descendants, shares, trait_index

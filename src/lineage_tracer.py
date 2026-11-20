@@ -9,10 +9,16 @@ them. At the next snapshot the tracer content of an object is the share of its m
 comes from each earlier object.
 
 The engine is not changed. Every step runs ``fl_eco3.step`` twice from the same state: once as
-the simulation, and once without mutation and homogenization on a copy whose trait field has
-the tracers appended. The engine moves every channel of the trait field with the same
+the simulation, and once without mutation, homogenization and decay on a copy whose trait
+field has the tracers appended. The engine moves every channel of the trait field with the same
 velocity, which it computes from the mass field and the first two traits, so the copy gives
 the transported fractions. The simulated state never sees a tracer.
+
+The copy has no decay because the engine clears the traits of a cell whose mass falls to zero
+in the reaction. Food uptake depends on the first trait, which homogenization changes, so the
+reaction of the copy can differ from the reaction of the simulation. Without decay the mass of
+the copy is never below the transported mass, and a cell keeps its fractions whatever the
+reaction does.
 
 Mass that grows from food inherits the tracer content of its cell, so growth is credited to
 the lineage that grows. The engine limits the flux of each channel on its own, so the
@@ -33,6 +39,7 @@ from helpers import invariant
 
 MASS_EPSILON: float = 1e-6
 BACKGROUND_CHANNEL: int = 0
+DECAY_PARAMETER: str = "dec"
 
 State = dict
 
@@ -84,10 +91,10 @@ def run_chunk_with_tracers(
     invariant(step_count % m == 0, "step_count must be a multiple of m")
     options: dict = {"transport": True, "coarse": coarse, "fnoise": fnoise, "m": m}
 
-    def engine_step(current: State, with_mutation: bool) -> State:
+    def engine_step(current: State, step_params: dict, with_mutation: bool) -> State:
         return fl_eco3.step(
             current,
-            params,
+            step_params,
             mass_kernel,
             oscillator_kernel,
             wide_kernels,
@@ -96,12 +103,14 @@ def run_chunk_with_tracers(
             **options,
         )
 
-    transport_only = partial(engine_step, with_mutation=False)
+    transport_only = partial(
+        engine_step, step_params={**params, DECAY_PARAMETER: 0.0}, with_mutation=False
+    )
 
     def advance(carry: tuple[State, jnp.ndarray], with_mutation: bool) -> tuple[State, jnp.ndarray]:
         current, current_fractions = carry
         carried: jnp.ndarray = _carried_fractions(current, current_fractions, transport_only)
-        return engine_step(current, with_mutation), carried
+        return engine_step(current, params, with_mutation), carried
 
     def block(_: int, carry: tuple[State, jnp.ndarray]) -> tuple[State, jnp.ndarray]:
         carry = jax.lax.fori_loop(0, m - 1, lambda _, inner: advance(inner, False), carry)

@@ -111,11 +111,19 @@ with the closest (p0, p1) inside a 20-cell gate. "check" is the same with p1 alo
   whole body. It is not exact when a body holds mass of two origins and one part grows more or
   splits off. Example: a body that is a 50/50 merge stays 50/50 in the product, also when only
   one side grows.
-- At least 99.6% of descendants get 90% or more of their mass from one earlier object
-  (result 3). This shows that a merge is rare in one 200-step interval. It does not bound the
-  number of bodies that hold mass of two origins after many intervals, because a merged body
-  and its descendants keep the mix. It does not bound the error of the product.
-- The size of the error is not measured: that needs tracers that stay for the whole span.
+- For at least 99.6% of descendants, the mass from outside the main ancestor is at most 10%
+  in one 200-step interval (result 3). This does not show that merges are rare. It does not
+  bound the number of bodies that hold mass of two origins after many intervals, because a
+  merged body and its descendants keep the mix. It does not bound the error of the product.
+- Mass that is outside every detected body at a snapshot is background, and background is
+  credited to no ancestor. Ancestry that leaves every body at one snapshot and enters a body
+  later is thus lost, also when every body passes on a uniform mix. In one interval 1.4-1.8%
+  of the mass of an object comes from background, as a mean over objects (result 3). As an
+  illustration: if every object lost that share in every interval, the product would credit
+  about 91-93% of the mass after five intervals and about 16-24% after 100 intervals. The
+  mean alone does not fix these numbers, and the credited mass is not measured. The Price
+  terms and the lineage number use the credited mass only.
+- The size of the two errors is not measured: that needs tracers that stay for the whole span.
 - Results 1, 2, 3 and 5 use single 200-step shares and do not depend on this.
 
 ## Records
@@ -128,6 +136,16 @@ with the closest (p0, p1) inside a 20-cell gate. "check" is the same with p1 alo
   (`run_truth.py`: one argument check; `price_equation.py`: used by the analysis only).
   `run_truth.py` now reads the revision at the start.
 - `analyze_truth.py` takes about 1 second for the six files.
+- The six runs used `lineage_tracer.py` before one correction. The copy that carries the
+  tracers then had the decay of the world, and the engine clears the traits of a cell whose
+  mass falls to zero. A cell that died in the copy and lived in the simulation lost its
+  fractions. The copy now runs without decay. With the decay of these worlds (0.0003 per
+  step before the crowding factor) the case needs a cell at the mass limit of 1e-6 or
+  crowding of 5 times the reference. One comparison shows no effect: `sel_3D96_s201`, box
+  48, 4000 steps, seed 301, 240 descendants, with the old and the new copy gives equal
+  shares, background and fraction sum error to five decimals (a one-off run, not in the
+  repository). The six runs are not repeated, and the comparison does not cover their
+  plateau or 4D.
 
 ## How to rerun
 
