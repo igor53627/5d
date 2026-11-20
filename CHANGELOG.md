@@ -56,8 +56,9 @@ All notable changes to this project are documented in this file. The format is b
   `analyze_truth.py` compares the ancestor rules with the measured ancestors (issue #13).
   `results/truth_notes.md` reports six runs: the (p0, p1) rule picks the measured ancestor
   for 97.5-99.9% of descendants, the nearest object in space for 61-80%. The six raw files
-  (1.4 MB) are not in the repository; their place is the folder `tracking_truth/` of the
-  Hugging Face dataset, and `analyze_truth.py` reads them from a local copy of the dataset.
+  (1.4 MB) are not in the repository; they are in the folder `tracking_truth/` of the
+  Hugging Face dataset (`DATA.md` lists it), and `analyze_truth.py` reads them from a local
+  copy of the dataset. The download commands in `DATA.md` and README use `hf download`.
 - `price_equation.price_terms_from_shares` and `step_share_matrices`: the Price terms from
   given share matrices, which can be fractions. `price_terms` uses them and is unchanged.
 - `src/spend_cap.py`: the worst-case GPU spend of a Modal launch (calls x timeout x rate) and a

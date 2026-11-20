@@ -3,9 +3,8 @@
 **Status:** six CPU runs of the Part 13 world with tracer fields, done 2026-11-20. Issue #13.
 **Scripts:** `run_truth.py`, `analyze_truth.py` (the directory above); `src/lineage_tracer.py`.
 **Tables:** [truth_summary.md](truth_summary.md), `truth_summary.json`.
-**Raw files:** six `truth_*.json` files, 1.4 MB. They are not in this repository. Their place is
-the folder `tracking_truth/` of the Hugging Face dataset `igor53627/5d`; `DATA.md` lists the
-folder from the commit that follows the upload.
+**Raw files:** six `truth_*.json` files, 1.4 MB. They are not in this repository. They are in
+the folder `tracking_truth/` of the Hugging Face dataset `igor53627/5d` (`DATA.md`).
 
 ## Why
 
@@ -151,8 +150,12 @@ with the closest (p0, p1) inside a 20-cell gate. "check" is the same with p1 alo
 
 ## How to rerun
 
+The `hf` command comes with current `huggingface_hub` releases; older releases have
+`huggingface-cli download` with the same arguments (`DATA.md`).
+
 ```bash
 cd experiments/tracking_truth
+hf download igor53627/5d --repo-type dataset --include "tracking_truth/*" --local-dir DATA
 python analyze_truth.py DATA                      # DATA: a local copy of the dataset
 python run_truth.py neu_3D96_s201 64 20000 301 DATA/tracking_truth   # about 2.2 hours on CPU
 python run_truth.py sel_4D56_s201 40 4000 301 DATA/tracking_truth    # about 3.5 hours on CPU
