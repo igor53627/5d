@@ -50,6 +50,8 @@ All notable changes to this project are documented in this file. The format is b
 - `src/lineage_tracer.py`: passive tracer fractions that move with the mass of an `fl_eco3`
   run and record the share of the mass of every body that comes from each earlier body. The
   simulated state is bitwise the state of `fl_eco3.run_chunk` (`tests/test_lineage_tracer.py`).
+  The copy that carries the tracers runs without decay, so a cell keeps its fractions whatever
+  the reaction does.
   `experiments/tracking_truth/run_truth.py` runs a Part 13 world with tracers, and
   `analyze_truth.py` compares the ancestor rules with the measured ancestors (issue #13).
   `results/truth_notes.md` reports six runs: the (p0, p1) rule picks the measured ancestor
@@ -60,7 +62,8 @@ All notable changes to this project are documented in this file. The format is b
   given share matrices, which can be fractions. `price_terms` uses them and is unchanged.
 - `src/spend_cap.py`: the worst-case GPU spend of a Modal launch (calls x timeout x rate) and a
   check that raises `ValueError` when it exceeds a cap. `tests/test_spend_cap.py` checks the
-  arithmetic (issue #14).
+  arithmetic (issue #14). The figure does not count the CPU and memory charge or the time
+  before a preemption.
 
 ### Changed
 

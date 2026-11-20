@@ -166,6 +166,8 @@ def test_a_window_whose_shares_credit_no_mass_is_skipped():
     ]
     matrices = [None, np.array([[1.0, 0.0], [0.0, 0.0]])]
     assert PE.price_terms_from_shares(log, matrices, lag=1).window_count == 0
+    with pytest.raises(ValueError, match="shape"):
+        PE.price_terms_from_shares(log, [None, np.zeros((2, 3))], lag=1)
 
 
 def test_an_empty_log_has_no_windows():

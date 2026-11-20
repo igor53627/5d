@@ -26,8 +26,10 @@ OUTPUT_DIRECTORY, which is ``results`` next to this script when it is not given.
 A share is measured over one snapshot step (200 simulation steps), because ``run_truth.py``
 gives every body a new tracer at each snapshot. Over a longer span the ``truth`` estimator
 multiplies these shares, as the rules do. The product is exact only when the mass that a body
-passes on has the same mix of origins as the whole body. The agreement counts and the division
-counts use single steps and do not depend on this.
+passes on has the same mix of origins as the whole body. It also credits no ancestor for mass
+that is outside every body at a snapshot, so ancestry that leaves every body and enters a body
+later is lost. The agreement counts and the division counts use single steps and do not depend
+on this.
 """
 
 from __future__ import annotations
@@ -177,7 +179,10 @@ def division_count(log: list, step_matrices: ShareMatrices) -> int:
 def effective_lineages(log: list, step_matrices: ShareMatrices) -> float | None:
     """Effective number of founder lineages in the final mass; None when it is not defined.
 
-    It is not defined across an empty snapshot or when no final mass has a founder.
+    The founder credit is the product of the share matrices of all steps. It is ancestry
+    composed from object to object, not a founder tracer that stays for the whole run: the
+    product gives every descendant of an object the mean founder mix of that object. It is
+    not defined across an empty snapshot or when no final mass has a founder.
     """
     if any(matrix is None for matrix in step_matrices[1:]):
         return None

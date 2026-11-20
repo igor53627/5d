@@ -1,14 +1,22 @@
 """Worst-case spend of a Modal launch, computed before a container starts.
 
-A launch starts ``call_count`` containers and Modal stops each one when its timeout ends. The
-GPU charge of the launch is thus at most::
+A launch starts ``call_count`` containers and Modal stops each one when its timeout ends. Without
+a preemption, the GPU charge of the launch is thus at most::
 
     call_count * timeout_seconds / 3600 * dollars_per_hour
 
 ``modal_app.spawn_h100`` calls ``require_spend_under_cap`` before it starts a container.
 
-The bound covers the GPU charge for the time that the job code runs. It does not cover the CPU
-and memory charge, the start of a container, or the idle seconds before a container scales down.
+The bound covers the GPU charge for the time that the job code runs, when no container is
+preempted. It does not cover:
+
+- the CPU and memory charge;
+- the start of a container, or the idle seconds before a container scales down;
+- the seconds that a job can run after its timeout before Modal stops it;
+- a preemption. Modal restarts a preempted Function on the same input, so the time before
+  the preemption is charged in addition to the restarted run. The number of preemptions is
+  not known before a launch.
+
 It applies to one launch: two launches under the cap can add to more than the cap.
 
 This module imports neither Modal nor JAX.

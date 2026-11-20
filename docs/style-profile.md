@@ -79,8 +79,10 @@ memory management (Python and JAX manage memory).
 a launch. `spawn_h100` replaces the job time of `gpu_job_h100` with `--timeout-seconds`, which
 has no usable default. Before it starts a container it computes the worst-case spend, calls x
 timeout x $3.95 per H100-hour (`src/spend_cap.py`, checked by `tests/test_spend_cap.py`), and
-refuses to start when that exceeds `--cap-dollars`. The other entry points have no spend limit;
-see Open questions.
+refuses to start when that exceeds `--cap-dollars`. The figure is the GPU charge without a
+preemption: it does not count the CPU and memory charge, and Modal restarts a preempted
+Function on the same input, which adds the time before the preemption. The other entry points
+have no spend limit; see Open questions.
 
 ## Dependencies and tooling
 
