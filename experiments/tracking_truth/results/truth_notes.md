@@ -107,8 +107,10 @@ with the closest (p0, p1) inside a 20-cell gate. "check" is the same with p1 alo
   200 steps only.
 - The Price terms at 1000 steps (result 4) and the effective founder lineages (result 6)
   multiply these 200-step shares. The rules are chained in the same way.
-- The product is exact when the mass that a body passes on has the same mix of origins as the
-  whole body. It is not exact when a body holds mass of two origins and one part grows more or
+- The product is exact only when two conditions hold. First, the mass that a body passes on
+  has the same mix of origins as the whole body. Second, no mass passes from one body to
+  another through background (see below).
+- The first condition fails when a body holds mass of two origins and one part grows more or
   splits off. Example: a body that is a 50/50 merge stays 50/50 in the product, also when only
   one side grows.
 - For at least 99.6% of descendants, the mass from outside the main ancestor is at most 10%
