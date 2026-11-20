@@ -211,6 +211,20 @@ def run(tag: str, box_size: int, step_count: int, seed: int) -> dict:
     }
 
 
+def write_new_file(output: Path, text: str) -> None:
+    """Write a file that does not exist yet. An incomplete file is removed when the write fails.
+
+    Raises FileExistsError, and leaves the file as it is, when the file exists.
+    """
+    with output.open("x") as file:
+        try:
+            file.write(text)
+            file.flush()
+        except BaseException:
+            output.unlink()
+            raise
+
+
 def main(arguments: Sequence[str]) -> int:
     """Run one world and write its JSON file."""
     if len(arguments) != 5:
@@ -223,8 +237,7 @@ def main(arguments: Sequence[str]) -> int:
         raise FileExistsError(f"{output} exists; give another output directory")
     output_directory.mkdir(parents=True, exist_ok=True)
     result: dict = run(tag, box_size, step_count, seed)
-    with output.open("x") as file:
-        file.write(json.dumps(result) + "\n")
+    write_new_file(output, json.dumps(result) + "\n")
     print(f"wrote {output}")
     return 0
 
