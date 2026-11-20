@@ -1,6 +1,6 @@
 """Run one Part 13 world with tracer fields that record the true ancestor of every body.
 
-Usage: python run_truth.py TAG BOX_SIZE STEPS SEED [OUTPUT_DIRECTORY]
+Usage: python run_truth.py TAG BOX_SIZE STEPS SEED OUTPUT_DIRECTORY
 
 TAG names a run of ``archive/specs/eco13m.json``, for example ``neu_4D56_s201``. The run uses
 that world (soliton, food, mutation, 12 founders), with the box size, step count and seed
@@ -14,6 +14,10 @@ state that ``fl_eco3.run_chunk`` produces: the tracers are passive.
 
 The output is ``truth_<TAG>_L<BOX_SIZE>_s<SEED>.json`` with the log in the format of the
 published logs and one share matrix for each pair of snapshots. The run uses the CPU.
+
+The output is raw data and does not belong in this repository. Write it to the folder
+``tracking_truth`` of a local copy of the Hugging Face dataset ``igor53627/5d``, where
+``analyze_truth.py`` reads it.
 """
 
 from __future__ import annotations
@@ -45,7 +49,6 @@ import jax.numpy as jnp
 
 ROOT: Path = Path(__file__).resolve().parents[2]
 SOURCE_SPEC: Path = ROOT / "archive" / "specs" / "eco13m.json"
-DEFAULT_OUTPUT: Path = Path(__file__).resolve().parent / "results"
 BOX_SIZE_MAX: int = 64
 PREPARE_STEPS: int = 600
 TRAIT_COUNT: int = 2
@@ -160,6 +163,7 @@ def run(tag: str, box_size: int, step_count: int, seed: int) -> dict:
     invariant(box_size <= BOX_SIZE_MAX, f"box size {box_size} is above {BOX_SIZE_MAX}")
     invariant(step_count >= every, f"the step count must be at least {every}")
     invariant(step_count % every == 0, "the step count must be a multiple of the snapshot step")
+    revision: str = git_revision()
     state, engine, unit_mass = initial_world(source, box_size, seed)
     log: list = []
     truth: list = []
@@ -198,7 +202,7 @@ def run(tag: str, box_size: int, step_count: int, seed: int) -> dict:
         "eco": source["ecos"][0],
         "options": source["opts"],
         "unit_mass": unit_mass,
-        "git_revision": git_revision(),
+        "git_revision": revision,
         "wall_seconds": time.time() - started,
         "log": log,
         "truth": truth,
@@ -207,11 +211,11 @@ def run(tag: str, box_size: int, step_count: int, seed: int) -> dict:
 
 def main(arguments: Sequence[str]) -> int:
     """Run one world and write its JSON file."""
-    if not 4 <= len(arguments) <= 5:
+    if len(arguments) != 5:
         print(__doc__, file=sys.stderr)
         return 2
     tag, box_size, step_count, seed = arguments[0], *(int(value) for value in arguments[1:4])
-    output_directory: Path = Path(arguments[4]) if len(arguments) == 5 else DEFAULT_OUTPUT
+    output_directory: Path = Path(arguments[4])
     output_directory.mkdir(parents=True, exist_ok=True)
     result: dict = run(tag, box_size, step_count, seed)
     output: Path = output_directory / f"truth_{tag}_L{box_size}_s{seed}.json"

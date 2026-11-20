@@ -1,6 +1,9 @@
 """Compare the ancestor rules with the true ancestors that ``run_truth.py`` recorded.
 
-Usage: python analyze_truth.py [RESULTS_DIRECTORY]
+Usage: python analyze_truth.py DATA_ROOT [OUTPUT_DIRECTORY]
+
+DATA_ROOT is a local copy of the Hugging Face dataset ``igor53627/5d``; the truth files are in
+its folder ``tracking_truth``. The raw files are not in this repository.
 
 For every ``truth_*.json`` file the script takes three ancestor rules of
 ``lineage_tracking.assign_ancestors`` and the measured tracer shares:
@@ -14,9 +17,11 @@ For every ``truth_*.json`` file the script takes three ancestor rules of
   them to shares of the whole mass, so that a chain of steps credits the background to no
   ancestor.
 
-It reports how often each rule picks the object that gave a descendant most of its mass, and
-what each rule gives for the Price terms of p0, the division count and the effective number
-of founder lineages. It writes ``truth_summary.md`` and ``truth_summary.json``.
+It reports how often each rule picks the object that gave a descendant most of its mass,
+which rule is right where the nearest object and the (p0, p1) rule differ, and what each rule
+gives for the Price terms of p0, the division count and the effective number
+of founder lineages. It writes ``truth_summary.md`` and ``truth_summary.json`` to
+OUTPUT_DIRECTORY, which is ``results`` next to this script when it is not given.
 """
 
 from __future__ import annotations
@@ -35,7 +40,8 @@ import lineage_tracking
 import price_equation
 # isort: on
 
-DEFAULT_DIRECTORY: Path = Path(__file__).resolve().parent / "results"
+DEFAULT_OUTPUT: Path = Path(__file__).resolve().parent / "results"
+DATA_FOLDER: str = "tracking_truth"
 GATE_RADIUS: float = 20.0
 LAG_SNAPSHOTS: int = 5
 TRAIT_INDEX: int = 0
@@ -51,6 +57,11 @@ AGREEMENT_HEADER: str = (
 ESTIMATE_HEADER: str = (
     "| run | seed | estimator | S first half | S second half | T first half "
     "| T second half | divisions | effective lineages |"
+)
+
+DISAGREEMENT_HEADER: str = (
+    "| run | seed | descendants | nearest differs from tracked | tracked is right "
+    "| nearest is right | neither is right |"
 )
 
 ShareMatrices = list
@@ -112,6 +123,30 @@ def agreement_counts(matrices: dict[str, ShareMatrices]) -> dict[str, int]:
     return counts
 
 
+def disagreement_counts(matrices: dict[str, ShareMatrices]) -> dict[str, int]:
+    """Descendants for which ``nearest`` and ``tracked`` differ, and which of them is right.
+
+    ``differ`` over ``traced`` is the disagreement rate that the notes of the tracking fix
+    report for the published logs, where no true ancestor exists.
+    """
+    names: tuple[str, ...] = ("traced", "differ", "tracked_right", "nearest_right", "neither")
+    counts: dict[str, int] = dict.fromkeys(names, 0)
+    for step, truth in enumerate(matrices["truth"]):
+        if truth is None or truth.shape[1] < 2:
+            continue
+        traced: np.ndarray = truth.sum(axis=1) > 0
+        main: np.ndarray = truth.argmax(axis=1)
+        by_space: np.ndarray = matrices["nearest"][step].argmax(axis=1)
+        by_traits: np.ndarray = matrices["tracked"][step].argmax(axis=1)
+        differ: np.ndarray = traced & (by_space != by_traits)
+        counts["traced"] += int(traced.sum())
+        counts["differ"] += int(differ.sum())
+        counts["tracked_right"] += int((differ & (by_traits == main)).sum())
+        counts["nearest_right"] += int((differ & (by_space == main)).sum())
+        counts["neither"] += int((differ & (by_traits != main) & (by_space != main)).sum())
+    return counts
+
+
 def division_count(log: list, step_matrices: ShareMatrices) -> int:
     """Divisions as ``lineage_tracking.division_pairs`` counts them, from share matrices."""
     mass_min: float = lineage_tracking.DIVISION_MASS_MIN
@@ -129,15 +164,18 @@ def division_count(log: list, step_matrices: ShareMatrices) -> int:
     return total
 
 
-def effective_lineages(log: list, step_matrices: ShareMatrices) -> float:
-    """Effective number of founder lineages in the final mass; NaN across an empty snapshot."""
+def effective_lineages(log: list, step_matrices: ShareMatrices) -> float | None:
+    """Effective number of founder lineages in the final mass; None when it is not defined.
+
+    It is not defined across an empty snapshot or when no final mass has a founder.
+    """
     if any(matrix is None for matrix in step_matrices[1:]):
-        return float("nan")
+        return None
     credit: np.ndarray = np.array([o[0] for o in log[-1][1]], float)
     for matrix in reversed(step_matrices[1:]):
         credit = credit @ matrix
     if credit.sum() <= 0:
-        return float("nan")
+        return None
     return lineage_tracking.effective_lineage_count(credit / credit.sum())
 
 
@@ -157,6 +195,7 @@ def run_summary(run: dict) -> dict:
         "background_mean": float(np.mean([v for r in run["truth"] for v in r["background"]])),
         "fraction_sum_error_max": max(r["fraction_sum_error"] for r in run["truth"]),
         "counts": agreement_counts(matrices),
+        "disagreement": disagreement_counts(matrices),
     }
     for name in ESTIMATORS:
         terms = price_equation.price_terms_from_shares(
@@ -184,13 +223,31 @@ def signed(value: float | None) -> str:
     return "n/a" if value is None or not np.isfinite(value) else f"{value:+.4f}"
 
 
+def count(value: float | None) -> str:
+    """A number with two decimals, or n/a."""
+    return "n/a" if value is None else f"{value:.2f}"
+
+
 def separator(header: str) -> str:
     """Markdown separator row with one cell per column of the header."""
     return "|" + "---|" * (header.count("|") - 1)
 
 
+def disagreement_rows(summaries: Sequence[dict]) -> list[str]:
+    """Rows of the table that says which rule is right where the two rules differ."""
+    rows: list[str] = []
+    for s in summaries:
+        d = s["disagreement"]
+        rows.append(
+            f"| {s['tag']} | {s['seed']} | {d['traced']} | {share(d['differ'], d['traced'])} "
+            f"| {share(d['tracked_right'], d['differ'])} "
+            f"| {share(d['nearest_right'], d['differ'])} | {share(d['neither'], d['differ'])} |"
+        )
+    return rows
+
+
 def markdown(summaries: Sequence[dict]) -> str:
-    """The two tables of the summary file."""
+    """The three tables of the summary file."""
     lines: list[str] = ["## Does each rule pick the main ancestor?", ""]
     lines += [AGREEMENT_HEADER, separator(AGREEMENT_HEADER)]
     for s in summaries:
@@ -203,6 +260,8 @@ def markdown(summaries: Sequence[dict]) -> str:
             f"| {' | '.join(right)} | {' | '.join(right_pure)} "
             f"| {s['background_mean']:.3f} | {s['fraction_sum_error_max']:.4f} |"
         )
+    lines += ["", "## Where the nearest object and the (p0, p1) rule differ", ""]
+    lines += [DISAGREEMENT_HEADER, separator(DISAGREEMENT_HEADER), *disagreement_rows(summaries)]
     lines += ["", "## What each rule gives (p0, lag 1000 steps)", ""]
     lines += [ESTIMATE_HEADER, separator(ESTIMATE_HEADER)]
     for s in summaries:
@@ -212,24 +271,28 @@ def markdown(summaries: Sequence[dict]) -> str:
                 f"| {s['tag']} | {s['seed']} | {name} | {signed(e['S_first_half'])} "
                 f"| {signed(e['S_second_half'])} | {signed(e['T_first_half'])} "
                 f"| {signed(e['T_second_half'])} | {e['divisions']} "
-                f"| {e['effective_lineages']:.2f} |"
+                f"| {count(e['effective_lineages'])} |"
             )
     return "\n".join(lines) + "\n"
 
 
 def main(arguments: Sequence[str]) -> int:
-    """Analyse every truth file of one directory."""
-    if len(arguments) > 1:
+    """Analyse every truth file of the data folder and write the summary files."""
+    if not 1 <= len(arguments) <= 2:
         print(__doc__, file=sys.stderr)
         return 2
-    directory: Path = Path(arguments[0]) if arguments else DEFAULT_DIRECTORY
+    directory: Path = Path(arguments[0]) / DATA_FOLDER
+    output_directory: Path = Path(arguments[1]) if len(arguments) == 2 else DEFAULT_OUTPUT
     files: list[Path] = sorted(directory.glob("truth_*_L*_s*.json"))
     if not files:
         raise FileNotFoundError(f"no truth files in {directory}")
     summaries: list[dict] = [run_summary(load_run(path)) for path in files]
-    (directory / "truth_summary.json").write_text(json.dumps(summaries, indent=1) + "\n")
+    output_directory.mkdir(parents=True, exist_ok=True)
+    (output_directory / "truth_summary.json").write_text(
+        json.dumps(summaries, indent=1, allow_nan=False) + "\n"
+    )
     text: str = markdown(summaries)
-    (directory / "truth_summary.md").write_text(text)
+    (output_directory / "truth_summary.md").write_text(text)
     print(text)
     return 0
 

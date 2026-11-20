@@ -254,9 +254,13 @@ the score rows, divisions per run are 9 / 0 (Part 18 `mem` / `nobrain`) and 181 
   individual (also those of Part 14), and the Part 13 response per generation. The logs are
   available and the reason is time only; issue #13 tracks this work. Part 18g/18i logs are
   sparse: the nearest object differs from the trait rule for 3% of descendants there.
-- **No ground truth.** No log records the true ancestor. The checks above show that the
-  trait rule is reproducible; they do not measure its error. A small run that records the
-  true lineage is in issue #13.
+- **No ground truth in the published logs.** No published log records the true ancestor.
+  The checks above show that the trait rule is reproducible; they do not measure its error.
+  Six new runs of the Part 13 world with tracer fields measure it
+  ([truth_notes.md](../../tracking_truth/results/truth_notes.md)): the (p0, p1) rule picks
+  the measured ancestor for 99.6-99.9% of descendants in 3D 64^3 and for 97.5-98.6% in 4D
+  40^4, and the nearest object for 61-80%. Runs with a brain, 5D and the published box sizes
+  are not covered.
 - **Sensitivity, one-off checks not in the repository:** for Part 17 `evo`, gates of 22, 30
   and 45 cells give S(g_F) = +0.022, +0.034, +0.036 and S(g_P) = -0.025, -0.033, -0.034. Lags
   of 1, 2, 5 and 10 snapshots give S(g_F) = +0.008, +0.014, +0.034, +0.062 (same sign, the

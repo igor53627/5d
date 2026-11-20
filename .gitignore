@@ -10,6 +10,7 @@ __pycache__/
 *.npy
 *.npz
 *.pkl
+experiments/tracking_truth/results/truth_*_L*_s*.json
 
 # Virtual environment
 .venv/

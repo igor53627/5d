@@ -52,16 +52,20 @@ All notable changes to this project are documented in this file. The format is b
   simulated state is bitwise the state of `fl_eco3.run_chunk` (`tests/test_lineage_tracer.py`).
   `experiments/tracking_truth/run_truth.py` runs a Part 13 world with tracers, and
   `analyze_truth.py` compares the ancestor rules with the measured ancestors (issue #13).
+  `results/truth_notes.md` reports six runs: the (p0, p1) rule picks the measured ancestor
+  for 97.5-99.9% of descendants, the nearest object in space for 61-80%. The six raw files
+  (1.4 MB) are not in the repository; their place is the folder `tracking_truth/` of the
+  Hugging Face dataset, and `analyze_truth.py` reads them from a local copy of the dataset.
 - `price_equation.price_terms_from_shares` and `step_share_matrices`: the Price terms from
   given share matrices, which can be fractions. `price_terms` uses them and is unchanged.
-- `src/spend_cap.py`: the worst-case spend of a Modal launch (calls x timeout x rate) and a
+- `src/spend_cap.py`: the worst-case GPU spend of a Modal launch (calls x timeout x rate) and a
   check that raises `ValueError` when it exceeds a cap. `tests/test_spend_cap.py` checks the
   arithmetic (issue #14).
 
 ### Changed
 
 - `modal_app.spawn_h100` takes `--timeout-seconds` (required; the default 0 is refused) and
-  `--cap-dollars` (default 15). It prints the worst-case spend and refuses to start over the
+  `--cap-dollars` (default 15). It prints the worst-case GPU spend and refuses to start over the
   cap, and it passes the timeout to Modal with `Function.with_options(timeout=...)`, which
   needs Modal 1.4.3 or later. Command lines without `--timeout-seconds` no longer start a
   launch; the launch commands in the notes and run scripts of Parts 18 and 19 predate this.
